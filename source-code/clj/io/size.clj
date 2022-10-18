@@ -2,7 +2,7 @@
 ;; -- Namespace ---------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(ns io.side-effects
+(ns io.size
     (:require [clojure.java.io]
               [io.config :as config]
               [io.check  :as check]))

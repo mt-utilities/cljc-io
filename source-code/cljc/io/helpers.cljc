@@ -1,18 +1,8 @@
 
-;; -- Legal information -------------------------------------------------------
-;; ----------------------------------------------------------------------------
-
-; Monoset Clojure/ClojureScript Library
-; https://monotech.hu/monoset
-;
-; Copyright Adam Szűcs and other contributors - All rights reserved
-
-
-
 ;; -- Namespace ---------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(ns mid-fruits.io
+(ns io.helpers
     (:require [mid-fruits.candy  :refer [param return]]
               [mid-fruits.map    :as map]
               [mid-fruits.regex  :refer [re-match? re-mismatch?]]

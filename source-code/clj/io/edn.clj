@@ -3,7 +3,9 @@
 ;; ----------------------------------------------------------------------------
 
 (ns io.edn
-    (:require [mid-fruits.candy  :refer [return]]
+    (:require [io.actions        :as actions]
+              [io.read           :as read]
+              [mid-fruits.candy  :refer [return]]
               [mid-fruits.pretty :as pretty]
               [mid-fruits.reader :as reader]
               [mid-fruits.string :as string]
@@ -27,7 +29,7 @@
   ; @return (map)
   [filepath content & [options]]
   (let [output (pretty/mixed->string content options)]
-       (write-file! filepath (str "\n" output))
+       (actions/write-file! filepath (str "\n" output))
        (return content)))
 
 (defn read-edn-file

@@ -6,6 +6,7 @@
     (:require [clojure.java.io]
               [io.check          :as check]
               [io.config         :as config]
+              [io.read           :as read]
               [mid-fruits.string :as string]))
 
 
@@ -24,8 +25,6 @@
       (catch Exception e (println (str e " \"" filepath "\"")))))
 
 (defn copy-file!
-  ; WARNING! NON-PUBLIC! DO NOT USE!
-  ;
   ; @param (string) source-filepath
   ; @param (string) destination-filepath
   ;
@@ -57,7 +56,7 @@
   ;
   ; @return (?)
   [filepath content {:keys [max-line-count reverse?]}]
-  (let [file-content (read-file filepath)
+  (let [file-content (read/read-file filepath)
         output       (if reverse? (str content      "\n" file-content)
                                   (str file-content "\n" content))]
        (if max-line-count ; If maximum number of lines is limited ...
@@ -114,7 +113,7 @@
   ;
   ; @return (?)
   [directory-path]
-  (doseq [item-path (item-list directory-path)]
+  (doseq [item-path (read/item-list directory-path)]
          (if (check/directory? item-path)
              (do (empty-directory!        item-path)
                  (delete-empty-directory! item-path))
