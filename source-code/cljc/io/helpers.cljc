@@ -361,6 +361,25 @@
 
 
 
+;; -- Directory ---------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn directory-path->directory-name
+  ; @param (string) directory-path
+  ;
+  ; @example
+  ;  (io/directory-path->directory-name "a/b")
+  ;  =>
+  ;  "b"
+  ;
+  ; @return (string)
+  [directory-path]
+  (if-let [directory-name (string/after-last-occurence directory-path "/")]
+          (return directory-name)
+          (return directory-path)))
+
+
+
 ;; -- Validators ---------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
