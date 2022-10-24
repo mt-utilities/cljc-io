@@ -32,7 +32,7 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (io/file-list "my-directory")
+  ;  (file-list "my-directory")
   ;  =>
   ;  ["my-directory/my-file.ext" ...]
   ;
@@ -52,7 +52,7 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (io/all-file-list "my-directory")
+  ;  (all-file-list "my-directory")
   ;  =>
   ;  ["my-directory/my-file.ext" ...]
   ;
@@ -72,7 +72,7 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (io/subdirectory-list "my-directory")
+  ;  (subdirectory-list "my-directory")
   ;  =>
   ;  ["my-directory/my-subdirectory" ...]
   ;
@@ -92,7 +92,7 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (io/all-subdirectory-list "my-directory")
+  ;  (all-subdirectory-list "my-directory")
   ;  =>
   ;  ["my-directory/my-subdirectory" ...]
   ;
@@ -112,7 +112,7 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (io/item-list "my-directory")
+  ;  (item-list "my-directory")
   ;  =>
   ;  ["my-directory/my-file.ext" "my-directory/my-subdirectory" ...]
   ;
@@ -129,7 +129,7 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (io/all-item-list "my-directory")
+  ;  (all-item-list "my-directory")
   ;  =>
   ;  ["my-directory/my-file.ext" "my-directory/my-subdirectory" ...]
   ;

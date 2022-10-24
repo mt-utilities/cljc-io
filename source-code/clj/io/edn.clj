@@ -24,7 +24,7 @@
   ;    Default: false}
   ;
   ; @usage
-  ;  (io/write-edn-file! "my-file.edn" {...})
+  ;  (write-edn-file! "my-file.edn" {...})
   ;
   ; @return (map)
   [filepath content & [options]]
@@ -49,10 +49,10 @@
   ; @param (*) params
   ;
   ; @usage
-  ;  (io/swap-edn-file! "my-file.edn" assoc-in [:items :xyz] "XYZ")
+  ;  (swap-edn-file! "my-file.edn" assoc-in [:items :xyz] "XYZ")
   ;
   ; @usage
-  ;  (io/swap-edn-file! "my-file.edn" vector/conj-item "XYZ")
+  ;  (swap-edn-file! "my-file.edn" vector/conj-item "XYZ")
   ;
   ; @return (map)
   [filepath f & params]

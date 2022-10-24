@@ -128,12 +128,12 @@
   ; @param (string) mime-type
   ;
   ; @example
-  ;  (io/mime-type->extension "text/xml")
+  ;  (mime-type->extension "text/xml")
   ;  =>
   ;  "xml"
   ;
   ; @example
-  ;  (io/mime-type->extension "foo/bar")
+  ;  (mime-type->extension "foo/bar")
   ;  =>
   ;  "unknown"
   ;
@@ -145,12 +145,12 @@
   ; @param (extension)
   ;
   ; @example
-  ;  (io/extension->mime-type "xml")
+  ;  (extension->mime-type "xml")
   ;  =>
   ;  "text/xml"
   ;
   ; @example
-  ;  (io/extension->mime-type "bar")
+  ;  (extension->mime-type "bar")
   ;  =>
   ;  "unknown/unknown"
   ;
@@ -162,12 +162,12 @@
   ; @param (string) mime-type
   ;
   ; @example
-  ;  (io/unknown-mime-type? "text/xml")
+  ;  (unknown-mime-type? "text/xml")
   ;  =>
   ;  false
   ;
   ; @example
-  ;  (io/unknown-mime-type? "foo/bar")
+  ;  (unknown-mime-type? "foo/bar")
   ;  =>
   ;  true
   ;
@@ -184,7 +184,7 @@
   ; @param (string) extension
   ;
   ; @example
-  ;  (io/extension->image? "png")
+  ;  (extension->image? "png")
   ;  =>
   ;  true
   ;
@@ -196,7 +196,7 @@
   ; @param (string) extension
   ;
   ; @example
-  ;  (io/mime-type->image? "image/png")
+  ;  (mime-type->image? "image/png")
   ;  =>
   ;  true
   ;
@@ -208,7 +208,7 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (io/filepath->filename "a/b.png")
+  ;  (filepath->filename "a/b.png")
   ;  =>
   ;  "b.png"
   ;
@@ -222,17 +222,17 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (io/filepath->extension "a/b.PNG")
+  ;  (filepath->extension "a/b.PNG")
   ;  =>
   ;  "png"
   ;
   ; @example
-  ;  (io/filepath->extension "a/.hidden-file.txt")
+  ;  (filepath->extension "a/.hidden-file.txt")
   ;  =>
   ;  "txt"
   ;
   ; @example
-  ;  (io/filepath->extension "a/.hidden-file")
+  ;  (filepath->extension "a/.hidden-file")
   ;  =>
   ;  nil
   ;
@@ -254,17 +254,17 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (io/filepath->basepath "a/b.png")
+  ;  (filepath->basepath "a/b.png")
   ;  =>
   ;  "a"
   ;
   ; @example
-  ;  (io/filepath->basepath "a/b/c.png")
+  ;  (filepath->basepath "a/b/c.png")
   ;  =>
   ;  "a/b"
   ;
   ; @example
-  ;  (io/filepath->basepath "c.png")
+  ;  (filepath->basepath "c.png")
   ;  =>
   ;  nil
   ;
@@ -276,17 +276,17 @@
   ; @param (string) filename
   ;
   ; @example
-  ;  (io/filename->basename "b.png")
+  ;  (filename->basename "b.png")
   ;  =>
   ;  "b"
   ;
   ; @example
-  ;  (io/filename->basename ".hidden-file.txt")
+  ;  (filename->basename ".hidden-file.txt")
   ;  =>
   ;  ".hidden-file"
   ;
   ; @example
-  ;  (io/filename->basename ".hidden-file")
+  ;  (filename->basename ".hidden-file")
   ;  =>
   ;  ".hidden-file"
   ;
@@ -300,17 +300,17 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (io/filepath->basename "a/b.png")
+  ;  (filepath->basename "a/b.png")
   ;  =>
   ;  "b"
   ;
   ; @example
-  ;  (io/filepath->basename "a/.hidden-file.txt")
+  ;  (filepath->basename "a/.hidden-file.txt")
   ;  =>
   ;  ".hidden-file"
   ;
   ; @example
-  ;  (io/filepath->basename "a/.hidden-file")
+  ;  (filepath->basename "a/.hidden-file")
   ;  =>
   ;  ".hidden-file"
   ;
@@ -322,12 +322,12 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (io/filepath->mime-type "a/b.png")
+  ;  (filepath->mime-type "a/b.png")
   ;  =>
   ;  "image/png"
   ;
   ; @example
-  ;  (io/filepath->mime-type "a/b")
+  ;  (filepath->mime-type "a/b")
   ;  =>
   ;  "unknown/unknown"
   ;
@@ -346,7 +346,7 @@
   ; @param (string) filepath
   ;
   ; @usage
-  ;  (io/filepath->image? "a/b.png")
+  ;  (filepath->image? "a/b.png")
   ;
   ; @return (boolean)
   [filepath]
@@ -368,7 +368,7 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (io/directory-path->directory-name "a/b")
+  ;  (directory-path->directory-name "a/b")
   ;  =>
   ;  "b"
   ;
