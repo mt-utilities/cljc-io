@@ -6,8 +6,33 @@
     (:require [clojure.java.io]
               [io.check          :as check]
               [io.config         :as config]
+              [io.helpers        :as helpers]
               [io.read           :as read]
               [mid-fruits.string :as string]))
+
+
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn create-directory!
+  ; @param (string) directory-path
+  ;
+  ; @return (?)
+  [directory-path]
+  (if-not (check/directory-exists? directory-path)
+          (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
+  (try (-> directory-path java.io.File. .mkdir)
+       (catch Exception e (println e))))
+
+(defn create-file!
+  ; @param (string) filepath
+  ;
+  ; @return (?)
+  [filepath]
+  (if-not (check/file-exists? filepath)
+          (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+  (spit filepath nil))
 
 
 
@@ -42,6 +67,9 @@
   ;
   ; @return (?)
   [filepath content]
+  (if-let [directory-path (helpers/filepath->directory-path filepath)]
+          (if-not (check/directory-exists? directory-path)
+                  (create-directory!       directory-path)))
   (if-not (check/file-exists? filepath)
           (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
   (spit filepath (str content)))
@@ -50,29 +78,33 @@
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ;  {:max-line-count (integer)(opt)
-  ;   :reverse? (boolean)(opt)
-  ;    Default: false}
+  ;  {:max-line-count (integer)(opt)}
   ;
   ; @return (?)
-  [filepath content {:keys [max-line-count reverse?]}]
+  [filepath content {:keys [max-line-count]}]
   (let [file-content (read/read-file filepath)
-        output       (if reverse? (str content      "\n" file-content)
-                                  (str file-content "\n" content))]
-       (if max-line-count ; If maximum number of lines is limited ...
+        output       (str file-content "\n" content)]
+       (if max-line-count ; If the maximum number of lines is limited ...
                           (let [output (string/max-lines output max-line-count)]
                                (write-file! filepath output))
-                          ; If maximum number of lines is NOT limited ...
+                          ; If the maximum number of lines is NOT limited ...
                           (write-file! filepath output))))
 
-(defn create-file!
+(defn prepend-to-file!
   ; @param (string) filepath
+  ; @param (*) content
+  ; @param (map)(opt) options
+  ;  {:max-line-count (integer)(opt)}
   ;
   ; @return (?)
-  [filepath]
-  (if-not (check/file-exists? filepath)
-          (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-  (spit filepath nil))
+  [filepath content {:keys [max-line-count]}]
+  (let [file-content (read/read-file filepath)
+        output       (str content "\n" file-content)]
+       (if max-line-count ; If the maximum number of lines is limited ...
+                          (let [output (string/max-lines output max-line-count)]
+                               (write-file! filepath output))
+                          ; If the maximum number of lines is NOT limited ...
+                          (write-file! filepath output))))
 
 (defn copy-uri-to-file!
   ; @param (string) uri
@@ -89,14 +121,6 @@
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
-
-(defn create-directory!
-  ; @param (string) directory-path
-  ;
-  ; @return (?)
-  [directory-path]
-  (try (-> directory-path java.io.File. .mkdir)
-       (catch Exception e (println e))))
 
 (defn delete-empty-directory!
   ; @param (string) directory-path

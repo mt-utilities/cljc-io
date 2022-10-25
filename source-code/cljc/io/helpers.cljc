@@ -204,6 +204,18 @@
   [mime-type]
   (string/starts-with? mime-type "image"))
 
+(defn filepath->directory-path
+  ; @param (string) filepath
+  ;
+  ; @example
+  ;  (filepath->directory-path "a/b.png")
+  ;  =>
+  ;  "a"
+  ;
+  ; @return (string)
+  [filepath]
+  (string/before-last-occurence filepath "/" {:return? false}))
+
 (defn filepath->filename
   ; @param (string) filepath
   ;
@@ -214,9 +226,7 @@
   ;
   ; @return (string)
   [filepath]
-  (if-let [filename (string/after-last-occurence filepath "/")]
-          (return filename)
-          (return filepath)))
+  (string/after-last-occurence filepath "/" {:return? true}))
 
 (defn filepath->extension
   ; @param (string) filepath
@@ -239,9 +249,8 @@
   ; @return (string)
   [filepath]
   (let [filename (-> filepath filepath->filename (string/not-starts-with! "."))]
-       (if-let [extension (string/after-last-occurence filename ".")]
-               (string/lowercase extension)
-               (return nil))))
+       (if-let [extension (string/after-last-occurence filename "." {:return? false})]
+               (string/lowercase extension))))
 
 (defn filename->extension
   ; @param (string) filename
@@ -249,28 +258,6 @@
   ; @return (string)
   [filename]
   (filepath->extension filename))
-
-(defn filepath->basepath
-  ; @param (string) filepath
-  ;
-  ; @example
-  ;  (filepath->basepath "a/b.png")
-  ;  =>
-  ;  "a"
-  ;
-  ; @example
-  ;  (filepath->basepath "a/b/c.png")
-  ;  =>
-  ;  "a/b"
-  ;
-  ; @example
-  ;  (filepath->basepath "c.png")
-  ;  =>
-  ;  nil
-  ;
-  ; @return (string)
-  [filepath]
-  (string/before-last-occurence filepath "/"))
 
 (defn filename->basename
   ; @param (string) filename

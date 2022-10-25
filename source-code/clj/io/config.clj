@@ -25,3 +25,6 @@
 ;  üzenet, így egyértelmű, hogy a FILE-DOES-NOT-EXIST-ERROR hibaüzenet ignorálható,
 ;  mivel az addig hiányzó fájl létrehozása megtörtént.
 (def CREATE-FILE-MESSAGE "Creating file:")
+
+; @constant (string)
+(def CREATE-DIRECTORY-MESSAGE "Creating directory:")
