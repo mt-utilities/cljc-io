@@ -5,7 +5,7 @@
 (ns io.helpers
     (:require [mid-fruits.candy  :refer [param return]]
               [mid-fruits.map    :as map]
-              [mid-fruits.regex  :refer [re-match? re-mismatch?]]
+              [regex.api         :refer [re-match? re-mismatch?]]
               [mid-fruits.string :as string]
               [mid-fruits.vector :as vector]))
 
