@@ -1,16 +1,11 @@
 
-;; -- Namespace ---------------------------------------------------------------
-;; ----------------------------------------------------------------------------
-
 (ns io.actions
     (:require [clojure.java.io]
               [io.check          :as check]
               [io.config         :as config]
-              [io.helpers        :as helpers]
+              [io.file           :as file]
               [io.read           :as read]
               [mid-fruits.string :as string]))
-
-
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -33,8 +28,6 @@
   (if-not (check/file-exists? filepath)
           (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
   (spit filepath nil))
-
-
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -67,7 +60,7 @@
   ;
   ; @return (?)
   [filepath content]
-  (if-let [directory-path (helpers/filepath->directory-path filepath)]
+  (if-let [directory-path (file/filepath->directory-path filepath)]
           (if-not (check/directory-exists? directory-path)
                   (create-directory!       directory-path)))
   (if-not (check/file-exists? filepath)
@@ -116,8 +109,6 @@
                    output (clojure.java.io/output-stream file)]
                   (clojure.java.io/copy input output))
        (catch Exception e (println e))))
-
-
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

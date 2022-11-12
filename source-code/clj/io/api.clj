@@ -1,17 +1,17 @@
 
-;; -- Namespace ---------------------------------------------------------------
-;; ----------------------------------------------------------------------------
-
 (ns io.api
     (:require [clojure.java.io]
-              [io.actions :as actions]
-              [io.check   :as check]
-              [io.edn     :as edn]
-              [io.helpers :as helpers]
-              [io.read    :as read]
-              [io.size    :as size]))
-
-
+              [io.actions    :as actions]
+              [io.check      :as check]
+              [io.config     :as config]
+              [io.directory  :as directory]
+              [io.edn        :as edn]
+              [io.file       :as file]
+              [io.filesize   :as filesize]
+              [io.mime-type  :as mime-type]
+              [io.read       :as read]
+              [io.size       :as size]
+              [io.validators :as validators]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -40,41 +40,48 @@
 (def directory?        check/directory?)
 (def directory-exists? check/directory-exists?)
 
+; io.config
+(def MIME-TYPES       config/MIME-TYPES)
+(def EXTENSIONS       config/EXTENSIONS)
+(def IMAGE-EXTENSIONS config/IMAGE-EXTENSIONS)
+
+; io.directory
+(def directory-path->directory-name directory/directory-path->directory-name)
+
 ; io.edn
 (def write-edn-file! edn/write-edn-file!)
 (def read-edn-file   edn/read-edn-file)
 (def swap-edn-file!  edn/swap-edn-file!)
 
-; io.helpers
-(def MIME-TYPES                     helpers/MIME-TYPES)
-(def EXTENSIONS                     helpers/EXTENSIONS)
-(def IMAGE-EXTENSIONS               helpers/IMAGE-EXTENSIONS)
-(def B->KB                          helpers/B->KB)
-(def B->MB                          helpers/B->MB)
-(def KB->B                          helpers/KB->B)
-(def KB->MB                         helpers/KB->MB)
-(def MB->B                          helpers/MB->B)
-(def MB->KB                         helpers/MB->KB)
-(def mime-type->extension           helpers/mime-type->extension)
-(def extension->mime-type           helpers/extension->mime-type)
-(def unknown-mime-type?             helpers/unknown-mime-type?)
-(def extension->image?              helpers/extension->image?)
-(def mime-type->image?              helpers/mime-type->image?)
-(def filepath->directory-path       helpers/filepath->directory-path)
-(def filepath->filename             helpers/filepath->filename)
-(def filepath->extension            helpers/filepath->extension)
-(def filename->extension            helpers/filename->extension)
-(def filename->basename             helpers/filename->basename)
-(def filepath->basename             helpers/filepath->basename)
-(def filepath->mime-type            helpers/filepath->mime-type)
-(def filename->mime-type            helpers/filename->mime-type)
-(def filepath->image?               helpers/filepath->image?)
-(def filename->image?               helpers/filename->image?)
-(def directory-path->directory-name helpers/directory-path->directory-name)
-(def filename-valid?                helpers/filename-valid?)
-(def filename-invalid?              helpers/filename-invalid?)
-(def directory-name-valid?          helpers/directory-name-valid?)
-(def directory-name-invalid?        helpers/directory-name-invalid?)
+; io.file
+(def extension->image?        file/extension->image?)
+(def filepath->directory-path file/filepath->directory-path)
+(def filepath->filename       file/filepath->filename)
+(def filepath->extension      file/filepath->extension)
+(def filename->extension      file/filename->extension)
+(def filename->basename       file/filename->basename)
+(def filepath->basename       file/filepath->basename)
+(def filepath->mime-type      file/filepath->mime-type)
+(def filename->mime-type      file/filename->mime-type)
+(def filepath->image?         file/filepath->image?)
+(def filename->image?         file/filename->image?)
+
+; io.filesize
+(def B->KB  filesize/B->KB)
+(def B->MB  filesize/B->MB)
+(def B->GB  filesize/B->GB)
+(def KB->B  filesize/KB->B)
+(def KB->MB filesize/KB->MB)
+(def KB->GB filesize/KB->GB)
+(def MB->B  filesize/MB->B)
+(def MB->KB filesize/MB->KB)
+(def MB->GB filesize/MB->GB)
+
+; io.mime-type
+(def mime-type->extension mime-type/mime-type->extension)
+(def extension->mime-type mime-type/extension->mime-type)
+(def unknown-mime-type?   mime-type/unknown-mime-type?)
+(def mime-type->image?    mime-type/mime-type->image?)
 
 ; io.read
 (def read-file             read/read-file)
@@ -89,3 +96,9 @@
 ; io.size
 (def get-filesize          size/get-filesize)
 (def max-filesize-reached? size/max-filesize-reached?)
+
+; io.validators
+(def filename-valid?         validators/filename-valid?)
+(def filename-invalid?       validators/filename-invalid?)
+(def directory-name-valid?   validators/directory-name-valid?)
+(def directory-name-invalid? validators/directory-name-invalid?)
