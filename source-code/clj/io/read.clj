@@ -4,9 +4,9 @@
 
 (ns io.read
     (:require [clojure.java.io]
+              [candy.api         :refer [param]]
               [io.check          :as check]
               [io.config         :as config]
-              [mid-fruits.candy  :refer [param]]
               [mid-fruits.vector :as vector]))
 
 

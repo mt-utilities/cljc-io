@@ -3,9 +3,9 @@
 ;; ----------------------------------------------------------------------------
 
 (ns io.edn
-    (:require [io.actions        :as actions]
+    (:require [candy.api         :refer [return]]
+              [io.actions        :as actions]
               [io.read           :as read]
-              [mid-fruits.candy  :refer [return]]
               [mid-fruits.pretty :as pretty]
               [mid-fruits.reader :as reader]
               [mid-fruits.string :as string]

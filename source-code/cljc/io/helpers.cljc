@@ -3,7 +3,7 @@
 ;; ----------------------------------------------------------------------------
 
 (ns io.helpers
-    (:require [mid-fruits.candy  :refer [param return]]
+    (:require [candy.api         :refer [param return]]
               [mid-fruits.map    :as map]
               [regex.api         :refer [re-match? re-mismatch?]]
               [mid-fruits.string :as string]
