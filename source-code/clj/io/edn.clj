@@ -14,18 +14,27 @@
 (defn write-edn-file!
   ; @param (string) filepath
   ; @param (*) content
-  ; @param (map) options
+  ; @param (map)(opt) options
   ;  {:abc? (boolean)(opt)
   ;    Default: false}
   ;
   ; @usage
   ;  (write-edn-file! "my-file.edn" {...})
   ;
-  ; @return (map)
-  [filepath content & [options]]
-  (let [output (pretty/mixed->string content options)]
-       (actions/write-file! filepath (str "\n" output))
-       (return content)))
+  ; @example
+  ;  (write-edn-file! "my-file.edn" {:b "B" :a "A" :d "D" :c "C"} {:abc? true})
+  ;  (read-file       "my-field.edn")
+  ;  =>
+  ;  "{:a "A" :b "B" :c "C" :d "D"}"
+  ;
+  ; @return (string)
+  ([filepath content]
+   (write-edn-file! filepath content {}))
+
+  ([filepath content options]
+   (let [output (pretty/mixed->string content options)]
+        (actions/write-file! filepath (str "\n" output) {:create? true})
+        (return content))))
 
 (defn read-edn-file
   ; @param (string) filepath

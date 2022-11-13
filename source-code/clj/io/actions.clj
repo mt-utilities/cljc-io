@@ -57,47 +57,64 @@
 (defn write-file!
   ; @param (string) filepath
   ; @param (*) content
+  ; @param (map)(opt) options
+  ;  {:create? (boolean)(opt)
+  ;    Default: false}
   ;
   ; @return (?)
-  [filepath content]
-  (if-let [directory-path (file/filepath->directory-path filepath)]
-          (if-not (check/directory-exists? directory-path)
-                  (create-directory!       directory-path)))
-  (if-not (check/file-exists? filepath)
-          (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-  (spit filepath (str content)))
+  ([filepath content]
+   (write-file! filepath content {}))
+
+  ([filepath content {:keys [create?]}]
+   (if (check/file-exists? filepath)
+       (spit filepath (str content))
+       (if create? (do (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\""))
+                       (if-let [directory-path (file/filepath->directory-path filepath)]
+                               (if-not (check/directory-exists? directory-path)
+                                       (create-directory!       directory-path)))
+                       (spit filepath (str content)))))))
 
 (defn append-to-file!
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ;  {:max-line-count (integer)(opt)}
+  ;  {:create? (boolean)(opt)
+  ;    Default: false
+  ;   :max-line-count (integer)(opt)}
   ;
   ; @return (?)
-  [filepath content {:keys [max-line-count]}]
-  (let [file-content (read/read-file filepath)
-        output       (str file-content "\n" content)]
-       (if max-line-count ; If the maximum number of lines is limited ...
-                          (let [output (string/max-lines output max-line-count)]
-                               (write-file! filepath output))
-                          ; If the maximum number of lines is NOT limited ...
-                          (write-file! filepath output))))
+  ([filepath content]
+   (append-to-file! filepath content {}))
+
+  ([filepath content {:keys [max-line-count] :as options}]
+   (let [file-content (read/read-file filepath)
+         output       (str file-content "\n" content)]
+        (if max-line-count ; If the maximum number of lines is limited ...
+                           (let [output (string/max-lines output max-line-count)]
+                                (write-file! filepath output options))
+                           ; If the maximum number of lines is NOT limited ...
+                           (write-file! filepath output options)))))
 
 (defn prepend-to-file!
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ;  {:max-line-count (integer)(opt)}
+  ;  {:create? (boolean)(opt)
+  ;    Default: false
+  ;   :max-line-count (integer)(opt)}
   ;
   ; @return (?)
-  [filepath content {:keys [max-line-count]}]
-  (let [file-content (read/read-file filepath)
-        output       (str content "\n" file-content)]
-       (if max-line-count ; If the maximum number of lines is limited ...
-                          (let [output (string/max-lines output max-line-count)]
-                               (write-file! filepath output))
-                          ; If the maximum number of lines is NOT limited ...
-                          (write-file! filepath output))))
+  ([filepath content]
+   (prepend-to-file! filepath content {}))
+
+  ([filepath content {:keys [max-line-count] :as options}]
+   (let [file-content (read/read-file filepath)
+         output       (str content "\n" file-content)]
+        (if max-line-count ; If the maximum number of lines is limited ...
+                           (let [output (string/max-lines output max-line-count)]
+                                (write-file! filepath output options))
+                           ; If the maximum number of lines is NOT limited ...
+                           (write-file! filepath output options)))))
 
 (defn copy-uri-to-file!
   ; @param (string) uri
