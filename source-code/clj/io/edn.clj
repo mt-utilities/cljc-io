@@ -4,7 +4,7 @@
               [io.actions        :as actions]
               [io.read           :as read]
               [mid-fruits.pretty :as pretty]
-              [mid-fruits.reader :as reader]
+              [reader.api        :as reader]
               [mid-fruits.string :as string]
               [mid-fruits.vector :as vector]))
 
