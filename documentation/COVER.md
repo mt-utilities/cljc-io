@@ -5,9 +5,9 @@
 ---
 
 ### api files
-* [io/api.clj](clj/io/API.md)
-* [io/api.cljc](cljc/io/API.md)
-* [io/api.cljs](cljs/io/API.md)
+* [io.api](clj/io/API.md) [clj]
+* [io.api](cljc/io/API.md) [cljc]
+* [io.api](cljs/io/API.md) [cljs]
 
 ---
 

@@ -12,4 +12,4 @@ The <strong>io-api</strong> is releasing soon on Clojars!
 
 ### Documentation
 
-The io-api documentation is [available here](documentation/COVER.md).
+The <strong>io-api</strong> documentation is [available here](documentation/COVER.md).
