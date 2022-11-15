@@ -19,11 +19,20 @@
   ;    Default: false}
   ;
   ; @usage
-  ;  (write-edn-file! "my-file.edn" {...})
+  ;  (write-edn-file! "my-directory/my-file.edn" {...})
+  ;
+  ; @usage
+  ;  (write-edn-file! "my-directory/my-file.edn" {...} {...})
   ;
   ; @example
-  ;  (write-edn-file! "my-file.edn" {:b "B" :a "A" :d "D" :c "C"} {:abc? true})
-  ;  (read-file       "my-field.edn")
+  ;  (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"})
+  ;  (read-file       "my-directory/my-file.edn")
+  ;  =>
+  ;  "{:b "B" :a "A" :d "D" :c "C"}"
+  ;
+  ; @example
+  ;  (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"} {:abc? true})
+  ;  (read-file       "my-directory/my-file.edn")
   ;  =>
   ;  "{:a "A" :b "B" :c "C" :d "D"}"
   ;
@@ -39,6 +48,9 @@
 (defn read-edn-file
   ; @param (string) filepath
   ;
+  ; @usage
+  ;  (read-edn-file "my-directory/my-file.edn")
+  ;
   ; @return (*)
   [filepath]
   (let [file-content (read/read-file filepath)]
@@ -53,12 +65,12 @@
   ; @param (*) params
   ;
   ; @usage
-  ;  (swap-edn-file! "my-file.edn" assoc-in [:items :xyz] "XYZ")
+  ;  (swap-edn-file! "my-directory/my-file.edn" assoc-in [:items :xyz] "XYZ")
   ;
   ; @usage
-  ;  (swap-edn-file! "my-file.edn" vector/conj-item "XYZ")
+  ;  (swap-edn-file! "my-directory/my-file.edn" conj "XYZ")
   ;
-  ; @return (map)
+  ; @return (*)
   [filepath f & params]
   (let [edn    (read-edn-file    filepath)
         params (vector/cons-item params edn)

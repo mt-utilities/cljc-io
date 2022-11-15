@@ -12,6 +12,9 @@
 (defn read-file
   ; @param (string) filepath
   ;
+  ; @usage
+  ;  (read-file "my-directory/my-file.ext")
+  ;
   ; @return (string)
   [filepath]
   (try (if (check/file-exists? filepath)
@@ -27,9 +30,9 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (file-list "my-directory")
+  ;  (file-list "my-directory/my-subdirectory")
   ;  =>
-  ;  ["my-directory/my-file.ext" ...]
+  ;  ["my-directory/my-subdirectory/my-file.ext" ...]
   ;
   ; @return (strings in vector)
   [directory-path]
@@ -47,9 +50,9 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (all-file-list "my-directory")
+  ;  (all-file-list "my-directory/my-subdirectory")
   ;  =>
-  ;  ["my-directory/my-file.ext" ...]
+  ;  ["my-directory/my-subdirectory/my-file.ext" ...]
   ;
   ; @return (strings in vector)
   [directory-path]
@@ -109,11 +112,11 @@
   ; @example
   ;  (item-list "my-directory")
   ;  =>
-  ;  ["my-directory/my-file.ext" "my-directory/my-subdirectory" ...]
+  ;  ["my-directory/my-subdirectory" "my-directory/my-subdirectory/my-file.ext" ...]
   ;
   ; @return (strings in vector)
   [directory-path]
-  (vector/remove-item (mapv str (-> directory-path clojure.java.io/file .listFiles))
+  (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file .listFiles))
                       (param directory-path)))
 
 (defn all-item-list
@@ -126,15 +129,18 @@
   ; @example
   ;  (all-item-list "my-directory")
   ;  =>
-  ;  ["my-directory/my-file.ext" "my-directory/my-subdirectory" ...]
+  ;  ["my-directory/my-subdirectory" "my-directory/my-subdirectory/my-file.ext" ...]
   ;
   ; @return (strings in vector)
   [directory-path]
-  (vector/remove-item (mapv str (-> directory-path clojure.java.io/file file-seq))
+  (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file file-seq))
                       (param directory-path)))
 
 (defn empty-directory?
   ; @param (string) directory-path
+  ;
+  ; @usage
+  ;  (empty-directory? "my-directory/my-subdirectory")
   ;
   ; @return (boolean)
   [directory-path]

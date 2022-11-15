@@ -1,6 +1,6 @@
 
 # <strong>io/api.cljc</strong>
-<p>Documentation of the <strong>io/api.cljc</strong> namespace</p>
+<p>Documentation of the <strong>io.api</strong> namespace</p>
 
 ---
 
@@ -14,6 +14,7 @@
 ---
 
 ### directory-path->directory-name
+###### cljc/io/api.cljc
 
 ```
 @param (string) directory-path
@@ -33,6 +34,7 @@
 ---
 
 ### extension->image?
+###### cljc/io/api.cljc
 
 ```
 @param (string) extension
@@ -52,6 +54,7 @@
 ---
 
 ### filepath->directory-path
+###### cljc/io/api.cljc
 
 ```
 @param (string) filepath
@@ -59,9 +62,9 @@
 
 ```
 @example
- (filepath->directory-path "a/b.png")
+ (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
  =>
- "a"
+ "my-directory/my-subdirectory"
 ```
 
 ```
@@ -71,6 +74,7 @@
 ---
 
 ### filepath->filename
+###### cljc/io/api.cljc
 
 ```
 @param (string) filepath
@@ -78,9 +82,9 @@
 
 ```
 @example
- (filepath->filename "a/b.png")
+ (filepath->filename "my-directory/my-file.ext")
  =>
- "b.png"
+ "my-file.ext"
 ```
 
 ```
@@ -90,6 +94,7 @@
 ---
 
 ### filepath->extension
+###### cljc/io/api.cljc
 
 ```
 @param (string) filepath
@@ -97,21 +102,21 @@
 
 ```
 @example
- (filepath->extension "a/b.PNG")
+ (filepath->extension "my-directory/my-file.EXT")
  =>
- "png"
+ "ext"
 ```
 
 ```
 @example
- (filepath->extension "a/.hidden-file.txt")
+ (filepath->extension "my-directory/.my-hidden-file.ext")
  =>
- "txt"
+ "ext"
 ```
 
 ```
 @example
- (filepath->extension "a/.hidden-file")
+ (filepath->extension "my-directory/.my-hidden-file")
  =>
  nil
 ```
@@ -123,9 +128,31 @@
 ---
 
 ### filename->extension
+###### cljc/io/api.cljc
 
 ```
 @param (string) filename
+```
+
+```
+@example
+ (filename->extension "my-file.EXT")
+ =>
+ "ext"
+```
+
+```
+@example
+ (filename->extension ".my-hidden-file.ext")
+ =>
+ "ext"
+```
+
+```
+@example
+ (filename->extension ".my-hidden-file")
+ =>
+ nil
 ```
 
 ```
@@ -135,6 +162,7 @@
 ---
 
 ### filename->basename
+###### cljc/io/api.cljc
 
 ```
 @param (string) filename
@@ -142,23 +170,23 @@
 
 ```
 @example
- (filename->basename "b.png")
+ (filename->basename "my-file.EXT")
  =>
- "b"
+ "my-file"
 ```
 
 ```
 @example
- (filename->basename ".hidden-file.txt")
+ (filename->basename ".my-hidden-file.ext")
  =>
- ".hidden-file"
+ ".my-hidden-file"
 ```
 
 ```
 @example
- (filename->basename ".hidden-file")
+ (filename->basename ".my-hidden-file")
  =>
- ".hidden-file"
+ ".my-hidden-file"
 ```
 
 ```
@@ -168,6 +196,7 @@
 ---
 
 ### filepath->basename
+###### cljc/io/api.cljc
 
 ```
 @param (string) filepath
@@ -175,23 +204,23 @@
 
 ```
 @example
- (filepath->basename "a/b.png")
+ (filepath->basename "my-directory/my-file.EXT")
  =>
- "b"
+ "my-file"
 ```
 
 ```
 @example
- (filepath->basename "a/.hidden-file.txt")
+ (filepath->basename "my-directory/.my-hidden-file.ext")
  =>
- ".hidden-file"
+ ".my-hidden-file"
 ```
 
 ```
 @example
- (filepath->basename "a/.hidden-file")
+ (filepath->basename "my-directory/.my-hidden-file")
  =>
- ".hidden-file"
+ ".my-hidden-file"
 ```
 
 ```
@@ -201,6 +230,7 @@
 ---
 
 ### filepath->mime-type
+###### cljc/io/api.cljc
 
 ```
 @param (string) filepath
@@ -208,14 +238,14 @@
 
 ```
 @example
- (filepath->mime-type "a/b.png")
+ (filepath->mime-type "my-directory/my-image.png")
  =>
  "image/png"
 ```
 
 ```
 @example
- (filepath->mime-type "a/b")
+ (filepath->mime-type "my-directory/my-file")
  =>
  "unknown/unknown"
 ```
@@ -227,9 +257,24 @@
 ---
 
 ### filename->mime-type
+###### cljc/io/api.cljc
 
 ```
 @param (string) filename
+```
+
+```
+@example
+ (filename->mime-type "my-image.png")
+ =>
+ "image/png"
+```
+
+```
+@example
+ (filename->mime-type "my-file")
+ =>
+ "unknown/unknown"
 ```
 
 ```
@@ -239,14 +284,31 @@
 ---
 
 ### filepath->image?
+###### cljc/io/api.cljc
 
 ```
 @param (string) filepath
 ```
 
 ```
-@usage
-  (filepath->image? "a/b.png")
+@example
+ (filepath->image? "my-directory/my-image.png")
+ =>
+ true
+```
+
+```
+@example
+ (filepath->image? "my-directory/my-file.ext")
+ =>
+ false
+```
+
+```
+@example
+ (filepath->image? "my-directory/my-file")
+ =>
+ false
 ```
 
 ```
@@ -256,9 +318,31 @@
 ---
 
 ### filename->image?
+###### cljc/io/api.cljc
 
 ```
 @param (string) filename
+```
+
+```
+@example
+ (filename->image? "my-image.png")
+ =>
+ true
+```
+
+```
+@example
+ (filename->image? "my-file.ext")
+ =>
+ false
+```
+
+```
+@example
+ (filename->image? "my-file")
+ =>
+ false
 ```
 
 ```
@@ -268,9 +352,15 @@
 ---
 
 ### B->KB
+###### cljc/io/api.cljc
 
 ```
 @param (B) n
+```
+
+```
+@usage
+  (B->KB 420)
 ```
 
 ```
@@ -280,9 +370,15 @@
 ---
 
 ### B->MB
+###### cljc/io/api.cljc
 
 ```
 @param (B) n
+```
+
+```
+@usage
+  (B->MB 420)
 ```
 
 ```
@@ -292,9 +388,15 @@
 ---
 
 ### B->GB
+###### cljc/io/api.cljc
 
 ```
 @param (B) n
+```
+
+```
+@usage
+  (B->GB 420)
 ```
 
 ```
@@ -304,9 +406,15 @@
 ---
 
 ### KB->B
+###### cljc/io/api.cljc
 
 ```
 @param (KB) n
+```
+
+```
+@usage
+  (KB->B 420)
 ```
 
 ```
@@ -316,9 +424,15 @@
 ---
 
 ### KB->MB
+###### cljc/io/api.cljc
 
 ```
 @param (KB) n
+```
+
+```
+@usage
+  (KB->MB 420)
 ```
 
 ```
@@ -328,9 +442,15 @@
 ---
 
 ### KB->GB
+###### cljc/io/api.cljc
 
 ```
 @param (KB) n
+```
+
+```
+@usage
+  (KB->GB 420)
 ```
 
 ```
@@ -340,9 +460,15 @@
 ---
 
 ### MB->B
+###### cljc/io/api.cljc
 
 ```
 @param (MB) n
+```
+
+```
+@usage
+  (MB->B 420)
 ```
 
 ```
@@ -352,9 +478,15 @@
 ---
 
 ### MB->KB
+###### cljc/io/api.cljc
 
 ```
 @param (MB) n
+```
+
+```
+@usage
+  (MB->KB 420)
 ```
 
 ```
@@ -364,9 +496,15 @@
 ---
 
 ### MB->GB
+###### cljc/io/api.cljc
 
 ```
 @param (MB) n
+```
+
+```
+@usage
+  (MB->GB 420)
 ```
 
 ```
@@ -376,6 +514,7 @@
 ---
 
 ### mime-type->extension
+###### cljc/io/api.cljc
 
 ```
 @param (string) mime-type
@@ -402,6 +541,7 @@
 ---
 
 ### extension->mime-type
+###### cljc/io/api.cljc
 
 ```
 @param (extension) 
@@ -428,6 +568,7 @@
 ---
 
 ### unknown-mime-type?
+###### cljc/io/api.cljc
 
 ```
 @param (string) mime-type
@@ -454,6 +595,7 @@
 ---
 
 ### mime-type->image?
+###### cljc/io/api.cljc
 
 ```
 @param (string) extension
@@ -473,9 +615,24 @@
 ---
 
 ### filename-valid?
+###### cljc/io/api.cljc
 
 ```
 @param (string) filename
+```
+
+```
+@example
+ (filename-valid? "my-file.ext")
+ =>
+ true
+```
+
+```
+@example
+ (filename-valid? "my-directory/my-file.ext")
+ =>
+ false
 ```
 
 ```
@@ -485,9 +642,24 @@
 ---
 
 ### filename-invalid?
+###### cljc/io/api.cljc
 
 ```
 @param (string) filename
+```
+
+```
+@example
+ (filename-invalid? "my-file.ext")
+ =>
+ false
+```
+
+```
+@example
+ (filename-invalid? "my-directory/my-file.ext")
+ =>
+ true
 ```
 
 ```
@@ -497,9 +669,24 @@
 ---
 
 ### directory-name-valid?
+###### cljc/io/api.cljc
 
 ```
 @param (string) directory-name
+```
+
+```
+@example
+ (directory-name-valid? "my-directory")
+ =>
+ true
+```
+
+```
+@example
+ (directory-name-valid? "my-directory/my-subdirectory")
+ =>
+ false
 ```
 
 ```
@@ -509,9 +696,24 @@
 ---
 
 ### directory-name-invalid?
+###### cljc/io/api.cljc
 
 ```
 @param (string) directory-name
+```
+
+```
+@example
+ (directory-name-invalid? "my-directory")
+ =>
+ false
+```
+
+```
+@example
+ (directory-name-invalid? "my-directory/my-subdirectory")
+ =>
+ true
 ```
 
 ```

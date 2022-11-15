@@ -8,6 +8,9 @@
 (defn file-exists?
   ; @param (string) filepath
   ;
+  ; @usage
+  ;  (file-exists? "my-directory/my-file.ext")
+  ;
   ; @return (boolean)
   [filepath]
   (let [file (clojure.java.io/file filepath)]
@@ -16,6 +19,9 @@
 
 (defn file-not-exists?
   ; @param (string) filepath
+  ;
+  ; @usage
+  ;  (file-not-exists? "my-directory/my-file.ext")
   ;
   ; @return (boolean)
   [filepath]
@@ -26,12 +32,18 @@
 (defn directory?
   ; @param (string) directory-path
   ;
+  ; @usage
+  ;  (directory? "my-directory/my-subdirectory")
+  ;
   ; @return (boolean)
   [directory-path]
   (-> directory-path clojure.java.io/file .isDirectory))
 
 (defn directory-exists?
   ; @param (string) directory-path
+  ;
+  ; @usage
+  ;  (directory-exists? "my-directory/my-subdirectory")
   ;
   ; @return (boolean)
   [directory-path]

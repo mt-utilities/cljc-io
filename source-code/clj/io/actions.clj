@@ -13,6 +13,9 @@
 (defn create-directory!
   ; @param (string) directory-path
   ;
+  ; @usage
+  ;  (create-directory! "my-directory/my-subdirectory")
+  ;
   ; @return (?)
   [directory-path]
   (if-not (check/directory-exists? directory-path)
@@ -24,6 +27,9 @@
 
 (defn create-file!
   ; @param (string) filepath
+  ;
+  ; @usage
+  ;  (create-file! "my-directory/my-file.ext")
   ;
   ; @return (?)
   [filepath]
@@ -37,6 +43,9 @@
 (defn delete-file!
   ; @param (string) filepath
   ;
+  ; @usage
+  ;  (delete-file! "my-directory/my-file.ext")
+  ;
   ; @return (?)
   [filepath]
   (try (if (check/file-exists?          filepath)
@@ -47,6 +56,10 @@
 (defn copy-file!
   ; @param (string) source-filepath
   ; @param (string) destination-filepath
+  ;
+  ; @usage
+  ;  (copy-file! "my-directory/my-source-file.ext"
+  ;              "my-directory/my-destination-file.ext")
   ;
   ; @return (?)
   [source-filepath destination-filepath]
@@ -62,6 +75,12 @@
   ; @param (map)(opt) options
   ;  {:create? (boolean)(opt)
   ;    Default: false}
+  ;
+  ; @usage
+  ;  (write-file! "my-directory/my-file.ext" "My content")
+  ;
+  ; @usage
+  ;  (write-file! "my-directory/my-file.ext" "My content" {...})
   ;
   ; @return (?)
   ([filepath content]
@@ -84,6 +103,12 @@
   ;    Default: false
   ;   :max-line-count (integer)(opt)}
   ;
+  ; @usage
+  ;  (append-to-file! "my-directory/my-file.ext" "My content")
+  ;
+  ; @usage
+  ;  (append-to-file! "my-directory/my-file.ext" "My content" {...})
+  ;
   ; @return (?)
   ([filepath content]
    (append-to-file! filepath content {}))
@@ -104,6 +129,12 @@
   ;  {:create? (boolean)(opt)
   ;    Default: false
   ;   :max-line-count (integer)(opt)}
+  ;
+  ; @usage
+  ;  (prepend-to-file! "my-directory/my-file.ext" "My content")
+  ;
+  ; @usage
+  ;  (prepend-to-file! "my-directory/my-file.ext" "My content" {...})
   ;
   ; @return (?)
   ([filepath content]
@@ -135,6 +166,9 @@
 (defn delete-empty-directory!
   ; @param (string) directory-path
   ;
+  ; @usage
+  ;  (delete-empty-directory! "my-directory/my-subdirectory")
+  ;
   ; @return (?)
   [directory-path]
   (try (if (check/directory-exists?     directory-path)
@@ -144,6 +178,9 @@
 
 (defn empty-directory!
   ; @param (string) directory-path
+  ;
+  ; @usage
+  ;  (empty-directory! "my-directory/my-subdirectory")
   ;
   ; @return (?)
   [directory-path]
@@ -155,6 +192,9 @@
 
 (defn delete-directory!
   ; @param (string) directory-path
+  ;
+  ; @usage
+  ;  (delete-directory! "my-directory/my-subdirectory")
   ;
   ; @return (?)
   [directory-path]
