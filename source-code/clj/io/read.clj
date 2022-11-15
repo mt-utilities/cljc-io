@@ -30,9 +30,9 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (file-list "my-directory/my-subdirectory")
+  ;  (file-list "my-directory")
   ;  =>
-  ;  ["my-directory/my-subdirectory/my-file.ext" ...]
+  ;  ["my-directory/my-file.ext" ...]
   ;
   ; @return (strings in vector)
   [directory-path]
@@ -50,9 +50,9 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (all-file-list "my-directory/my-subdirectory")
+  ;  (all-file-list "my-directory")
   ;  =>
-  ;  ["my-directory/my-subdirectory/my-file.ext" ...]
+  ;  ["my-directory/my-file.ext" ...]
   ;
   ; @return (strings in vector)
   [directory-path]

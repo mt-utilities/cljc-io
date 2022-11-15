@@ -22,7 +22,7 @@
 
 ```
 @usage
-  (create-directory! "my-directory/my-subdirectory")
+ (create-directory! "my-directory/my-subdirectory")
 ```
 
 ```
@@ -40,7 +40,7 @@
 
 ```
 @usage
-  (create-file! "my-directory/my-file.ext")
+ (create-file! "my-directory/my-file.ext")
 ```
 
 ```
@@ -58,7 +58,7 @@
 
 ```
 @usage
-  (delete-file! "my-directory/my-file.ext")
+ (delete-file! "my-directory/my-file.ext")
 ```
 
 ```
@@ -77,8 +77,8 @@
 
 ```
 @usage
-  (copy-file! "my-directory/my-source-file.ext"
-  ;              "my-directory/my-destination-file.ext")
+ (copy-file! "my-directory/my-source-file.ext"
+             "my-directory/my-destination-file.ext")
 ```
 
 ```
@@ -90,15 +90,75 @@
 ### write-file!
 ###### clj/io/api.clj
 
+```
+@param (string) filepath
+@param (*) content
+@param (map)(opt) options
+```
+
+```
+@usage
+ (write-file! "my-directory/my-file.ext" "My content")
+```
+
+```
+@usage
+ (write-file! "my-directory/my-file.ext" "My content" {...})
+```
+
+```
+@return (?)
+```
+
 ---
 
 ### append-to-file!
 ###### clj/io/api.clj
 
+```
+@param (string) filepath
+@param (*) content
+@param (map)(opt) options
+```
+
+```
+@usage
+ (append-to-file! "my-directory/my-file.ext" "My content")
+```
+
+```
+@usage
+ (append-to-file! "my-directory/my-file.ext" "My content" {...})
+```
+
+```
+@return (?)
+```
+
 ---
 
 ### prepend-to-file!
 ###### clj/io/api.clj
+
+```
+@param (string) filepath
+@param (*) content
+@param (map)(opt) options
+```
+
+```
+@usage
+ (prepend-to-file! "my-directory/my-file.ext" "My content")
+```
+
+```
+@usage
+ (prepend-to-file! "my-directory/my-file.ext" "My content" {...})
+```
+
+```
+@return (?)
+```
 
 ---
 
@@ -125,7 +185,7 @@
 
 ```
 @usage
-  (delete-empty-directory! "my-directory/my-subdirectory")
+ (delete-empty-directory! "my-directory/my-subdirectory")
 ```
 
 ```
@@ -143,7 +203,7 @@
 
 ```
 @usage
-  (empty-directory! "my-directory/my-subdirectory")
+ (empty-directory! "my-directory/my-subdirectory")
 ```
 
 ```
@@ -161,7 +221,7 @@
 
 ```
 @usage
-  (delete-directory! "my-directory/my-subdirectory")
+ (delete-directory! "my-directory/my-subdirectory")
 ```
 
 ```
@@ -179,7 +239,7 @@
 
 ```
 @usage
-  (file-exists? "my-directory/my-file.ext")
+ (file-exists? "my-directory/my-file.ext")
 ```
 
 ```
@@ -197,7 +257,7 @@
 
 ```
 @usage
-  (file-not-exists? "my-directory/my-file.ext")
+ (file-not-exists? "my-directory/my-file.ext")
 ```
 
 ```
@@ -215,7 +275,7 @@
 
 ```
 @usage
-  (directory? "my-directory/my-subdirectory")
+ (directory? "my-directory/my-subdirectory")
 ```
 
 ```
@@ -233,7 +293,7 @@
 
 ```
 @usage
-  (directory-exists? "my-directory/my-subdirectory")
+ (directory-exists? "my-directory/my-subdirectory")
 ```
 
 ```
@@ -265,6 +325,42 @@
 ### write-edn-file!
 ###### clj/io/api.clj
 
+```
+@param (string) filepath
+@param (*) content
+@param (map)(opt) options
+```
+
+```
+@usage
+ (write-edn-file! "my-directory/my-file.edn" {...})
+```
+
+```
+@usage
+ (write-edn-file! "my-directory/my-file.edn" {...} {...})
+```
+
+```
+@example
+ (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"})
+ (read-file       "my-directory/my-file.edn")
+ =>
+ "{:b "B" :a "A" :d "D" :c "C"}"
+```
+
+```
+@example
+ (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"} {:abc? true})
+ (read-file       "my-directory/my-file.edn")
+ =>
+ "{:a "A" :b "B" :c "C" :d "D"}"
+```
+
+```
+@return (string)
+```
+
 ---
 
 ### read-edn-file
@@ -276,7 +372,7 @@
 
 ```
 @usage
-  (read-edn-file "my-directory/my-file.edn")
+ (read-edn-file "my-directory/my-file.edn")
 ```
 
 ```
@@ -296,12 +392,12 @@
 
 ```
 @usage
-  (swap-edn-file! "my-directory/my-file.edn" assoc-in [:items :xyz] "XYZ")
+ (swap-edn-file! "my-directory/my-file.edn" assoc-in [:items :xyz] "XYZ")
 ```
 
 ```
 @usage
-  (swap-edn-file! "my-directory/my-file.edn" conj "XYZ")
+ (swap-edn-file! "my-directory/my-file.edn" conj "XYZ")
 ```
 
 ```
@@ -637,7 +733,7 @@
 
 ```
 @usage
-  (B->KB 420)
+ (B->KB 420)
 ```
 
 ```
@@ -655,7 +751,7 @@
 
 ```
 @usage
-  (B->MB 420)
+ (B->MB 420)
 ```
 
 ```
@@ -673,7 +769,7 @@
 
 ```
 @usage
-  (B->GB 420)
+ (B->GB 420)
 ```
 
 ```
@@ -691,7 +787,7 @@
 
 ```
 @usage
-  (KB->B 420)
+ (KB->B 420)
 ```
 
 ```
@@ -709,7 +805,7 @@
 
 ```
 @usage
-  (KB->MB 420)
+ (KB->MB 420)
 ```
 
 ```
@@ -727,7 +823,7 @@
 
 ```
 @usage
-  (KB->GB 420)
+ (KB->GB 420)
 ```
 
 ```
@@ -745,7 +841,7 @@
 
 ```
 @usage
-  (MB->B 420)
+ (MB->B 420)
 ```
 
 ```
@@ -763,7 +859,7 @@
 
 ```
 @usage
-  (MB->KB 420)
+ (MB->KB 420)
 ```
 
 ```
@@ -781,7 +877,7 @@
 
 ```
 @usage
-  (MB->GB 420)
+ (MB->GB 420)
 ```
 
 ```
@@ -886,6 +982,13 @@
 ```
 
 ```
+@example
+ (mime-type->image? "application/pdf")
+ =>
+ false
+```
+
+```
 @return (boolean)
 ```
 
@@ -900,7 +1003,7 @@
 
 ```
 @usage
-  (read-file "my-directory/my-file.ext")
+ (read-file "my-directory/my-file.ext")
 ```
 
 ```
@@ -918,9 +1021,9 @@
 
 ```
 @example
- (file-list "my-directory/my-subdirectory")
+ (file-list "my-directory")
  =>
- ["my-directory/my-subdirectory/my-file.ext" ...]
+ ["my-directory/my-file.ext" ...]
 ```
 
 ```
@@ -938,9 +1041,9 @@
 
 ```
 @example
- (all-file-list "my-directory/my-subdirectory")
+ (all-file-list "my-directory")
  =>
- ["my-directory/my-subdirectory/my-file.ext" ...]
+ ["my-directory/my-file.ext" ...]
 ```
 
 ```
@@ -1038,7 +1141,7 @@
 
 ```
 @usage
-  (empty-directory? "my-directory/my-subdirectory")
+ (empty-directory? "my-directory/my-subdirectory")
 ```
 
 ```
@@ -1056,7 +1159,7 @@
 
 ```
 @usage
-  (get-filesize "my-directory/my-file.ext")
+ (get-filesize "my-directory/my-file.ext")
 ```
 
 ```
@@ -1075,7 +1178,7 @@
 
 ```
 @usage
-  (max-filesize-reached? "my-directory/my-file.ext" 420)
+ (max-filesize-reached? "my-directory/my-file.ext" 420)
 ```
 
 ```

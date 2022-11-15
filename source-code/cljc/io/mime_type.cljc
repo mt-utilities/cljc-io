@@ -65,6 +65,11 @@
   ;  =>
   ;  true
   ;
+  ; @example
+  ;  (mime-type->image? "application/pdf")
+  ;  =>
+  ;  false
+  ;
   ; @return (boolean)
   [mime-type]
   (string/starts-with? mime-type "image"))
