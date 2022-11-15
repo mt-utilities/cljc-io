@@ -430,6 +430,22 @@
 ###### clj/io/api.clj
 
 ```
+@require
+(ns my-namespace
+    (:require [io.api :as io]))
+
+(io/filepath->directory-path ...)
+```
+
+```
+@require
+(ns my-namespace
+    (:require [io.api :refer [filepath->directory-path]]))
+
+(filepath->directory-path ...)
+```
+
+```
 @param (string) filepath
 ```
 
@@ -917,7 +933,7 @@
 ###### clj/io/api.clj
 
 ```
-@param (extension) 
+@param (extension)
 ```
 
 ```
