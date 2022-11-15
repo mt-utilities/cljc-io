@@ -1,11 +1,11 @@
 
-# <strong>io/api.clj</strong>
-<p>Documentation of the <strong>io.api</strong> namespace</p>
+# <strong>io.api</strong> namespace</p>
+<p>Documentation of the <strong>io/api.clj</strong> file</p>
 
 ### B->GB
 
 ```
-@require
+@require 
 (ns my-namespace (:require [io.api :as io :refer [B->GB]]))
 
 (io/B->GB ...)
@@ -746,7 +746,7 @@ true
 ```
 
 ```
-@param (extension) 
+@param (extension)
 ```
 
 ```

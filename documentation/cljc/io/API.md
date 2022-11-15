@@ -1,6 +1,6 @@
 
-# <strong>io/api.cljc</strong>
-<p>Documentation of the <strong>io.api</strong> namespace</p>
+# <strong>io.api</strong> namespace</p>
+<p>Documentation of the <strong>io/api.cljc</strong> file</p>
 
 ### B->GB
 

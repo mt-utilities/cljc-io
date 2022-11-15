@@ -1,6 +1,6 @@
 
-# <strong>io/api.cljs</strong>
-<p>Documentation of the <strong>io.api</strong> namespace</p>
+# <strong>io.api</strong> namespace</p>
+<p>Documentation of the <strong>io/api.cljs</strong> file</p>
 
 ### B->GB
 
