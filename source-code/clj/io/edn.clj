@@ -15,26 +15,26 @@
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ;  {:abc? (boolean)(opt)
-  ;    Default: false}
+  ; {:abc? (boolean)(opt)
+  ;   Default: false}
   ;
   ; @usage
-  ;  (write-edn-file! "my-directory/my-file.edn" {...})
+  ; (write-edn-file! "my-directory/my-file.edn" {...})
   ;
   ; @usage
-  ;  (write-edn-file! "my-directory/my-file.edn" {...} {...})
+  ; (write-edn-file! "my-directory/my-file.edn" {...} {...})
   ;
   ; @example
-  ;  (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"})
-  ;  (read-file       "my-directory/my-file.edn")
-  ;  =>
-  ;  "{:b "B" :a "A" :d "D" :c "C"}"
+  ; (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"})
+  ; (read-file       "my-directory/my-file.edn")
+  ; =>
+  ; "{:b "B" :a "A" :d "D" :c "C"}"
   ;
   ; @example
-  ;  (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"} {:abc? true})
-  ;  (read-file       "my-directory/my-file.edn")
-  ;  =>
-  ;  "{:a "A" :b "B" :c "C" :d "D"}"
+  ; (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"} {:abc? true})
+  ; (read-file       "my-directory/my-file.edn")
+  ; =>
+  ; "{:a "A" :b "B" :c "C" :d "D"}"
   ;
   ; @return (string)
   ([filepath content]
@@ -49,7 +49,7 @@
   ; @param (string) filepath
   ;
   ; @usage
-  ;  (read-edn-file "my-directory/my-file.edn")
+  ; (read-edn-file "my-directory/my-file.edn")
   ;
   ; @return (*)
   [filepath]
@@ -65,10 +65,10 @@
   ; @param (*) params
   ;
   ; @usage
-  ;  (swap-edn-file! "my-directory/my-file.edn" assoc-in [:items :xyz] "XYZ")
+  ; (swap-edn-file! "my-directory/my-file.edn" assoc-in [:items :xyz] "XYZ")
   ;
   ; @usage
-  ;  (swap-edn-file! "my-directory/my-file.edn" conj "XYZ")
+  ; (swap-edn-file! "my-directory/my-file.edn" conj "XYZ")
   ;
   ; @return (*)
   [filepath f & params]

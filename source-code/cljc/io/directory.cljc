@@ -10,9 +10,9 @@
   ; @param (string) directory-path
   ;
   ; @example
-  ;  (directory-path->directory-name "a/b")
-  ;  =>
-  ;  "b"
+  ; (directory-path->directory-name "a/b")
+  ; =>
+  ; "b"
   ;
   ; @return (string)
   [directory-path]

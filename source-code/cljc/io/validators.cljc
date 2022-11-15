@@ -10,14 +10,14 @@
   ; @param (string) filename
   ;
   ; @example
-  ;  (filename-valid? "my-file.ext")
-  ;  =>
-  ;  true
+  ; (filename-valid? "my-file.ext")
+  ; =>
+  ; true
   ;
   ; @example
-  ;  (filename-valid? "my-directory/my-file.ext")
-  ;  =>
-  ;  false
+  ; (filename-valid? "my-directory/my-file.ext")
+  ; =>
+  ; false
   ;
   ; @return (boolean)
   [filename]
@@ -27,14 +27,14 @@
   ; @param (string) filename
   ;
   ; @example
-  ;  (filename-invalid? "my-file.ext")
-  ;  =>
-  ;  false
+  ; (filename-invalid? "my-file.ext")
+  ; =>
+  ; false
   ;
   ; @example
-  ;  (filename-invalid? "my-directory/my-file.ext")
-  ;  =>
-  ;  true
+  ; (filename-invalid? "my-directory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [filename]
@@ -44,14 +44,14 @@
   ; @param (string) directory-name
   ;
   ; @example
-  ;  (directory-name-valid? "my-directory")
-  ;  =>
-  ;  true
+  ; (directory-name-valid? "my-directory")
+  ; =>
+  ; true
   ;
   ; @example
-  ;  (directory-name-valid? "my-directory/my-subdirectory")
-  ;  =>
-  ;  false
+  ; (directory-name-valid? "my-directory/my-subdirectory")
+  ; =>
+  ; false
   ;
   ; @return (boolean)
   [directory-name]
@@ -61,14 +61,14 @@
   ; @param (string) directory-name
   ;
   ; @example
-  ;  (directory-name-invalid? "my-directory")
-  ;  =>
-  ;  false
+  ; (directory-name-invalid? "my-directory")
+  ; =>
+  ; false
   ;
   ; @example
-  ;  (directory-name-invalid? "my-directory/my-subdirectory")
-  ;  =>
-  ;  true
+  ; (directory-name-invalid? "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [directory-name]

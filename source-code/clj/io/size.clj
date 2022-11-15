@@ -11,10 +11,10 @@
   ; @param (string) filepath
   ;
   ; @usage
-  ;  (get-filesize "my-directory/my-file.ext")
+  ; (get-filesize "my-directory/my-file.ext")
   ;
   ; @return (B)
-  ;  The length of the file in bytes
+  ; The length of the file in bytes
   [filepath]
   (try (if (check/file-exists? filepath)
            (->                 filepath clojure.java.io/file .length)
@@ -26,7 +26,7 @@
   ; @param (B) max-filesize
   ;
   ; @usage
-  ;  (max-filesize-reached? "my-directory/my-file.ext" 420)
+  ; (max-filesize-reached? "my-directory/my-file.ext" 420)
   ;
   ; @return (boolean)
   [filepath max-filesize]

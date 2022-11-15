@@ -8,7 +8,7 @@
   ; @param (B) n
   ;
   ; @usage
-  ;  (B->KB 420)
+  ; (B->KB 420)
   ;
   ; @return (KB)
   [n]
@@ -18,7 +18,7 @@
   ; @param (B) n
   ;
   ; @usage
-  ;  (B->MB 420)
+  ; (B->MB 420)
   ;
   ; @return (MB)
   [n]
@@ -28,7 +28,7 @@
   ; @param (B) n
   ;
   ; @usage
-  ;  (B->GB 420)
+  ; (B->GB 420)
   ;
   ; @return (GB)
   [n]
@@ -38,7 +38,7 @@
   ; @param (KB) n
   ;
   ; @usage
-  ;  (KB->B 420)
+  ; (KB->B 420)
   ;
   ; @return (B)
   [n]
@@ -48,7 +48,7 @@
   ; @param (KB) n
   ;
   ; @usage
-  ;  (KB->MB 420)
+  ; (KB->MB 420)
   ;
   ; @return (MB)
   [n]
@@ -58,7 +58,7 @@
   ; @param (KB) n
   ;
   ; @usage
-  ;  (KB->GB 420)
+  ; (KB->GB 420)
   ;
   ; @return (GB)
   [n]
@@ -68,7 +68,7 @@
   ; @param (MB) n
   ;
   ; @usage
-  ;  (MB->B 420)
+  ; (MB->B 420)
   ;
   ; @return (B)
   [n]
@@ -78,7 +78,7 @@
   ; @param (MB) n
   ;
   ; @usage
-  ;  (MB->KB 420)
+  ; (MB->KB 420)
   ;
   ; @return (KB)
   [n]
@@ -88,7 +88,7 @@
   ; @param (MB) n
   ;
   ; @usage
-  ;  (MB->GB 420)
+  ; (MB->GB 420)
   ;
   ; @return (GB)
   [n]

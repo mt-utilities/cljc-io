@@ -10,14 +10,14 @@
   ; @param (string) mime-type
   ;
   ; @example
-  ;  (mime-type->extension "text/xml")
-  ;  =>
-  ;  "xml"
+  ; (mime-type->extension "text/xml")
+  ; =>
+  ; "xml"
   ;
   ; @example
-  ;  (mime-type->extension "foo/bar")
-  ;  =>
-  ;  "unknown"
+  ; (mime-type->extension "foo/bar")
+  ; =>
+  ; "unknown"
   ;
   ; @return (string)
   [mime-type]
@@ -27,14 +27,14 @@
   ; @param (extension)
   ;
   ; @example
-  ;  (extension->mime-type "xml")
-  ;  =>
-  ;  "text/xml"
+  ; (extension->mime-type "xml")
+  ; =>
+  ; "text/xml"
   ;
   ; @example
-  ;  (extension->mime-type "bar")
-  ;  =>
-  ;  "unknown/unknown"
+  ; (extension->mime-type "bar")
+  ; =>
+  ; "unknown/unknown"
   ;
   ; @return (string)
   [extension]
@@ -44,14 +44,14 @@
   ; @param (string) mime-type
   ;
   ; @example
-  ;  (unknown-mime-type? "text/xml")
-  ;  =>
-  ;  false
+  ; (unknown-mime-type? "text/xml")
+  ; =>
+  ; false
   ;
   ; @example
-  ;  (unknown-mime-type? "foo/bar")
-  ;  =>
-  ;  true
+  ; (unknown-mime-type? "foo/bar")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [mime-type]
@@ -61,14 +61,14 @@
   ; @param (string) extension
   ;
   ; @example
-  ;  (mime-type->image? "image/png")
-  ;  =>
-  ;  true
+  ; (mime-type->image? "image/png")
+  ; =>
+  ; true
   ;
   ; @example
-  ;  (mime-type->image? "application/pdf")
-  ;  =>
-  ;  false
+  ; (mime-type->image? "application/pdf")
+  ; =>
+  ; false
   ;
   ; @return (boolean)
   [mime-type]

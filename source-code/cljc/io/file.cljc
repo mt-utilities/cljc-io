@@ -13,9 +13,9 @@
   ; @param (string) extension
   ;
   ; @example
-  ;  (extension->image? "png")
-  ;  =>
-  ;  true
+  ; (extension->image? "png")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [extension]
@@ -25,9 +25,9 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
-  ;  =>
-  ;  "my-directory/my-subdirectory"
+  ; (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
+  ; =>
+  ; "my-directory/my-subdirectory"
   ;
   ; @return (string)
   [filepath]
@@ -37,9 +37,9 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (filepath->filename "my-directory/my-file.ext")
-  ;  =>
-  ;  "my-file.ext"
+  ; (filepath->filename "my-directory/my-file.ext")
+  ; =>
+  ; "my-file.ext"
   ;
   ; @return (string)
   [filepath]
@@ -49,19 +49,19 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (filepath->extension "my-directory/my-file.EXT")
-  ;  =>
-  ;  "ext"
+  ; (filepath->extension "my-directory/my-file.EXT")
+  ; =>
+  ; "ext"
   ;
   ; @example
-  ;  (filepath->extension "my-directory/.my-hidden-file.ext")
-  ;  =>
-  ;  "ext"
+  ; (filepath->extension "my-directory/.my-hidden-file.ext")
+  ; =>
+  ; "ext"
   ;
   ; @example
-  ;  (filepath->extension "my-directory/.my-hidden-file")
-  ;  =>
-  ;  nil
+  ; (filepath->extension "my-directory/.my-hidden-file")
+  ; =>
+  ; nil
   ;
   ; @return (string)
   [filepath]
@@ -73,19 +73,19 @@
   ; @param (string) filename
   ;
   ; @example
-  ;  (filename->extension "my-file.EXT")
-  ;  =>
-  ;  "ext"
+  ; (filename->extension "my-file.EXT")
+  ; =>
+  ; "ext"
   ;
   ; @example
-  ;  (filename->extension ".my-hidden-file.ext")
-  ;  =>
-  ;  "ext"
+  ; (filename->extension ".my-hidden-file.ext")
+  ; =>
+  ; "ext"
   ;
   ; @example
-  ;  (filename->extension ".my-hidden-file")
-  ;  =>
-  ;  nil
+  ; (filename->extension ".my-hidden-file")
+  ; =>
+  ; nil
   ;
   ; @return (string)
   [filename]
@@ -95,19 +95,19 @@
   ; @param (string) filename
   ;
   ; @example
-  ;  (filename->basename "my-file.EXT")
-  ;  =>
-  ;  "my-file"
+  ; (filename->basename "my-file.EXT")
+  ; =>
+  ; "my-file"
   ;
   ; @example
-  ;  (filename->basename ".my-hidden-file.ext")
-  ;  =>
-  ;  ".my-hidden-file"
+  ; (filename->basename ".my-hidden-file.ext")
+  ; =>
+  ; ".my-hidden-file"
   ;
   ; @example
-  ;  (filename->basename ".my-hidden-file")
-  ;  =>
-  ;  ".my-hidden-file"
+  ; (filename->basename ".my-hidden-file")
+  ; =>
+  ; ".my-hidden-file"
   ;
   ; @return (string)
   [filename]
@@ -119,19 +119,19 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (filepath->basename "my-directory/my-file.EXT")
-  ;  =>
-  ;  "my-file"
+  ; (filepath->basename "my-directory/my-file.EXT")
+  ; =>
+  ; "my-file"
   ;
   ; @example
-  ;  (filepath->basename "my-directory/.my-hidden-file.ext")
-  ;  =>
-  ;  ".my-hidden-file"
+  ; (filepath->basename "my-directory/.my-hidden-file.ext")
+  ; =>
+  ; ".my-hidden-file"
   ;
   ; @example
-  ;  (filepath->basename "my-directory/.my-hidden-file")
-  ;  =>
-  ;  ".my-hidden-file"
+  ; (filepath->basename "my-directory/.my-hidden-file")
+  ; =>
+  ; ".my-hidden-file"
   ;
   ; @return (string)
   [filepath]
@@ -141,14 +141,14 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (filepath->mime-type "my-directory/my-image.png")
-  ;  =>
-  ;  "image/png"
+  ; (filepath->mime-type "my-directory/my-image.png")
+  ; =>
+  ; "image/png"
   ;
   ; @example
-  ;  (filepath->mime-type "my-directory/my-file")
-  ;  =>
-  ;  "unknown/unknown"
+  ; (filepath->mime-type "my-directory/my-file")
+  ; =>
+  ; "unknown/unknown"
   ;
   ; @return (string)
   [filepath]
@@ -158,14 +158,14 @@
   ; @param (string) filename
   ;
   ; @example
-  ;  (filename->mime-type "my-image.png")
-  ;  =>
-  ;  "image/png"
+  ; (filename->mime-type "my-image.png")
+  ; =>
+  ; "image/png"
   ;
   ; @example
-  ;  (filename->mime-type "my-file")
-  ;  =>
-  ;  "unknown/unknown"
+  ; (filename->mime-type "my-file")
+  ; =>
+  ; "unknown/unknown"
   ;
   ; @return (string)
   [filename]
@@ -175,19 +175,19 @@
   ; @param (string) filepath
   ;
   ; @example
-  ;  (filepath->image? "my-directory/my-image.png")
-  ;  =>
-  ;  true
+  ; (filepath->image? "my-directory/my-image.png")
+  ; =>
+  ; true
   ;
   ; @example
-  ;  (filepath->image? "my-directory/my-file.ext")
-  ;  =>
-  ;  false
+  ; (filepath->image? "my-directory/my-file.ext")
+  ; =>
+  ; false
   ;
   ; @example
-  ;  (filepath->image? "my-directory/my-file")
-  ;  =>
-  ;  false
+  ; (filepath->image? "my-directory/my-file")
+  ; =>
+  ; false
   ;
   ; @return (boolean)
   [filepath]
@@ -197,19 +197,19 @@
   ; @param (string) filename
   ;
   ; @example
-  ;  (filename->image? "my-image.png")
-  ;  =>
-  ;  true
+  ; (filename->image? "my-image.png")
+  ; =>
+  ; true
   ;
   ; @example
-  ;  (filename->image? "my-file.ext")
-  ;  =>
-  ;  false
+  ; (filename->image? "my-file.ext")
+  ; =>
+  ; false
   ;
   ; @example
-  ;  (filename->image? "my-file")
-  ;  =>
-  ;  false
+  ; (filename->image? "my-file")
+  ; =>
+  ; false
   ;
   ; @return (boolean)
   [filename]

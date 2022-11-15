@@ -14,7 +14,7 @@
   ; @param (string) directory-path
   ;
   ; @usage
-  ;  (create-directory! "my-directory/my-subdirectory")
+  ; (create-directory! "my-directory/my-subdirectory")
   ;
   ; @return (?)
   [directory-path]
@@ -29,7 +29,7 @@
   ; @param (string) filepath
   ;
   ; @usage
-  ;  (create-file! "my-directory/my-file.ext")
+  ; (create-file! "my-directory/my-file.ext")
   ;
   ; @return (?)
   [filepath]
@@ -44,7 +44,7 @@
   ; @param (string) filepath
   ;
   ; @usage
-  ;  (delete-file! "my-directory/my-file.ext")
+  ; (delete-file! "my-directory/my-file.ext")
   ;
   ; @return (?)
   [filepath]
@@ -58,8 +58,8 @@
   ; @param (string) destination-filepath
   ;
   ; @usage
-  ;  (copy-file! "my-directory/my-source-file.ext"
-  ;              "my-directory/my-destination-file.ext")
+  ; (copy-file! "my-directory/my-source-file.ext"
+  ;             "my-directory/my-destination-file.ext")
   ;
   ; @return (?)
   [source-filepath destination-filepath]
@@ -73,14 +73,14 @@
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ;  {:create? (boolean)(opt)
-  ;    Default: false}
+  ; {:create? (boolean)(opt)
+  ;   Default: false}
   ;
   ; @usage
-  ;  (write-file! "my-directory/my-file.ext" "My content")
+  ; (write-file! "my-directory/my-file.ext" "My content")
   ;
   ; @usage
-  ;  (write-file! "my-directory/my-file.ext" "My content" {...})
+  ; (write-file! "my-directory/my-file.ext" "My content" {...})
   ;
   ; @return (?)
   ([filepath content]
@@ -99,15 +99,15 @@
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ;  {:create? (boolean)(opt)
-  ;    Default: false
-  ;   :max-line-count (integer)(opt)}
+  ; {:create? (boolean)(opt)
+  ;   Default: false
+  ;  :max-line-count (integer)(opt)}
   ;
   ; @usage
-  ;  (append-to-file! "my-directory/my-file.ext" "My content")
+  ; (append-to-file! "my-directory/my-file.ext" "My content")
   ;
   ; @usage
-  ;  (append-to-file! "my-directory/my-file.ext" "My content" {...})
+  ; (append-to-file! "my-directory/my-file.ext" "My content" {...})
   ;
   ; @return (?)
   ([filepath content]
@@ -126,15 +126,15 @@
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ;  {:create? (boolean)(opt)
-  ;    Default: false
-  ;   :max-line-count (integer)(opt)}
+  ; {:create? (boolean)(opt)
+  ;   Default: false
+  ;  :max-line-count (integer)(opt)}
   ;
   ; @usage
-  ;  (prepend-to-file! "my-directory/my-file.ext" "My content")
+  ; (prepend-to-file! "my-directory/my-file.ext" "My content")
   ;
   ; @usage
-  ;  (prepend-to-file! "my-directory/my-file.ext" "My content" {...})
+  ; (prepend-to-file! "my-directory/my-file.ext" "My content" {...})
   ;
   ; @return (?)
   ([filepath content]
@@ -167,7 +167,7 @@
   ; @param (string) directory-path
   ;
   ; @usage
-  ;  (delete-empty-directory! "my-directory/my-subdirectory")
+  ; (delete-empty-directory! "my-directory/my-subdirectory")
   ;
   ; @return (?)
   [directory-path]
@@ -180,7 +180,7 @@
   ; @param (string) directory-path
   ;
   ; @usage
-  ;  (empty-directory! "my-directory/my-subdirectory")
+  ; (empty-directory! "my-directory/my-subdirectory")
   ;
   ; @return (?)
   [directory-path]
@@ -194,7 +194,7 @@
   ; @param (string) directory-path
   ;
   ; @usage
-  ;  (delete-directory! "my-directory/my-subdirectory")
+  ; (delete-directory! "my-directory/my-subdirectory")
   ;
   ; @return (?)
   [directory-path]

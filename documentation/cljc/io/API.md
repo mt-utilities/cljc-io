@@ -22,9 +22,9 @@
 
 ```
 @example
- (directory-path->directory-name "a/b")
- =>
- "b"
+(directory-path->directory-name "a/b")
+=>
+"b"
 ```
 
 ```
@@ -42,9 +42,9 @@
 
 ```
 @example
- (extension->image? "png")
- =>
- true
+(extension->image? "png")
+=>
+true
 ```
 
 ```
@@ -62,9 +62,9 @@
 
 ```
 @example
- (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
- =>
- "my-directory/my-subdirectory"
+(filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
+=>
+"my-directory/my-subdirectory"
 ```
 
 ```
@@ -82,9 +82,9 @@
 
 ```
 @example
- (filepath->filename "my-directory/my-file.ext")
- =>
- "my-file.ext"
+(filepath->filename "my-directory/my-file.ext")
+=>
+"my-file.ext"
 ```
 
 ```
@@ -102,23 +102,23 @@
 
 ```
 @example
- (filepath->extension "my-directory/my-file.EXT")
- =>
- "ext"
+(filepath->extension "my-directory/my-file.EXT")
+=>
+"ext"
 ```
 
 ```
 @example
- (filepath->extension "my-directory/.my-hidden-file.ext")
- =>
- "ext"
+(filepath->extension "my-directory/.my-hidden-file.ext")
+=>
+"ext"
 ```
 
 ```
 @example
- (filepath->extension "my-directory/.my-hidden-file")
- =>
- nil
+(filepath->extension "my-directory/.my-hidden-file")
+=>
+nil
 ```
 
 ```
@@ -136,23 +136,23 @@
 
 ```
 @example
- (filename->extension "my-file.EXT")
- =>
- "ext"
+(filename->extension "my-file.EXT")
+=>
+"ext"
 ```
 
 ```
 @example
- (filename->extension ".my-hidden-file.ext")
- =>
- "ext"
+(filename->extension ".my-hidden-file.ext")
+=>
+"ext"
 ```
 
 ```
 @example
- (filename->extension ".my-hidden-file")
- =>
- nil
+(filename->extension ".my-hidden-file")
+=>
+nil
 ```
 
 ```
@@ -170,23 +170,23 @@
 
 ```
 @example
- (filename->basename "my-file.EXT")
- =>
- "my-file"
+(filename->basename "my-file.EXT")
+=>
+"my-file"
 ```
 
 ```
 @example
- (filename->basename ".my-hidden-file.ext")
- =>
- ".my-hidden-file"
+(filename->basename ".my-hidden-file.ext")
+=>
+".my-hidden-file"
 ```
 
 ```
 @example
- (filename->basename ".my-hidden-file")
- =>
- ".my-hidden-file"
+(filename->basename ".my-hidden-file")
+=>
+".my-hidden-file"
 ```
 
 ```
@@ -204,23 +204,23 @@
 
 ```
 @example
- (filepath->basename "my-directory/my-file.EXT")
- =>
- "my-file"
+(filepath->basename "my-directory/my-file.EXT")
+=>
+"my-file"
 ```
 
 ```
 @example
- (filepath->basename "my-directory/.my-hidden-file.ext")
- =>
- ".my-hidden-file"
+(filepath->basename "my-directory/.my-hidden-file.ext")
+=>
+".my-hidden-file"
 ```
 
 ```
 @example
- (filepath->basename "my-directory/.my-hidden-file")
- =>
- ".my-hidden-file"
+(filepath->basename "my-directory/.my-hidden-file")
+=>
+".my-hidden-file"
 ```
 
 ```
@@ -238,16 +238,16 @@
 
 ```
 @example
- (filepath->mime-type "my-directory/my-image.png")
- =>
- "image/png"
+(filepath->mime-type "my-directory/my-image.png")
+=>
+"image/png"
 ```
 
 ```
 @example
- (filepath->mime-type "my-directory/my-file")
- =>
- "unknown/unknown"
+(filepath->mime-type "my-directory/my-file")
+=>
+"unknown/unknown"
 ```
 
 ```
@@ -265,16 +265,16 @@
 
 ```
 @example
- (filename->mime-type "my-image.png")
- =>
- "image/png"
+(filename->mime-type "my-image.png")
+=>
+"image/png"
 ```
 
 ```
 @example
- (filename->mime-type "my-file")
- =>
- "unknown/unknown"
+(filename->mime-type "my-file")
+=>
+"unknown/unknown"
 ```
 
 ```
@@ -292,23 +292,23 @@
 
 ```
 @example
- (filepath->image? "my-directory/my-image.png")
- =>
- true
+(filepath->image? "my-directory/my-image.png")
+=>
+true
 ```
 
 ```
 @example
- (filepath->image? "my-directory/my-file.ext")
- =>
- false
+(filepath->image? "my-directory/my-file.ext")
+=>
+false
 ```
 
 ```
 @example
- (filepath->image? "my-directory/my-file")
- =>
- false
+(filepath->image? "my-directory/my-file")
+=>
+false
 ```
 
 ```
@@ -326,23 +326,23 @@
 
 ```
 @example
- (filename->image? "my-image.png")
- =>
- true
+(filename->image? "my-image.png")
+=>
+true
 ```
 
 ```
 @example
- (filename->image? "my-file.ext")
- =>
- false
+(filename->image? "my-file.ext")
+=>
+false
 ```
 
 ```
 @example
- (filename->image? "my-file")
- =>
- false
+(filename->image? "my-file")
+=>
+false
 ```
 
 ```
@@ -360,7 +360,7 @@
 
 ```
 @usage
- (B->KB 420)
+(B->KB 420)
 ```
 
 ```
@@ -378,7 +378,7 @@
 
 ```
 @usage
- (B->MB 420)
+(B->MB 420)
 ```
 
 ```
@@ -396,7 +396,7 @@
 
 ```
 @usage
- (B->GB 420)
+(B->GB 420)
 ```
 
 ```
@@ -414,7 +414,7 @@
 
 ```
 @usage
- (KB->B 420)
+(KB->B 420)
 ```
 
 ```
@@ -432,7 +432,7 @@
 
 ```
 @usage
- (KB->MB 420)
+(KB->MB 420)
 ```
 
 ```
@@ -450,7 +450,7 @@
 
 ```
 @usage
- (KB->GB 420)
+(KB->GB 420)
 ```
 
 ```
@@ -468,7 +468,7 @@
 
 ```
 @usage
- (MB->B 420)
+(MB->B 420)
 ```
 
 ```
@@ -486,7 +486,7 @@
 
 ```
 @usage
- (MB->KB 420)
+(MB->KB 420)
 ```
 
 ```
@@ -504,7 +504,7 @@
 
 ```
 @usage
- (MB->GB 420)
+(MB->GB 420)
 ```
 
 ```
@@ -522,16 +522,16 @@
 
 ```
 @example
- (mime-type->extension "text/xml")
- =>
- "xml"
+(mime-type->extension "text/xml")
+=>
+"xml"
 ```
 
 ```
 @example
- (mime-type->extension "foo/bar")
- =>
- "unknown"
+(mime-type->extension "foo/bar")
+=>
+"unknown"
 ```
 
 ```
@@ -549,16 +549,16 @@
 
 ```
 @example
- (extension->mime-type "xml")
- =>
- "text/xml"
+(extension->mime-type "xml")
+=>
+"text/xml"
 ```
 
 ```
 @example
- (extension->mime-type "bar")
- =>
- "unknown/unknown"
+(extension->mime-type "bar")
+=>
+"unknown/unknown"
 ```
 
 ```
@@ -576,16 +576,16 @@
 
 ```
 @example
- (unknown-mime-type? "text/xml")
- =>
- false
+(unknown-mime-type? "text/xml")
+=>
+false
 ```
 
 ```
 @example
- (unknown-mime-type? "foo/bar")
- =>
- true
+(unknown-mime-type? "foo/bar")
+=>
+true
 ```
 
 ```
@@ -603,16 +603,16 @@
 
 ```
 @example
- (mime-type->image? "image/png")
- =>
- true
+(mime-type->image? "image/png")
+=>
+true
 ```
 
 ```
 @example
- (mime-type->image? "application/pdf")
- =>
- false
+(mime-type->image? "application/pdf")
+=>
+false
 ```
 
 ```
@@ -630,16 +630,16 @@
 
 ```
 @example
- (filename-valid? "my-file.ext")
- =>
- true
+(filename-valid? "my-file.ext")
+=>
+true
 ```
 
 ```
 @example
- (filename-valid? "my-directory/my-file.ext")
- =>
- false
+(filename-valid? "my-directory/my-file.ext")
+=>
+false
 ```
 
 ```
@@ -657,16 +657,16 @@
 
 ```
 @example
- (filename-invalid? "my-file.ext")
- =>
- false
+(filename-invalid? "my-file.ext")
+=>
+false
 ```
 
 ```
 @example
- (filename-invalid? "my-directory/my-file.ext")
- =>
- true
+(filename-invalid? "my-directory/my-file.ext")
+=>
+true
 ```
 
 ```
@@ -684,16 +684,16 @@
 
 ```
 @example
- (directory-name-valid? "my-directory")
- =>
- true
+(directory-name-valid? "my-directory")
+=>
+true
 ```
 
 ```
 @example
- (directory-name-valid? "my-directory/my-subdirectory")
- =>
- false
+(directory-name-valid? "my-directory/my-subdirectory")
+=>
+false
 ```
 
 ```
@@ -711,16 +711,16 @@
 
 ```
 @example
- (directory-name-invalid? "my-directory")
- =>
- false
+(directory-name-invalid? "my-directory")
+=>
+false
 ```
 
 ```
 @example
- (directory-name-invalid? "my-directory/my-subdirectory")
- =>
- true
+(directory-name-invalid? "my-directory/my-subdirectory")
+=>
+true
 ```
 
 ```
