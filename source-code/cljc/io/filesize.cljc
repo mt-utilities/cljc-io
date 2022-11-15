@@ -5,64 +5,64 @@
 ;; ----------------------------------------------------------------------------
 
 (defn B->KB
-  ; @param (number) n
+  ; @param (B) n
   ;
-  ; @return (number)
+  ; @return (KB)
   [n]
   (/ n 1000))
 
 (defn B->MB
-  ; @param (number) n
+  ; @param (B) n
   ;
-  ; @return (number)
+  ; @return (MB)
   [n]
   (/ n 1000000))
 
 (defn B->GB
-  ; @param (number) n
+  ; @param (B) n
   ;
-  ; @return (number)
+  ; @return (GB)
   [n]
   (/ n 1000000000))
 
 (defn KB->B
-  ; @param (number) n
+  ; @param (KB) n
   ;
-  ; @return (number)
+  ; @return (B)
   [n]
   (* n 1000))
 
 (defn KB->MB
-  ; @param (number) n
+  ; @param (KB) n
   ;
-  ; @return (number)
+  ; @return (MB)
   [n]
   (/ n 1000))
 
 (defn KB->GB
-  ; @param (number) n
+  ; @param (KB) n
   ;
-  ; @return (number)
+  ; @return (GB)
   [n]
   (/ n 1000000))
 
 (defn MB->B
-  ; @param (number) n
+  ; @param (MB) n
   ;
-  ; @return (number)
+  ; @return (B)
   [n]
   (* n 1000000))
 
 (defn MB->KB
-  ; @param (number) n
+  ; @param (MB) n
   ;
-  ; @return (number)
+  ; @return (KB)
   [n]
   (* n 1000))
 
 (defn MB->GB
-  ; @param (number) n
+  ; @param (MB) n
   ;
-  ; @return (number)
+  ; @return (GB)
   [n]
   (/ n 1000))

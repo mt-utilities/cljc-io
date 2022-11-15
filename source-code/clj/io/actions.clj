@@ -17,7 +17,9 @@
   [directory-path]
   (if-not (check/directory-exists? directory-path)
           (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
-  (try (-> directory-path java.io.File. .mkdir)
+  ; https://stackoverflow.com/questions/6774369/recursively-create-directory
+  ; (try (-> directory-path java.io.File. .mkdir) ...)
+  (try (-> directory-path java.io.File. .mkdirs)
        (catch Exception e (println e))))
 
 (defn create-file!
