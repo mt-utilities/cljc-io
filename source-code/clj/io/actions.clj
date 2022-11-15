@@ -16,7 +16,7 @@
   ; @usage
   ; (create-directory! "my-directory/my-subdirectory")
   ;
-  ; @return (?)
+  ; @return (boolean)
   [directory-path]
   (if-not (check/directory-exists? directory-path)
           (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
@@ -31,7 +31,7 @@
   ; @usage
   ; (create-file! "my-directory/my-file.ext")
   ;
-  ; @return (?)
+  ; @return (nil)
   [filepath]
   (if-not (check/file-exists? filepath)
           (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
@@ -46,7 +46,7 @@
   ; @usage
   ; (delete-file! "my-directory/my-file.ext")
   ;
-  ; @return (?)
+  ; @return (boolean)
   [filepath]
   (try (if (check/file-exists?          filepath)
            (clojure.java.io/delete-file filepath)
@@ -61,7 +61,7 @@
   ; (copy-file! "my-directory/my-source-file.ext"
   ;             "my-directory/my-destination-file.ext")
   ;
-  ; @return (?)
+  ; @return (nil)
   [source-filepath destination-filepath]
   (try (if (check/file-exists? source-filepath)
            (clojure.java.io/copy (clojure.java.io/file      source-filepath)
@@ -82,7 +82,7 @@
   ; @usage
   ; (write-file! "my-directory/my-file.ext" "My content" {...})
   ;
-  ; @return (?)
+  ; @return (nil)
   ([filepath content]
    (write-file! filepath content {}))
 
@@ -109,7 +109,7 @@
   ; @usage
   ; (append-to-file! "my-directory/my-file.ext" "My content" {...})
   ;
-  ; @return (?)
+  ; @return (nil)
   ([filepath content]
    (append-to-file! filepath content {}))
 
@@ -136,7 +136,7 @@
   ; @usage
   ; (prepend-to-file! "my-directory/my-file.ext" "My content" {...})
   ;
-  ; @return (?)
+  ; @return (nil)
   ([filepath content]
    (prepend-to-file! filepath content {}))
 
@@ -153,7 +153,7 @@
   ; @param (string) uri
   ; @param (?) file
   ;
-  ; @return (?)
+  ; @return (nil)
   [uri file]
   (try (with-open [input  (clojure.java.io/input-stream  uri)
                    output (clojure.java.io/output-stream file)]
@@ -169,7 +169,7 @@
   ; @usage
   ; (delete-empty-directory! "my-directory/my-subdirectory")
   ;
-  ; @return (?)
+  ; @return (boolean)
   [directory-path]
   (try (if (check/directory-exists?     directory-path)
            (clojure.java.io/delete-file directory-path)
@@ -182,7 +182,7 @@
   ; @usage
   ; (empty-directory! "my-directory/my-subdirectory")
   ;
-  ; @return (?)
+  ; @return (boolean)
   [directory-path]
   (doseq [item-path (read/item-list directory-path)]
          (if (check/directory? item-path)
@@ -196,7 +196,7 @@
   ; @usage
   ; (delete-directory! "my-directory/my-subdirectory")
   ;
-  ; @return (?)
+  ; @return (boolean)
   [directory-path]
   (empty-directory!        directory-path)
   (delete-empty-directory! directory-path))
