@@ -2,19 +2,15 @@
 # <strong>io/api.clj</strong>
 <p>Documentation of the <strong>io.api</strong> namespace</p>
 
----
-
-### Require
-
-```
-(ns my-namespace
-    (:require [io.api :as io]))
-```
-
----
-
 ### create-directory!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [create-directory!]]))
+
+(io/create-directory! ...)
+(create-directory!    ...)
+```
 
 ```
 @param (string) directory-path
@@ -32,7 +28,14 @@
 ---
 
 ### create-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [create-file!]]))
+
+(io/create-file! ...)
+(create-file!    ...)
+```
 
 ```
 @param (string) filepath
@@ -50,7 +53,14 @@
 ---
 
 ### delete-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [delete-file!]]))
+
+(io/delete-file! ...)
+(delete-file!    ...)
+```
 
 ```
 @param (string) filepath
@@ -68,7 +78,14 @@
 ---
 
 ### copy-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [copy-file!]]))
+
+(io/copy-file! ...)
+(copy-file!    ...)
+```
 
 ```
 @param (string) source-filepath
@@ -88,7 +105,14 @@
 ---
 
 ### write-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [write-file!]]))
+
+(io/write-file! ...)
+(write-file!    ...)
+```
 
 ```
 @param (string) filepath
@@ -113,7 +137,14 @@
 ---
 
 ### append-to-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [append-to-file!]]))
+
+(io/append-to-file! ...)
+(append-to-file!    ...)
+```
 
 ```
 @param (string) filepath
@@ -138,7 +169,14 @@
 ---
 
 ### prepend-to-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [prepend-to-file!]]))
+
+(io/prepend-to-file! ...)
+(prepend-to-file!    ...)
+```
 
 ```
 @param (string) filepath
@@ -163,7 +201,14 @@
 ---
 
 ### copy-uri-to-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [copy-uri-to-file!]]))
+
+(io/copy-uri-to-file! ...)
+(copy-uri-to-file!    ...)
+```
 
 ```
 @param (string) uri
@@ -177,7 +222,14 @@
 ---
 
 ### delete-empty-directory!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [delete-empty-directory!]]))
+
+(io/delete-empty-directory! ...)
+(delete-empty-directory!    ...)
+```
 
 ```
 @param (string) directory-path
@@ -195,7 +247,14 @@
 ---
 
 ### empty-directory!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [empty-directory!]]))
+
+(io/empty-directory! ...)
+(empty-directory!    ...)
+```
 
 ```
 @param (string) directory-path
@@ -213,7 +272,14 @@
 ---
 
 ### delete-directory!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [delete-directory!]]))
+
+(io/delete-directory! ...)
+(delete-directory!    ...)
+```
 
 ```
 @param (string) directory-path
@@ -231,7 +297,14 @@
 ---
 
 ### file-exists?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [file-exists?]]))
+
+(io/file-exists? ...)
+(file-exists?    ...)
+```
 
 ```
 @param (string) filepath
@@ -249,7 +322,14 @@
 ---
 
 ### file-not-exists?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [file-not-exists?]]))
+
+(io/file-not-exists? ...)
+(file-not-exists?    ...)
+```
 
 ```
 @param (string) filepath
@@ -267,7 +347,14 @@
 ---
 
 ### directory?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [directory?]]))
+
+(io/directory? ...)
+(directory?    ...)
+```
 
 ```
 @param (string) directory-path
@@ -285,7 +372,14 @@
 ---
 
 ### directory-exists?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [directory-exists?]]))
+
+(io/directory-exists? ...)
+(directory-exists?    ...)
+```
 
 ```
 @param (string) directory-path
@@ -303,7 +397,14 @@
 ---
 
 ### directory-path->directory-name
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [directory-path->directory-name]]))
+
+(io/directory-path->directory-name ...)
+(directory-path->directory-name    ...)
+```
 
 ```
 @param (string) directory-path
@@ -323,7 +424,14 @@
 ---
 
 ### write-edn-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [write-edn-file!]]))
+
+(io/write-edn-file! ...)
+(write-edn-file!    ...)
+```
 
 ```
 @param (string) filepath
@@ -364,7 +472,14 @@
 ---
 
 ### read-edn-file
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [read-edn-file]]))
+
+(io/read-edn-file ...)
+(read-edn-file    ...)
+```
 
 ```
 @param (string) filepath
@@ -382,7 +497,14 @@
 ---
 
 ### swap-edn-file!
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [swap-edn-file!]]))
+
+(io/swap-edn-file! ...)
+(swap-edn-file!    ...)
+```
 
 ```
 @param (string) filepath
@@ -407,7 +529,14 @@
 ---
 
 ### extension->image?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [extension->image?]]))
+
+(io/extension->image? ...)
+(extension->image?    ...)
+```
 
 ```
 @param (string) extension
@@ -427,7 +556,14 @@ true
 ---
 
 ### filepath->directory-path
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filepath->directory-path]]))
+
+(io/filepath->directory-path ...)
+(filepath->directory-path    ...)
+```
 
 ```
 @param (string) filepath
@@ -447,7 +583,14 @@ true
 ---
 
 ### filepath->filename
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filepath->filename]]))
+
+(io/filepath->filename ...)
+(filepath->filename    ...)
+```
 
 ```
 @param (string) filepath
@@ -467,7 +610,14 @@ true
 ---
 
 ### filepath->extension
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filepath->extension]]))
+
+(io/filepath->extension ...)
+(filepath->extension    ...)
+```
 
 ```
 @param (string) filepath
@@ -501,7 +651,14 @@ nil
 ---
 
 ### filename->extension
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filename->extension]]))
+
+(io/filename->extension ...)
+(filename->extension    ...)
+```
 
 ```
 @param (string) filename
@@ -535,7 +692,14 @@ nil
 ---
 
 ### filename->basename
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filename->basename]]))
+
+(io/filename->basename ...)
+(filename->basename    ...)
+```
 
 ```
 @param (string) filename
@@ -569,7 +733,14 @@ nil
 ---
 
 ### filepath->basename
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filepath->basename]]))
+
+(io/filepath->basename ...)
+(filepath->basename    ...)
+```
 
 ```
 @param (string) filepath
@@ -603,7 +774,14 @@ nil
 ---
 
 ### filepath->mime-type
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filepath->mime-type]]))
+
+(io/filepath->mime-type ...)
+(filepath->mime-type    ...)
+```
 
 ```
 @param (string) filepath
@@ -630,7 +808,14 @@ nil
 ---
 
 ### filename->mime-type
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filename->mime-type]]))
+
+(io/filename->mime-type ...)
+(filename->mime-type    ...)
+```
 
 ```
 @param (string) filename
@@ -657,7 +842,14 @@ nil
 ---
 
 ### filepath->image?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filepath->image?]]))
+
+(io/filepath->image? ...)
+(filepath->image?    ...)
+```
 
 ```
 @param (string) filepath
@@ -691,7 +883,14 @@ false
 ---
 
 ### filename->image?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filename->image?]]))
+
+(io/filename->image? ...)
+(filename->image?    ...)
+```
 
 ```
 @param (string) filename
@@ -725,7 +924,14 @@ false
 ---
 
 ### B->KB
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [B->KB]]))
+
+(io/B->KB ...)
+(B->KB    ...)
+```
 
 ```
 @param (B) n
@@ -743,7 +949,14 @@ false
 ---
 
 ### B->MB
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [B->MB]]))
+
+(io/B->MB ...)
+(B->MB    ...)
+```
 
 ```
 @param (B) n
@@ -761,7 +974,14 @@ false
 ---
 
 ### B->GB
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [B->GB]]))
+
+(io/B->GB ...)
+(B->GB    ...)
+```
 
 ```
 @param (B) n
@@ -779,7 +999,14 @@ false
 ---
 
 ### KB->B
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [KB->B]]))
+
+(io/KB->B ...)
+(KB->B    ...)
+```
 
 ```
 @param (KB) n
@@ -797,7 +1024,14 @@ false
 ---
 
 ### KB->MB
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [KB->MB]]))
+
+(io/KB->MB ...)
+(KB->MB    ...)
+```
 
 ```
 @param (KB) n
@@ -815,7 +1049,14 @@ false
 ---
 
 ### KB->GB
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [KB->GB]]))
+
+(io/KB->GB ...)
+(KB->GB    ...)
+```
 
 ```
 @param (KB) n
@@ -833,7 +1074,14 @@ false
 ---
 
 ### MB->B
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [MB->B]]))
+
+(io/MB->B ...)
+(MB->B    ...)
+```
 
 ```
 @param (MB) n
@@ -851,7 +1099,14 @@ false
 ---
 
 ### MB->KB
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [MB->KB]]))
+
+(io/MB->KB ...)
+(MB->KB    ...)
+```
 
 ```
 @param (MB) n
@@ -869,7 +1124,14 @@ false
 ---
 
 ### MB->GB
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [MB->GB]]))
+
+(io/MB->GB ...)
+(MB->GB    ...)
+```
 
 ```
 @param (MB) n
@@ -887,7 +1149,14 @@ false
 ---
 
 ### mime-type->extension
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [mime-type->extension]]))
+
+(io/mime-type->extension ...)
+(mime-type->extension    ...)
+```
 
 ```
 @param (string) mime-type
@@ -914,7 +1183,14 @@ false
 ---
 
 ### extension->mime-type
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [extension->mime-type]]))
+
+(io/extension->mime-type ...)
+(extension->mime-type    ...)
+```
 
 ```
 @param (extension) 
@@ -941,7 +1217,14 @@ false
 ---
 
 ### unknown-mime-type?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [unknown-mime-type?]]))
+
+(io/unknown-mime-type? ...)
+(unknown-mime-type?    ...)
+```
 
 ```
 @param (string) mime-type
@@ -968,7 +1251,14 @@ true
 ---
 
 ### mime-type->image?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [mime-type->image?]]))
+
+(io/mime-type->image? ...)
+(mime-type->image?    ...)
+```
 
 ```
 @param (string) extension
@@ -995,7 +1285,14 @@ false
 ---
 
 ### read-file
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [read-file]]))
+
+(io/read-file ...)
+(read-file    ...)
+```
 
 ```
 @param (string) filepath
@@ -1013,7 +1310,14 @@ false
 ---
 
 ### file-list
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [file-list]]))
+
+(io/file-list ...)
+(file-list    ...)
+```
 
 ```
 @param (string) directory-path
@@ -1033,7 +1337,14 @@ false
 ---
 
 ### all-file-list
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [all-file-list]]))
+
+(io/all-file-list ...)
+(all-file-list    ...)
+```
 
 ```
 @param (string) directory-path
@@ -1053,7 +1364,14 @@ false
 ---
 
 ### subdirectory-list
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [subdirectory-list]]))
+
+(io/subdirectory-list ...)
+(subdirectory-list    ...)
+```
 
 ```
 @param (string) directory-path
@@ -1073,7 +1391,14 @@ false
 ---
 
 ### all-subdirectory-list
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [all-subdirectory-list]]))
+
+(io/all-subdirectory-list ...)
+(all-subdirectory-list    ...)
+```
 
 ```
 @param (string) directory-path
@@ -1093,7 +1418,14 @@ false
 ---
 
 ### item-list
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [item-list]]))
+
+(io/item-list ...)
+(item-list    ...)
+```
 
 ```
 @param (string) directory-path
@@ -1113,7 +1445,14 @@ false
 ---
 
 ### all-item-list
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [all-item-list]]))
+
+(io/all-item-list ...)
+(all-item-list    ...)
+```
 
 ```
 @param (string) directory-path
@@ -1133,7 +1472,14 @@ false
 ---
 
 ### empty-directory?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [empty-directory?]]))
+
+(io/empty-directory? ...)
+(empty-directory?    ...)
+```
 
 ```
 @param (string) directory-path
@@ -1151,7 +1497,14 @@ false
 ---
 
 ### get-filesize
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [get-filesize]]))
+
+(io/get-filesize ...)
+(get-filesize    ...)
+```
 
 ```
 @param (string) filepath
@@ -1169,7 +1522,14 @@ false
 ---
 
 ### max-filesize-reached?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [max-filesize-reached?]]))
+
+(io/max-filesize-reached? ...)
+(max-filesize-reached?    ...)
+```
 
 ```
 @param (string) filepath
@@ -1188,7 +1548,14 @@ false
 ---
 
 ### filename-valid?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filename-valid?]]))
+
+(io/filename-valid? ...)
+(filename-valid?    ...)
+```
 
 ```
 @param (string) filename
@@ -1215,7 +1582,14 @@ false
 ---
 
 ### filename-invalid?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [filename-invalid?]]))
+
+(io/filename-invalid? ...)
+(filename-invalid?    ...)
+```
 
 ```
 @param (string) filename
@@ -1242,7 +1616,14 @@ true
 ---
 
 ### directory-name-valid?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [directory-name-valid?]]))
+
+(io/directory-name-valid? ...)
+(directory-name-valid?    ...)
+```
 
 ```
 @param (string) directory-name
@@ -1269,7 +1650,14 @@ false
 ---
 
 ### directory-name-invalid?
-###### clj/io/api.clj
+
+```
+@require
+(ns my-namespace (:require [io.api :as io :refer [directory-name-invalid?]]))
+
+(io/directory-name-invalid? ...)
+(directory-name-invalid?    ...)
+```
 
 ```
 @param (string) directory-name
