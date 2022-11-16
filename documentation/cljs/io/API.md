@@ -1,16 +1,12 @@
 
-# <strong>io.api</strong> namespace</p>
+# <strong>io.api</strong> namespace
 <p>Documentation of the <strong>io/api.cljs</strong> file</p>
 
+[README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > io.api
+
+
+
 ### B->GB
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [B->GB]]))
-
-(io/B->GB ...)
-(B->GB    ...)
-```
 
 ```
 @param (B) n
@@ -25,17 +21,32 @@
 @return (GB)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn B->GB
+  [n]
+  (/ n 1000000000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [B->GB]]))
+
+(io/B->GB ...)
+(B->GB    ...)
+```
+
+</details>
+
 ---
 
 ### B->KB
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [B->KB]]))
-
-(io/B->KB ...)
-(B->KB    ...)
-```
 
 ```
 @param (B) n
@@ -50,17 +61,32 @@
 @return (KB)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn B->KB
+  [n]
+  (/ n 1000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [B->KB]]))
+
+(io/B->KB ...)
+(B->KB    ...)
+```
+
+</details>
+
 ---
 
 ### B->MB
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [B->MB]]))
-
-(io/B->MB ...)
-(B->MB    ...)
-```
 
 ```
 @param (B) n
@@ -75,17 +101,82 @@
 @return (MB)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn B->MB
+  [n]
+  (/ n 1000000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [B->MB]]))
+
+(io/B->MB ...)
+(B->MB    ...)
+```
+
+</details>
+
+---
+
+### EXTENSIONS
+
+<details>
+<summary>Source code</summary>
+
+```
+
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [EXTENSIONS]]))
+
+(io/EXTENSIONS)
+(EXTENSIONS)
+```
+
+</details>
+
+---
+
+### IMAGE-EXTENSIONS
+
+<details>
+<summary>Source code</summary>
+
+```
+
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [IMAGE-EXTENSIONS]]))
+
+(io/IMAGE-EXTENSIONS)
+(IMAGE-EXTENSIONS)
+```
+
+</details>
+
 ---
 
 ### KB->B
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [KB->B]]))
-
-(io/KB->B ...)
-(KB->B    ...)
-```
 
 ```
 @param (KB) n
@@ -100,17 +191,32 @@
 @return (B)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn KB->B
+  [n]
+  (* n 1000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [KB->B]]))
+
+(io/KB->B ...)
+(KB->B    ...)
+```
+
+</details>
+
 ---
 
 ### KB->GB
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [KB->GB]]))
-
-(io/KB->GB ...)
-(KB->GB    ...)
-```
 
 ```
 @param (KB) n
@@ -125,17 +231,32 @@
 @return (GB)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn KB->GB
+  [n]
+  (/ n 1000000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [KB->GB]]))
+
+(io/KB->GB ...)
+(KB->GB    ...)
+```
+
+</details>
+
 ---
 
 ### KB->MB
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [KB->MB]]))
-
-(io/KB->MB ...)
-(KB->MB    ...)
-```
 
 ```
 @param (KB) n
@@ -150,17 +271,32 @@
 @return (MB)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn KB->MB
+  [n]
+  (/ n 1000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [KB->MB]]))
+
+(io/KB->MB ...)
+(KB->MB    ...)
+```
+
+</details>
+
 ---
 
 ### MB->B
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [MB->B]]))
-
-(io/MB->B ...)
-(MB->B    ...)
-```
 
 ```
 @param (MB) n
@@ -175,17 +311,32 @@
 @return (B)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn MB->B
+  [n]
+  (* n 1000000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [MB->B]]))
+
+(io/MB->B ...)
+(MB->B    ...)
+```
+
+</details>
+
 ---
 
 ### MB->GB
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [MB->GB]]))
-
-(io/MB->GB ...)
-(MB->GB    ...)
-```
 
 ```
 @param (MB) n
@@ -200,17 +351,32 @@
 @return (GB)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn MB->GB
+  [n]
+  (/ n 1000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [MB->GB]]))
+
+(io/MB->GB ...)
+(MB->GB    ...)
+```
+
+</details>
+
 ---
 
 ### MB->KB
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [MB->KB]]))
-
-(io/MB->KB ...)
-(MB->KB    ...)
-```
 
 ```
 @param (MB) n
@@ -225,17 +391,57 @@
 @return (KB)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn MB->KB
+  [n]
+  (* n 1000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [MB->KB]]))
+
+(io/MB->KB ...)
+(MB->KB    ...)
+```
+
+</details>
+
+---
+
+### MIME-TYPES
+
+<details>
+<summary>Source code</summary>
+
+```
+
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [MIME-TYPES]]))
+
+(io/MIME-TYPES)
+(MIME-TYPES)
+```
+
+</details>
+
 ---
 
 ### directory-name-invalid?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [directory-name-invalid?]]))
-
-(io/directory-name-invalid? ...)
-(directory-name-invalid?    ...)
-```
 
 ```
 @param (string) directory-name
@@ -259,17 +465,32 @@ true
 @return (boolean)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn directory-name-invalid?
+  [directory-name]
+  (re-mismatch? directory-name config/DIRECTORY-NAME-PATTERN))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [directory-name-invalid?]]))
+
+(io/directory-name-invalid? ...)
+(directory-name-invalid?    ...)
+```
+
+</details>
+
 ---
 
 ### directory-name-valid?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [directory-name-valid?]]))
-
-(io/directory-name-valid? ...)
-(directory-name-valid?    ...)
-```
 
 ```
 @param (string) directory-name
@@ -293,17 +514,32 @@ false
 @return (boolean)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn directory-name-valid?
+  [directory-name]
+  (re-match? directory-name config/DIRECTORY-NAME-PATTERN))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [directory-name-valid?]]))
+
+(io/directory-name-valid? ...)
+(directory-name-valid?    ...)
+```
+
+</details>
+
 ---
 
 ### directory-path->directory-name
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [directory-path->directory-name]]))
-
-(io/directory-path->directory-name ...)
-(directory-path->directory-name    ...)
-```
 
 ```
 @param (string) directory-path
@@ -320,17 +556,34 @@ false
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn directory-path->directory-name
+  [directory-path]
+  (if-let [directory-name (string/after-last-occurence directory-path "/")]
+          (return directory-name)
+          (return directory-path)))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [directory-path->directory-name]]))
+
+(io/directory-path->directory-name ...)
+(directory-path->directory-name    ...)
+```
+
+</details>
+
 ---
 
 ### extension->image?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [extension->image?]]))
-
-(io/extension->image? ...)
-(extension->image?    ...)
-```
 
 ```
 @param (string) extension
@@ -347,17 +600,32 @@ true
 @return (boolean)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn extension->image?
+  [extension]
+  (vector/contains-item? config/IMAGE-EXTENSIONS extension))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [extension->image?]]))
+
+(io/extension->image? ...)
+(extension->image?    ...)
+```
+
+</details>
+
 ---
 
 ### extension->mime-type
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [extension->mime-type]]))
-
-(io/extension->mime-type ...)
-(extension->mime-type    ...)
-```
 
 ```
 @param (extension) 
@@ -381,17 +649,32 @@ true
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn extension->mime-type
+  [extension]
+  (get config/MIME-TYPES (string/lowercase extension) "unknown/unknown"))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [extension->mime-type]]))
+
+(io/extension->mime-type ...)
+(extension->mime-type    ...)
+```
+
+</details>
+
 ---
 
 ### filename->basename
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filename->basename]]))
-
-(io/filename->basename ...)
-(filename->basename    ...)
-```
 
 ```
 @param (string) filename
@@ -422,17 +705,34 @@ true
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename->basename
+  [filename]
+  (if-let [extension (filename->extension filename)]
+          (string/before-last-occurence filename (str "." extension))
+          (return filename)))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename->basename]]))
+
+(io/filename->basename ...)
+(filename->basename    ...)
+```
+
+</details>
+
 ---
 
 ### filename->extension
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filename->extension]]))
-
-(io/filename->extension ...)
-(filename->extension    ...)
-```
 
 ```
 @param (string) filename
@@ -463,17 +763,32 @@ nil
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename->extension
+  [filename]
+  (filepath->extension filename))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename->extension]]))
+
+(io/filename->extension ...)
+(filename->extension    ...)
+```
+
+</details>
+
 ---
 
 ### filename->image?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filename->image?]]))
-
-(io/filename->image? ...)
-(filename->image?    ...)
-```
 
 ```
 @param (string) filename
@@ -504,17 +819,32 @@ false
 @return (boolean)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename->image?
+  [filename]
+  (filepath->image? filename))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename->image?]]))
+
+(io/filename->image? ...)
+(filename->image?    ...)
+```
+
+</details>
+
 ---
 
 ### filename->mime-type
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filename->mime-type]]))
-
-(io/filename->mime-type ...)
-(filename->mime-type    ...)
-```
 
 ```
 @param (string) filename
@@ -538,17 +868,32 @@ false
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename->mime-type
+  [filename]
+  (filepath->mime-type filename))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename->mime-type]]))
+
+(io/filename->mime-type ...)
+(filename->mime-type    ...)
+```
+
+</details>
+
 ---
 
 ### filename-invalid?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filename-invalid?]]))
-
-(io/filename-invalid? ...)
-(filename-invalid?    ...)
-```
 
 ```
 @param (string) filename
@@ -572,17 +917,32 @@ true
 @return (boolean)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename-invalid?
+  [filename]
+  (re-mismatch? filename config/FILENAME-PATTERN))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename-invalid?]]))
+
+(io/filename-invalid? ...)
+(filename-invalid?    ...)
+```
+
+</details>
+
 ---
 
 ### filename-valid?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filename-valid?]]))
-
-(io/filename-valid? ...)
-(filename-valid?    ...)
-```
 
 ```
 @param (string) filename
@@ -606,17 +966,32 @@ false
 @return (boolean)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename-valid?
+  [filename]
+  (re-match? filename config/FILENAME-PATTERN))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename-valid?]]))
+
+(io/filename-valid? ...)
+(filename-valid?    ...)
+```
+
+</details>
+
 ---
 
 ### filepath->basename
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filepath->basename]]))
-
-(io/filepath->basename ...)
-(filepath->basename    ...)
-```
 
 ```
 @param (string) filepath
@@ -647,17 +1022,32 @@ false
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->basename
+  [filepath]
+  (-> filepath filepath->filename filename->basename))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->basename]]))
+
+(io/filepath->basename ...)
+(filepath->basename    ...)
+```
+
+</details>
+
 ---
 
 ### filepath->directory-path
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filepath->directory-path]]))
-
-(io/filepath->directory-path ...)
-(filepath->directory-path    ...)
-```
 
 ```
 @param (string) filepath
@@ -674,17 +1064,32 @@ false
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->directory-path
+  [filepath]
+  (string/before-last-occurence filepath "/" {:return? false}))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->directory-path]]))
+
+(io/filepath->directory-path ...)
+(filepath->directory-path    ...)
+```
+
+</details>
+
 ---
 
 ### filepath->extension
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filepath->extension]]))
-
-(io/filepath->extension ...)
-(filepath->extension    ...)
-```
 
 ```
 @param (string) filepath
@@ -715,17 +1120,34 @@ nil
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->extension
+  [filepath]
+  (let [filename (-> filepath filepath->filename (string/not-starts-with! "."))]
+       (if-let [extension (string/after-last-occurence filename "." {:return? false})]
+               (string/lowercase extension))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->extension]]))
+
+(io/filepath->extension ...)
+(filepath->extension    ...)
+```
+
+</details>
+
 ---
 
 ### filepath->filename
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filepath->filename]]))
-
-(io/filepath->filename ...)
-(filepath->filename    ...)
-```
 
 ```
 @param (string) filepath
@@ -742,17 +1164,32 @@ nil
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->filename
+  [filepath]
+  (string/after-last-occurence filepath "/" {:return? true}))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->filename]]))
+
+(io/filepath->filename ...)
+(filepath->filename    ...)
+```
+
+</details>
+
 ---
 
 ### filepath->image?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filepath->image?]]))
-
-(io/filepath->image? ...)
-(filepath->image?    ...)
-```
 
 ```
 @param (string) filepath
@@ -783,17 +1220,32 @@ false
 @return (boolean)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->image?
+  [filepath]
+  (-> filepath filepath->extension extension->image?))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->image?]]))
+
+(io/filepath->image? ...)
+(filepath->image?    ...)
+```
+
+</details>
+
 ---
 
 ### filepath->mime-type
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [filepath->mime-type]]))
-
-(io/filepath->mime-type ...)
-(filepath->mime-type    ...)
-```
 
 ```
 @param (string) filepath
@@ -817,17 +1269,32 @@ false
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->mime-type
+  [filepath]
+  (-> filepath filepath->extension mime-type/extension->mime-type))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->mime-type]]))
+
+(io/filepath->mime-type ...)
+(filepath->mime-type    ...)
+```
+
+</details>
+
 ---
 
 ### mime-type->extension
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [mime-type->extension]]))
-
-(io/mime-type->extension ...)
-(mime-type->extension    ...)
-```
 
 ```
 @param (string) mime-type
@@ -851,17 +1318,32 @@ false
 @return (string)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn mime-type->extension
+  [mime-type]
+  (get config/EXTENSIONS (string/lowercase mime-type) "unknown"))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [mime-type->extension]]))
+
+(io/mime-type->extension ...)
+(mime-type->extension    ...)
+```
+
+</details>
+
 ---
 
 ### mime-type->image?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [mime-type->image?]]))
-
-(io/mime-type->image? ...)
-(mime-type->image?    ...)
-```
 
 ```
 @param (string) extension
@@ -885,17 +1367,32 @@ false
 @return (boolean)
 ```
 
+<details>
+<summary>Source code</summary>
+
+```
+(defn mime-type->image?
+  [mime-type]
+  (string/starts-with? mime-type "image"))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [mime-type->image?]]))
+
+(io/mime-type->image? ...)
+(mime-type->image?    ...)
+```
+
+</details>
+
 ---
 
 ### unknown-mime-type?
-
-```
-@require
-(ns my-namespace (:require [io.api :as io :refer [unknown-mime-type?]]))
-
-(io/unknown-mime-type? ...)
-(unknown-mime-type?    ...)
-```
 
 ```
 @param (string) mime-type
@@ -918,3 +1415,26 @@ true
 ```
 @return (boolean)
 ```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn unknown-mime-type?
+  [mime-type]
+  (-> mime-type mime-type->extension nil?))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [unknown-mime-type?]]))
+
+(io/unknown-mime-type? ...)
+(unknown-mime-type?    ...)
+```
+
+</details>
