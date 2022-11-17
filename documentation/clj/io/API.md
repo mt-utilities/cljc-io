@@ -507,6 +507,9 @@
 @param (string) filepath
 @param (*) content
 @param (map)(opt) options
+{:create? (boolean)(opt)
+  Default: false
+ :max-line-count (integer)(opt)}
 ```
 
 ```
@@ -2014,6 +2017,7 @@ false
 
 ```
 @return (B)
+The length of the file in bytes
 ```
 
 <details>
@@ -2233,6 +2237,9 @@ false
 @param (string) filepath
 @param (*) content
 @param (map)(opt) options
+{:create? (boolean)(opt)
+  Default: false
+ :max-line-count (integer)(opt)}
 ```
 
 ```
@@ -2518,6 +2525,8 @@ true
 @param (string) filepath
 @param (*) content
 @param (map)(opt) options
+{:abc? (boolean)(opt)
+  Default: false}
 ```
 
 ```
@@ -2586,6 +2595,8 @@ true
 @param (string) filepath
 @param (*) content
 @param (map)(opt) options
+{:create? (boolean)(opt)
+  Default: false}
 ```
 
 ```
