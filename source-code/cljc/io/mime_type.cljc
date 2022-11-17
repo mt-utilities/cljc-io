@@ -1,7 +1,7 @@
 
 (ns io.mime-type
-    (:require [io.config         :as config]
-              [mid-fruits.string :as string]))
+    (:require [io.config  :as config]
+              [string.api :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

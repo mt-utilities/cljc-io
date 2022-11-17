@@ -1,10 +1,10 @@
 
 (ns io.file
-    (:require [candy.api         :refer [return]]
-              [io.config         :as config]
-              [io.mime-type      :as mime-type]
-              [mid-fruits.string :as string]
-              [mid-fruits.vector :as vector]))
+    (:require [candy.api    :refer [return]]
+              [io.config    :as config]
+              [io.mime-type :as mime-type]
+              [string.api   :as string]
+              [vector.api   :as vector]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

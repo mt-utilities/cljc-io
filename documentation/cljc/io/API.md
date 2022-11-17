@@ -126,56 +126,6 @@
 
 ---
 
-### EXTENSIONS
-
-<details>
-<summary>Source code</summary>
-
-```
-
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :as io :refer [EXTENSIONS]]))
-
-(io/EXTENSIONS)
-(EXTENSIONS)
-```
-
-</details>
-
----
-
-### IMAGE-EXTENSIONS
-
-<details>
-<summary>Source code</summary>
-
-```
-
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :as io :refer [IMAGE-EXTENSIONS]]))
-
-(io/IMAGE-EXTENSIONS)
-(IMAGE-EXTENSIONS)
-```
-
-</details>
-
----
-
 ### KB->B
 
 ```
@@ -410,31 +360,6 @@
 
 (io/MB->KB ...)
 (MB->KB    ...)
-```
-
-</details>
-
----
-
-### MIME-TYPES
-
-<details>
-<summary>Source code</summary>
-
-```
-
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :as io :refer [MIME-TYPES]]))
-
-(io/MIME-TYPES)
-(MIME-TYPES)
 ```
 
 </details>

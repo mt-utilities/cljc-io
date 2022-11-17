@@ -1,12 +1,12 @@
 
 (ns io.edn
-    (:require [candy.api         :refer [return]]
-              [io.actions        :as actions]
-              [io.read           :as read]
-              [mid-fruits.pretty :as pretty]
-              [reader.api        :as reader]
-              [mid-fruits.string :as string]
-              [mid-fruits.vector :as vector]))
+    (:require [candy.api    :refer [return]]
+              [io.actions   :as actions]
+              [io.read      :as read]
+              [pretty.print :as pretty]
+              [reader.api   :as reader]
+              [string.api   :as string]
+              [vector.api   :as vector]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

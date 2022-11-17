@@ -1,7 +1,7 @@
 
 (ns io.directory
-    (:require [candy.api         :refer [return]]
-              [mid-fruits.string :as string]))
+    (:require [candy.api  :refer [return]]
+              [string.api :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
