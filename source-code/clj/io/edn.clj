@@ -16,7 +16,9 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:abc? (boolean)(opt)
-  ;   Default: false}
+  ;   Default: false
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (write-edn-file! "my-directory/my-file.edn" {...})
@@ -40,24 +42,30 @@
   ([filepath content]
    (write-edn-file! filepath content {}))
 
-  ([filepath content options]
-   (let [output (pretty/mixed->string content options)]
-        (actions/write-file! filepath (str "\n" output) {:create? true})
+  ([filepath content {:keys [abc? warn?] :or {warn? true}}]
+   (let [output (pretty/mixed->string content {:abc? abc?})]
+        (actions/write-file! filepath (str "\n" output) {:create? true :warn? warn?})
         (return content))))
 
 (defn read-edn-file
   ; @param (string) filepath
+  ; @param (map)(opt) options
+  ; {:warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (read-edn-file "my-directory/my-file.edn")
   ;
   ; @return (*)
-  [filepath]
-  (let [file-content (read/read-file filepath)]
-       (if (-> file-content string/trim some?)
-           (-> file-content reader/string->mixed))))
-           ; Az .edn fájl tartalma lehet string, map, vektor, stb. típus,
-           ; ezért a read-edn-file függvény kimenetén nem lehetséges típusvizsgálatot végezni!
+  ([filepath]
+   (read-edn-file filepath {}))
+
+  ([filepath options]
+   (let [file-content (read/read-file filepath options)]
+        (if (-> file-content string/trim some?)
+            (-> file-content reader/string->mixed)))))
+            ; Az .edn fájl tartalma lehet string, map, vektor, stb. típus,
+            ; ezért a read-edn-file függvény kimenetén nem lehetséges típusvizsgálatot végezni!
 
 (defn swap-edn-file!
   ; @param (string) filepath
@@ -76,4 +84,4 @@
         params (vector/cons-item params edn)
         output (apply          f params)]
        (write-edn-file! filepath output)
-       (return output)))
+       (return                   output)))
