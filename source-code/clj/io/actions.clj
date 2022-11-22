@@ -84,7 +84,7 @@
   ;
   ; @return (nil)
   ([source-filepath destination-filepath]
-   (copy-file! ([source-filepath destination-filepath {}])))
+   (copy-file! source-filepath destination-filepath {}))
 
   ([source-filepath destination-filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists? source-filepath)

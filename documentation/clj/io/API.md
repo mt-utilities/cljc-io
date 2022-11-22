@@ -370,6 +370,9 @@
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -388,12 +391,18 @@
 
 ```
 (defn all-file-list
-  [directory-path]
-  (let [directory (clojure.java.io/file directory-path)
-        file-seq  (file-seq             directory)]
-       (mapv str (filter #(and (-> % .isFile)
-                               (-> % .isHidden not))
-                          (param file-seq)))))
+  ([directory-path]
+   (all-file-list directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if (check/directory-exists? directory-path)
+            (let [directory (clojure.java.io/file directory-path)
+                  file-seq  (file-seq             directory)]
+                 (letfn [(f [%] (and (-> % .isFile)
+                                     (-> % .isHidden not)))]
+                        (mapv str (filter f file-seq))))
+            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
 </details>
@@ -416,6 +425,9 @@
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -434,9 +446,15 @@
 
 ```
 (defn all-item-list
-  [directory-path]
-  (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file file-seq))
-                      (param directory-path)))
+  ([directory-path]
+   (all-item-list directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if (check/directory-exists? directory-path)
+            (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file file-seq))
+                                (param directory-path))
+            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
 </details>
@@ -459,6 +477,9 @@
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -477,12 +498,18 @@
 
 ```
 (defn all-subdirectory-list
-  [directory-path]
-  (let [directory (clojure.java.io/file directory-path)
-        file-seq  (file-seq             directory)]
-       (mapv str (filter #(and (-> % .isDirectory)
-                               (-> % .isHidden not))
-                          (param file-seq)))))
+  ([directory-path]
+   (all-subdirectory-list directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if (check/directory-exists? directory-path)
+            (let [directory (clojure.java.io/file directory-path)
+                  file-seq  (file-seq             directory)]
+                 (letfn [(f [%] (and (-> % .isDirectory)
+                                     (-> % .isHidden not)))]
+                        (mapv str (filter f file-seq))))
+            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
 </details>
@@ -509,7 +536,9 @@
 @param (map)(opt) options
 {:create? (boolean)(opt)
   Default: false
- :max-line-count (integer)(opt)}
+ :max-line-count (integer)(opt)
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -563,6 +592,9 @@
 ```
 @param (string) source-filepath
 @param (string) destination-filepath
+@param (map)(opt) options
+ {:warn? (boolean)(opt)
+   Default: true}
 ```
 
 ```
@@ -580,12 +612,15 @@
 
 ```
 (defn copy-file!
-  [source-filepath destination-filepath]
-  (try (if (check/file-exists? source-filepath)
-           (clojure.java.io/copy (clojure.java.io/file      source-filepath)
-                                 (clojure.java.io/file destination-filepath))
-           (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
-       (catch Exception e (println (str e " \"" source-filepath "\"")))))
+  ([source-filepath destination-filepath]
+   (copy-file! source-filepath destination-filepath {}))
+
+  ([source-filepath destination-filepath {:keys [warn?] :or {warn? true}}]
+   (try (if (check/file-exists? source-filepath)
+            (clojure.java.io/copy (clojure.java.io/file      source-filepath)
+                                  (clojure.java.io/file destination-filepath))
+            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" source-filepath "\"")))))))
 ```
 
 </details>
@@ -609,6 +644,9 @@
 ```
 @param (string) uri
 @param (?) file
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -620,11 +658,14 @@
 
 ```
 (defn copy-uri-to-file!
-  [uri file]
-  (try (with-open [input  (clojure.java.io/input-stream  uri)
-                   output (clojure.java.io/output-stream file)]
-                  (clojure.java.io/copy input output))
-       (catch Exception e (println e))))
+  ([uri file]
+   (copy-uri-to-file! uri file {}))
+
+  ([uri file {:keys [warn?] :or {warn? true}}]
+   (try (with-open [input  (clojure.java.io/input-stream  uri)
+                    output (clojure.java.io/output-stream file)]
+                   (clojure.java.io/copy input output))
+        (catch Exception e (if warn? (println e))))))
 ```
 
 </details>
@@ -647,6 +688,9 @@
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+ {:warn? (boolean)(opt)
+   Default: true}
 ```
 
 ```
@@ -663,11 +707,14 @@
 
 ```
 (defn create-directory!
-  [directory-path]
-  (if-not (check/directory-exists? directory-path)
-          (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
-  (try (-> directory-path java.io.File. .mkdirs)
-       (catch Exception e (println e))))
+  ([directory-path]
+   (create-directory! directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (if-not (check/directory-exists? directory-path)
+           (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\""))))
+   (try (-> directory-path java.io.File. .mkdirs)
+        (catch Exception e (println e)))))
 ```
 
 </details>
@@ -690,6 +737,9 @@
 
 ```
 @param (string) filepath
+@param (map)(opt) options
+ {:warn? (boolean)(opt)
+   Default: true}
 ```
 
 ```
@@ -706,10 +756,13 @@
 
 ```
 (defn create-file!
-  [filepath]
-  (if-not (check/file-exists? filepath)
-          (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-  (spit filepath nil))
+  ([filepath]
+   (create-file! filepath {}))
+
+  ([filepath {:keys [warn?] :or {warn? true}}]
+   (if-not (check/file-exists? filepath)
+           (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\""))))
+   (spit filepath nil)))
 ```
 
 </details>
@@ -732,6 +785,9 @@
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -748,9 +804,12 @@
 
 ```
 (defn delete-directory!
-  [directory-path]
-  (empty-directory!        directory-path)
-  (delete-empty-directory! directory-path))
+  ([directory-path]
+   (empty-directory! directory-path {}))
+
+  ([directory-path options]
+   (empty-directory!        directory-path options)
+   (delete-empty-directory! directory-path options)))
 ```
 
 </details>
@@ -773,6 +832,9 @@
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -789,11 +851,14 @@
 
 ```
 (defn delete-empty-directory!
-  [directory-path]
-  (try (if (check/directory-exists?     directory-path)
-           (clojure.java.io/delete-file directory-path)
-           (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
-      (catch Exception e (println (str e " \"" directory-path "\"")))))
+  ([directory-path]
+   (delete-empty-directory! directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if (check/directory-exists?     directory-path)
+            (clojure.java.io/delete-file directory-path)
+            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
 </details>
@@ -816,6 +881,9 @@
 
 ```
 @param (string) filepath
+@param (map)(opt) options
+ {:warn? (boolean)(opt)
+   Default: true}
 ```
 
 ```
@@ -832,11 +900,14 @@
 
 ```
 (defn delete-file!
-  [filepath]
-  (try (if (check/file-exists?          filepath)
-           (clojure.java.io/delete-file filepath)
-           (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
-      (catch Exception e (println (str e " \"" filepath "\"")))))
+  ([filepath]
+   (delete-file! filepath {}))
+
+  ([filepath {:keys [warn?] :or {warn? true}}]
+   (try (if (check/file-exists?          filepath)
+            (clojure.java.io/delete-file filepath)
+            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+       (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 ```
 
 </details>
@@ -1083,6 +1154,9 @@ false
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -1099,12 +1173,15 @@ false
 
 ```
 (defn empty-directory!
-  [directory-path]
-  (doseq [item-path (read/item-list directory-path)]
-         (if (check/directory? item-path)
-             (do (empty-directory!        item-path)
-                 (delete-empty-directory! item-path))
-             (delete-file! item-path))))
+  ([directory-path]
+   (empty-directory! directory-path {}))
+
+  ([directory-path options]
+   (doseq [item-path (read/item-list directory-path)]
+          (if (check/directory? item-path)
+              (do (empty-directory!        item-path options)
+                  (delete-empty-directory! item-path options))
+              (delete-file! item-path)))))
 ```
 
 </details>
@@ -1127,6 +1204,9 @@ false
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -1143,8 +1223,14 @@ false
 
 ```
 (defn empty-directory?
-  [directory-path]
-  (-> directory-path item-list empty?))
+  ([directory-path]
+   (empty-directory? directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if (check/directory-exists? directory-path)
+            (-> directory-path item-list empty?)
+            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
 </details>
@@ -1426,6 +1512,9 @@ true
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -1444,12 +1533,18 @@ true
 
 ```
 (defn file-list
-  [directory-path]
-  (let [directory (clojure.java.io/file directory-path)
-        file-seq  (.listFiles           directory)]
-       (mapv str (filter #(and (-> % .isFile)
-                               (-> % .isHidden not))
-                          (param file-seq)))))
+  ([directory-path]
+   (file-list directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if (check/directory-exists? directory-path)
+            (let [directory (clojure.java.io/file directory-path)
+                  file-seq  (.listFiles           directory)]
+                 (letfn [(f [%] (and (-> % .isFile)
+                                     (-> % .isHidden not)))]
+                        (mapv str (filter f file-seq))))
+            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+       (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
 </details>
@@ -2470,6 +2565,9 @@ false
 
 ```
 @param (string) filepath
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -2487,11 +2585,14 @@ The length of the file in bytes
 
 ```
 (defn get-filesize
-  [filepath]
-  (try (if (check/file-exists? filepath)
-           (->                 filepath clojure.java.io/file .length)
-           (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
-      (catch Exception e (println (str e " \"" filepath "\"")))))
+  ([filepath]
+   (get-filesize filepath {}))
+
+  ([filepath {:keys [warn?] :or {warn? true}}]
+   (try (if (check/file-exists? filepath)
+            (->                 filepath clojure.java.io/file .length)
+            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+       (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 ```
 
 </details>
@@ -2514,6 +2615,9 @@ The length of the file in bytes
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -2532,9 +2636,15 @@ The length of the file in bytes
 
 ```
 (defn item-list
-  [directory-path]
-  (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file .listFiles))
-                      (param directory-path)))
+  ([directory-path]
+   (item-list directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if (check/directory-exists? directory-path)
+            (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file .listFiles))
+                                (param directory-path))
+            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
 </details>
@@ -2558,6 +2668,9 @@ The length of the file in bytes
 ```
 @param (string) filepath
 @param (B) max-filesize
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -2574,9 +2687,12 @@ The length of the file in bytes
 
 ```
 (defn max-filesize-reached?
-  [filepath max-filesize]
-  (let [filesize (get-filesize filepath)]
-       (>= filesize max-filesize)))
+  ([filepath max-filesize]
+   (max-filesize-reached? filepath max-filesize {}))
+
+  ([filepath max-filesize options]
+   (if-let [filesize (get-filesize filepath options)]
+           (>= filesize max-filesize))))
 ```
 
 </details>
@@ -2701,7 +2817,9 @@ false
 @param (map)(opt) options
 {:create? (boolean)(opt)
   Default: false
- :max-line-count (integer)(opt)}
+ :max-line-count (integer)(opt)
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -2754,6 +2872,9 @@ false
 
 ```
 @param (string) filepath
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -2770,10 +2891,13 @@ false
 
 ```
 (defn read-edn-file
-  [filepath]
-  (let [file-content (read/read-file filepath)]
-       (if (-> file-content string/trim some?)
-           (-> file-content reader/string->mixed))))
+  ([filepath]
+   (read-edn-file filepath {}))
+
+  ([filepath options]
+   (let [file-content (read/read-file filepath options)]
+        (if (-> file-content string/trim some?)
+            (-> file-content reader/string->mixed)))))
 ```
 
 </details>
@@ -2796,6 +2920,9 @@ false
 
 ```
 @param (string) filepath
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -2812,11 +2939,14 @@ false
 
 ```
 (defn read-file
-  [filepath]
-  (try (if (check/file-exists? filepath)
-           (slurp              filepath)
-           (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
-      (catch Exception e (println (str e " \"" filepath "\"")))))
+  ([filepath]
+   (read-file filepath {}))
+
+  ([filepath {:keys [warn?] :or {warn? true}}]
+   (try (if (check/file-exists? filepath)
+            (slurp              filepath)
+            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+       (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 ```
 
 </details>
@@ -2839,6 +2969,9 @@ false
 
 ```
 @param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -2857,12 +2990,18 @@ false
 
 ```
 (defn subdirectory-list
-  [directory-path]
-  (let [directory (clojure.java.io/file directory-path)
-        file-seq  (.listFiles           directory)]
-       (mapv str (filter #(and (-> % .isDirectory)
-                               (-> % .isHidden not))
-                          (param file-seq)))))
+  ([directory-path]
+   (subdirectory-list directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if (check/directory-exists? directory-path)
+            (let [directory (clojure.java.io/file directory-path)
+                  file-seq  (.listFiles           directory)]
+                 (letfn [(f [%] (and (-> % .isDirectory)
+                                     (-> % .isHidden not)))]
+                        (mapv str (filter f file-seq))))
+            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
 </details>
@@ -2913,7 +3052,7 @@ false
         params (vector/cons-item params edn)
         output (apply          f params)]
        (write-edn-file! filepath output)
-       (return output)))
+       (return                   output)))
 ```
 
 </details>
@@ -2988,7 +3127,9 @@ true
 @param (*) content
 @param (map)(opt) options
 {:abc? (boolean)(opt)
-  Default: false}
+  Default: false
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -3029,9 +3170,9 @@ true
   ([filepath content]
    (write-edn-file! filepath content {}))
 
-  ([filepath content options]
-   (let [output (pretty/mixed->string content options)]
-        (actions/write-file! filepath (str "\n" output) {:create? true})
+  ([filepath content {:keys [abc? warn?] :or {warn? true}}]
+   (let [output (pretty/mixed->string content {:abc? abc?})]
+        (actions/write-file! filepath (str "\n" output) {:create? true :warn? warn?})
         (return content))))
 ```
 
@@ -3058,7 +3199,9 @@ true
 @param (*) content
 @param (map)(opt) options
 {:create? (boolean)(opt)
-  Default: false}
+  Default: false
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -3083,13 +3226,13 @@ true
   ([filepath content]
    (write-file! filepath content {}))
 
-  ([filepath content {:keys [create?]}]
+  ([filepath content {:keys [create? warn?] :or {warn? true} :as options}]
    (if (check/file-exists? filepath)
        (spit filepath (str content))
-       (if create? (do (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\""))
+       (if create? (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (if-let [directory-path (file/filepath->directory-path filepath)]
                                (if-not (check/directory-exists? directory-path)
-                                       (create-directory!       directory-path)))
+                                       (create-directory!       directory-path options)))
                        (spit filepath (str content)))))))
 ```
 
