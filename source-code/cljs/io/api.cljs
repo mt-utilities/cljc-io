@@ -11,15 +11,17 @@
 ;; ----------------------------------------------------------------------------
 
 ; io.config
-(def MIME-TYPES       config/MIME-TYPES)
-(def EXTENSIONS       config/EXTENSIONS)
-(def IMAGE-EXTENSIONS config/IMAGE-EXTENSIONS)
+(def MIME-TYPES config/MIME-TYPES)
+(def EXTENSIONS config/EXTENSIONS)
 
 ; io.directory
 (def directory-path->directory-name directory/directory-path->directory-name)
 
 ; io.file
+(def extension->audio?        file/extension->audio?)
 (def extension->image?        file/extension->image?)
+(def extension->text?         file/extension->text?)
+(def extension->video?        file/extension->video?)
 (def filepath->directory-path file/filepath->directory-path)
 (def filepath->filename       file/filepath->filename)
 (def filepath->extension      file/filepath->extension)
@@ -28,8 +30,15 @@
 (def filepath->basename       file/filepath->basename)
 (def filepath->mime-type      file/filepath->mime-type)
 (def filename->mime-type      file/filename->mime-type)
+(def filepath->audio?         file/filepath->audio?)
 (def filepath->image?         file/filepath->image?)
+(def filepath->text?          file/filepath->text?)
+(def filepath->video?         file/filepath->video?)
+(def filename->audio?         file/filename->audio?)
 (def filename->image?         file/filename->image?)
+(def filename->text?          file/filename->text?)
+(def filename->video?         file/filename->video?)
+
 
 ; io.filesize
 (def B->KB  filesize/B->KB)

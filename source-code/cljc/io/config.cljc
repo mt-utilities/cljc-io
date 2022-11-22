@@ -87,7 +87,3 @@
 
 ; @constant (map)
 (def EXTENSIONS (map/swap MIME-TYPES))
-
-; @constant (strings in vector)
-;  A rendszer által ismert képformátumok. A lista tetszés szerint bővíthető.
-(def IMAGE-EXTENSIONS ["bmp" "gif" "jpg" "jpeg" "png" "tif" "tiff" "webp"])

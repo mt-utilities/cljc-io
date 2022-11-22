@@ -508,6 +508,48 @@ false
 
 ---
 
+### extension->audio?
+
+```
+@param (string) extension
+```
+
+```
+@example
+(extension->audio? "mp3")
+=>
+true
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn extension->audio?
+  [extension]
+  (-> extension mime-type/extension->mime-type mime-type/mime-type->audio?))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [extension->audio?]]))
+
+(io/extension->audio? ...)
+(extension->audio?    ...)
+```
+
+</details>
+
+---
+
 ### extension->image?
 
 ```
@@ -531,7 +573,7 @@ true
 ```
 (defn extension->image?
   [extension]
-  (vector/contains-item? config/IMAGE-EXTENSIONS extension))
+  (-> extension mime-type/extension->mime-type mime-type/mime-type->image?))
 ```
 
 </details>
@@ -593,6 +635,146 @@ true
 
 (io/extension->mime-type ...)
 (extension->mime-type    ...)
+```
+
+</details>
+
+---
+
+### extension->text?
+
+```
+@param (string) extension
+```
+
+```
+@example
+(extension->text? "txt")
+=>
+true
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn extension->text?
+  [extension]
+  (-> extension mime-type/extension->mime-type mime-type/mime-type->text?))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [extension->text?]]))
+
+(io/extension->text? ...)
+(extension->text?    ...)
+```
+
+</details>
+
+---
+
+### extension->video?
+
+```
+@param (string) extension
+```
+
+```
+@example
+(extension->video? "mp4")
+=>
+true
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn extension->video?
+  [extension]
+  (-> extension mime-type/extension->mime-type mime-type/mime-type->video?))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [extension->video?]]))
+
+(io/extension->video? ...)
+(extension->video?    ...)
+```
+
+</details>
+
+---
+
+### filename->audio?
+
+```
+@param (string) filename
+```
+
+```
+@example
+(filename->audio? "my-audio.mp3")
+=>
+true
+```
+
+```
+@example
+(filename->audio? "my-file.ext")
+=>
+false
+```
+
+```
+@example
+(filename->audio? "my-file")
+=>
+false
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename->audio?
+  [filename]
+  (filepath->audio? filename))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename->audio?]]))
+
+(io/filename->audio? ...)
+(filename->audio?    ...)
 ```
 
 </details>
@@ -818,6 +1000,118 @@ false
 
 ---
 
+### filename->text?
+
+```
+@param (string) filename
+```
+
+```
+@example
+(filename->text? "my-text.txt")
+=>
+true
+```
+
+```
+@example
+(filename->text? "my-file.ext")
+=>
+false
+```
+
+```
+@example
+(filename->text? "my-file")
+=>
+false
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename->text?
+  [filename]
+  (filepath->text? filename))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename->text?]]))
+
+(io/filename->text? ...)
+(filename->text?    ...)
+```
+
+</details>
+
+---
+
+### filename->video?
+
+```
+@param (string) filename
+```
+
+```
+@example
+(filename->video? "my-video.mp4")
+=>
+true
+```
+
+```
+@example
+(filename->video? "my-file.ext")
+=>
+false
+```
+
+```
+@example
+(filename->video? "my-file")
+=>
+false
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn filename->video?
+  [filename]
+  (filepath->image? filename))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filename->video?]]))
+
+(io/filename->video? ...)
+(filename->video?    ...)
+```
+
+</details>
+
+---
+
 ### filename-invalid?
 
 ```
@@ -910,6 +1204,62 @@ false
 
 (io/filename-valid? ...)
 (filename-valid?    ...)
+```
+
+</details>
+
+---
+
+### filepath->audio?
+
+```
+@param (string) filepath
+```
+
+```
+@example
+(filepath->audio? "my-directory/my-audio.mp3")
+=>
+true
+```
+
+```
+@example
+(filepath->audio? "my-directory/my-file.ext")
+=>
+false
+```
+
+```
+@example
+(filepath->audio? "my-directory/my-file")
+=>
+false
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->audio?
+  [filepath]
+  (-> filepath filepath->extension extension->audio?))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->audio?]]))
+
+(io/filepath->audio? ...)
+(filepath->audio?    ...)
 ```
 
 </details>
@@ -1213,6 +1563,118 @@ false
 
 (io/filepath->mime-type ...)
 (filepath->mime-type    ...)
+```
+
+</details>
+
+---
+
+### filepath->text?
+
+```
+@param (string) filepath
+```
+
+```
+@example
+(filepath->text? "my-directory/my-text.txt")
+=>
+true
+```
+
+```
+@example
+(filepath->text? "my-directory/my-file.ext")
+=>
+false
+```
+
+```
+@example
+(filepath->text? "my-directory/my-file")
+=>
+false
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->text?
+  [filepath]
+  (-> filepath filepath->extension extension->text?))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->text?]]))
+
+(io/filepath->text? ...)
+(filepath->text?    ...)
+```
+
+</details>
+
+---
+
+### filepath->video?
+
+```
+@param (string) filepath
+```
+
+```
+@example
+(filepath->video? "my-directory/my-video.mp4")
+=>
+true
+```
+
+```
+@example
+(filepath->video? "my-directory/my-file.ext")
+=>
+false
+```
+
+```
+@example
+(filepath->video? "my-directory/my-file")
+=>
+false
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn filepath->video?
+  [filepath]
+  (-> filepath filepath->extension extension->image?))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [filepath->video?]]))
+
+(io/filepath->video? ...)
+(filepath->video?    ...)
 ```
 
 </details>

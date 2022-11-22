@@ -1,13 +1,23 @@
 
 (ns io.file
     (:require [candy.api    :refer [return]]
-              [io.config    :as config]
               [io.mime-type :as mime-type]
-              [string.api   :as string]
-              [vector.api   :as vector]))
+              [string.api   :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
+
+(defn extension->audio?
+  ; @param (string) extension
+  ;
+  ; @example
+  ; (extension->audio? "mp3")
+  ; =>
+  ; true
+  ;
+  ; @return (boolean)
+  [extension]
+  (-> extension mime-type/extension->mime-type mime-type/mime-type->audio?))
 
 (defn extension->image?
   ; @param (string) extension
@@ -19,7 +29,34 @@
   ;
   ; @return (boolean)
   [extension]
-  (vector/contains-item? config/IMAGE-EXTENSIONS extension))
+  (-> extension mime-type/extension->mime-type mime-type/mime-type->image?))
+
+(defn extension->text?
+  ; @param (string) extension
+  ;
+  ; @example
+  ; (extension->text? "txt")
+  ; =>
+  ; true
+  ;
+  ; @return (boolean)
+  [extension]
+  (-> extension mime-type/extension->mime-type mime-type/mime-type->text?))
+
+(defn extension->video?
+  ; @param (string) extension
+  ;
+  ; @example
+  ; (extension->video? "mp4")
+  ; =>
+  ; true
+  ;
+  ; @return (boolean)
+  [extension]
+  (-> extension mime-type/extension->mime-type mime-type/mime-type->video?))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defn filepath->directory-path
   ; @param (string) filepath
@@ -171,6 +208,31 @@
   [filename]
   (filepath->mime-type filename))
 
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn filepath->audio?
+  ; @param (string) filepath
+  ;
+  ; @example
+  ; (filepath->audio? "my-directory/my-audio.mp3")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (filepath->audio? "my-directory/my-file.ext")
+  ; =>
+  ; false
+  ;
+  ; @example
+  ; (filepath->audio? "my-directory/my-file")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [filepath]
+  (-> filepath filepath->extension extension->audio?))
+
 (defn filepath->image?
   ; @param (string) filepath
   ;
@@ -193,6 +255,75 @@
   [filepath]
   (-> filepath filepath->extension extension->image?))
 
+(defn filepath->text?
+  ; @param (string) filepath
+  ;
+  ; @example
+  ; (filepath->text? "my-directory/my-text.txt")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (filepath->text? "my-directory/my-file.ext")
+  ; =>
+  ; false
+  ;
+  ; @example
+  ; (filepath->text? "my-directory/my-file")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [filepath]
+  (-> filepath filepath->extension extension->text?))
+
+(defn filepath->video?
+  ; @param (string) filepath
+  ;
+  ; @example
+  ; (filepath->video? "my-directory/my-video.mp4")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (filepath->video? "my-directory/my-file.ext")
+  ; =>
+  ; false
+  ;
+  ; @example
+  ; (filepath->video? "my-directory/my-file")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [filepath]
+  (-> filepath filepath->extension extension->image?))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn filename->audio?
+  ; @param (string) filename
+  ;
+  ; @example
+  ; (filename->audio? "my-audio.mp3")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (filename->audio? "my-file.ext")
+  ; =>
+  ; false
+  ;
+  ; @example
+  ; (filename->audio? "my-file")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [filename]
+  (filepath->audio? filename))
+
 (defn filename->image?
   ; @param (string) filename
   ;
@@ -208,6 +339,50 @@
   ;
   ; @example
   ; (filename->image? "my-file")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [filename]
+  (filepath->image? filename))
+
+(defn filename->text?
+  ; @param (string) filename
+  ;
+  ; @example
+  ; (filename->text? "my-text.txt")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (filename->text? "my-file.ext")
+  ; =>
+  ; false
+  ;
+  ; @example
+  ; (filename->text? "my-file")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [filename]
+  (filepath->text? filename))
+
+(defn filename->video?
+  ; @param (string) filename
+  ;
+  ; @example
+  ; (filename->video? "my-video.mp4")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (filename->video? "my-file.ext")
+  ; =>
+  ; false
+  ;
+  ; @example
+  ; (filename->video? "my-file")
   ; =>
   ; false
   ;

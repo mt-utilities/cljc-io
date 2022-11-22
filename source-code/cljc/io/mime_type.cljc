@@ -57,6 +57,23 @@
   [mime-type]
   (-> mime-type mime-type->extension nil?))
 
+(defn mime-type->audio?
+  ; @param (string) extension
+  ;
+  ; @example
+  ; (mime-type->image? "audio/mpeg")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (mime-type->image? "application/pdf")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [mime-type]
+  (string/starts-with? mime-type "audio"))
+
 (defn mime-type->image?
   ; @param (string) extension
   ;
@@ -73,3 +90,37 @@
   ; @return (boolean)
   [mime-type]
   (string/starts-with? mime-type "image"))
+
+(defn mime-type->text?
+  ; @param (string) extension
+  ;
+  ; @example
+  ; (mime-type->image? "text/plain")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (mime-type->image? "application/pdf")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [mime-type]
+  (string/starts-with? mime-type "text"))
+
+(defn mime-type->video?
+  ; @param (string) extension
+  ;
+  ; @example
+  ; (mime-type->image? "video/mpeg")
+  ; =>
+  ; true
+  ;
+  ; @example
+  ; (mime-type->image? "application/pdf")
+  ; =>
+  ; false
+  ;
+  ; @return (boolean)
+  [mime-type]
+  (string/starts-with? mime-type "video"))
