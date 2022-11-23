@@ -24,12 +24,13 @@
    (create-directory! directory-path {}))
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
-   (if-not (check/directory-exists? directory-path)
-           (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\""))))
    ; https://stackoverflow.com/questions/6774369/recursively-create-directory
-   ; (try (-> directory-path java.io.File. .mkdir) ...)
-   (try (-> directory-path java.io.File. .mkdirs)
-        (catch Exception e (println e)))))
+   ; (try (-> directory-path java.io.File. .mkdir)  ...)
+   ; (try (-> directory-path java.io.File. .mkdirs) ...)
+   (when-not (check/directory-exists? directory-path)
+             (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
+             (try (-> directory-path java.io.File. .mkdirs)
+                  (catch Exception e (println e))))))
 
 (defn create-file!
   ; @param (string) filepath
@@ -45,9 +46,9 @@
    (create-file! filepath {}))
 
   ([filepath {:keys [warn?] :or {warn? true}}]
-   (if-not (check/file-exists? filepath)
-           (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\""))))
-   (spit filepath nil)))
+   (when-not (check/file-exists? filepath)
+             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (spit filepath nil))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

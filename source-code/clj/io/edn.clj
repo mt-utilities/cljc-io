@@ -11,6 +11,24 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
+(defn create-edn-file!
+  ; @param (string) filepath
+  ; @param (map)(opt) options
+  ;  {:warn? (boolean)(opt)
+  ;    Default: true}
+  ;
+  ; @usage
+  ; (create-edn-file! "my-directory/my-file.edn")
+  ;
+  ; @return (nil)
+  ([filepath]
+   (create-edn-file! filepath {}))
+
+  ([filepath {:keys [warn?] :or {warn? true}}]
+   (when-not (check/file-exists? filepath)
+             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (spit filepath {}))))
+
 (defn write-edn-file!
   ; @param (string) filepath
   ; @param (*) content
