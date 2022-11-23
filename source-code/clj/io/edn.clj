@@ -2,6 +2,7 @@
 (ns io.edn
     (:require [candy.api    :refer [return]]
               [io.actions   :as actions]
+              [io.check     :as check]
               [io.read      :as read]
               [pretty.print :as pretty]
               [reader.api   :as reader]
