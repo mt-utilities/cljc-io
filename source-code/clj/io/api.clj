@@ -48,10 +48,10 @@
 (def directory-path->directory-name directory/directory-path->directory-name)
 
 ; io.edn
-(def create-edn-file edn/create-edn-file)
-(def write-edn-file! edn/write-edn-file!)
-(def read-edn-file   edn/read-edn-file)
-(def swap-edn-file!  edn/swap-edn-file!)
+(def create-edn-file! edn/create-edn-file!)
+(def write-edn-file!  edn/write-edn-file!)
+(def read-edn-file    edn/read-edn-file)
+(def swap-edn-file!   edn/swap-edn-file!)
 
 ; io.file
 (def extension->audio?        file/extension->audio?)
