@@ -29,7 +29,7 @@
   ([filepath {:keys [warn?] :or {warn? true}}]
    (when-not (check/file-exists? filepath)
              (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-             (spit filepath {}))))
+             (spit filepath "\n{}"))))
 
 (defn write-edn-file!
   ; @param (string) filepath

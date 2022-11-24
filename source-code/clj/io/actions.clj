@@ -120,7 +120,26 @@
                        (if-let [directory-path (file/filepath->directory-path filepath)]
                                (if-not (check/directory-exists? directory-path)
                                        (create-directory!       directory-path options)))
-                       (spit filepath (str content)))))))
+                       (spit filepath (str content)))
+                   (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))))
+
+(defn empty-file!
+  ; @param (string) filepath
+  ; @param (map)(opt) options
+  ;  {:create? (boolean)(opt)
+  ;    Default: false
+  ;   :warn? (boolean)(opt)
+  ;    Default: true}
+  ;
+  ; @usage
+  ; (empty-file! "my-directory/my-file.ext")
+  ;
+  ; @return (nil)
+  ([filepath]
+   (empty-file! filepath {}))
+
+  ([filepath options]
+   (write-file! filepath nil options)))
 
 (defn append-to-file!
   ; @param (string) filepath
@@ -145,8 +164,8 @@
   ([filepath content {:keys [max-line-count] :as options}]
    (let [file-content (read/read-file filepath)
          output       (str file-content "\n" content)]
-        (if max-line-count ; If the maximum number of lines is limited ...
-                           (let [output (string/max-lines output max-line-count)]
+                           ; If the maximum number of lines is limited ...
+        (if max-line-count (let [output (string/max-lines output max-line-count)]
                                 (write-file! filepath output options))
                            ; If the maximum number of lines is NOT limited ...
                            (write-file! filepath output options)))))
@@ -174,8 +193,8 @@
   ([filepath content {:keys [max-line-count] :as options}]
    (let [file-content (read/read-file filepath)
          output       (str content "\n" file-content)]
-        (if max-line-count ; If the maximum number of lines is limited ...
-                           (let [output (string/max-lines output max-line-count)]
+                           ; If the maximum number of lines is limited ...
+        (if max-line-count (let [output (string/max-lines output max-line-count)]
                                 (write-file! filepath output options))
                            ; If the maximum number of lines is NOT limited ...
                            (write-file! filepath output options)))))

@@ -27,6 +27,7 @@
 (def delete-file!            actions/delete-file!)
 (def copy-file!              actions/copy-file!)
 (def write-file!             actions/write-file!)
+(def empty-file!             actions/empty-file!)
 (def append-to-file!         actions/append-to-file!)
 (def prepend-to-file!        actions/prepend-to-file!)
 (def copy-uri-to-file!       actions/copy-uri-to-file!)

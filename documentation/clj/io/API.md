@@ -566,7 +566,7 @@
   ([filepath content {:keys [max-line-count] :as options}]
    (let [file-content (read/read-file filepath)
          output       (str file-content "\n" content)]
-        (if max-line-count                           (let [output (string/max-lines output max-line-count)]
+        (if max-line-count (let [output (string/max-lines output max-line-count)]
                                 (write-file! filepath output options))
                            (write-file! filepath output options)))))
 ```
@@ -711,10 +711,10 @@
    (create-directory! directory-path {}))
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
-   (if-not (check/directory-exists? directory-path)
-           (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\""))))
-   (try (-> directory-path java.io.File. .mkdirs)
-        (catch Exception e (println e)))))
+   (when-not (check/directory-exists? directory-path)
+             (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
+             (try (-> directory-path java.io.File. .mkdirs)
+                  (catch Exception e (println e))))))
 ```
 
 </details>
@@ -727,6 +727,54 @@
 
 (io/create-directory! ...)
 (create-directory!    ...)
+```
+
+</details>
+
+---
+
+### create-edn-file!
+
+```
+@param (string) filepath
+@param (map)(opt) options
+ {:warn? (boolean)(opt)
+   Default: true}
+```
+
+```
+@usage
+(create-edn-file! "my-directory/my-file.edn")
+```
+
+```
+@return (nil)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn create-edn-file!
+  ([filepath]
+   (create-edn-file! filepath {}))
+
+  ([filepath {:keys [warn?] :or {warn? true}}]
+   (when-not (check/file-exists? filepath)
+             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (spit filepath {}))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [create-edn-file!]]))
+
+(io/create-edn-file! ...)
+(create-edn-file!    ...)
 ```
 
 </details>
@@ -760,9 +808,9 @@
    (create-file! filepath {}))
 
   ([filepath {:keys [warn?] :or {warn? true}}]
-   (if-not (check/file-exists? filepath)
-           (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\""))))
-   (spit filepath nil)))
+   (when-not (check/file-exists? filepath)
+             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (spit filepath nil))))
 ```
 
 </details>
@@ -1243,6 +1291,54 @@ false
 
 (io/empty-directory? ...)
 (empty-directory?    ...)
+```
+
+</details>
+
+---
+
+### empty-file!
+
+```
+@param (string) filepath
+@param (map)(opt) options
+ {:create? (boolean)(opt)
+   Default: false
+  :warn? (boolean)(opt)
+   Default: true}
+```
+
+```
+@usage
+(empty-file! "my-directory/my-file.ext")
+```
+
+```
+@return (nil)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn empty-file!
+  ([filepath]
+   (empty-file! filepath {}))
+
+  ([filepath options]
+   (write-file! filepath nil options)))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [empty-file!]]))
+
+(io/empty-file! ...)
+(empty-file!    ...)
 ```
 
 </details>
@@ -2847,7 +2943,7 @@ false
   ([filepath content {:keys [max-line-count] :as options}]
    (let [file-content (read/read-file filepath)
          output       (str content "\n" file-content)]
-        (if max-line-count                           (let [output (string/max-lines output max-line-count)]
+        (if max-line-count (let [output (string/max-lines output max-line-count)]
                                 (write-file! filepath output options))
                            (write-file! filepath output options)))))
 ```
@@ -3233,7 +3329,8 @@ true
                        (if-let [directory-path (file/filepath->directory-path filepath)]
                                (if-not (check/directory-exists? directory-path)
                                        (create-directory!       directory-path options)))
-                       (spit filepath (str content)))))))
+                       (spit filepath (str content)))
+                   (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))))
 ```
 
 </details>
