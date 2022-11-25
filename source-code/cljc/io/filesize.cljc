@@ -4,14 +4,16 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn B->KB
+(defn B->kB
   ; @param (B) n
   ;
   ; @usage
-  ; (B->KB 420)
+  ; (B->kB 420)
   ;
-  ; @return (KB)
+  ; @return (kB)
   [n]
+  ; https://en.wikipedia.org/wiki/Byte
+  ; The unit symbol for the byte was designated as the upper-case letter B ...
   (/ n 1000))
 
 (defn B->MB
@@ -34,31 +36,33 @@
   [n]
   (/ n 1000000000))
 
-(defn KB->B
-  ; @param (KB) n
+(defn kB->B
+  ; @param (kB) n
   ;
   ; @usage
-  ; (KB->B 420)
+  ; (kB->B 420)
   ;
   ; @return (B)
   [n]
+  ; https://en.wikipedia.org/wiki/Kilobyte
+  ; The internationally recommended unit symbol for the kilobyte is kB.
   (* n 1000))
 
-(defn KB->MB
-  ; @param (KB) n
+(defn kB->MB
+  ; @param (kB) n
   ;
   ; @usage
-  ; (KB->MB 420)
+  ; (kB->MB 420)
   ;
   ; @return (MB)
   [n]
   (/ n 1000))
 
-(defn KB->GB
-  ; @param (KB) n
+(defn kB->GB
+  ; @param (kB) n
   ;
   ; @usage
-  ; (KB->GB 420)
+  ; (kB->GB 420)
   ;
   ; @return (GB)
   [n]
@@ -72,15 +76,17 @@
   ;
   ; @return (B)
   [n]
+  ; https://en.wikipedia.org/wiki/Megabyte
+  ; ... its recommended unit symbol is MB.
   (* n 1000000))
 
-(defn MB->KB
+(defn MB->kB
   ; @param (MB) n
   ;
   ; @usage
-  ; (MB->KB 420)
+  ; (MB->kB 420)
   ;
-  ; @return (KB)
+  ; @return (kB)
   [n]
   (* n 1000))
 
@@ -93,3 +99,37 @@
   ; @return (GB)
   [n]
   (/ n 1000))
+
+(defn GB->B
+  ; @param (GB) n
+  ;
+  ; @usage
+  ; (GB->B 420)
+  ;
+  ; @return (B)
+  [n]
+  ; https://en.wikipedia.org/wiki/Gigabyte
+  ; The unit symbol for the gigabyte is GB.
+  (* n 1000000000))
+
+(defn GB->kB
+  ; @param (GB) n
+  ;
+  ; @usage
+  ; (GB->kB 420)
+  ;
+  ; @return (kB)
+  [n]
+  ; https://en.wikipedia.org/wiki/Byte
+  ; The unit symbol for the byte was designated as the upper-case letter B ...
+  (* n 1000000))
+
+(defn GB->MB
+  ; @param (GB) n
+  ;
+  ; @usage
+  ; (GB->MB 420)
+  ;
+  ; @return (MB)
+  [n]
+  (* n 1000))

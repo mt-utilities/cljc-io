@@ -40,15 +40,18 @@
 (def filename->video?         file/filename->video?)
 
 ; io.filesize
-(def B->KB  filesize/B->KB)
+(def B->kB  filesize/B->kB)
 (def B->MB  filesize/B->MB)
 (def B->GB  filesize/B->GB)
-(def KB->B  filesize/KB->B)
-(def KB->MB filesize/KB->MB)
-(def KB->GB filesize/KB->GB)
+(def kB->B  filesize/kB->B)
+(def kB->MB filesize/kB->MB)
+(def kB->GB filesize/kB->GB)
 (def MB->B  filesize/MB->B)
-(def MB->KB filesize/MB->KB)
+(def MB->kB filesize/MB->kB)
 (def MB->GB filesize/MB->GB)
+(def GB->B  filesize/GB->B)
+(def GB->kB filesize/GB->kB)
+(def GB->MB filesize/GB->MB)
 
 ; io.mime-type
 (def mime-type->extension mime-type/mime-type->extension)

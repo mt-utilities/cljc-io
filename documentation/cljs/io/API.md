@@ -46,46 +46,6 @@
 
 ---
 
-### B->KB
-
-```
-@param (B) n
-```
-
-```
-@usage
-(B->KB 420)
-```
-
-```
-@return (KB)
-```
-
-<details>
-<summary>Source code</summary>
-
-```
-(defn B->KB
-  [n]
-  (/ n 1000))
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :as io :refer [B->KB]]))
-
-(io/B->KB ...)
-(B->KB    ...)
-```
-
-</details>
-
----
-
 ### B->MB
 
 ```
@@ -126,106 +86,26 @@
 
 ---
 
-### KB->B
+### B->kB
 
 ```
-@param (KB) n
+@param (B) n
 ```
 
 ```
 @usage
-(KB->B 420)
+(B->kB 420)
 ```
 
 ```
-@return (B)
+@return (kB)
 ```
 
 <details>
 <summary>Source code</summary>
 
 ```
-(defn KB->B
-  [n]
-  (* n 1000))
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :as io :refer [KB->B]]))
-
-(io/KB->B ...)
-(KB->B    ...)
-```
-
-</details>
-
----
-
-### KB->GB
-
-```
-@param (KB) n
-```
-
-```
-@usage
-(KB->GB 420)
-```
-
-```
-@return (GB)
-```
-
-<details>
-<summary>Source code</summary>
-
-```
-(defn KB->GB
-  [n]
-  (/ n 1000000))
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :as io :refer [KB->GB]]))
-
-(io/KB->GB ...)
-(KB->GB    ...)
-```
-
-</details>
-
----
-
-### KB->MB
-
-```
-@param (KB) n
-```
-
-```
-@usage
-(KB->MB 420)
-```
-
-```
-@return (MB)
-```
-
-<details>
-<summary>Source code</summary>
-
-```
-(defn KB->MB
+(defn B->kB
   [n]
   (/ n 1000))
 ```
@@ -236,10 +116,130 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [KB->MB]]))
+(ns my-namespace (:require [io.api :as io :refer [B->kB]]))
 
-(io/KB->MB ...)
-(KB->MB    ...)
+(io/B->kB ...)
+(B->kB    ...)
+```
+
+</details>
+
+---
+
+### GB->B
+
+```
+@param (GB) n
+```
+
+```
+@usage
+(GB->B 420)
+```
+
+```
+@return (B)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn GB->B
+  [n]
+  (* n 1000000000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [GB->B]]))
+
+(io/GB->B ...)
+(GB->B    ...)
+```
+
+</details>
+
+---
+
+### GB->MB
+
+```
+@param (GB) n
+```
+
+```
+@usage
+(GB->MB 420)
+```
+
+```
+@return (MB)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn GB->MB
+  [n]
+  (* n 1000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [GB->MB]]))
+
+(io/GB->MB ...)
+(GB->MB    ...)
+```
+
+</details>
+
+---
+
+### GB->kB
+
+```
+@param (GB) n
+```
+
+```
+@usage
+(GB->kB 420)
+```
+
+```
+@return (kB)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn GB->kB
+  [n]
+  (* n 1000000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [GB->kB]]))
+
+(io/GB->kB ...)
+(GB->kB    ...)
 ```
 
 </details>
@@ -326,7 +326,7 @@
 
 ---
 
-### MB->KB
+### MB->kB
 
 ```
 @param (MB) n
@@ -334,18 +334,18 @@
 
 ```
 @usage
-(MB->KB 420)
+(MB->kB 420)
 ```
 
 ```
-@return (KB)
+@return (kB)
 ```
 
 <details>
 <summary>Source code</summary>
 
 ```
-(defn MB->KB
+(defn MB->kB
   [n]
   (* n 1000))
 ```
@@ -356,10 +356,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [MB->KB]]))
+(ns my-namespace (:require [io.api :as io :refer [MB->kB]]))
 
-(io/MB->KB ...)
-(MB->KB    ...)
+(io/MB->kB ...)
+(MB->kB    ...)
 ```
 
 </details>
@@ -1675,6 +1675,126 @@ false
 
 (io/filepath->video? ...)
 (filepath->video?    ...)
+```
+
+</details>
+
+---
+
+### kB->B
+
+```
+@param (kB) n
+```
+
+```
+@usage
+(kB->B 420)
+```
+
+```
+@return (B)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn kB->B
+  [n]
+  (* n 1000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [kB->B]]))
+
+(io/kB->B ...)
+(kB->B    ...)
+```
+
+</details>
+
+---
+
+### kB->GB
+
+```
+@param (kB) n
+```
+
+```
+@usage
+(kB->GB 420)
+```
+
+```
+@return (GB)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn kB->GB
+  [n]
+  (/ n 1000000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [kB->GB]]))
+
+(io/kB->GB ...)
+(kB->GB    ...)
+```
+
+</details>
+
+---
+
+### kB->MB
+
+```
+@param (kB) n
+```
+
+```
+@usage
+(kB->MB 420)
+```
+
+```
+@return (MB)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn kB->MB
+  [n]
+  (/ n 1000))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :as io :refer [kB->MB]]))
+
+(io/kB->MB ...)
+(kB->MB    ...)
 ```
 
 </details>
