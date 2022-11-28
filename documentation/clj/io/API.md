@@ -738,8 +738,8 @@
 ```
 @param (string) filepath
 @param (map)(opt) options
- {:warn? (boolean)(opt)
-   Default: true}
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -3344,6 +3344,8 @@ true
 @param (map)(opt) options
 {:abc? (boolean)(opt)
   Default: false
+ :create? (boolean)(opt)
+  Default: false
  :warn? (boolean)(opt)
   Default: true}
 ```
@@ -3386,9 +3388,9 @@ true
   ([filepath content]
    (write-edn-file! filepath content {}))
 
-  ([filepath content {:keys [abc? warn?] :or {warn? true}}]
+  ([filepath content {:keys [abc?] :as options}]
    (let [output (pretty/mixed->string content {:abc? abc?})]
-        (actions/write-file! filepath (str "\n" output) {:create? true :warn? warn?})
+        (actions/write-file! filepath (str "\n" output) options)
         (return content))))
 ```
 
