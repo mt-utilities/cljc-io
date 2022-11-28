@@ -1,0 +1,6 @@
+
+{:paths ["source-code/clj" "source-code/cljc" "source-code/cljs"]
+ :deps  {org.clojure/clojure       {:mvn/version "1.10.1"}
+         org.clojure/clojurescript {:mvn/version "1.10.891"}
+         bithandshake/cljc-fruits  {:git/url "https://github.com/bithandshake/cljc-fruits"
+                                    :sha     "81654bafcdf7c11790e52eb93889c05ff5157177"}}}
