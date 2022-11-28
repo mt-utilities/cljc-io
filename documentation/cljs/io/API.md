@@ -622,7 +622,7 @@ true
 ```
 (defn extension->mime-type
   [extension]
-  (get config/MIME-TYPES (string/lowercase extension) "unknown/unknown"))
+  (get config/MIME-TYPES (string/to-lowercase extension) "unknown/unknown"))
 ```
 
 </details>
@@ -1403,7 +1403,7 @@ nil
   [filepath]
   (let [filename (-> filepath filepath->filename (string/not-starts-with! "."))]
        (if-let [extension (string/after-last-occurence filename "." {:return? false})]
-               (string/lowercase extension))))
+               (string/to-lowercase extension))))
 ```
 
 </details>
@@ -1831,7 +1831,7 @@ false
 ```
 (defn mime-type->extension
   [mime-type]
-  (get config/EXTENSIONS (string/lowercase mime-type) "unknown"))
+  (get config/EXTENSIONS (string/to-lowercase mime-type) "unknown"))
 ```
 
 </details>

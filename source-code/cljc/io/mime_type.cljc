@@ -21,7 +21,7 @@
   ;
   ; @return (string)
   [mime-type]
-  (get config/EXTENSIONS (string/lowercase mime-type) "unknown"))
+  (get config/EXTENSIONS (string/to-lowercase mime-type) "unknown"))
 
 (defn extension->mime-type
   ; @param (extension)
@@ -38,7 +38,7 @@
   ;
   ; @return (string)
   [extension]
-  (get config/MIME-TYPES (string/lowercase extension) "unknown/unknown"))
+  (get config/MIME-TYPES (string/to-lowercase extension) "unknown/unknown"))
 
 (defn unknown-mime-type?
   ; @param (string) mime-type

@@ -104,7 +104,7 @@
   [filepath]
   (let [filename (-> filepath filepath->filename (string/not-starts-with! "."))]
        (if-let [extension (string/after-last-occurence filename "." {:return? false})]
-               (string/lowercase extension))))
+               (string/to-lowercase extension))))
 
 (defn filename->extension
   ; @param (string) filename
