@@ -184,9 +184,9 @@
   ([filepath header options]
    (let [file-content (read/read-file filepath options)]
         (letfn [(f [result n]
-                   (if-let [first-row (string/before-first-occurence n "\n")]
-                           (f (str "; " first-row "\n" result)
-                              (string/after-first-occurence n "\n" {:return? false}))
+                   (if-let [last-row (string/after-last-occurence n "\n")]
+                           (f (str "; " last-row "\n" result)
+                              (string/before-last-occurence n "\n" {:return? false}))
                            (return result)))]
                (let [file-content (str "\n" (f file-content header))]
                     (actions/write-file! filepath file-content options))))))
