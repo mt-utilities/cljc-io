@@ -35,20 +35,27 @@
 (defn create-file!
   ; @param (string) filepath
   ; @param (map)(opt) options
-  ;  {:warn? (boolean)(opt)
+  ;  {:return? (boolean)(opt)
+  ;    Default: true
+  ;   :warn? (boolean)(opt)
   ;    Default: true}
   ;
   ; @usage
   ; (create-file! "my-directory/my-file.ext")
   ;
-  ; @return (nil)
+  ; @return (nil or string)
+  ; Returns an empty string if the file is created or with the file's content
+  ; if it is already exists.
+  ; Returns nil if the return? option is set to false.
   ([filepath]
    (create-file! filepath {}))
 
-  ([filepath {:keys [warn?] :or {warn? true}}]
-   (when-not (check/file-exists? filepath)
-             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-             (spit filepath nil))))
+  ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
+   (if (check/file-exists? filepath)
+       (if return? (read/read-file     filepath))
+       (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+           (spit filepath nil)
+           (if return? "")))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -76,21 +83,25 @@
   ; @param (string) source-filepath
   ; @param (string) destination-filepath
   ; @param (map)(opt) options
-  ;  {:warn? (boolean)(opt)
+  ;  {:return? (boolean)(opt)
+  ;    Default: true
+  ;   :warn? (boolean)(opt)
   ;    Default: true}
   ;
   ; @usage
   ; (copy-file! "my-directory/my-source-file.ext"
   ;             "my-directory/my-destination-file.ext")
   ;
-  ; @return (nil)
+  ; @return (nil or string)
+  ; Returns with the file's content or with nil if the return? option is set to false.
   ([source-filepath destination-filepath]
    (copy-file! source-filepath destination-filepath {}))
 
-  ([source-filepath destination-filepath {:keys [warn?] :or {warn? true}}]
+  ([source-filepath destination-filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (try (if (check/file-exists? source-filepath)
-            (clojure.java.io/copy (clojure.java.io/file      source-filepath)
-                                  (clojure.java.io/file destination-filepath))
+            (do (clojure.java.io/copy (clojure.java.io/file      source-filepath)
+                                      (clojure.java.io/file destination-filepath))
+                (if return? (read/read-file destination-filepath)))
             (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" source-filepath "\"")))))))
 
@@ -100,6 +111,8 @@
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
   ;   Default: false
+  ;  :return? (boolean)(opt)
+  ;    Default: true
   ;  :warn? (boolean)(opt)
   ;   Default: true}
   ;
@@ -109,18 +122,21 @@
   ; @usage
   ; (write-file! "my-directory/my-file.ext" "My content" {...})
   ;
-  ; @return (nil)
+  ; @return (nil or string)
+  ; Returns with the file's content or with nil if the return? option is set to false.
   ([filepath content]
    (write-file! filepath content {}))
 
-  ([filepath content {:keys [create? warn?] :or {warn? true} :as options}]
+  ([filepath content {:keys [create? return? warn?] :or {return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
-       (spit filepath (str content))
+       (do (spit filepath (str content))
+           (if return? (read/read-file filepath)))
        (if create? (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (if-let [directory-path (file/filepath->directory-path filepath)]
                                (if-not (check/directory-exists? directory-path)
                                        (create-directory!       directory-path options)))
-                       (spit filepath (str content)))
+                       (spit filepath (str content))
+                       (if return? (read/read-file filepath)))
                    (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))))
 
 (defn empty-file!
@@ -128,13 +144,16 @@
   ; @param (map)(opt) options
   ;  {:create? (boolean)(opt)
   ;    Default: false
+  ;  :return? (boolean)(opt)
+  ;    Default: true
   ;   :warn? (boolean)(opt)
   ;    Default: true}
   ;
   ; @usage
   ; (empty-file! "my-directory/my-file.ext")
   ;
-  ; @return (nil)
+  ; @return (nil or string)
+  ; Returns with an empty string or with nil if the return? option is set to false.
   ([filepath]
    (empty-file! filepath {}))
 
@@ -148,6 +167,8 @@
   ; {:create? (boolean)(opt)
   ;   Default: false
   ;  :max-line-count (integer)(opt)
+  ;  :return? (boolean)(opt)
+  ;    Default: true
   ;  :warn? (boolean)(opt)
   ;   Default: true}
   ;
@@ -157,7 +178,8 @@
   ; @usage
   ; (append-to-file! "my-directory/my-file.ext" "My content" {...})
   ;
-  ; @return (nil)
+  ; @return (nil or string)
+  ; Returns with the file's content or with nil if the return? option is set to false.
   ([filepath content]
    (append-to-file! filepath content {}))
 
@@ -177,6 +199,8 @@
   ; {:create? (boolean)(opt)
   ;   Default: false
   ;  :max-line-count (integer)(opt)
+  ;  :return? (boolean)(opt)
+  ;    Default: true
   ;  :warn? (boolean)(opt)
   ;   Default: true}
   ;
@@ -186,7 +210,8 @@
   ; @usage
   ; (prepend-to-file! "my-directory/my-file.ext" "My content" {...})
   ;
-  ; @return (nil)
+  ; @return (nil or string)
+  ; Returns with the file's content or with nil if the return? option is set to false.
   ([filepath content]
    (prepend-to-file! filepath content {}))
 

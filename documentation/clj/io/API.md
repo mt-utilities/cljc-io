@@ -537,6 +537,8 @@
 {:create? (boolean)(opt)
   Default: false
  :max-line-count (integer)(opt)
+ :return? (boolean)(opt)
+   Default: true
  :warn? (boolean)(opt)
   Default: true}
 ```
@@ -552,7 +554,8 @@
 ```
 
 ```
-@return (nil)
+@return (nil or string)
+Returns with the file's content or with nil if the return? option is set to false.
 ```
 
 <details>
@@ -593,7 +596,9 @@
 @param (string) source-filepath
 @param (string) destination-filepath
 @param (map)(opt) options
- {:warn? (boolean)(opt)
+ {:return? (boolean)(opt)
+   Default: true
+  :warn? (boolean)(opt)
    Default: true}
 ```
 
@@ -604,7 +609,8 @@
 ```
 
 ```
-@return (nil)
+@return (nil or string)
+Returns with the file's content or with nil if the return? option is set to false.
 ```
 
 <details>
@@ -615,10 +621,11 @@
   ([source-filepath destination-filepath]
    (copy-file! source-filepath destination-filepath {}))
 
-  ([source-filepath destination-filepath {:keys [warn?] :or {warn? true}}]
+  ([source-filepath destination-filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (try (if (check/file-exists? source-filepath)
-            (clojure.java.io/copy (clojure.java.io/file      source-filepath)
-                                  (clojure.java.io/file destination-filepath))
+            (do (clojure.java.io/copy (clojure.java.io/file      source-filepath)
+                                      (clojure.java.io/file destination-filepath))
+                (if return? (read/read-file destination-filepath)))
             (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" source-filepath "\"")))))))
 ```
@@ -786,7 +793,9 @@
 ```
 @param (string) filepath
 @param (map)(opt) options
- {:warn? (boolean)(opt)
+ {:return? (boolean)(opt)
+   Default: true
+  :warn? (boolean)(opt)
    Default: true}
 ```
 
@@ -796,7 +805,10 @@
 ```
 
 ```
-@return (nil)
+@return (nil or string)
+Returns an empty string if the file is created or with the file's content
+if it is already exists.
+Returns nil if the return? option is set to false.
 ```
 
 <details>
@@ -807,10 +819,12 @@
   ([filepath]
    (create-file! filepath {}))
 
-  ([filepath {:keys [warn?] :or {warn? true}}]
-   (when-not (check/file-exists? filepath)
-             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-             (spit filepath nil))))
+  ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
+   (if (check/file-exists? filepath)
+       (if return? (read/read-file     filepath))
+       (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+           (spit filepath nil)
+           (if return? "")))))
 ```
 
 </details>
@@ -1304,6 +1318,8 @@ false
 @param (map)(opt) options
  {:create? (boolean)(opt)
    Default: false
+ :return? (boolean)(opt)
+   Default: true
   :warn? (boolean)(opt)
    Default: true}
 ```
@@ -1314,7 +1330,8 @@ false
 ```
 
 ```
-@return (nil)
+@return (nil or string)
+Returns with an empty string or with nil if the return? option is set to false.
 ```
 
 <details>
@@ -3034,6 +3051,8 @@ false
 {:create? (boolean)(opt)
   Default: false
  :max-line-count (integer)(opt)
+ :return? (boolean)(opt)
+   Default: true
  :warn? (boolean)(opt)
   Default: true}
 ```
@@ -3049,7 +3068,8 @@ false
 ```
 
 ```
-@return (nil)
+@return (nil or string)
+Returns with the file's content or with nil if the return? option is set to false.
 ```
 
 <details>
@@ -3418,6 +3438,8 @@ true
 @param (map)(opt) options
 {:create? (boolean)(opt)
   Default: false
+ :return? (boolean)(opt)
+   Default: true
  :warn? (boolean)(opt)
   Default: true}
 ```
@@ -3433,7 +3455,8 @@ true
 ```
 
 ```
-@return (nil)
+@return (nil or string)
+Returns with the file's content or with nil if the return? option is set to false.
 ```
 
 <details>
@@ -3444,14 +3467,16 @@ true
   ([filepath content]
    (write-file! filepath content {}))
 
-  ([filepath content {:keys [create? warn?] :or {warn? true} :as options}]
+  ([filepath content {:keys [create? return? warn?] :or {return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
-       (spit filepath (str content))
+       (do (spit filepath (str content))
+           (if return? (read/read-file filepath)))
        (if create? (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (if-let [directory-path (file/filepath->directory-path filepath)]
                                (if-not (check/directory-exists? directory-path)
                                        (create-directory!       directory-path options)))
-                       (spit filepath (str content)))
+                       (spit filepath (str content))
+                       (if return? (read/read-file filepath)))
                    (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))))
 ```
 

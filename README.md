@@ -5,7 +5,8 @@
 
 ### Overview
 
-...
+The <strong>io-api</strong> is a set of Clojure file/directory handling functions
+(+ Clojure/ClojuresScript file/directory utility functions).
 
 ### deps.edn
 
