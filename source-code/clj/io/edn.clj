@@ -1,6 +1,7 @@
 
 (ns io.edn
-    (:require [io.actions :as actions]
+    (:require [candy.api  :refer [return]]
+              [io.actions :as actions]
               [io.check   :as check]
               [io.config  :as config]
               [io.read    :as read]
@@ -120,3 +121,72 @@
         output (apply          f params)]
        (write-edn-file!    filepath output)
        (read-edn-file filepath)))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn read-edn-header
+  ; @param (string) filepath
+  ; @param (map)(opt) options
+  ; {:warn? (boolean)(opt)
+  ;   Default: true}
+  ;
+  ; @usage
+  ; (read-edn-header "my-directory/my-file.edn")
+  ;
+  ; @return (string)
+  ([filepath]
+   (read-edn-header filepath {}))
+
+  ([filepath options]
+   (let [file-content (read/read-file filepath options)]
+        (letfn [(cut-row      [n]   (string/after-first-occurence n "\n"))
+                (comment-row? [row] (-> row (string/trim)
+                                            (string/starts-with? ";")))
+                (empty-row?   [row] (-> row (string/trim)
+                                            (= "")))
+                (append-row   [result row]
+                              (let [row (string/after-first-occurence row ";" {:return? false})]
+                                   (if result (str result "\n" row)
+                                              (str             row))))
+                (f [result n] (if-let [first-row (string/before-first-occurence n "\n" {:return? false})]
+                                      (cond (comment-row?         first-row)
+                                            (f (append-row result first-row)
+                                               (cut-row n))
+                                            (empty-row? first-row)
+                                            (f (str result "\n")
+                                               (cut-row n))
+                                            :else
+                                            (return result))
+                                      (return result)))]
+               (f "" file-content)))))
+
+(defn write-edn-header!
+  ; @param (string) filepath
+  ; @param (string) header
+  ; @param (map)(opt) options
+  ; @param (map)(opt) options
+  ; {:create? (boolean)(opt)
+  ;   Default: false
+  ;  :return? (boolean)(opt)
+  ;    Default: true
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
+  ;
+  ; @usage
+  ; (write-edn-header! "my-directory/my-file.edn" "My header\nI love comments!")
+  ;
+  ; @return (nil or string)
+  ; Returns with the file's content (as string) or with nil if the return? option is set to false.
+  ([filepath header]
+   (write-edn-header! filepath header {}))
+
+  ([filepath header options]
+   (let [file-content (read/read-file filepath options)]
+        (letfn [(f [result n]
+                   (if-let [first-row (string/before-first-occurence n "\n")]
+                           (f (str "; " first-row "\n" result)
+                              (string/after-first-occurence n "\n" {:return? false}))
+                           (return result)))]
+               (let [file-content (str "\n" (f file-content header))]
+                    (actions/write-file! filepath file-content options))))))
