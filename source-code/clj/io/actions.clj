@@ -51,11 +51,10 @@
    (create-file! filepath {}))
 
   ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
-   (if (check/file-exists? filepath)
-       (if return? (read/read-file     filepath))
-       (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-           (spit filepath nil)
-           (if return? "")))))
+   (when-not (check/file-exists? filepath)
+             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (spit filepath nil))
+   (if return? (read/read-file filepath))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -129,15 +128,14 @@
 
   ([filepath content {:keys [create? return? warn?] :or {return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
-       (do (spit filepath (str content))
-           (if return? (read/read-file filepath)))
+       (spit filepath (str content))
        (if create? (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (if-let [directory-path (file/filepath->directory-path filepath)]
                                (if-not (check/directory-exists? directory-path)
                                        (create-directory!       directory-path options)))
-                       (spit filepath (str content))
-                       (if return? (read/read-file filepath)))
-                   (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))))
+                       (spit filepath (str content)))
+                   (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
+   (if return? (read/read-file filepath))))
 
 (defn empty-file!
   ; @param (string) filepath
