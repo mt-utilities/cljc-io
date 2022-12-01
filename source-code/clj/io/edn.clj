@@ -53,7 +53,7 @@
    (when-not (check/file-exists? filepath)
              (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
              (spit filepath "\n{}"))
-   (if return? (read/read-edn-file filepath))))
+   (if return? (read-edn-file filepath))))
 
 (defn write-edn-file!
   ; @param (string) filepath
@@ -95,7 +95,7 @@
   ([filepath content {:keys [abc? return?] :or {return? true} :as options}]
    (let [output (pretty/mixed->string content {:abc? abc?})]
         (actions/write-file! filepath (str "\n" output) options))
-   (if return? (read/read-edn-file filepath))))
+   (if return? (read-edn-file filepath))))
 
 (defn swap-edn-file!
   ; @param (string) filepath
@@ -119,4 +119,4 @@
         params (vector/cons-item params edn)
         output (apply          f params)]
        (write-edn-file!    filepath output)
-       (read/read-edn-file filepath)))
+       (read-edn-file filepath)))
