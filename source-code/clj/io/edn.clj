@@ -95,7 +95,7 @@
 
   ([filepath content {:keys [abc? return?] :or {return? true} :as options}]
    (let [output (pretty/mixed->string content {:abc? abc?})]
-        (actions/write-file! filepath (str "\n" output) options))
+        (actions/write-file! filepath (str "\n" output "\n" ) options))
    (if return? (read-edn-file filepath))))
 
 (defn swap-edn-file!
