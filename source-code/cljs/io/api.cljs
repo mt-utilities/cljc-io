@@ -22,6 +22,7 @@
 (def extension->image?        file/extension->image?)
 (def extension->text?         file/extension->text?)
 (def extension->video?        file/extension->video?)
+(def item-path->parent-path   file/item-path->parent-path)
 (def filepath->directory-path file/filepath->directory-path)
 (def filepath->filename       file/filepath->filename)
 (def filepath->extension      file/filepath->extension)

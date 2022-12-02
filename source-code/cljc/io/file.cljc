@@ -10,6 +10,9 @@
 (defn extension->audio?
   ; @param (string) extension
   ;
+  ; @usage
+  ; (extension->audio? "mp3")
+  ;
   ; @example
   ; (extension->audio? "mp3")
   ; =>
@@ -21,6 +24,9 @@
 
 (defn extension->image?
   ; @param (string) extension
+  ;
+  ; @usage
+  ; (extension->image? "png")
   ;
   ; @example
   ; (extension->image? "png")
@@ -34,6 +40,9 @@
 (defn extension->text?
   ; @param (string) extension
   ;
+  ; @usage
+  ; (extension->text? "txt")
+  ;
   ; @example
   ; (extension->text? "txt")
   ; =>
@@ -45,6 +54,9 @@
 
 (defn extension->video?
   ; @param (string) extension
+  ;
+  ; @usage
+  ; (extension->video? "mp4")
   ;
   ; @example
   ; (extension->video? "mp4")
@@ -58,20 +70,51 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
+(defn item-path->parent-path
+  ; @param (string) item-path
+  ;
+  ; @usage
+  ; (item-path->parent-path "my-directory/my-subdirectory/my-file.ext")
+  ;
+  ; @example
+  ; (item-path->parent-path "my-directory/my-subdirectory/my-file.ext")
+  ; =>
+  ; "my-directory/my-subdirectory"
+  ;
+  ; @example
+  ; (item-path->parent-path "my-file.ext")
+  ; =>
+  ; nil
+  ;
+  ; @return (string)
+  [item-path]
+  (string/before-last-occurence item-path "/" {:return? false}))
+
 (defn filepath->directory-path
   ; @param (string) filepath
+  ;
+  ; @usage
+  ; (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
   ;
   ; @example
   ; (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
   ; =>
   ; "my-directory/my-subdirectory"
   ;
+  ; @example
+  ; (filepath->directory-path "my-file.ext")
+  ; =>
+  ; nil
+  ;
   ; @return (string)
   [filepath]
-  (string/before-last-occurence filepath "/" {:return? false}))
+  (item-path->parent-path filepath))
 
 (defn filepath->filename
   ; @param (string) filepath
+  ;
+  ; @usage
+  ; (filepath->filename "my-directory/my-file.ext")
   ;
   ; @example
   ; (filepath->filename "my-directory/my-file.ext")
@@ -84,6 +127,9 @@
 
 (defn filepath->extension
   ; @param (string) filepath
+  ;
+  ; @usage
+  ; (filepath->extension "my-directory/my-file.EXT")
   ;
   ; @example
   ; (filepath->extension "my-directory/my-file.EXT")
@@ -109,6 +155,9 @@
 (defn filename->extension
   ; @param (string) filename
   ;
+  ; @usage
+  ; (filename->extension "my-file.EXT")
+  ;
   ; @example
   ; (filename->extension "my-file.EXT")
   ; =>
@@ -130,6 +179,9 @@
 
 (defn filename->basename
   ; @param (string) filename
+  ;
+  ; @usage
+  ; (filename->basename "my-file.EXT")
   ;
   ; @example
   ; (filename->basename "my-file.EXT")
@@ -155,6 +207,9 @@
 (defn filepath->basename
   ; @param (string) filepath
   ;
+  ; @usage
+  ; (filepath->basename "my-directory/my-file.EXT")
+  ;
   ; @example
   ; (filepath->basename "my-directory/my-file.EXT")
   ; =>
@@ -177,6 +232,9 @@
 (defn filepath->mime-type
   ; @param (string) filepath
   ;
+  ; @usage
+  ; (filepath->mime-type "my-directory/my-image.png")
+  ;
   ; @example
   ; (filepath->mime-type "my-directory/my-image.png")
   ; =>
@@ -193,6 +251,9 @@
 
 (defn filename->mime-type
   ; @param (string) filename
+  ;
+  ; @usage
+  ; (filename->mime-type "my-image.png")
   ;
   ; @example
   ; (filename->mime-type "my-image.png")
@@ -213,6 +274,9 @@
 
 (defn filepath->audio?
   ; @param (string) filepath
+  ;
+  ; @usage
+  ; (filepath->audio? "my-directory/my-audio.mp3")
   ;
   ; @example
   ; (filepath->audio? "my-directory/my-audio.mp3")
@@ -236,6 +300,9 @@
 (defn filepath->image?
   ; @param (string) filepath
   ;
+  ; @usage
+  ; (filepath->image? "my-directory/my-image.png")
+  ;
   ; @example
   ; (filepath->image? "my-directory/my-image.png")
   ; =>
@@ -258,6 +325,9 @@
 (defn filepath->text?
   ; @param (string) filepath
   ;
+  ; @usage
+  ; (filepath->text? "my-directory/my-text.txt")
+  ;
   ; @example
   ; (filepath->text? "my-directory/my-text.txt")
   ; =>
@@ -279,6 +349,9 @@
 
 (defn filepath->video?
   ; @param (string) filepath
+  ;
+  ; @usage
+  ; (filepath->video? "my-directory/my-video.mp4")
   ;
   ; @example
   ; (filepath->video? "my-directory/my-video.mp4")
@@ -305,6 +378,9 @@
 (defn filename->audio?
   ; @param (string) filename
   ;
+  ; @usage
+  ; (filename->audio? "my-audio.mp3")
+  ;
   ; @example
   ; (filename->audio? "my-audio.mp3")
   ; =>
@@ -326,6 +402,9 @@
 
 (defn filename->image?
   ; @param (string) filename
+  ;
+  ; @usage
+  ; (filename->image? "my-image.png")
   ;
   ; @example
   ; (filename->image? "my-image.png")
@@ -349,6 +428,9 @@
 (defn filename->text?
   ; @param (string) filename
   ;
+  ; @usage
+  ; (filename->text? "my-text.txt")
+  ;
   ; @example
   ; (filename->text? "my-text.txt")
   ; =>
@@ -370,6 +452,9 @@
 
 (defn filename->video?
   ; @param (string) filename
+  ;
+  ; @usage
+  ; (filename->video? "my-video.mp4")
   ;
   ; @example
   ; (filename->video? "my-video.mp4")

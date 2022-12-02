@@ -13,8 +13,8 @@
 (defn create-directory!
   ; @param (string) directory-path
   ; @param (map)(opt) options
-  ;  {:warn? (boolean)(opt)
-  ;    Default: true}
+  ; {:warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (create-directory! "my-directory/my-subdirectory")
@@ -32,13 +32,38 @@
              (try (-> directory-path java.io.File. .mkdirs)
                   (catch Exception e (println e))))))
 
+(defn create-path!
+  ; @param (string) item-path
+  ; @param (map)(opt) options
+  ; {:warn? (boolean)(opt)
+  ;   Default: true}
+  ;
+  ; @usage
+  ; (create-path! "my-directory/my-file.ext")
+  ;
+  ; @example
+  ; (create-path! "my-directory/my-file.ext")
+  ; =>
+  ; It only creates the my-directory (if it does not exist),
+  ; to settle the path for the item.
+  ;
+  ; @return (boolean)
+  ([item-path]
+   (create-path! item-path {}))
+
+  ([item-path {:keys [warn?] :or {warn? true} :as options}]
+   (when-let [parent-path (file/item-path->parent-path item-path)]
+             (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" parent-path "\"")))
+             (if-not (check/directory-exists? parent-path)
+                     (create-directory!       parent-path options)))))
+
 (defn create-file!
   ; @param (string) filepath
   ; @param (map)(opt) options
-  ;  {:return? (boolean)(opt)
-  ;    Default: true
-  ;   :warn? (boolean)(opt)
-  ;    Default: true}
+  ; {:return? (boolean)(opt)
+  ;   Default: true
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (create-file! "my-directory/my-file.ext")
@@ -52,6 +77,7 @@
 
   ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (when-not (check/file-exists? filepath)
+             (create-path!       filepath {:warn? false})
              (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
              (spit filepath nil))
    (if return? (read/read-file filepath))))
@@ -62,8 +88,8 @@
 (defn delete-file!
   ; @param (string) filepath
   ; @param (map)(opt) options
-  ;  {:warn? (boolean)(opt)
-  ;    Default: true}
+  ; {:warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (delete-file! "my-directory/my-file.ext")
@@ -82,14 +108,14 @@
   ; @param (string) source-filepath
   ; @param (string) destination-filepath
   ; @param (map)(opt) options
-  ;  {:return? (boolean)(opt)
-  ;    Default: true
-  ;   :warn? (boolean)(opt)
-  ;    Default: true}
+  ; {:return? (boolean)(opt)
+  ;   Default: true
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (copy-file! "my-directory/my-source-file.ext"
-  ;             "my-directory/my-destination-file.ext")
+  ;            "my-directory/my-destination-file.ext")
   ;
   ; @return (nil or string)
   ; Returns with the file's content or with nil if the return? option is set to false.
@@ -109,11 +135,11 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   Default: false
-  ;  :return? (boolean)(opt)
-  ;    Default: true
-  ;  :warn? (boolean)(opt)
-  ;   Default: true}
+  ;  Default: false
+  ; :return? (boolean)(opt)
+  ;   Default: true
+  ; :warn? (boolean)(opt)
+  ;  Default: true}
   ;
   ; @usage
   ; (write-file! "my-directory/my-file.ext" "My content")
@@ -129,10 +155,8 @@
   ([filepath content {:keys [create? return? warn?] :or {return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
        (spit filepath (str content))
-       (if create? (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-                       (if-let [directory-path (file/filepath->directory-path filepath)]
-                               (if-not (check/directory-exists? directory-path)
-                                       (create-directory!       directory-path options)))
+       (if create? (do (create-path! filepath {:warn? false})
+                       (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (spit filepath (str content)))
                    (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
    (if return? (read/read-file filepath))))
@@ -140,12 +164,12 @@
 (defn empty-file!
   ; @param (string) filepath
   ; @param (map)(opt) options
-  ;  {:create? (boolean)(opt)
-  ;    Default: false
-  ;  :return? (boolean)(opt)
-  ;    Default: true
-  ;   :warn? (boolean)(opt)
-  ;    Default: true}
+  ; {:create? (boolean)(opt)
+  ;   Default: false
+  ; :return? (boolean)(opt)
+  ;   Default: true
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (empty-file! "my-directory/my-file.ext")
@@ -163,12 +187,12 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   Default: false
-  ;  :max-line-count (integer)(opt)
-  ;  :return? (boolean)(opt)
-  ;    Default: true
-  ;  :warn? (boolean)(opt)
-  ;   Default: true}
+  ;  Default: false
+  ; :max-line-count (integer)(opt)
+  ; :return? (boolean)(opt)
+  ;   Default: true
+  ; :warn? (boolean)(opt)
+  ;  Default: true}
   ;
   ; @usage
   ; (append-to-file! "my-directory/my-file.ext" "My content")
@@ -195,12 +219,12 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   Default: false
-  ;  :max-line-count (integer)(opt)
-  ;  :return? (boolean)(opt)
-  ;    Default: true
-  ;  :warn? (boolean)(opt)
-  ;   Default: true}
+  ;  Default: false
+  ; :max-line-count (integer)(opt)
+  ; :return? (boolean)(opt)
+  ;   Default: true
+  ; :warn? (boolean)(opt)
+  ;  Default: true}
   ;
   ; @usage
   ; (prepend-to-file! "my-directory/my-file.ext" "My content")
@@ -227,7 +251,7 @@
   ; @param (?) file
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   Default: true}
+  ;  Default: true}
   ;
   ; @return (nil)
   ([uri file]
@@ -246,7 +270,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   Default: true}
+  ;  Default: true}
   ;
   ; @usage
   ; (delete-empty-directory! "my-directory/my-subdirectory")
@@ -265,7 +289,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   Default: true}
+  ;  Default: true}
   ;
   ; @usage
   ; (empty-directory! "my-directory/my-subdirectory")
@@ -285,7 +309,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   Default: true}
+  ;  Default: true}
   ;
   ; @usage
   ; (delete-directory! "my-directory/my-subdirectory")
