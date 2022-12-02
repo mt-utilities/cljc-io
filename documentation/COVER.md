@@ -1,12 +1,13 @@
 
 # <strong>io-api</strong>
+
 <p>Documentation of the <strong>io-api</strong> Clojure / ClojureScript library</p>
 
 <strong>[README](../README.md) > DOCUMENTATION</strong>
 
 ### Public namespaces
+
 * [io.api](clj/io/API.md) [clj]
-* [io.api](cljc/io/API.md) [cljc]
 * [io.api](cljs/io/API.md) [cljs]
 
 ---

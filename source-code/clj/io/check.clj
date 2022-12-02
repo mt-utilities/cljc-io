@@ -13,7 +13,7 @@
   ;
   ; @return (boolean)
   [filepath]
-  (let [file (clojure.java.io/file filepath)]
+  (let [file (-> filepath str clojure.java.io/file)]
        (and (-> file .exists)
             (-> file .isDirectory not))))
 
@@ -25,7 +25,7 @@
   ;
   ; @return (boolean)
   [filepath]
-  (let [file (clojure.java.io/file filepath)]
+  (let [file (-> filepath str clojure.java.io/file)]
        (or (-> file .extists not)
            (-> file .isDirectory))))
 
@@ -37,7 +37,7 @@
   ;
   ; @return (boolean)
   [directory-path]
-  (-> directory-path clojure.java.io/file .isDirectory))
+  (-> directory-path str clojure.java.io/file .isDirectory))
 
 (defn directory-exists?
   ; @param (string) directory-path
@@ -47,6 +47,6 @@
   ;
   ; @return (boolean)
   [directory-path]
-  (let [directory (clojure.java.io/file directory-path)]
+  (let [directory (-> directory-path str clojure.java.io/file)]
        (and (.exists      directory)
             (.isDirectory directory))))

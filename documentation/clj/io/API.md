@@ -1,10 +1,7 @@
 
 # <strong>io.api</strong> namespace
-<p>Documentation of the <strong>io/api.clj</strong> file</p>
 
-<strong>[README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > io.api</strong>
-
-
+<strong>[README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > </strong>source-code/clj/io/api.clj
 
 ### B->GB
 
@@ -36,10 +33,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [B->GB]]))
+(ns my-namespace (:require [io.api :refer [B->GB]]))
 
-(io/B->GB ...)
-(B->GB    ...)
+(io.api/B->GB ...)
+(B->GB        ...)
 ```
 
 </details>
@@ -76,10 +73,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [B->MB]]))
+(ns my-namespace (:require [io.api :refer [B->MB]]))
 
-(io/B->MB ...)
-(B->MB    ...)
+(io.api/B->MB ...)
+(B->MB        ...)
 ```
 
 </details>
@@ -116,10 +113,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [B->kB]]))
+(ns my-namespace (:require [io.api :refer [B->kB]]))
 
-(io/B->kB ...)
-(B->kB    ...)
+(io.api/B->kB ...)
+(B->kB        ...)
 ```
 
 </details>
@@ -156,10 +153,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [GB->B]]))
+(ns my-namespace (:require [io.api :refer [GB->B]]))
 
-(io/GB->B ...)
-(GB->B    ...)
+(io.api/GB->B ...)
+(GB->B        ...)
 ```
 
 </details>
@@ -196,10 +193,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [GB->MB]]))
+(ns my-namespace (:require [io.api :refer [GB->MB]]))
 
-(io/GB->MB ...)
-(GB->MB    ...)
+(io.api/GB->MB ...)
+(GB->MB        ...)
 ```
 
 </details>
@@ -236,10 +233,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [GB->kB]]))
+(ns my-namespace (:require [io.api :refer [GB->kB]]))
 
-(io/GB->kB ...)
-(GB->kB    ...)
+(io.api/GB->kB ...)
+(GB->kB        ...)
 ```
 
 </details>
@@ -276,10 +273,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [MB->B]]))
+(ns my-namespace (:require [io.api :refer [MB->B]]))
 
-(io/MB->B ...)
-(MB->B    ...)
+(io.api/MB->B ...)
+(MB->B        ...)
 ```
 
 </details>
@@ -316,10 +313,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [MB->GB]]))
+(ns my-namespace (:require [io.api :refer [MB->GB]]))
 
-(io/MB->GB ...)
-(MB->GB    ...)
+(io.api/MB->GB ...)
+(MB->GB        ...)
 ```
 
 </details>
@@ -356,10 +353,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [MB->kB]]))
+(ns my-namespace (:require [io.api :refer [MB->kB]]))
 
-(io/MB->kB ...)
-(MB->kB    ...)
+(io.api/MB->kB ...)
+(MB->kB        ...)
 ```
 
 </details>
@@ -396,7 +393,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (clojure.java.io/file directory-path)
+            (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (file-seq             directory)]
                  (letfn [(f [%] (and (-> % .isFile)
                                      (-> % .isHidden not)))]
@@ -411,10 +408,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [all-file-list]]))
+(ns my-namespace (:require [io.api :refer [all-file-list]]))
 
-(io/all-file-list ...)
-(all-file-list    ...)
+(io.api/all-file-list ...)
+(all-file-list        ...)
 ```
 
 </details>
@@ -451,7 +448,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file file-seq))
+            (vector/remove-item (mapv  str (-> directory-path str clojure.java.io/file file-seq))
                                 (param directory-path))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
@@ -463,10 +460,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [all-item-list]]))
+(ns my-namespace (:require [io.api :refer [all-item-list]]))
 
-(io/all-item-list ...)
-(all-item-list    ...)
+(io.api/all-item-list ...)
+(all-item-list        ...)
 ```
 
 </details>
@@ -503,7 +500,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (clojure.java.io/file directory-path)
+            (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (file-seq             directory)]
                  (letfn [(f [%] (and (-> % .isDirectory)
                                      (-> % .isHidden not)))]
@@ -518,10 +515,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [all-subdirectory-list]]))
+(ns my-namespace (:require [io.api :refer [all-subdirectory-list]]))
 
-(io/all-subdirectory-list ...)
-(all-subdirectory-list    ...)
+(io.api/all-subdirectory-list ...)
+(all-subdirectory-list        ...)
 ```
 
 </details>
@@ -580,10 +577,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [append-to-file!]]))
+(ns my-namespace (:require [io.api :refer [append-to-file!]]))
 
-(io/append-to-file! ...)
-(append-to-file!    ...)
+(io.api/append-to-file! ...)
+(append-to-file!        ...)
 ```
 
 </details>
@@ -623,8 +620,8 @@ Returns with the file's content or with nil if the return? option is set to fals
 
   ([source-filepath destination-filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (try (if (check/file-exists? source-filepath)
-            (do (clojure.java.io/copy (clojure.java.io/file      source-filepath)
-                                      (clojure.java.io/file destination-filepath))
+            (do (clojure.java.io/copy (-> source-filepath      str clojure.java.io/file)
+                                      (-> destination-filepath str clojure.java.io/file))
                 (if return? (read/read-file destination-filepath)))
             (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" source-filepath "\"")))))))
@@ -636,10 +633,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [copy-file!]]))
+(ns my-namespace (:require [io.api :refer [copy-file!]]))
 
-(io/copy-file! ...)
-(copy-file!    ...)
+(io.api/copy-file! ...)
+(copy-file!        ...)
 ```
 
 </details>
@@ -681,10 +678,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [copy-uri-to-file!]]))
+(ns my-namespace (:require [io.api :refer [copy-uri-to-file!]]))
 
-(io/copy-uri-to-file! ...)
-(copy-uri-to-file!    ...)
+(io.api/copy-uri-to-file! ...)
+(copy-uri-to-file!        ...)
 ```
 
 </details>
@@ -730,10 +727,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [create-directory!]]))
+(ns my-namespace (:require [io.api :refer [create-directory!]]))
 
-(io/create-directory! ...)
-(create-directory!    ...)
+(io.api/create-directory! ...)
+(create-directory!        ...)
 ```
 
 </details>
@@ -745,7 +742,9 @@ Returns with the file's content or with nil if the return? option is set to fals
 ```
 @param (string) filepath
 @param (map)(opt) options
-{:warn? (boolean)(opt)
+{:return? (boolean)(opt)
+   Default: true
+ :warn? (boolean)(opt)
   Default: true}
 ```
 
@@ -755,7 +754,9 @@ Returns with the file's content or with nil if the return? option is set to fals
 ```
 
 ```
-@return (nil)
+@return (nil or string)
+Returns with the file's content (the reader procceses the content to data),
+or with nil if the return? option is set to false.
 ```
 
 <details>
@@ -766,10 +767,11 @@ Returns with the file's content or with nil if the return? option is set to fals
   ([filepath]
    (create-edn-file! filepath {}))
 
-  ([filepath {:keys [warn?] :or {warn? true}}]
+  ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (when-not (check/file-exists? filepath)
              (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-             (spit filepath "\n{}"))))
+             (spit filepath "\n{}"))
+   (if return? (read-edn-file filepath))))
 ```
 
 </details>
@@ -778,10 +780,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [create-edn-file!]]))
+(ns my-namespace (:require [io.api :refer [create-edn-file!]]))
 
-(io/create-edn-file! ...)
-(create-edn-file!    ...)
+(io.api/create-edn-file! ...)
+(create-edn-file!        ...)
 ```
 
 </details>
@@ -820,11 +822,10 @@ Returns nil if the return? option is set to false.
    (create-file! filepath {}))
 
   ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
-   (if (check/file-exists? filepath)
-       (if return? (read/read-file     filepath))
-       (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-           (spit filepath nil)
-           (if return? "")))))
+   (when-not (check/file-exists? filepath)
+             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (spit filepath nil))
+   (if return? (read/read-file filepath))))
 ```
 
 </details>
@@ -833,10 +834,10 @@ Returns nil if the return? option is set to false.
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [create-file!]]))
+(ns my-namespace (:require [io.api :refer [create-file!]]))
 
-(io/create-file! ...)
-(create-file!    ...)
+(io.api/create-file! ...)
+(create-file!        ...)
 ```
 
 </details>
@@ -880,10 +881,10 @@ Returns nil if the return? option is set to false.
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [delete-directory!]]))
+(ns my-namespace (:require [io.api :refer [delete-directory!]]))
 
-(io/delete-directory! ...)
-(delete-directory!    ...)
+(io.api/delete-directory! ...)
+(delete-directory!        ...)
 ```
 
 </details>
@@ -929,10 +930,10 @@ Returns nil if the return? option is set to false.
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [delete-empty-directory!]]))
+(ns my-namespace (:require [io.api :refer [delete-empty-directory!]]))
 
-(io/delete-empty-directory! ...)
-(delete-empty-directory!    ...)
+(io.api/delete-empty-directory! ...)
+(delete-empty-directory!        ...)
 ```
 
 </details>
@@ -978,10 +979,10 @@ Returns nil if the return? option is set to false.
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [delete-file!]]))
+(ns my-namespace (:require [io.api :refer [delete-file!]]))
 
-(io/delete-file! ...)
-(delete-file!    ...)
+(io.api/delete-file! ...)
+(delete-file!        ...)
 ```
 
 </details>
@@ -1009,7 +1010,7 @@ Returns nil if the return? option is set to false.
 ```
 (defn directory-exists?
   [directory-path]
-  (let [directory (clojure.java.io/file directory-path)]
+  (let [directory (-> directory-path str clojure.java.io/file)]
        (and (.exists      directory)
             (.isDirectory directory))))
 ```
@@ -1020,10 +1021,10 @@ Returns nil if the return? option is set to false.
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [directory-exists?]]))
+(ns my-namespace (:require [io.api :refer [directory-exists?]]))
 
-(io/directory-exists? ...)
-(directory-exists?    ...)
+(io.api/directory-exists? ...)
+(directory-exists?        ...)
 ```
 
 </details>
@@ -1069,10 +1070,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [directory-name-invalid?]]))
+(ns my-namespace (:require [io.api :refer [directory-name-invalid?]]))
 
-(io/directory-name-invalid? ...)
-(directory-name-invalid?    ...)
+(io.api/directory-name-invalid? ...)
+(directory-name-invalid?        ...)
 ```
 
 </details>
@@ -1118,10 +1119,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [directory-name-valid?]]))
+(ns my-namespace (:require [io.api :refer [directory-name-valid?]]))
 
-(io/directory-name-valid? ...)
-(directory-name-valid?    ...)
+(io.api/directory-name-valid? ...)
+(directory-name-valid?        ...)
 ```
 
 </details>
@@ -1162,10 +1163,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [directory-path->directory-name]]))
+(ns my-namespace (:require [io.api :refer [directory-path->directory-name]]))
 
-(io/directory-path->directory-name ...)
-(directory-path->directory-name    ...)
+(io.api/directory-path->directory-name ...)
+(directory-path->directory-name        ...)
 ```
 
 </details>
@@ -1193,7 +1194,7 @@ false
 ```
 (defn directory?
   [directory-path]
-  (-> directory-path clojure.java.io/file .isDirectory))
+  (-> directory-path str clojure.java.io/file .isDirectory))
 ```
 
 </details>
@@ -1202,10 +1203,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [directory?]]))
+(ns my-namespace (:require [io.api :refer [directory?]]))
 
-(io/directory? ...)
-(directory?    ...)
+(io.api/directory? ...)
+(directory?        ...)
 ```
 
 </details>
@@ -1252,10 +1253,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [empty-directory!]]))
+(ns my-namespace (:require [io.api :refer [empty-directory!]]))
 
-(io/empty-directory! ...)
-(empty-directory!    ...)
+(io.api/empty-directory! ...)
+(empty-directory!        ...)
 ```
 
 </details>
@@ -1301,10 +1302,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [empty-directory?]]))
+(ns my-namespace (:require [io.api :refer [empty-directory?]]))
 
-(io/empty-directory? ...)
-(empty-directory?    ...)
+(io.api/empty-directory? ...)
+(empty-directory?        ...)
 ```
 
 </details>
@@ -1352,10 +1353,10 @@ Returns with an empty string or with nil if the return? option is set to false.
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [empty-file!]]))
+(ns my-namespace (:require [io.api :refer [empty-file!]]))
 
-(io/empty-file! ...)
-(empty-file!    ...)
+(io.api/empty-file! ...)
+(empty-file!        ...)
 ```
 
 </details>
@@ -1394,10 +1395,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->audio?]]))
+(ns my-namespace (:require [io.api :refer [extension->audio?]]))
 
-(io/extension->audio? ...)
-(extension->audio?    ...)
+(io.api/extension->audio? ...)
+(extension->audio?        ...)
 ```
 
 </details>
@@ -1436,10 +1437,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->image?]]))
+(ns my-namespace (:require [io.api :refer [extension->image?]]))
 
-(io/extension->image? ...)
-(extension->image?    ...)
+(io.api/extension->image? ...)
+(extension->image?        ...)
 ```
 
 </details>
@@ -1485,10 +1486,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->mime-type]]))
+(ns my-namespace (:require [io.api :refer [extension->mime-type]]))
 
-(io/extension->mime-type ...)
-(extension->mime-type    ...)
+(io.api/extension->mime-type ...)
+(extension->mime-type        ...)
 ```
 
 </details>
@@ -1527,10 +1528,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->text?]]))
+(ns my-namespace (:require [io.api :refer [extension->text?]]))
 
-(io/extension->text? ...)
-(extension->text?    ...)
+(io.api/extension->text? ...)
+(extension->text?        ...)
 ```
 
 </details>
@@ -1569,10 +1570,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->video?]]))
+(ns my-namespace (:require [io.api :refer [extension->video?]]))
 
-(io/extension->video? ...)
-(extension->video?    ...)
+(io.api/extension->video? ...)
+(extension->video?        ...)
 ```
 
 </details>
@@ -1600,7 +1601,7 @@ true
 ```
 (defn file-exists?
   [filepath]
-  (let [file (clojure.java.io/file filepath)]
+  (let [file (-> filepath str clojure.java.io/file)]
        (and (-> file .exists)
             (-> file .isDirectory not))))
 ```
@@ -1611,10 +1612,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [file-exists?]]))
+(ns my-namespace (:require [io.api :refer [file-exists?]]))
 
-(io/file-exists? ...)
-(file-exists?    ...)
+(io.api/file-exists? ...)
+(file-exists?        ...)
 ```
 
 </details>
@@ -1651,7 +1652,7 @@ true
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (clojure.java.io/file directory-path)
+            (let [directory (-> directory-path str clojure.java.io/file)
                   file-seq  (.listFiles           directory)]
                  (letfn [(f [%] (and (-> % .isFile)
                                      (-> % .isHidden not)))]
@@ -1666,10 +1667,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [file-list]]))
+(ns my-namespace (:require [io.api :refer [file-list]]))
 
-(io/file-list ...)
-(file-list    ...)
+(io.api/file-list ...)
+(file-list        ...)
 ```
 
 </details>
@@ -1697,7 +1698,7 @@ true
 ```
 (defn file-not-exists?
   [filepath]
-  (let [file (clojure.java.io/file filepath)]
+  (let [file (-> filepath str clojure.java.io/file)]
        (or (-> file .extists not)
            (-> file .isDirectory))))
 ```
@@ -1708,10 +1709,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [file-not-exists?]]))
+(ns my-namespace (:require [io.api :refer [file-not-exists?]]))
 
-(io/file-not-exists? ...)
-(file-not-exists?    ...)
+(io.api/file-not-exists? ...)
+(file-not-exists?        ...)
 ```
 
 </details>
@@ -1764,10 +1765,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->audio?]]))
+(ns my-namespace (:require [io.api :refer [filename->audio?]]))
 
-(io/filename->audio? ...)
-(filename->audio?    ...)
+(io.api/filename->audio? ...)
+(filename->audio?        ...)
 ```
 
 </details>
@@ -1822,10 +1823,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->basename]]))
+(ns my-namespace (:require [io.api :refer [filename->basename]]))
 
-(io/filename->basename ...)
-(filename->basename    ...)
+(io.api/filename->basename ...)
+(filename->basename        ...)
 ```
 
 </details>
@@ -1878,10 +1879,10 @@ nil
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->extension]]))
+(ns my-namespace (:require [io.api :refer [filename->extension]]))
 
-(io/filename->extension ...)
-(filename->extension    ...)
+(io.api/filename->extension ...)
+(filename->extension        ...)
 ```
 
 </details>
@@ -1934,10 +1935,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->image?]]))
+(ns my-namespace (:require [io.api :refer [filename->image?]]))
 
-(io/filename->image? ...)
-(filename->image?    ...)
+(io.api/filename->image? ...)
+(filename->image?        ...)
 ```
 
 </details>
@@ -1983,10 +1984,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->mime-type]]))
+(ns my-namespace (:require [io.api :refer [filename->mime-type]]))
 
-(io/filename->mime-type ...)
-(filename->mime-type    ...)
+(io.api/filename->mime-type ...)
+(filename->mime-type        ...)
 ```
 
 </details>
@@ -2039,10 +2040,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->text?]]))
+(ns my-namespace (:require [io.api :refer [filename->text?]]))
 
-(io/filename->text? ...)
-(filename->text?    ...)
+(io.api/filename->text? ...)
+(filename->text?        ...)
 ```
 
 </details>
@@ -2095,10 +2096,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->video?]]))
+(ns my-namespace (:require [io.api :refer [filename->video?]]))
 
-(io/filename->video? ...)
-(filename->video?    ...)
+(io.api/filename->video? ...)
+(filename->video?        ...)
 ```
 
 </details>
@@ -2144,10 +2145,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename-invalid?]]))
+(ns my-namespace (:require [io.api :refer [filename-invalid?]]))
 
-(io/filename-invalid? ...)
-(filename-invalid?    ...)
+(io.api/filename-invalid? ...)
+(filename-invalid?        ...)
 ```
 
 </details>
@@ -2193,10 +2194,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename-valid?]]))
+(ns my-namespace (:require [io.api :refer [filename-valid?]]))
 
-(io/filename-valid? ...)
-(filename-valid?    ...)
+(io.api/filename-valid? ...)
+(filename-valid?        ...)
 ```
 
 </details>
@@ -2249,10 +2250,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->audio?]]))
+(ns my-namespace (:require [io.api :refer [filepath->audio?]]))
 
-(io/filepath->audio? ...)
-(filepath->audio?    ...)
+(io.api/filepath->audio? ...)
+(filepath->audio?        ...)
 ```
 
 </details>
@@ -2305,10 +2306,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->basename]]))
+(ns my-namespace (:require [io.api :refer [filepath->basename]]))
 
-(io/filepath->basename ...)
-(filepath->basename    ...)
+(io.api/filepath->basename ...)
+(filepath->basename        ...)
 ```
 
 </details>
@@ -2347,10 +2348,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->directory-path]]))
+(ns my-namespace (:require [io.api :refer [filepath->directory-path]]))
 
-(io/filepath->directory-path ...)
-(filepath->directory-path    ...)
+(io.api/filepath->directory-path ...)
+(filepath->directory-path        ...)
 ```
 
 </details>
@@ -2405,10 +2406,10 @@ nil
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->extension]]))
+(ns my-namespace (:require [io.api :refer [filepath->extension]]))
 
-(io/filepath->extension ...)
-(filepath->extension    ...)
+(io.api/filepath->extension ...)
+(filepath->extension        ...)
 ```
 
 </details>
@@ -2447,10 +2448,10 @@ nil
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->filename]]))
+(ns my-namespace (:require [io.api :refer [filepath->filename]]))
 
-(io/filepath->filename ...)
-(filepath->filename    ...)
+(io.api/filepath->filename ...)
+(filepath->filename        ...)
 ```
 
 </details>
@@ -2503,10 +2504,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->image?]]))
+(ns my-namespace (:require [io.api :refer [filepath->image?]]))
 
-(io/filepath->image? ...)
-(filepath->image?    ...)
+(io.api/filepath->image? ...)
+(filepath->image?        ...)
 ```
 
 </details>
@@ -2552,10 +2553,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->mime-type]]))
+(ns my-namespace (:require [io.api :refer [filepath->mime-type]]))
 
-(io/filepath->mime-type ...)
-(filepath->mime-type    ...)
+(io.api/filepath->mime-type ...)
+(filepath->mime-type        ...)
 ```
 
 </details>
@@ -2608,10 +2609,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->text?]]))
+(ns my-namespace (:require [io.api :refer [filepath->text?]]))
 
-(io/filepath->text? ...)
-(filepath->text?    ...)
+(io.api/filepath->text? ...)
+(filepath->text?        ...)
 ```
 
 </details>
@@ -2664,10 +2665,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->video?]]))
+(ns my-namespace (:require [io.api :refer [filepath->video?]]))
 
-(io/filepath->video? ...)
-(filepath->video?    ...)
+(io.api/filepath->video? ...)
+(filepath->video?        ...)
 ```
 
 </details>
@@ -2703,7 +2704,7 @@ The length of the file in bytes
 
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists? filepath)
-            (->                 filepath clojure.java.io/file .length)
+            (->                 filepath str clojure.java.io/file .length)
             (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 ```
@@ -2714,10 +2715,10 @@ The length of the file in bytes
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [get-filesize]]))
+(ns my-namespace (:require [io.api :refer [get-filesize]]))
 
-(io/get-filesize ...)
-(get-filesize    ...)
+(io.api/get-filesize ...)
+(get-filesize        ...)
 ```
 
 </details>
@@ -2754,7 +2755,7 @@ The length of the file in bytes
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file .listFiles))
+            (vector/remove-item (mapv  str (-> directory-path str clojure.java.io/file .listFiles))
                                 (param directory-path))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
@@ -2766,10 +2767,10 @@ The length of the file in bytes
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [item-list]]))
+(ns my-namespace (:require [io.api :refer [item-list]]))
 
-(io/item-list ...)
-(item-list    ...)
+(io.api/item-list ...)
+(item-list        ...)
 ```
 
 </details>
@@ -2806,10 +2807,10 @@ The length of the file in bytes
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [kB->B]]))
+(ns my-namespace (:require [io.api :refer [kB->B]]))
 
-(io/kB->B ...)
-(kB->B    ...)
+(io.api/kB->B ...)
+(kB->B        ...)
 ```
 
 </details>
@@ -2846,10 +2847,10 @@ The length of the file in bytes
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [kB->GB]]))
+(ns my-namespace (:require [io.api :refer [kB->GB]]))
 
-(io/kB->GB ...)
-(kB->GB    ...)
+(io.api/kB->GB ...)
+(kB->GB        ...)
 ```
 
 </details>
@@ -2886,10 +2887,10 @@ The length of the file in bytes
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [kB->MB]]))
+(ns my-namespace (:require [io.api :refer [kB->MB]]))
 
-(io/kB->MB ...)
-(kB->MB    ...)
+(io.api/kB->MB ...)
+(kB->MB        ...)
 ```
 
 </details>
@@ -2934,10 +2935,10 @@ The length of the file in bytes
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [max-filesize-reached?]]))
+(ns my-namespace (:require [io.api :refer [max-filesize-reached?]]))
 
-(io/max-filesize-reached? ...)
-(max-filesize-reached?    ...)
+(io.api/max-filesize-reached? ...)
+(max-filesize-reached?        ...)
 ```
 
 </details>
@@ -2983,10 +2984,10 @@ The length of the file in bytes
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [mime-type->extension]]))
+(ns my-namespace (:require [io.api :refer [mime-type->extension]]))
 
-(io/mime-type->extension ...)
-(mime-type->extension    ...)
+(io.api/mime-type->extension ...)
+(mime-type->extension        ...)
 ```
 
 </details>
@@ -3032,10 +3033,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [mime-type->image?]]))
+(ns my-namespace (:require [io.api :refer [mime-type->image?]]))
 
-(io/mime-type->image? ...)
-(mime-type->image?    ...)
+(io.api/mime-type->image? ...)
+(mime-type->image?        ...)
 ```
 
 </details>
@@ -3094,10 +3095,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [prepend-to-file!]]))
+(ns my-namespace (:require [io.api :refer [prepend-to-file!]]))
 
-(io/prepend-to-file! ...)
-(prepend-to-file!    ...)
+(io.api/prepend-to-file! ...)
+(prepend-to-file!        ...)
 ```
 
 </details>
@@ -3142,10 +3143,74 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [read-edn-file]]))
+(ns my-namespace (:require [io.api :refer [read-edn-file]]))
 
-(io/read-edn-file ...)
-(read-edn-file    ...)
+(io.api/read-edn-file ...)
+(read-edn-file        ...)
+```
+
+</details>
+
+---
+
+### read-edn-header
+
+```
+@param (string) filepath
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
+```
+
+```
+@usage
+(read-edn-header "my-directory/my-file.edn")
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn read-edn-header
+  ([filepath]
+   (read-edn-header filepath {}))
+
+  ([filepath options]
+   (let [file-content (read/read-file filepath options)]
+        (letfn [(cut-row      [n]   (string/after-first-occurence n "\n"))
+                (comment-row? [row] (-> row (string/trim)
+                                            (string/starts-with? "                (empty-row?   [row] (-> row (string/trim)
+                                            (= "")))
+                (append-row   [result row]
+                              (let [row (string/after-first-occurence row "                                   (if result (str result "\n" row)
+                                              (str             row))))
+                (f [result n] (if-let [first-row (string/before-first-occurence n "\n" {:return? false})]
+                                      (cond (comment-row?         first-row)
+                                            (f (append-row result first-row)
+                                               (cut-row n))
+                                            (empty-row? first-row)
+                                            (f (str result "\n")
+                                               (cut-row n))
+                                            :else
+                                            (return result))
+                                      (return result)))]
+               (f "" file-content)))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [read-edn-header]]))
+
+(io.api/read-edn-header ...)
+(read-edn-header        ...)
 ```
 
 </details>
@@ -3191,10 +3256,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [read-file]]))
+(ns my-namespace (:require [io.api :refer [read-file]]))
 
-(io/read-file ...)
-(read-file    ...)
+(io.api/read-file ...)
+(read-file        ...)
 ```
 
 </details>
@@ -3231,7 +3296,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (clojure.java.io/file directory-path)
+            (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (.listFiles           directory)]
                  (letfn [(f [%] (and (-> % .isDirectory)
                                      (-> % .isHidden not)))]
@@ -3246,10 +3311,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [subdirectory-list]]))
+(ns my-namespace (:require [io.api :refer [subdirectory-list]]))
 
-(io/subdirectory-list ...)
-(subdirectory-list    ...)
+(io.api/subdirectory-list ...)
+(subdirectory-list        ...)
 ```
 
 </details>
@@ -3276,6 +3341,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 
 ```
 @return (*)
+Returns with the file's content (the reader procceses the content to data).
 ```
 
 <details>
@@ -3287,8 +3353,8 @@ Returns with the file's content or with nil if the return? option is set to fals
   (let [edn    (read-edn-file    filepath)
         params (vector/cons-item params edn)
         output (apply          f params)]
-       (write-edn-file! filepath output)
-       (return                   output)))
+       (write-edn-file!    filepath output)
+       (read-edn-file filepath)))
 ```
 
 </details>
@@ -3297,10 +3363,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [swap-edn-file!]]))
+(ns my-namespace (:require [io.api :refer [swap-edn-file!]]))
 
-(io/swap-edn-file! ...)
-(swap-edn-file!    ...)
+(io.api/swap-edn-file! ...)
+(swap-edn-file!        ...)
 ```
 
 </details>
@@ -3346,10 +3412,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [unknown-mime-type?]]))
+(ns my-namespace (:require [io.api :refer [unknown-mime-type?]]))
 
-(io/unknown-mime-type? ...)
-(unknown-mime-type?    ...)
+(io.api/unknown-mime-type? ...)
+(unknown-mime-type?        ...)
 ```
 
 </details>
@@ -3366,6 +3432,8 @@ true
   Default: false
  :create? (boolean)(opt)
   Default: false
+ :return? (boolean)(opt)
+   Default: true
  :warn? (boolean)(opt)
   Default: true}
 ```
@@ -3397,7 +3465,9 @@ true
 ```
 
 ```
-@return (string)
+@return (*)
+Returns with the file's content (the reader procceses the content to data),
+or with nil if the return? option is set to false.
 ```
 
 <details>
@@ -3408,10 +3478,10 @@ true
   ([filepath content]
    (write-edn-file! filepath content {}))
 
-  ([filepath content {:keys [abc?] :as options}]
+  ([filepath content {:keys [abc? return?] :or {return? true} :as options}]
    (let [output (pretty/mixed->string content {:abc? abc?})]
-        (actions/write-file! filepath (str "\n" output) options)
-        (return content))))
+        (actions/write-file! filepath (str "\n" output) options))
+   (if return? (read-edn-file filepath))))
 ```
 
 </details>
@@ -3420,10 +3490,69 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [write-edn-file!]]))
+(ns my-namespace (:require [io.api :refer [write-edn-file!]]))
 
-(io/write-edn-file! ...)
-(write-edn-file!    ...)
+(io.api/write-edn-file! ...)
+(write-edn-file!        ...)
+```
+
+</details>
+
+---
+
+### write-edn-header!
+
+```
+@param (string) filepath
+@param (string) header
+@param (map)(opt) options
+@param (map)(opt) options
+{:create? (boolean)(opt)
+  Default: false
+ :return? (boolean)(opt)
+   Default: true
+ :warn? (boolean)(opt)
+  Default: true}
+```
+
+```
+@usage
+(write-edn-header! "my-directory/my-file.edn" "My header\nI love comments!")
+```
+
+```
+@return (nil or string)
+Returns with the file's content (as string) or with nil if the return? option is set to false.
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn write-edn-header!
+  ([filepath header]
+   (write-edn-header! filepath header {}))
+
+  ([filepath header options]
+   (let [file-content (read/read-file filepath options)]
+        (letfn [(f [result n]
+                   (if-let [last-row (string/after-last-occurence n "\n")]
+                           (f (str "                              (string/before-last-occurence n "\n" {:return? false}))
+                           (return result)))]
+               (let [file-content (str "\n" (f file-content header))]
+                    (actions/write-file! filepath file-content options))))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [write-edn-header!]]))
+
+(io.api/write-edn-header! ...)
+(write-edn-header!        ...)
 ```
 
 </details>
@@ -3469,15 +3598,14 @@ Returns with the file's content or with nil if the return? option is set to fals
 
   ([filepath content {:keys [create? return? warn?] :or {return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
-       (do (spit filepath (str content))
-           (if return? (read/read-file filepath)))
+       (spit filepath (str content))
        (if create? (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (if-let [directory-path (file/filepath->directory-path filepath)]
                                (if-not (check/directory-exists? directory-path)
                                        (create-directory!       directory-path options)))
-                       (spit filepath (str content))
-                       (if return? (read/read-file filepath)))
-                   (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))))
+                       (spit filepath (str content)))
+                   (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
+   (if return? (read/read-file filepath))))
 ```
 
 </details>
@@ -3486,10 +3614,10 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [write-file!]]))
+(ns my-namespace (:require [io.api :refer [write-file!]]))
 
-(io/write-file! ...)
-(write-file!    ...)
+(io.api/write-file! ...)
+(write-file!        ...)
 ```
 
 </details>

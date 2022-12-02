@@ -1,10 +1,7 @@
 
 # <strong>io.api</strong> namespace
-<p>Documentation of the <strong>io/api.cljs</strong> file</p>
 
-<strong>[README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > io.api</strong>
-
-
+<strong>[README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > </strong>source-code/cljs/io/api.cljs
 
 ### B->GB
 
@@ -36,10 +33,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [B->GB]]))
+(ns my-namespace (:require [io.api :refer [B->GB]]))
 
-(io/B->GB ...)
-(B->GB    ...)
+(io.api/B->GB ...)
+(B->GB        ...)
 ```
 
 </details>
@@ -76,10 +73,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [B->MB]]))
+(ns my-namespace (:require [io.api :refer [B->MB]]))
 
-(io/B->MB ...)
-(B->MB    ...)
+(io.api/B->MB ...)
+(B->MB        ...)
 ```
 
 </details>
@@ -116,10 +113,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [B->kB]]))
+(ns my-namespace (:require [io.api :refer [B->kB]]))
 
-(io/B->kB ...)
-(B->kB    ...)
+(io.api/B->kB ...)
+(B->kB        ...)
 ```
 
 </details>
@@ -156,10 +153,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [GB->B]]))
+(ns my-namespace (:require [io.api :refer [GB->B]]))
 
-(io/GB->B ...)
-(GB->B    ...)
+(io.api/GB->B ...)
+(GB->B        ...)
 ```
 
 </details>
@@ -196,10 +193,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [GB->MB]]))
+(ns my-namespace (:require [io.api :refer [GB->MB]]))
 
-(io/GB->MB ...)
-(GB->MB    ...)
+(io.api/GB->MB ...)
+(GB->MB        ...)
 ```
 
 </details>
@@ -236,10 +233,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [GB->kB]]))
+(ns my-namespace (:require [io.api :refer [GB->kB]]))
 
-(io/GB->kB ...)
-(GB->kB    ...)
+(io.api/GB->kB ...)
+(GB->kB        ...)
 ```
 
 </details>
@@ -276,10 +273,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [MB->B]]))
+(ns my-namespace (:require [io.api :refer [MB->B]]))
 
-(io/MB->B ...)
-(MB->B    ...)
+(io.api/MB->B ...)
+(MB->B        ...)
 ```
 
 </details>
@@ -316,10 +313,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [MB->GB]]))
+(ns my-namespace (:require [io.api :refer [MB->GB]]))
 
-(io/MB->GB ...)
-(MB->GB    ...)
+(io.api/MB->GB ...)
+(MB->GB        ...)
 ```
 
 </details>
@@ -356,10 +353,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [MB->kB]]))
+(ns my-namespace (:require [io.api :refer [MB->kB]]))
 
-(io/MB->kB ...)
-(MB->kB    ...)
+(io.api/MB->kB ...)
+(MB->kB        ...)
 ```
 
 </details>
@@ -405,10 +402,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [directory-name-invalid?]]))
+(ns my-namespace (:require [io.api :refer [directory-name-invalid?]]))
 
-(io/directory-name-invalid? ...)
-(directory-name-invalid?    ...)
+(io.api/directory-name-invalid? ...)
+(directory-name-invalid?        ...)
 ```
 
 </details>
@@ -454,10 +451,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [directory-name-valid?]]))
+(ns my-namespace (:require [io.api :refer [directory-name-valid?]]))
 
-(io/directory-name-valid? ...)
-(directory-name-valid?    ...)
+(io.api/directory-name-valid? ...)
+(directory-name-valid?        ...)
 ```
 
 </details>
@@ -498,10 +495,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [directory-path->directory-name]]))
+(ns my-namespace (:require [io.api :refer [directory-path->directory-name]]))
 
-(io/directory-path->directory-name ...)
-(directory-path->directory-name    ...)
+(io.api/directory-path->directory-name ...)
+(directory-path->directory-name        ...)
 ```
 
 </details>
@@ -540,10 +537,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->audio?]]))
+(ns my-namespace (:require [io.api :refer [extension->audio?]]))
 
-(io/extension->audio? ...)
-(extension->audio?    ...)
+(io.api/extension->audio? ...)
+(extension->audio?        ...)
 ```
 
 </details>
@@ -582,10 +579,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->image?]]))
+(ns my-namespace (:require [io.api :refer [extension->image?]]))
 
-(io/extension->image? ...)
-(extension->image?    ...)
+(io.api/extension->image? ...)
+(extension->image?        ...)
 ```
 
 </details>
@@ -631,10 +628,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->mime-type]]))
+(ns my-namespace (:require [io.api :refer [extension->mime-type]]))
 
-(io/extension->mime-type ...)
-(extension->mime-type    ...)
+(io.api/extension->mime-type ...)
+(extension->mime-type        ...)
 ```
 
 </details>
@@ -673,10 +670,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->text?]]))
+(ns my-namespace (:require [io.api :refer [extension->text?]]))
 
-(io/extension->text? ...)
-(extension->text?    ...)
+(io.api/extension->text? ...)
+(extension->text?        ...)
 ```
 
 </details>
@@ -715,10 +712,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [extension->video?]]))
+(ns my-namespace (:require [io.api :refer [extension->video?]]))
 
-(io/extension->video? ...)
-(extension->video?    ...)
+(io.api/extension->video? ...)
+(extension->video?        ...)
 ```
 
 </details>
@@ -771,10 +768,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->audio?]]))
+(ns my-namespace (:require [io.api :refer [filename->audio?]]))
 
-(io/filename->audio? ...)
-(filename->audio?    ...)
+(io.api/filename->audio? ...)
+(filename->audio?        ...)
 ```
 
 </details>
@@ -829,10 +826,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->basename]]))
+(ns my-namespace (:require [io.api :refer [filename->basename]]))
 
-(io/filename->basename ...)
-(filename->basename    ...)
+(io.api/filename->basename ...)
+(filename->basename        ...)
 ```
 
 </details>
@@ -885,10 +882,10 @@ nil
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->extension]]))
+(ns my-namespace (:require [io.api :refer [filename->extension]]))
 
-(io/filename->extension ...)
-(filename->extension    ...)
+(io.api/filename->extension ...)
+(filename->extension        ...)
 ```
 
 </details>
@@ -941,10 +938,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->image?]]))
+(ns my-namespace (:require [io.api :refer [filename->image?]]))
 
-(io/filename->image? ...)
-(filename->image?    ...)
+(io.api/filename->image? ...)
+(filename->image?        ...)
 ```
 
 </details>
@@ -990,10 +987,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->mime-type]]))
+(ns my-namespace (:require [io.api :refer [filename->mime-type]]))
 
-(io/filename->mime-type ...)
-(filename->mime-type    ...)
+(io.api/filename->mime-type ...)
+(filename->mime-type        ...)
 ```
 
 </details>
@@ -1046,10 +1043,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->text?]]))
+(ns my-namespace (:require [io.api :refer [filename->text?]]))
 
-(io/filename->text? ...)
-(filename->text?    ...)
+(io.api/filename->text? ...)
+(filename->text?        ...)
 ```
 
 </details>
@@ -1102,10 +1099,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename->video?]]))
+(ns my-namespace (:require [io.api :refer [filename->video?]]))
 
-(io/filename->video? ...)
-(filename->video?    ...)
+(io.api/filename->video? ...)
+(filename->video?        ...)
 ```
 
 </details>
@@ -1151,10 +1148,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename-invalid?]]))
+(ns my-namespace (:require [io.api :refer [filename-invalid?]]))
 
-(io/filename-invalid? ...)
-(filename-invalid?    ...)
+(io.api/filename-invalid? ...)
+(filename-invalid?        ...)
 ```
 
 </details>
@@ -1200,10 +1197,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filename-valid?]]))
+(ns my-namespace (:require [io.api :refer [filename-valid?]]))
 
-(io/filename-valid? ...)
-(filename-valid?    ...)
+(io.api/filename-valid? ...)
+(filename-valid?        ...)
 ```
 
 </details>
@@ -1256,10 +1253,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->audio?]]))
+(ns my-namespace (:require [io.api :refer [filepath->audio?]]))
 
-(io/filepath->audio? ...)
-(filepath->audio?    ...)
+(io.api/filepath->audio? ...)
+(filepath->audio?        ...)
 ```
 
 </details>
@@ -1312,10 +1309,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->basename]]))
+(ns my-namespace (:require [io.api :refer [filepath->basename]]))
 
-(io/filepath->basename ...)
-(filepath->basename    ...)
+(io.api/filepath->basename ...)
+(filepath->basename        ...)
 ```
 
 </details>
@@ -1354,10 +1351,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->directory-path]]))
+(ns my-namespace (:require [io.api :refer [filepath->directory-path]]))
 
-(io/filepath->directory-path ...)
-(filepath->directory-path    ...)
+(io.api/filepath->directory-path ...)
+(filepath->directory-path        ...)
 ```
 
 </details>
@@ -1412,10 +1409,10 @@ nil
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->extension]]))
+(ns my-namespace (:require [io.api :refer [filepath->extension]]))
 
-(io/filepath->extension ...)
-(filepath->extension    ...)
+(io.api/filepath->extension ...)
+(filepath->extension        ...)
 ```
 
 </details>
@@ -1454,10 +1451,10 @@ nil
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->filename]]))
+(ns my-namespace (:require [io.api :refer [filepath->filename]]))
 
-(io/filepath->filename ...)
-(filepath->filename    ...)
+(io.api/filepath->filename ...)
+(filepath->filename        ...)
 ```
 
 </details>
@@ -1510,10 +1507,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->image?]]))
+(ns my-namespace (:require [io.api :refer [filepath->image?]]))
 
-(io/filepath->image? ...)
-(filepath->image?    ...)
+(io.api/filepath->image? ...)
+(filepath->image?        ...)
 ```
 
 </details>
@@ -1559,10 +1556,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->mime-type]]))
+(ns my-namespace (:require [io.api :refer [filepath->mime-type]]))
 
-(io/filepath->mime-type ...)
-(filepath->mime-type    ...)
+(io.api/filepath->mime-type ...)
+(filepath->mime-type        ...)
 ```
 
 </details>
@@ -1615,10 +1612,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->text?]]))
+(ns my-namespace (:require [io.api :refer [filepath->text?]]))
 
-(io/filepath->text? ...)
-(filepath->text?    ...)
+(io.api/filepath->text? ...)
+(filepath->text?        ...)
 ```
 
 </details>
@@ -1671,10 +1668,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [filepath->video?]]))
+(ns my-namespace (:require [io.api :refer [filepath->video?]]))
 
-(io/filepath->video? ...)
-(filepath->video?    ...)
+(io.api/filepath->video? ...)
+(filepath->video?        ...)
 ```
 
 </details>
@@ -1711,10 +1708,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [kB->B]]))
+(ns my-namespace (:require [io.api :refer [kB->B]]))
 
-(io/kB->B ...)
-(kB->B    ...)
+(io.api/kB->B ...)
+(kB->B        ...)
 ```
 
 </details>
@@ -1751,10 +1748,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [kB->GB]]))
+(ns my-namespace (:require [io.api :refer [kB->GB]]))
 
-(io/kB->GB ...)
-(kB->GB    ...)
+(io.api/kB->GB ...)
+(kB->GB        ...)
 ```
 
 </details>
@@ -1791,10 +1788,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [kB->MB]]))
+(ns my-namespace (:require [io.api :refer [kB->MB]]))
 
-(io/kB->MB ...)
-(kB->MB    ...)
+(io.api/kB->MB ...)
+(kB->MB        ...)
 ```
 
 </details>
@@ -1840,10 +1837,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [mime-type->extension]]))
+(ns my-namespace (:require [io.api :refer [mime-type->extension]]))
 
-(io/mime-type->extension ...)
-(mime-type->extension    ...)
+(io.api/mime-type->extension ...)
+(mime-type->extension        ...)
 ```
 
 </details>
@@ -1889,10 +1886,10 @@ false
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [mime-type->image?]]))
+(ns my-namespace (:require [io.api :refer [mime-type->image?]]))
 
-(io/mime-type->image? ...)
-(mime-type->image?    ...)
+(io.api/mime-type->image? ...)
+(mime-type->image?        ...)
 ```
 
 </details>
@@ -1938,10 +1935,10 @@ true
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :as io :refer [unknown-mime-type?]]))
+(ns my-namespace (:require [io.api :refer [unknown-mime-type?]]))
 
-(io/unknown-mime-type? ...)
-(unknown-mime-type?    ...)
+(io.api/unknown-mime-type? ...)
+(unknown-mime-type?        ...)
 ```
 
 </details>

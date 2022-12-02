@@ -98,8 +98,8 @@
 
   ([source-filepath destination-filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (try (if (check/file-exists? source-filepath)
-            (do (clojure.java.io/copy (clojure.java.io/file      source-filepath)
-                                      (clojure.java.io/file destination-filepath))
+            (do (clojure.java.io/copy (-> source-filepath      str clojure.java.io/file)
+                                      (-> destination-filepath str clojure.java.io/file))
                 (if return? (read/read-file destination-filepath)))
             (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" source-filepath "\"")))))))

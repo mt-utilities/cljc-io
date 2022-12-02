@@ -1,4 +1,8 @@
 
+; WARNING
+; Important to make string from filepaths before passing them
+; to the clojure.java.io/file function!
+
 (ns io.api
     (:require [clojure.java.io]
               [io.actions    :as actions]

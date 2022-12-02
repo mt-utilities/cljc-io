@@ -49,7 +49,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (clojure.java.io/file directory-path)
+            (let [directory (-> directory-path str clojure.java.io/file)
                   file-seq  (.listFiles           directory)]
                  (letfn [(f [%] (and (-> % .isFile)
                                      (-> % .isHidden not)))]
@@ -78,7 +78,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (clojure.java.io/file directory-path)
+            (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (file-seq             directory)]
                  (letfn [(f [%] (and (-> % .isFile)
                                      (-> % .isHidden not)))]
@@ -107,7 +107,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (clojure.java.io/file directory-path)
+            (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (.listFiles           directory)]
                  (letfn [(f [%] (and (-> % .isDirectory)
                                      (-> % .isHidden not)))]
@@ -136,7 +136,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (clojure.java.io/file directory-path)
+            (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (file-seq             directory)]
                  (letfn [(f [%] (and (-> % .isDirectory)
                                      (-> % .isHidden not)))]
@@ -165,7 +165,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file .listFiles))
+            (vector/remove-item (mapv  str (-> directory-path str clojure.java.io/file .listFiles))
                                 (param directory-path))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
@@ -191,7 +191,7 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (vector/remove-item (mapv  str (-> directory-path clojure.java.io/file file-seq))
+            (vector/remove-item (mapv  str (-> directory-path str clojure.java.io/file file-seq))
                                 (param directory-path))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))

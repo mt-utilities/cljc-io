@@ -23,7 +23,7 @@
 
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists? filepath)
-            (->                 filepath clojure.java.io/file .length)
+            (->                 filepath str clojure.java.io/file .length)
             (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
