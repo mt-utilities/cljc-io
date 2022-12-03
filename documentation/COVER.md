@@ -9,9 +9,6 @@
 
 * [io.api](clj/io/API.md) [clj]
 
-### Isomorphic namespaces
-
-
 ### ClojureScript namespaces
 
 * [io.api](cljs/io/API.md) [cljs]
