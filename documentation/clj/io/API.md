@@ -532,12 +532,12 @@
 @param (*) content
 @param (map)(opt) options
 {:create? (boolean)(opt)
-  Default: false
- :max-line-count (integer)(opt)
- :return? (boolean)(opt)
-   Default: true
- :warn? (boolean)(opt)
-  Default: true}
+ Default: false
+:max-line-count (integer)(opt)
+:return? (boolean)(opt)
+  Default: true
+:warn? (boolean)(opt)
+ Default: true}
 ```
 
 ```
@@ -593,16 +593,16 @@ Returns with the file's content or with nil if the return? option is set to fals
 @param (string) source-filepath
 @param (string) destination-filepath
 @param (map)(opt) options
- {:return? (boolean)(opt)
-   Default: true
-  :warn? (boolean)(opt)
-   Default: true}
+{:return? (boolean)(opt)
+  Default: true
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
 @usage
 (copy-file! "my-directory/my-source-file.ext"
-            "my-directory/my-destination-file.ext")
+           "my-directory/my-destination-file.ext")
 ```
 
 ```
@@ -650,7 +650,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 @param (?) file
 @param (map)(opt) options
 {:warn? (boolean)(opt)
-  Default: true}
+ Default: true}
 ```
 
 ```
@@ -693,8 +693,8 @@ Returns with the file's content or with nil if the return? option is set to fals
 ```
 @param (string) directory-path
 @param (map)(opt) options
- {:warn? (boolean)(opt)
-   Default: true}
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -795,10 +795,10 @@ or with nil if the return? option is set to false.
 ```
 @param (string) filepath
 @param (map)(opt) options
- {:return? (boolean)(opt)
-   Default: true
-  :warn? (boolean)(opt)
-   Default: true}
+{:return? (boolean)(opt)
+  Default: true
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -823,6 +823,7 @@ Returns nil if the return? option is set to false.
 
   ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (when-not (check/file-exists? filepath)
+             (create-path!       filepath {:warn? false})
              (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
              (spit filepath nil))
    (if return? (read/read-file filepath))))
@@ -844,13 +845,70 @@ Returns nil if the return? option is set to false.
 
 ---
 
+### create-path!
+
+```
+@param (string) item-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
+```
+
+```
+@usage
+(create-path! "my-directory/my-file.ext")
+```
+
+```
+@example
+(create-path! "my-directory/my-file.ext")
+=>
+It only creates the my-directory (if it does not exist),
+to settle the path for the item.
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn create-path!
+  ([item-path]
+   (create-path! item-path {}))
+
+  ([item-path {:keys [warn?] :or {warn? true} :as options}]
+   (when-let [parent-path (file/item-path->parent-path item-path)]
+             (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" parent-path "\"")))
+             (if-not (check/directory-exists? parent-path)
+                     (create-directory!       parent-path options)))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [create-path!]]))
+
+(io.api/create-path! ...)
+(create-path!        ...)
+```
+
+</details>
+
+---
+
 ### delete-directory!
 
 ```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
-  Default: true}
+ Default: true}
 ```
 
 ```
@@ -897,7 +955,7 @@ Returns nil if the return? option is set to false.
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
-  Default: true}
+ Default: true}
 ```
 
 ```
@@ -945,8 +1003,8 @@ Returns nil if the return? option is set to false.
 ```
 @param (string) filepath
 @param (map)(opt) options
- {:warn? (boolean)(opt)
-   Default: true}
+{:warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -1219,7 +1277,7 @@ false
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
-  Default: true}
+ Default: true}
 ```
 
 ```
@@ -1317,12 +1375,12 @@ false
 ```
 @param (string) filepath
 @param (map)(opt) options
- {:create? (boolean)(opt)
-   Default: false
- :return? (boolean)(opt)
-   Default: true
-  :warn? (boolean)(opt)
-   Default: true}
+{:create? (boolean)(opt)
+  Default: false
+:return? (boolean)(opt)
+  Default: true
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -1370,6 +1428,11 @@ Returns with an empty string or with nil if the return? option is set to false.
 ```
 
 ```
+@usage
+(extension->audio? "mp3")
+```
+
+```
 @example
 (extension->audio? "mp3")
 =>
@@ -1409,6 +1472,11 @@ true
 
 ```
 @param (string) extension
+```
+
+```
+@usage
+(extension->image? "png")
 ```
 
 ```
@@ -1503,6 +1571,11 @@ true
 ```
 
 ```
+@usage
+(extension->text? "txt")
+```
+
+```
 @example
 (extension->text? "txt")
 =>
@@ -1542,6 +1615,11 @@ true
 
 ```
 @param (string) extension
+```
+
+```
+@usage
+(extension->video? "mp4")
 ```
 
 ```
@@ -1726,6 +1804,11 @@ true
 ```
 
 ```
+@usage
+(filename->audio? "my-audio.mp3")
+```
+
+```
 @example
 (filename->audio? "my-audio.mp3")
 =>
@@ -1779,6 +1862,11 @@ false
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->basename "my-file.EXT")
 ```
 
 ```
@@ -1840,6 +1928,11 @@ false
 ```
 
 ```
+@usage
+(filename->extension "my-file.EXT")
+```
+
+```
 @example
 (filename->extension "my-file.EXT")
 =>
@@ -1893,6 +1986,11 @@ nil
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->image? "my-image.png")
 ```
 
 ```
@@ -1952,6 +2050,11 @@ false
 ```
 
 ```
+@usage
+(filename->mime-type "my-image.png")
+```
+
+```
 @example
 (filename->mime-type "my-image.png")
 =>
@@ -1998,6 +2101,11 @@ false
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->text? "my-text.txt")
 ```
 
 ```
@@ -2054,6 +2162,11 @@ false
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->video? "my-video.mp4")
 ```
 
 ```
@@ -2211,6 +2324,11 @@ false
 ```
 
 ```
+@usage
+(filepath->audio? "my-directory/my-audio.mp3")
+```
+
+```
 @example
 (filepath->audio? "my-directory/my-audio.mp3")
 =>
@@ -2264,6 +2382,11 @@ false
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->basename "my-directory/my-file.EXT")
 ```
 
 ```
@@ -2323,10 +2446,22 @@ false
 ```
 
 ```
+@usage
+(filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
+```
+
+```
 @example
 (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
 =>
 "my-directory/my-subdirectory"
+```
+
+```
+@example
+(filepath->directory-path "my-file.ext")
+=>
+nil
 ```
 
 ```
@@ -2339,7 +2474,7 @@ false
 ```
 (defn filepath->directory-path
   [filepath]
-  (string/before-last-occurence filepath "/" {:return? false}))
+  (item-path->parent-path filepath))
 ```
 
 </details>
@@ -2362,6 +2497,11 @@ false
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->extension "my-directory/my-file.EXT")
 ```
 
 ```
@@ -2423,6 +2563,11 @@ nil
 ```
 
 ```
+@usage
+(filepath->filename "my-directory/my-file.ext")
+```
+
+```
 @example
 (filepath->filename "my-directory/my-file.ext")
 =>
@@ -2462,6 +2607,11 @@ nil
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->image? "my-directory/my-image.png")
 ```
 
 ```
@@ -2521,6 +2671,11 @@ false
 ```
 
 ```
+@usage
+(filepath->mime-type "my-directory/my-image.png")
+```
+
+```
 @example
 (filepath->mime-type "my-directory/my-image.png")
 =>
@@ -2567,6 +2722,11 @@ false
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->text? "my-directory/my-text.txt")
 ```
 
 ```
@@ -2623,6 +2783,11 @@ false
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->video? "my-directory/my-video.mp4")
 ```
 
 ```
@@ -2771,6 +2936,60 @@ The length of the file in bytes
 
 (io.api/item-list ...)
 (item-list        ...)
+```
+
+</details>
+
+---
+
+### item-path->parent-path
+
+```
+@param (string) item-path
+```
+
+```
+@usage
+(item-path->parent-path "my-directory/my-subdirectory/my-file.ext")
+```
+
+```
+@example
+(item-path->parent-path "my-directory/my-subdirectory/my-file.ext")
+=>
+"my-directory/my-subdirectory"
+```
+
+```
+@example
+(item-path->parent-path "my-file.ext")
+=>
+nil
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn item-path->parent-path
+  [item-path]
+  (string/before-last-occurence item-path "/" {:return? false}))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [item-path->parent-path]]))
+
+(io.api/item-path->parent-path ...)
+(item-path->parent-path        ...)
 ```
 
 </details>
@@ -3050,12 +3269,12 @@ false
 @param (*) content
 @param (map)(opt) options
 {:create? (boolean)(opt)
-  Default: false
- :max-line-count (integer)(opt)
- :return? (boolean)(opt)
-   Default: true
- :warn? (boolean)(opt)
-  Default: true}
+ Default: false
+:max-line-count (integer)(opt)
+:return? (boolean)(opt)
+  Default: true
+:warn? (boolean)(opt)
+ Default: true}
 ```
 
 ```
@@ -3480,7 +3699,7 @@ or with nil if the return? option is set to false.
 
   ([filepath content {:keys [abc? return?] :or {return? true} :as options}]
    (let [output (pretty/mixed->string content {:abc? abc?})]
-        (actions/write-file! filepath (str "\n" output) options))
+        (actions/write-file! filepath (str "\n" output "\n" ) options))
    (if return? (read-edn-file filepath))))
 ```
 
@@ -3566,11 +3785,11 @@ Returns with the file's content (as string) or with nil if the return? option is
 @param (*) content
 @param (map)(opt) options
 {:create? (boolean)(opt)
-  Default: false
- :return? (boolean)(opt)
-   Default: true
- :warn? (boolean)(opt)
-  Default: true}
+ Default: false
+:return? (boolean)(opt)
+  Default: true
+:warn? (boolean)(opt)
+ Default: true}
 ```
 
 ```
@@ -3599,10 +3818,8 @@ Returns with the file's content or with nil if the return? option is set to fals
   ([filepath content {:keys [create? return? warn?] :or {return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
        (spit filepath (str content))
-       (if create? (do (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-                       (if-let [directory-path (file/filepath->directory-path filepath)]
-                               (if-not (check/directory-exists? directory-path)
-                                       (create-directory!       directory-path options)))
+       (if create? (do (create-path! filepath {:warn? false})
+                       (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (spit filepath (str content)))
                    (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
    (if return? (read/read-file filepath))))

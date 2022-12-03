@@ -512,6 +512,11 @@ false
 ```
 
 ```
+@usage
+(extension->audio? "mp3")
+```
+
+```
 @example
 (extension->audio? "mp3")
 =>
@@ -551,6 +556,11 @@ true
 
 ```
 @param (string) extension
+```
+
+```
+@usage
+(extension->image? "png")
 ```
 
 ```
@@ -645,6 +655,11 @@ true
 ```
 
 ```
+@usage
+(extension->text? "txt")
+```
+
+```
 @example
 (extension->text? "txt")
 =>
@@ -687,6 +702,11 @@ true
 ```
 
 ```
+@usage
+(extension->video? "mp4")
+```
+
+```
 @example
 (extension->video? "mp4")
 =>
@@ -726,6 +746,11 @@ true
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->audio? "my-audio.mp3")
 ```
 
 ```
@@ -782,6 +807,11 @@ false
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->basename "my-file.EXT")
 ```
 
 ```
@@ -843,6 +873,11 @@ false
 ```
 
 ```
+@usage
+(filename->extension "my-file.EXT")
+```
+
+```
 @example
 (filename->extension "my-file.EXT")
 =>
@@ -896,6 +931,11 @@ nil
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->image? "my-image.png")
 ```
 
 ```
@@ -955,6 +995,11 @@ false
 ```
 
 ```
+@usage
+(filename->mime-type "my-image.png")
+```
+
+```
 @example
 (filename->mime-type "my-image.png")
 =>
@@ -1001,6 +1046,11 @@ false
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->text? "my-text.txt")
 ```
 
 ```
@@ -1057,6 +1107,11 @@ false
 
 ```
 @param (string) filename
+```
+
+```
+@usage
+(filename->video? "my-video.mp4")
 ```
 
 ```
@@ -1214,6 +1269,11 @@ false
 ```
 
 ```
+@usage
+(filepath->audio? "my-directory/my-audio.mp3")
+```
+
+```
 @example
 (filepath->audio? "my-directory/my-audio.mp3")
 =>
@@ -1267,6 +1327,11 @@ false
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->basename "my-directory/my-file.EXT")
 ```
 
 ```
@@ -1326,10 +1391,22 @@ false
 ```
 
 ```
+@usage
+(filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
+```
+
+```
 @example
 (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
 =>
 "my-directory/my-subdirectory"
+```
+
+```
+@example
+(filepath->directory-path "my-file.ext")
+=>
+nil
 ```
 
 ```
@@ -1342,7 +1419,7 @@ false
 ```
 (defn filepath->directory-path
   [filepath]
-  (string/before-last-occurence filepath "/" {:return? false}))
+  (item-path->parent-path filepath))
 ```
 
 </details>
@@ -1365,6 +1442,11 @@ false
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->extension "my-directory/my-file.EXT")
 ```
 
 ```
@@ -1426,6 +1508,11 @@ nil
 ```
 
 ```
+@usage
+(filepath->filename "my-directory/my-file.ext")
+```
+
+```
 @example
 (filepath->filename "my-directory/my-file.ext")
 =>
@@ -1465,6 +1552,11 @@ nil
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->image? "my-directory/my-image.png")
 ```
 
 ```
@@ -1524,6 +1616,11 @@ false
 ```
 
 ```
+@usage
+(filepath->mime-type "my-directory/my-image.png")
+```
+
+```
 @example
 (filepath->mime-type "my-directory/my-image.png")
 =>
@@ -1570,6 +1667,11 @@ false
 
 ```
 @param (string) filepath
+```
+
+```
+@usage
+(filepath->text? "my-directory/my-text.txt")
 ```
 
 ```
@@ -1629,6 +1731,11 @@ false
 ```
 
 ```
+@usage
+(filepath->video? "my-directory/my-video.mp4")
+```
+
+```
 @example
 (filepath->video? "my-directory/my-video.mp4")
 =>
@@ -1672,6 +1779,60 @@ false
 
 (io.api/filepath->video? ...)
 (filepath->video?        ...)
+```
+
+</details>
+
+---
+
+### item-path->parent-path
+
+```
+@param (string) item-path
+```
+
+```
+@usage
+(item-path->parent-path "my-directory/my-subdirectory/my-file.ext")
+```
+
+```
+@example
+(item-path->parent-path "my-directory/my-subdirectory/my-file.ext")
+=>
+"my-directory/my-subdirectory"
+```
+
+```
+@example
+(item-path->parent-path "my-file.ext")
+=>
+nil
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn item-path->parent-path
+  [item-path]
+  (string/before-last-occurence item-path "/" {:return? false}))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [item-path->parent-path]]))
+
+(io.api/item-path->parent-path ...)
+(item-path->parent-path        ...)
 ```
 
 </details>
