@@ -30,8 +30,7 @@
 
 (defn file-list
   ; @description
-  ; A directory-path paraméterként átadott elérési útvonalon található
-  ; mappa fájljainak listája (egy mélységben).
+  ; Returns with the filenames found on the given directory-path (non-recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -59,8 +58,7 @@
 
 (defn all-file-list
   ; @description
-  ; A directory-path paraméterként átadott elérési útvonalon található
-  ; mappa fájljainak listája (több mélységben).
+  ; Returns with the filenames found on the given directory-path (recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -88,8 +86,7 @@
 
 (defn subdirectory-list
   ; @description
-  ; A directory-path paraméterként átadott elérési útvonalon található
-  ; mappa almappáinak listája (egy mélységben).
+  ; Returns with the subdirectories found on the given directory-path (non-recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -117,8 +114,7 @@
 
 (defn all-subdirectory-list
   ; @description
-  ; A directory-path paraméterként átadott elérési útvonalon található
-  ; mappa almappáinak listája (több mélységben).
+  ; Returns with the subdirectories found on the given directory-path (recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -146,8 +142,7 @@
 
 (defn item-list
   ; @description
-  ; A directory-path paraméterként átadott elérési útvonalon található
-  ; mappa elemeinek listája (egy mélységben).
+  ; Returns with the subdirectories and files found on the given directory-path (non-recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -172,8 +167,7 @@
 
 (defn all-item-list
   ; @description
-  ; A directory-path paraméterként átadott elérési útvonalon található
-  ; mappa elemeinek listája (több mélységben).
+  ; Returns with the subdirectories and files found on the given directory-path (recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options

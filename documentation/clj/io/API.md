@@ -518,6 +518,11 @@
 ### all-file-list
 
 ```
+@description
+Returns with the filenames found on the given directory-path (recursive).
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -573,6 +578,11 @@
 ### all-item-list
 
 ```
+@description
+Returns with the subdirectories and files found on the given directory-path (recursive).
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -623,6 +633,11 @@
 ---
 
 ### all-subdirectory-list
+
+```
+@description
+Returns with the subdirectories found on the given directory-path (recursive).
+```
 
 ```
 @param (string) directory-path
@@ -895,7 +910,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 @param (string) filepath
 @param (map)(opt) options
 {:return? (boolean)(opt)
-   Default: true
+  Default: true
  :warn? (boolean)(opt)
   Default: true}
 ```
@@ -919,11 +934,10 @@ or with nil if the return? option is set to false.
   ([filepath]
    (create-edn-file! filepath {}))
 
-  ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
-   (when-not (check/file-exists? filepath)
-             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-             (spit filepath "\n{}"))
-   (if return? (read-edn-file filepath))))
+  ([filepath {:keys [return? warn?] :or {return? true warn? true} :as options}]
+   (if-not (check/file-exists?  filepath)
+           (actions/write-file! filepath "\n{}" {:create? true :warn? warn?}))
+   (if return? (read-edn-file filepath {:warn? false}))))
 ```
 
 </details>
@@ -1853,6 +1867,11 @@ true
 ---
 
 ### file-list
+
+```
+@description
+Returns with the filenames found on the given directory-path (non-recursive).
+```
 
 ```
 @param (string) directory-path
@@ -3045,6 +3064,11 @@ The length of the file in bytes
 ### item-list
 
 ```
+@description
+Returns with the subdirectories and files found on the given directory-path (non-recursive).
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -3640,6 +3664,11 @@ Returns with the file's content or with nil if the return? option is set to fals
 ### subdirectory-list
 
 ```
+@description
+Returns with the subdirectories found on the given directory-path (non-recursive).
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -3724,8 +3753,8 @@ Returns with the file's content (the reader procceses the content to data).
   (let [edn    (read-edn-file    filepath)
         params (vector/cons-item params edn)
         output (apply          f params)]
-       (write-edn-file!    filepath output)
-       (read-edn-file filepath)))
+       (write-edn-file! filepath output)
+       (read-edn-file   filepath {:warn? false})))
 ```
 
 </details>
@@ -3804,7 +3833,7 @@ true
  :create? (boolean)(opt)
   Default: false
  :return? (boolean)(opt)
-   Default: true
+  Default: true
  :warn? (boolean)(opt)
   Default: true}
 ```
@@ -3852,7 +3881,7 @@ or with nil if the return? option is set to false.
   ([filepath content {:keys [abc? return?] :or {return? true} :as options}]
    (let [output (pretty/mixed->string content {:abc? abc?})]
         (actions/write-file! filepath (str "\n" output "\n" ) options))
-   (if return? (read-edn-file filepath))))
+   (if return? (read-edn-file filepath {:warn? false}))))
 ```
 
 </details>
@@ -3881,7 +3910,7 @@ or with nil if the return? option is set to false.
 {:create? (boolean)(opt)
   Default: false
  :return? (boolean)(opt)
-   Default: true
+  Default: true
  :warn? (boolean)(opt)
   Default: true}
 ```
