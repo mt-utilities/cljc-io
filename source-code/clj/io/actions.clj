@@ -1,6 +1,7 @@
 
 (ns io.actions
     (:require [clojure.java.io]
+              [candy.api  :refer [return]]
               [io.check   :as check]
               [io.config  :as config]
               [io.file    :as file]
@@ -27,10 +28,11 @@
    ; https://stackoverflow.com/questions/6774369/recursively-create-directory
    ; (try (-> directory-path java.io.File. .mkdir)  ...)
    ; (try (-> directory-path java.io.File. .mkdirs) ...)
-   (when-not (check/directory-exists? directory-path)
-             (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
-             (try (-> directory-path java.io.File. .mkdirs)
-                  (catch Exception e (println e))))))
+   (if-not (check/directory-exists? directory-path)
+           (do (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
+               (try (-> directory-path java.io.File. .mkdirs)
+                    (catch Exception e (println e))))
+           (return :directory-already-created))))
 
 (defn create-path!
   ; @param (string) item-path
@@ -55,7 +57,8 @@
    (when-let [parent-path (file/item-path->parent-path item-path)]
              (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" parent-path "\"")))
              (if-not (check/directory-exists? parent-path)
-                     (create-directory!       parent-path options)))))
+                     (create-directory!       parent-path options)
+                     (return :path-already-created)))))
 
 (defn create-file!
   ; @param (string) filepath
