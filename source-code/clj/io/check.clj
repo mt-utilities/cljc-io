@@ -6,6 +6,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn file-exists?
+  ; @description
+  ; Checks whether the file exists on the given filepath.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -18,6 +21,9 @@
             (-> file .isDirectory not))))
 
 (defn file-not-exists?
+  ; @description
+  ; Checks whether the file does not exist on the given filepath.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -30,6 +36,9 @@
            (-> file .isDirectory))))
 
 (defn directory?
+  ; @description
+  ; Checks whether a directory exists on the given filepath.
+  ;
   ; @param (string) directory-path
   ;
   ; @usage
@@ -40,6 +49,9 @@
   (-> directory-path str clojure.java.io/file .isDirectory))
 
 (defn directory-exists?
+  ; @description
+  ; Checks whether the directory exists on the given filepath.
+  ;
   ; @param (string) directory-path
   ;
   ; @usage
