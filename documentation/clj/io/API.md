@@ -1218,6 +1218,11 @@ to settle the path for the item.
 ### directory-exists?
 
 ```
+@description
+Checks whether the directory exists on the given filepath.
+```
+
+```
 @param (string) directory-path
 ```
 
@@ -1400,6 +1405,11 @@ false
 ---
 
 ### directory?
+
+```
+@description
+Checks whether a directory exists on the given filepath.
+```
 
 ```
 @param (string) directory-path
@@ -1829,6 +1839,11 @@ true
 ### file-exists?
 
 ```
+@description
+Checks whether the file exists on the given filepath.
+```
+
+```
 @param (string) filepath
 ```
 
@@ -1929,6 +1944,11 @@ Returns with the filenames found on the given directory-path (non-recursive).
 ---
 
 ### file-not-exists?
+
+```
+@description
+Checks whether the file does not exist on the given filepath.
+```
 
 ```
 @param (string) filepath
