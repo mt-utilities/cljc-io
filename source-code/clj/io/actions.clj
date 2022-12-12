@@ -32,7 +32,7 @@
            (do (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
                (try (-> directory-path java.io.File. .mkdirs)
                     (catch Exception e (println e))))
-           (return :directory-already-created))))
+           (return :directory-already-exists))))
 
 (defn create-path!
   ; @param (string) item-path
@@ -54,11 +54,12 @@
    (create-path! item-path {}))
 
   ([item-path {:keys [warn?] :or {warn? true} :as options}]
+
+   (let [parent-path (file/item-path->parent-path item-path)])
    (when-let [parent-path (file/item-path->parent-path item-path)]
-             (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" parent-path "\"")))
              (if-not (check/directory-exists? parent-path)
                      (create-directory!       parent-path options)
-                     (return :path-already-created)))))
+                     (return :path-already-exists)))))
 
 (defn create-file!
   ; @param (string) filepath
