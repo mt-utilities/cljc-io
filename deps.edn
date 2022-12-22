@@ -3,4 +3,4 @@
  :deps  {org.clojure/clojure       {:mvn/version "1.10.1"}
          org.clojure/clojurescript {:mvn/version "1.10.891"}
          bithandshake/cljc-fruits  {:git/url "https://github.com/bithandshake/cljc-fruits"
-                                    :sha     "14f082745d634265cc981d97e74b5c076d0daa69"}}}
+                                    :sha     "1027cc4225016616831885529e40a3bbbdf8c38b"}}}
