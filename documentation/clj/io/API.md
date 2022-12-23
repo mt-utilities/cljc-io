@@ -55,6 +55,8 @@
 
 - [directory-name-valid?](#directory-name-valid)
 
+- [directory-not-exists?](#directory-not-exists)
+
 - [directory-path->directory-name](#directory-path-directory-name)
 
 - [directory?](#directory)
@@ -699,12 +701,12 @@ Returns with the subdirectories found on the given directory-path (recursive).
 @param (*) content
 @param (map)(opt) options
 {:create? (boolean)(opt)
- Default: false
-:max-line-count (integer)(opt)
-:return? (boolean)(opt)
+  Default: false
+ :max-line-count (integer)(opt)
+ :return? (boolean)(opt)
   Default: true
-:warn? (boolean)(opt)
- Default: true}
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -769,7 +771,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 ```
 @usage
 (copy-file! "my-directory/my-source-file.ext"
-           "my-directory/my-destination-file.ext")
+            "my-directory/my-destination-file.ext")
 ```
 
 ```
@@ -817,7 +819,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 @param (?) file
 @param (map)(opt) options
 {:warn? (boolean)(opt)
- Default: true}
+  Default: true}
 ```
 
 ```
@@ -1077,7 +1079,7 @@ to settle the path for the item.
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
- Default: true}
+  Default: true}
 ```
 
 ```
@@ -1124,7 +1126,7 @@ to settle the path for the item.
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
- Default: true}
+  Default: true}
 ```
 
 ```
@@ -1243,8 +1245,8 @@ Checks whether the directory exists on the given filepath.
 (defn directory-exists?
   [directory-path]
   (let [directory (-> directory-path str clojure.java.io/file)]
-       (and (.exists      directory)
-            (.isDirectory directory))))
+       (and (-> directory .exists)
+            (-> directory .isDirectory))))
 ```
 
 </details>
@@ -1361,6 +1363,53 @@ false
 
 ---
 
+### directory-not-exists?
+
+```
+@description
+Checks whether the directory does not exist on the given filepath.
+```
+
+```
+@param (string) directory-path
+```
+
+```
+@usage
+(directory-not-exists? "my-directory/my-subdirectory")
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn directory-not-exists?
+  [directory-path]
+  (let [directory (-> directory-path str clojure.java.io/file)]
+       (or (-> directory .exists      not)
+           (-> directory .isDirectory not))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [directory-not-exists?]]))
+
+(io.api/directory-not-exists? ...)
+(directory-not-exists?        ...)
+```
+
+</details>
+
+---
+
 ### directory-path->directory-name
 
 ```
@@ -1456,7 +1505,7 @@ Checks whether a directory exists on the given filepath.
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
- Default: true}
+  Default: true}
 ```
 
 ```
@@ -1556,7 +1605,7 @@ Checks whether a directory exists on the given filepath.
 @param (map)(opt) options
 {:create? (boolean)(opt)
   Default: false
-:return? (boolean)(opt)
+ :return? (boolean)(opt)
   Default: true
  :warn? (boolean)(opt)
   Default: true}
@@ -3468,12 +3517,12 @@ false
 @param (*) content
 @param (map)(opt) options
 {:create? (boolean)(opt)
- Default: false
-:max-line-count (integer)(opt)
-:return? (boolean)(opt)
+  Default: false
+ :max-line-count (integer)(opt)
+ :return? (boolean)(opt)
   Default: true
-:warn? (boolean)(opt)
- Default: true}
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```
@@ -3776,7 +3825,7 @@ Returns with the file's content (the reader procceses the content to data).
   (let [edn    (read-edn-file    filepath)
         params (vector/cons-item params edn)
         output (apply          f params)]
-       (write-edn-file! filepath output)
+       (write-edn-file! filepath output {:create? true :warn? true})
        (read-edn-file   filepath {:warn? false})))
 ```
 
@@ -3989,11 +4038,11 @@ Returns with the file's content (as string) or with nil if the return? option is
 @param (*) content
 @param (map)(opt) options
 {:create? (boolean)(opt)
- Default: false
-:return? (boolean)(opt)
+  Default: false
+ :return? (boolean)(opt)
   Default: true
-:warn? (boolean)(opt)
- Default: true}
+ :warn? (boolean)(opt)
+  Default: true}
 ```
 
 ```

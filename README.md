@@ -33,7 +33,7 @@ You can track the changes of the <strong>io-api</strong> library [here](CHANGES.
 
 - [How to check whether a directory exists?](#how-to-check-whether-a-directory-exists)
 
-- [How to read a file's content?](#how-to-read-a-file-s-content)
+- [How to read a file's content?](#how-to-read-a-files-content)
 
 - [How to get the file list of a directory?](#how-to-get-the-file-list-of-a-directory)
 
@@ -59,7 +59,7 @@ You can track the changes of the <strong>io-api</strong> library [here](CHANGES.
 
 - [How to duplicate a file?](#how-to-duplicate-a-file)
 
-- [How to write into a file?](#how-to-write-into a file)
+- [How to write into a file?](#how-to-write-into-a-file)
 
 - [How to empty a file?](#how-to-empty-a-file)
 
@@ -77,7 +77,7 @@ You can track the changes of the <strong>io-api</strong> library [here](CHANGES.
 
 - [How to write an EDN file?](#how-to-write-an-edn-file)
 
-- [How to apply a function on an EDN file's content?](#how-to-apply-a-function-on-an-edn-file-s-content)
+- [How to apply a function on an EDN file's content?](#how-to-apply-a-function-on-an-edn-files-content)
 
 - [How to get the header from an EDN file?](#how-to-get-the-header-from-an-edn-file)
 
