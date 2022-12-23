@@ -60,5 +60,20 @@
   ; @return (boolean)
   [directory-path]
   (let [directory (-> directory-path str clojure.java.io/file)]
-       (and (.exists      directory)
-            (.isDirectory directory))))
+       (and (-> directory .exists)
+            (-> directory .isDirectory))))
+
+(defn directory-not-exists?
+  ; @description
+  ; Checks whether the directory does not exist on the given filepath.
+  ;
+  ; @param (string) directory-path
+  ;
+  ; @usage
+  ; (directory-not-exists? "my-directory/my-subdirectory")
+  ;
+  ; @return (boolean)
+  [directory-path]
+  (let [directory (-> directory-path str clojure.java.io/file)]
+       (or (-> directory .exists      not)
+           (-> directory .isDirectory not))))

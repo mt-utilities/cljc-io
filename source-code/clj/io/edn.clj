@@ -118,7 +118,7 @@
   (let [edn    (read-edn-file    filepath)
         params (vector/cons-item params edn)
         output (apply          f params)]
-       (write-edn-file! filepath output)
+       (write-edn-file! filepath output {:create? true :warn? true})
        (read-edn-file   filepath {:warn? false})))
 
 ;; ----------------------------------------------------------------------------

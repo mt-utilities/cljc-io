@@ -41,10 +41,11 @@
 (def delete-directory!       actions/delete-directory!)
 
 ; io.check
-(def file-exists?      check/file-exists?)
-(def file-not-exists?  check/file-not-exists?)
-(def directory?        check/directory?)
-(def directory-exists? check/directory-exists?)
+(def file-exists?          check/file-exists?)
+(def file-not-exists?      check/file-not-exists?)
+(def directory?            check/directory?)
+(def directory-exists?     check/directory-exists?)
+(def directory-not-exists? check/directory-not-exists?)
 
 ; io.config
 (def MIME-TYPES config/MIME-TYPES)

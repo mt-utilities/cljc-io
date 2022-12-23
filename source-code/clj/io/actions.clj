@@ -119,7 +119,7 @@
   ;
   ; @usage
   ; (copy-file! "my-directory/my-source-file.ext"
-  ;            "my-directory/my-destination-file.ext")
+  ;             "my-directory/my-destination-file.ext")
   ;
   ; @return (nil or string)
   ; Returns with the file's content or with nil if the return? option is set to false.
@@ -139,11 +139,11 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;  Default: false
-  ; :return? (boolean)(opt)
+  ;   Default: false
+  ;  :return? (boolean)(opt)
   ;   Default: true
-  ; :warn? (boolean)(opt)
-  ;  Default: true}
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (write-file! "my-directory/my-file.ext" "My content")
@@ -170,7 +170,7 @@
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
   ;   Default: false
-  ; :return? (boolean)(opt)
+  ;  :return? (boolean)(opt)
   ;   Default: true
   ;  :warn? (boolean)(opt)
   ;   Default: true}
@@ -191,12 +191,12 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;  Default: false
-  ; :max-line-count (integer)(opt)
-  ; :return? (boolean)(opt)
+  ;   Default: false
+  ;  :max-line-count (integer)(opt)
+  ;  :return? (boolean)(opt)
   ;   Default: true
-  ; :warn? (boolean)(opt)
-  ;  Default: true}
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (append-to-file! "my-directory/my-file.ext" "My content")
@@ -223,12 +223,12 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;  Default: false
-  ; :max-line-count (integer)(opt)
-  ; :return? (boolean)(opt)
+  ;   Default: false
+  ;  :max-line-count (integer)(opt)
+  ;  :return? (boolean)(opt)
   ;   Default: true
-  ; :warn? (boolean)(opt)
-  ;  Default: true}
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
   ;
   ; @usage
   ; (prepend-to-file! "my-directory/my-file.ext" "My content")
@@ -255,7 +255,7 @@
   ; @param (?) file
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;  Default: true}
+  ;   Default: true}
   ;
   ; @return (nil)
   ([uri file]
@@ -274,7 +274,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;  Default: true}
+  ;   Default: true}
   ;
   ; @usage
   ; (delete-empty-directory! "my-directory/my-subdirectory")
@@ -293,7 +293,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;  Default: true}
+  ;   Default: true}
   ;
   ; @usage
   ; (empty-directory! "my-directory/my-subdirectory")
@@ -313,7 +313,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;  Default: true}
+  ;   Default: true}
   ;
   ; @usage
   ; (delete-directory! "my-directory/my-subdirectory")
