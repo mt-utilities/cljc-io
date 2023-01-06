@@ -1,7 +1,7 @@
 
-(ns io.validators
-    (:require [io.config :as config]
-              [regex.api :refer [re-match? re-mismatch?]]))
+(ns iso.io.check
+    (:require [iso.io.config :as config]
+              [regex.api     :refer [re-match? re-mismatch?]]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

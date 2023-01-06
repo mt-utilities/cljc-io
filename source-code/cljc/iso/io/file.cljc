@@ -1,8 +1,8 @@
 
-(ns io.file
-    (:require [candy.api    :refer [return]]
-              [io.mime-type :as mime-type]
-              [string.api   :as string]))
+(ns iso.io.file
+    (:require [candy.api        :refer [return]]
+              [iso.io.mime-type :as mime-type]
+              [string.api       :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -148,6 +148,7 @@
   ;
   ; @return (string)
   [filepath]
+  ; XXX#5591 (source-code/cljc/iso/io/README.md)
   (let [filename (-> filepath filepath->filename (string/not-starts-with! "."))]
        (if-let [extension (string/after-last-occurence filename "." {:return? false})]
                (string/to-lowercase extension))))

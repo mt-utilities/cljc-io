@@ -1,23 +1,30 @@
 
 (ns io.api
-    (:require [io.config     :as config]
-              [io.directory  :as directory]
-              [io.file       :as file]
-              [io.filesize   :as filesize]
-              [io.mime-type  :as mime-type]
-              [io.validators :as validators]))
+    (:require [iso.io.check     :as check]
+              [iso.io.config    :as config]
+              [iso.io.directory :as directory]
+              [iso.io.file      :as file]
+              [iso.io.filesize  :as filesize]
+              [iso.io.mime-type :as mime-type]
+              [iso.io.valid     :as valid]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; io.config
+; iso.io.check
+(def filename-valid?         check/filename-valid?)
+(def filename-invalid?       check/filename-invalid?)
+(def directory-name-valid?   check/directory-name-valid?)
+(def directory-name-invalid? check/directory-name-invalid?)
+
+; iso.io.config
 (def MIME-TYPES config/MIME-TYPES)
 (def EXTENSIONS config/EXTENSIONS)
 
-; io.directory
+; iso.io.directory
 (def directory-path->directory-name directory/directory-path->directory-name)
 
-; io.file
+; iso.io.file
 (def extension->audio?        file/extension->audio?)
 (def extension->image?        file/extension->image?)
 (def extension->text?         file/extension->text?)
@@ -40,7 +47,7 @@
 (def filename->text?          file/filename->text?)
 (def filename->video?         file/filename->video?)
 
-; io.filesize
+; iso.io.filesize
 (def B->kB  filesize/B->kB)
 (def B->MB  filesize/B->MB)
 (def B->GB  filesize/B->GB)
@@ -54,14 +61,12 @@
 (def GB->kB filesize/GB->kB)
 (def GB->MB filesize/GB->MB)
 
-; io.mime-type
+; iso.io.mime-type
 (def mime-type->extension mime-type/mime-type->extension)
 (def extension->mime-type mime-type/extension->mime-type)
 (def unknown-mime-type?   mime-type/unknown-mime-type?)
 (def mime-type->image?    mime-type/mime-type->image?)
 
-; io.validators
-(def filename-valid?         validators/filename-valid?)
-(def filename-invalid?       validators/filename-invalid?)
-(def directory-name-valid?   validators/directory-name-valid?)
-(def directory-name-invalid? validators/directory-name-invalid?)
+; iso.io.valid
+(def valid-relative-path valid/valid-relative-path)
+(def valid-absolute-path valid/valid-absolute-path)

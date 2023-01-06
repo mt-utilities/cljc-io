@@ -1,7 +1,7 @@
 
-(ns io.mime-type
-    (:require [io.config  :as config]
-              [string.api :as string]))
+(ns iso.io.mime-type
+    (:require [iso.io.config :as config]
+              [string.api    :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

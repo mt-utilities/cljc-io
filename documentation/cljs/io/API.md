@@ -89,6 +89,10 @@
 
 - [unknown-mime-type?](#unknown-mime-type)
 
+- [valid-absolute-path](#valid-absolute-path)
+
+- [valid-relative-path](#valid-relative-path)
+
 ### B->GB
 
 ```
@@ -2186,6 +2190,130 @@ true
 
 (io.api/unknown-mime-type? ...)
 (unknown-mime-type?        ...)
+```
+
+</details>
+
+---
+
+### valid-absolute-path
+
+```
+@param (string) n
+```
+
+```
+@usage
+(valid-absolute-path "my-directory")
+```
+
+```
+@example
+(valid-absolute-path "my-directory")
+=>
+"my-directory"
+```
+
+```
+@example
+(valid-absolute-path "/my-directory/")
+=>
+"my-directory"
+```
+
+```
+@example
+(valid-absolute-path "")
+=>
+""
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn valid-absolute-path
+  [n]
+  (-> n (string/not-ends-with!   "/")
+        (string/not-starts-with! "/")))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [valid-absolute-path]]))
+
+(io.api/valid-absolute-path ...)
+(valid-absolute-path        ...)
+```
+
+</details>
+
+---
+
+### valid-relative-path
+
+```
+@param (string) n
+```
+
+```
+@usage
+(valid-relative-path "/my-directory")
+```
+
+```
+@example
+(valid-relative-path "/my-directory")
+=>
+"/my-directory"
+```
+
+```
+@example
+(valid-relative-path "my-directory/")
+=>
+"/my-directory"
+```
+
+```
+@example
+(valid-relative-path "")
+=>
+"/"
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn valid-relative-path
+  [n]
+  (-> n (string/not-ends-with! "/")
+        (string/starts-with!   "/")))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [valid-relative-path]]))
+
+(io.api/valid-relative-path ...)
+(valid-relative-path        ...)
 ```
 
 </details>

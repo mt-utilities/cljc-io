@@ -9,6 +9,28 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
+(defn read-resource
+  ; @param (string) resource-path
+  ; @param (map)(opt) options
+  ; {:warn? (boolean)(opt)
+  ;   Default: true}
+  ;
+  ; @usage
+  ; (read-resource "my-directory/my-file.ext")
+  ;
+  ; @return (string)
+  ([resource-path]
+   (read-resource resource-path {}))
+
+  ([resource-path {:keys [warn?] :or {warn? true}}]
+   (try (if-let [resource (clojure.java.io/resource resource-path)]
+                (slurp resource)
+                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" resource-path "\"")))))))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
 (defn read-file
   ; @param (string) filepath
   ; @param (map)(opt) options
@@ -47,6 +69,7 @@
    (file-list directory-path {}))
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [directory (-> directory-path str clojure.java.io/file)
                   file-seq  (.listFiles           directory)]
@@ -75,6 +98,7 @@
    (all-file-list directory-path {}))
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (file-seq             directory)]
@@ -103,6 +127,7 @@
    (subdirectory-list directory-path {}))
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (.listFiles           directory)]
@@ -131,6 +156,7 @@
    (all-subdirectory-list directory-path {}))
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [directory  (-> directory-path str clojure.java.io/file)
                   file-seq  (file-seq             directory)]
@@ -159,6 +185,7 @@
    (item-list directory-path {}))
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (vector/remove-item (mapv  str (-> directory-path str clojure.java.io/file .listFiles))
                                 (param directory-path))
@@ -184,6 +211,7 @@
    (all-item-list directory-path {}))
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (vector/remove-item (mapv  str (-> directory-path str clojure.java.io/file file-seq))
                                 (param directory-path))

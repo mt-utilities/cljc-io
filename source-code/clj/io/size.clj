@@ -22,6 +22,7 @@
    (get-filesize filepath {}))
 
   ([filepath {:keys [warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/file-exists? filepath)
             (->                 filepath str clojure.java.io/file .length)
             (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))

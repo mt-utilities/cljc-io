@@ -1,12 +1,12 @@
 
 (ns io.actions
     (:require [clojure.java.io]
-              [candy.api  :refer [return]]
-              [io.check   :as check]
-              [io.config  :as config]
-              [io.file    :as file]
-              [io.read    :as read]
-              [string.api :as string]))
+              [candy.api   :refer [return]]
+              [io.check    :as check]
+              [io.config   :as config]
+              [io.read     :as read]
+              [iso.io.file :as file]
+              [string.api  :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -127,6 +127,7 @@
    (copy-file! source-filepath destination-filepath {}))
 
   ([source-filepath destination-filepath {:keys [return? warn?] :or {return? true warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/file-exists? source-filepath)
             (do (clojure.java.io/copy (-> source-filepath      str clojure.java.io/file)
                                       (-> destination-filepath str clojure.java.io/file))

@@ -1,5 +1,5 @@
 
-(ns io.directory
+(ns iso.io.directory
     (:require [candy.api  :refer [return]]
               [string.api :as string]))
 

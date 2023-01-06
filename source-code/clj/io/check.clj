@@ -1,6 +1,16 @@
 
 (ns io.check
-    (:require [clojure.java.io]))
+    (:require [clojure.java.io]
+              [iso.io.check :as check]))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+; iso.io.check
+(def filename-valid?         check/filename-valid?)
+(def filename-invalid?       check/filename-invalid?)
+(def directory-name-valid?   check/directory-name-valid?)
+(def directory-name-invalid? check/directory-name-invalid?)
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -16,6 +26,7 @@
   ;
   ; @return (boolean)
   [filepath]
+  ; XXX#7440 (source-code/clj/io/README.md)
   (let [file (-> filepath str clojure.java.io/file)]
        (and (-> file .exists)
             (-> file .isDirectory not))))
@@ -31,6 +42,7 @@
   ;
   ; @return (boolean)
   [filepath]
+  ; XXX#7440 (source-code/clj/io/README.md)
   (let [file (-> filepath str clojure.java.io/file)]
        (or (-> file .extists not)
            (-> file .isDirectory))))
@@ -46,6 +58,7 @@
   ;
   ; @return (boolean)
   [directory-path]
+  ; XXX#7440 (source-code/clj/io/README.md)
   (-> directory-path str clojure.java.io/file .isDirectory))
 
 (defn directory-exists?
@@ -59,6 +72,7 @@
   ;
   ; @return (boolean)
   [directory-path]
+  ; XXX#7440 (source-code/clj/io/README.md)
   (let [directory (-> directory-path str clojure.java.io/file)]
        (and (-> directory .exists)
             (-> directory .isDirectory))))
@@ -74,6 +88,7 @@
   ;
   ; @return (boolean)
   [directory-path]
+  ; XXX#7440 (source-code/clj/io/README.md)
   (let [directory (-> directory-path str clojure.java.io/file)]
        (or (-> directory .exists      not)
            (-> directory .isDirectory not))))

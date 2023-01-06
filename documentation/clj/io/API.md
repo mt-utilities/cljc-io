@@ -51,10 +51,6 @@
 
 - [directory-exists?](#directory-exists)
 
-- [directory-name-invalid?](#directory-name-invalid)
-
-- [directory-name-valid?](#directory-name-valid)
-
 - [directory-not-exists?](#directory-not-exists)
 
 - [directory-path->directory-name](#directory-path-directory-name)
@@ -96,10 +92,6 @@
 - [filename->text?](#filename-text)
 
 - [filename->video?](#filename-video)
-
-- [filename-invalid?](#filename-invalid)
-
-- [filename-valid?](#filename-valid)
 
 - [filepath->audio?](#filepath-audio)
 
@@ -145,11 +137,17 @@
 
 - [read-file](#read-file)
 
+- [read-resource](#read-resource)
+
 - [subdirectory-list](#subdirectory-list)
 
 - [swap-edn-file!](#swap-edn-file)
 
 - [unknown-mime-type?](#unknown-mime-type)
+
+- [valid-absolute-path](#valid-absolute-path)
+
+- [valid-relative-path](#valid-relative-path)
 
 - [write-edn-file!](#write-edn-file)
 
@@ -1265,104 +1263,6 @@ Checks whether the directory exists on the given filepath.
 
 ---
 
-### directory-name-invalid?
-
-```
-@param (string) directory-name
-```
-
-```
-@example
-(directory-name-invalid? "my-directory")
-=>
-false
-```
-
-```
-@example
-(directory-name-invalid? "my-directory/my-subdirectory")
-=>
-true
-```
-
-```
-@return (boolean)
-```
-
-<details>
-<summary>Source code</summary>
-
-```
-(defn directory-name-invalid?
-  [directory-name]
-  (re-mismatch? directory-name config/DIRECTORY-NAME-PATTERN))
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :refer [directory-name-invalid?]]))
-
-(io.api/directory-name-invalid? ...)
-(directory-name-invalid?        ...)
-```
-
-</details>
-
----
-
-### directory-name-valid?
-
-```
-@param (string) directory-name
-```
-
-```
-@example
-(directory-name-valid? "my-directory")
-=>
-true
-```
-
-```
-@example
-(directory-name-valid? "my-directory/my-subdirectory")
-=>
-false
-```
-
-```
-@return (boolean)
-```
-
-<details>
-<summary>Source code</summary>
-
-```
-(defn directory-name-valid?
-  [directory-name]
-  (re-match? directory-name config/DIRECTORY-NAME-PATTERN))
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :refer [directory-name-valid?]]))
-
-(io.api/directory-name-valid? ...)
-(directory-name-valid?        ...)
-```
-
-</details>
-
----
-
 ### directory-not-exists?
 
 ```
@@ -2456,104 +2356,6 @@ false
 
 (io.api/filename->video? ...)
 (filename->video?        ...)
-```
-
-</details>
-
----
-
-### filename-invalid?
-
-```
-@param (string) filename
-```
-
-```
-@example
-(filename-invalid? "my-file.ext")
-=>
-false
-```
-
-```
-@example
-(filename-invalid? "my-directory/my-file.ext")
-=>
-true
-```
-
-```
-@return (boolean)
-```
-
-<details>
-<summary>Source code</summary>
-
-```
-(defn filename-invalid?
-  [filename]
-  (re-mismatch? filename config/FILENAME-PATTERN))
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :refer [filename-invalid?]]))
-
-(io.api/filename-invalid? ...)
-(filename-invalid?        ...)
-```
-
-</details>
-
----
-
-### filename-valid?
-
-```
-@param (string) filename
-```
-
-```
-@example
-(filename-valid? "my-file.ext")
-=>
-true
-```
-
-```
-@example
-(filename-valid? "my-directory/my-file.ext")
-=>
-false
-```
-
-```
-@return (boolean)
-```
-
-<details>
-<summary>Source code</summary>
-
-```
-(defn filename-valid?
-  [filename]
-  (re-match? filename config/FILENAME-PATTERN))
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [io.api :refer [filename-valid?]]))
-
-(io.api/filename-valid? ...)
-(filename-valid?        ...)
 ```
 
 </details>
@@ -3733,6 +3535,55 @@ Returns with the file's content or with nil if the return? option is set to fals
 
 ---
 
+### read-resource
+
+```
+@param (string) resource-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
+```
+
+```
+@usage
+(read-resource "my-directory/my-file.ext")
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn read-resource
+  ([resource-path]
+   (read-resource resource-path {}))
+
+  ([resource-path {:keys [warn?] :or {warn? true}}]
+   (try (if-let [resource (clojure.java.io/resource resource-path)]
+                (slurp resource)
+                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" resource-path "\"")))))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [read-resource]]))
+
+(io.api/read-resource ...)
+(read-resource        ...)
+```
+
+</details>
+
+---
+
 ### subdirectory-list
 
 ```
@@ -3888,6 +3739,130 @@ true
 
 (io.api/unknown-mime-type? ...)
 (unknown-mime-type?        ...)
+```
+
+</details>
+
+---
+
+### valid-absolute-path
+
+```
+@param (string) n
+```
+
+```
+@usage
+(valid-absolute-path "my-directory")
+```
+
+```
+@example
+(valid-absolute-path "my-directory")
+=>
+"my-directory"
+```
+
+```
+@example
+(valid-absolute-path "/my-directory/")
+=>
+"my-directory"
+```
+
+```
+@example
+(valid-absolute-path "")
+=>
+""
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn valid-absolute-path
+  [n]
+  (-> n (string/not-ends-with!   "/")
+        (string/not-starts-with! "/")))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [valid-absolute-path]]))
+
+(io.api/valid-absolute-path ...)
+(valid-absolute-path        ...)
+```
+
+</details>
+
+---
+
+### valid-relative-path
+
+```
+@param (string) n
+```
+
+```
+@usage
+(valid-relative-path "/my-directory")
+```
+
+```
+@example
+(valid-relative-path "/my-directory")
+=>
+"/my-directory"
+```
+
+```
+@example
+(valid-relative-path "my-directory/")
+=>
+"/my-directory"
+```
+
+```
+@example
+(valid-relative-path "")
+=>
+"/"
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn valid-relative-path
+  [n]
+  (-> n (string/not-ends-with! "/")
+        (string/starts-with!   "/")))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [valid-relative-path]]))
+
+(io.api/valid-relative-path ...)
+(valid-relative-path        ...)
 ```
 
 </details>
