@@ -27,6 +27,8 @@
 
 - [all-item-list](#all-item-list)
 
+- [all-resource-file-list](#all-resource-file-list)
+
 - [all-subdirectory-list](#all-subdirectory-list)
 
 - [append-to-file!](#append-to-file)
@@ -139,7 +141,21 @@
 
 - [read-file](#read-file)
 
-- [read-resource](#read-resource)
+- [read-resource-file](#read-resource-file)
+
+- [resource-directory-exists?](#resource-directory-exists)
+
+- [resource-directory-not-exists?](#resource-directory-not-exists)
+
+- [resource-directory?](#resource-directory)
+
+- [resource-file-exists?](#resource-file-exists)
+
+- [resource-file-list](#resource-file-list)
+
+- [resource-file-not-exists?](#resource-file-not-exists)
+
+- [resource-file?](#resource-file)
 
 - [subdirectory-list](#subdirectory-list)
 
@@ -527,7 +543,9 @@ Returns with the filenames found on the given directory-path (recursive).
 ```
 @param (string) directory-path
 @param (map)(opt) options
-{:warn? (boolean)(opt)
+{:keep-hidden? (boolean)(opt)
+  Default: false
+ :warn? (boolean)(opt)
   Default: true}
 ```
 
@@ -550,13 +568,10 @@ Returns with the filenames found on the given directory-path (recursive).
   ([directory-path]
    (all-file-list directory-path {}))
 
-  ([directory-path {:keys [warn?] :or {warn? true}}]
+  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory  (-> directory-path str clojure.java.io/file)
-                  file-seq  (file-seq             directory)]
-                 (letfn [(f [%] (and (-> % .isFile)
-                                     (-> % .isHidden not)))]
-                        (mapv str (filter f file-seq))))
+            (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
+                 (helpers/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
@@ -587,7 +602,9 @@ Returns with the subdirectories and files found on the given directory-path (rec
 ```
 @param (string) directory-path
 @param (map)(opt) options
-{:warn? (boolean)(opt)
+{:keep-hidden? (boolean)(opt)
+  Default: false
+ :warn? (boolean)(opt)
   Default: true}
 ```
 
@@ -610,10 +627,10 @@ Returns with the subdirectories and files found on the given directory-path (rec
   ([directory-path]
    (all-item-list directory-path {}))
 
-  ([directory-path {:keys [warn?] :or {warn? true}}]
+  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (vector/remove-item (mapv  str (-> directory-path str clojure.java.io/file file-seq))
-                                (param directory-path))
+            (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
+                 (helpers/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
@@ -634,6 +651,67 @@ Returns with the subdirectories and files found on the given directory-path (rec
 
 ---
 
+### all-resource-file-list
+
+```
+@param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
+```
+
+```
+@usage
+(all-resource-file-list "my-directory")
+```
+
+```
+@example
+(all-resource-file-list "my-directory")
+=>
+["my-directory/my-file.ext" ...]
+```
+
+```
+@return (strings in vector)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn all-resource-file-list
+  ([directory-path]
+   (all-resource-file-list directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if-let [resource-url (clojure.java.io/resource directory-path)]
+                (let [resource-root-url (helpers/get-resource-root-url directory-path)
+                      directory         (-> resource-url clojure.java.io/file)]
+                     (and (-> directory .isDirectory)
+                          (let [file-seq (-> directory file-seq)]
+                               (letfn [(f [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
+                                      (helpers/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
+                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [all-resource-file-list]]))
+
+(io.api/all-resource-file-list ...)
+(all-resource-file-list        ...)
+```
+
+</details>
+
+---
+
 ### all-subdirectory-list
 
 ```
@@ -644,7 +722,9 @@ Returns with the subdirectories found on the given directory-path (recursive).
 ```
 @param (string) directory-path
 @param (map)(opt) options
-{:warn? (boolean)(opt)
+{:keep-hidden? (boolean)(opt)
+  Default: false
+ :warn? (boolean)(opt)
   Default: true}
 ```
 
@@ -667,13 +747,10 @@ Returns with the subdirectories found on the given directory-path (recursive).
   ([directory-path]
    (all-subdirectory-list directory-path {}))
 
-  ([directory-path {:keys [warn?] :or {warn? true}}]
+  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory  (-> directory-path str clojure.java.io/file)
-                  file-seq  (file-seq             directory)]
-                 (letfn [(f [%] (and (-> % .isDirectory)
-                                     (-> % .isHidden not)))]
-                        (mapv str (filter f file-seq))))
+            (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
+                 (helpers/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
@@ -1369,7 +1446,7 @@ Checks whether the directory exists on the given path.
 
 ```
 @usage
-(directory-exists? "my-directory/my-subdirectory")
+(directory? "my-directory/my-subdirectory")
 ```
 
 ```
@@ -1456,7 +1533,9 @@ Checks whether the directory exists on the given path.
 ```
 @param (string) directory-path
 @param (map)(opt) options
-{:warn? (boolean)(opt)
+{:keep-hidden? (boolean)(opt)
+  Default: false
+ :warn? (boolean)(opt)
   Default: true}
 ```
 
@@ -1477,11 +1556,8 @@ Checks whether the directory exists on the given path.
   ([directory-path]
    (empty-directory? directory-path {}))
 
-  ([directory-path {:keys [warn?] :or {warn? true}}]
-   (try (if (check/directory-exists? directory-path)
-            (-> directory-path item-list empty?)
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
-        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
+  ([directory-path options]
+   (-> directory-path (item-list options) empty?)))
 ```
 
 </details>
@@ -1845,7 +1921,9 @@ Returns with the filenames found on the given directory-path (non-recursive).
 ```
 @param (string) directory-path
 @param (map)(opt) options
-{:warn? (boolean)(opt)
+{:keep-hidden? (boolean)(opt)
+  Default: false
+ :warn? (boolean)(opt)
   Default: true}
 ```
 
@@ -1868,13 +1946,10 @@ Returns with the filenames found on the given directory-path (non-recursive).
   ([directory-path]
    (file-list directory-path {}))
 
-  ([directory-path {:keys [warn?] :or {warn? true}}]
+  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory (-> directory-path str clojure.java.io/file)
-                  file-seq  (.listFiles           directory)]
-                 (letfn [(f [%] (and (-> % .isFile)
-                                     (-> % .isHidden not)))]
-                        (mapv str (filter f file-seq))))
+            (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
+                 (helpers/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
@@ -1955,7 +2030,7 @@ Checks whether the file exists on the given filepath.
 
 ```
 @usage
-(file-exists? "my-directory/my-file.ext")
+(file? "my-directory/my-file.ext")
 ```
 
 ```
@@ -2992,7 +3067,9 @@ Returns with the subdirectories and files found on the given directory-path (non
 ```
 @param (string) directory-path
 @param (map)(opt) options
-{:warn? (boolean)(opt)
+{:keep-hidden? (boolean)(opt)
+  Default: false
+ :warn? (boolean)(opt)
   Default: true}
 ```
 
@@ -3015,10 +3092,10 @@ Returns with the subdirectories and files found on the given directory-path (non
   ([directory-path]
    (item-list directory-path {}))
 
-  ([directory-path {:keys [warn?] :or {warn? true}}]
+  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (vector/remove-item (mapv  str (-> directory-path str clojure.java.io/file .listFiles))
-                                (param directory-path))
+            (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
+                 (helpers/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
@@ -3582,7 +3659,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 
 ---
 
-### read-resource
+### read-resource-file
 
 ```
 @param (string) resource-path
@@ -3593,7 +3670,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 
 ```
 @usage
-(read-resource "my-directory/my-file.ext")
+(read-resource-file "my-directory/my-file.ext")
 ```
 
 ```
@@ -3604,13 +3681,13 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Source code</summary>
 
 ```
-(defn read-resource
+(defn read-resource-file
   ([resource-path]
-   (read-resource resource-path {}))
+   (read-resource-file resource-path {}))
 
   ([resource-path {:keys [warn?] :or {warn? true}}]
-   (try (if-let [resource (clojure.java.io/resource resource-path)]
-                (slurp resource)
+   (try (if-let [resource-url (clojure.java.io/resource resource-path)]
+                (slurp resource-url)
                 (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" resource-path "\"")))))))
 ```
@@ -3621,10 +3698,345 @@ Returns with the file's content or with nil if the return? option is set to fals
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [io.api :refer [read-resource]]))
+(ns my-namespace (:require [io.api :refer [read-resource-file]]))
 
-(io.api/read-resource ...)
-(read-resource        ...)
+(io.api/read-resource-file ...)
+(read-resource-file        ...)
+```
+
+</details>
+
+---
+
+### resource-directory-exists?
+
+```
+@description
+Checks whether the resource directory exists on the given resource path.
+```
+
+```
+@param (string) resource-path
+```
+
+```
+@usage
+(resource-directory-exists? "my-directory")
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn resource-directory-exists?
+  [resource-path]
+  (if-let [resource-url (clojure.java.io/resource resource-path)]
+          (-> resource-url clojure.java.io/file .isDirectory)))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [resource-directory-exists?]]))
+
+(io.api/resource-directory-exists? ...)
+(resource-directory-exists?        ...)
+```
+
+</details>
+
+---
+
+### resource-directory-not-exists?
+
+```
+@description
+Checks whether the resource directory does not exist on the given resource path.
+```
+
+```
+@param (string) resource-path
+```
+
+```
+@usage
+(resource-directory-not-exists? "my-directory")
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn resource-directory-not-exists?
+  [resource-path]
+  (if-let [resource-url (clojure.java.io/resource resource-path)]
+          (-> resource-url clojure.java.io/file .isDirectory not)))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [resource-directory-not-exists?]]))
+
+(io.api/resource-directory-not-exists? ...)
+(resource-directory-not-exists?        ...)
+```
+
+</details>
+
+---
+
+### resource-directory?
+
+```
+@description
+Checks whether the resource directory exists on the given resource path.
+```
+
+```
+@param (string) resource-path
+```
+
+```
+@usage
+(resource-directory? "my-directory")
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn resource-directory?
+  [resource-path]
+  (resource-directory-exists? resource-path))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [resource-directory?]]))
+
+(io.api/resource-directory? ...)
+(resource-directory?        ...)
+```
+
+</details>
+
+---
+
+### resource-file-exists?
+
+```
+@description
+Checks whether the resource file exists on the given resource path.
+```
+
+```
+@param (string) resource-path
+```
+
+```
+@usage
+(resource-file-exists? "my-directory/my-file.ext")
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn resource-file-exists?
+  [resource-path]
+  (if-let [resource-url (clojure.java.io/resource resource-path)]
+          (-> resource-url clojure.java.io/file .isFile)))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [resource-file-exists?]]))
+
+(io.api/resource-file-exists? ...)
+(resource-file-exists?        ...)
+```
+
+</details>
+
+---
+
+### resource-file-list
+
+```
+@param (string) directory-path
+@param (map)(opt) options
+{:warn? (boolean)(opt)
+  Default: true}
+```
+
+```
+@usage
+(resource-file-list "my-directory")
+```
+
+```
+@example
+(resource-file-list "my-directory")
+=>
+["my-directory/my-file.ext" ...]
+```
+
+```
+@return (strings in vector)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn resource-file-list
+  ([directory-path]
+   (resource-file-list directory-path {}))
+
+  ([directory-path {:keys [warn?] :or {warn? true}}]
+   (try (if-let [resource-url (clojure.java.io/resource directory-path)]
+                (let [resource-root-url (helpers/get-resource-root-url directory-path)
+                      directory         (-> resource-url clojure.java.io/file)]
+                     (and (-> directory .isDirectory)
+                          (let [file-seq (-> directory .listFiles)]
+                               (letfn [(f [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
+                                      (helpers/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
+                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [resource-file-list]]))
+
+(io.api/resource-file-list ...)
+(resource-file-list        ...)
+```
+
+</details>
+
+---
+
+### resource-file-not-exists?
+
+```
+@description
+Checks whether the resource file does not exist on the given resource path.
+```
+
+```
+@param (string) resource-path
+```
+
+```
+@usage
+(resource-file-not-exists? "my-directory/my-file.ext")
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn resource-file-not-exists?
+  [resource-path]
+  (if-let [resource-url (clojure.java.io/resource resource-path)]
+          (-> resource-url clojure.java.io/file .isFile not)))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [resource-file-not-exists?]]))
+
+(io.api/resource-file-not-exists? ...)
+(resource-file-not-exists?        ...)
+```
+
+</details>
+
+---
+
+### resource-file?
+
+```
+@description
+Checks whether the resource file exists on the given resource path.
+```
+
+```
+@param (string) resource-path
+```
+
+```
+@usage
+(resource-file? "my-directory/my-file.ext")
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn resource-file?
+  [resource-path]
+  (resource-file-exists? resource-path))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [resource-file?]]))
+
+(io.api/resource-file? ...)
+(resource-file?        ...)
 ```
 
 </details>
@@ -3641,7 +4053,9 @@ Returns with the subdirectories found on the given directory-path (non-recursive
 ```
 @param (string) directory-path
 @param (map)(opt) options
-{:warn? (boolean)(opt)
+{:keep-hidden? (boolean)(opt)
+  Default: false
+ :warn? (boolean)(opt)
   Default: true}
 ```
 
@@ -3664,13 +4078,10 @@ Returns with the subdirectories found on the given directory-path (non-recursive
   ([directory-path]
    (subdirectory-list directory-path {}))
 
-  ([directory-path {:keys [warn?] :or {warn? true}}]
+  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
    (try (if (check/directory-exists? directory-path)
-            (let [directory  (-> directory-path str clojure.java.io/file)
-                  file-seq  (.listFiles           directory)]
-                 (letfn [(f [%] (and (-> % .isDirectory)
-                                     (-> % .isHidden not)))]
-                        (mapv str (filter f file-seq))))
+            (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
+                 (helpers/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```

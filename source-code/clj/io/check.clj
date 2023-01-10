@@ -15,6 +15,94 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
+(defn resource-file-exists?
+  ; @description
+  ; Checks whether the resource file exists on the given resource path.
+  ;
+  ; @param (string) resource-path
+  ;
+  ; @usage
+  ; (resource-file-exists? "my-directory/my-file.ext")
+  ;
+  ; @return (boolean)
+  [resource-path]
+  (if-let [resource-url (clojure.java.io/resource resource-path)]
+          (-> resource-url clojure.java.io/file .isFile)))
+
+(defn resource-file-not-exists?
+  ; @description
+  ; Checks whether the resource file does not exist on the given resource path.
+  ;
+  ; @param (string) resource-path
+  ;
+  ; @usage
+  ; (resource-file-not-exists? "my-directory/my-file.ext")
+  ;
+  ; @return (boolean)
+  [resource-path]
+  (if-let [resource-url (clojure.java.io/resource resource-path)]
+          (-> resource-url clojure.java.io/file .isFile not)))
+
+(defn resource-file?
+  ; @description
+  ; Checks whether the resource file exists on the given resource path.
+  ;
+  ; @param (string) resource-path
+  ;
+  ; @usage
+  ; (resource-file? "my-directory/my-file.ext")
+  ;
+  ; @return (boolean)
+  [resource-path]
+  (resource-file-exists? resource-path))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn resource-directory-exists?
+  ; @description
+  ; Checks whether the resource directory exists on the given resource path.
+  ;
+  ; @param (string) resource-path
+  ;
+  ; @usage
+  ; (resource-directory-exists? "my-directory")
+  ;
+  ; @return (boolean)
+  [resource-path]
+  (if-let [resource-url (clojure.java.io/resource resource-path)]
+          (-> resource-url clojure.java.io/file .isDirectory)))
+
+(defn resource-directory-not-exists?
+  ; @description
+  ; Checks whether the resource directory does not exist on the given resource path.
+  ;
+  ; @param (string) resource-path
+  ;
+  ; @usage
+  ; (resource-directory-not-exists? "my-directory")
+  ;
+  ; @return (boolean)
+  [resource-path]
+  (if-let [resource-url (clojure.java.io/resource resource-path)]
+          (-> resource-url clojure.java.io/file .isDirectory not)))
+
+(defn resource-directory?
+  ; @description
+  ; Checks whether the resource directory exists on the given resource path.
+  ;
+  ; @param (string) resource-path
+  ;
+  ; @usage
+  ; (resource-directory? "my-directory")
+  ;
+  ; @return (boolean)
+  [resource-path]
+  (resource-directory-exists? resource-path))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
 (defn file-exists?
   ; @description
   ; Checks whether the file exists on the given filepath.
@@ -54,11 +142,14 @@
   ; @param (string) filepath
   ;
   ; @usage
-  ; (file-exists? "my-directory/my-file.ext")
+  ; (file? "my-directory/my-file.ext")
   ;
   ; @return (boolean)
   [filepath]
   (file-exists? filepath))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defn directory-exists?
   ; @description
@@ -99,7 +190,7 @@
   ; @param (string) directory-path
   ;
   ; @usage
-  ; (directory-exists? "my-directory/my-subdirectory")
+  ; (directory? "my-directory/my-subdirectory")
   ;
   ; @return (boolean)
   [directory-path]

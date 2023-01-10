@@ -5,6 +5,7 @@
               [io.check          :as check]
               [io.config         :as config]
               [io.edn            :as edn]
+              [io.helpers        :as helpers]
               [io.read           :as read]
               [io.size           :as size]
               [iso.io.directory  :as directory]
@@ -37,16 +38,22 @@
 (def delete-directory!       actions/delete-directory!)
 
 ; io.check
-(def filename-valid?         check/filename-valid?)
-(def filename-invalid?       check/filename-invalid?)
-(def directory-name-valid?   check/directory-name-valid?)
-(def directory-name-invalid? check/directory-name-invalid?)
-(def file?                   check/file?)
-(def file-exists?            check/file-exists?)
-(def file-not-exists?        check/file-not-exists?)
-(def directory?              check/directory?)
-(def directory-exists?       check/directory-exists?)
-(def directory-not-exists?   check/directory-not-exists?)
+(def filename-valid?                check/filename-valid?)
+(def filename-invalid?              check/filename-invalid?)
+(def directory-name-valid?          check/directory-name-valid?)
+(def directory-name-invalid?        check/directory-name-invalid?)
+(def resource-file-exists?          check/resource-file-exists?)
+(def resource-file-not-exists?      check/resource-file-not-exists?)
+(def resource-file?                 check/resource-file?)
+(def resource-directory-exists?     check/resource-directory-exists?)
+(def resource-directory-not-exists? check/resource-directory-not-exists?)
+(def resource-directory?            check/resource-directory?)
+(def file-exists?                   check/file-exists?)
+(def file-not-exists?               check/file-not-exists?)
+(def file?                          check/file?)
+(def directory-exists?              check/directory-exists?)
+(def directory-not-exists?          check/directory-not-exists?)
+(def directory?                     check/directory?)
 
 ; io.config
 (def MIME-TYPES config/MIME-TYPES)
@@ -60,16 +67,22 @@
 (def read-edn-header   edn/read-edn-header)
 (def write-edn-header! edn/write-edn-header!)
 
+; io.helpers
+(def get-resource-root-path io.helpers/get-resource-root-path)
+(def get-resource-root-url  io.helpers/get-resource-root-url)
+
 ; io.read
-(def read-resource         read/read-resource)
-(def read-file             read/read-file)
-(def file-list             read/file-list)
-(def all-file-list         read/all-file-list)
-(def subdirectory-list     read/subdirectory-list)
-(def all-subdirectory-list read/all-subdirectory-list)
-(def item-list             read/item-list)
-(def all-item-list         read/all-item-list)
-(def empty-directory?      read/empty-directory?)
+(def read-resource-file     read/read-resource-file)
+(def resource-file-list     read/resource-file-list)
+(def all-resource-file-list read/all-resource-file-list)
+(def read-file              read/read-file)
+(def file-list              read/file-list)
+(def all-file-list          read/all-file-list)
+(def subdirectory-list      read/subdirectory-list)
+(def all-subdirectory-list  read/all-subdirectory-list)
+(def item-list              read/item-list)
+(def all-item-list          read/all-item-list)
+(def empty-directory?       read/empty-directory?)
 
 ; io.size
 (def get-filesize          size/get-filesize)
