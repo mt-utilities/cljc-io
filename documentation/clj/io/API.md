@@ -79,6 +79,8 @@
 
 - [file-not-exists?](#file-not-exists)
 
+- [file?](#file)
+
 - [filename->audio?](#filename-audio)
 
 - [filename->basename](#filename-basename)
@@ -1220,7 +1222,7 @@ to settle the path for the item.
 
 ```
 @description
-Checks whether the directory exists on the given filepath.
+Checks whether the directory exists on the given path.
 ```
 
 ```
@@ -1267,7 +1269,7 @@ Checks whether the directory exists on the given filepath.
 
 ```
 @description
-Checks whether the directory does not exist on the given filepath.
+Checks whether the directory does not exist on the given path.
 ```
 
 ```
@@ -1358,7 +1360,7 @@ Checks whether the directory does not exist on the given filepath.
 
 ```
 @description
-Checks whether a directory exists on the given filepath.
+Checks whether the directory exists on the given path.
 ```
 
 ```
@@ -1367,7 +1369,7 @@ Checks whether a directory exists on the given filepath.
 
 ```
 @usage
-(directory? "my-directory/my-subdirectory")
+(directory-exists? "my-directory/my-subdirectory")
 ```
 
 ```
@@ -1380,7 +1382,7 @@ Checks whether a directory exists on the given filepath.
 ```
 (defn directory?
   [directory-path]
-  (-> directory-path str clojure.java.io/file .isDirectory))
+  (directory-exists? directory-path))
 ```
 
 </details>
@@ -1934,6 +1936,51 @@ Checks whether the file does not exist on the given filepath.
 
 (io.api/file-not-exists? ...)
 (file-not-exists?        ...)
+```
+
+</details>
+
+---
+
+### file?
+
+```
+@description
+Checks whether the file exists on the given filepath.
+```
+
+```
+@param (string) filepath
+```
+
+```
+@usage
+(file-exists? "my-directory/my-file.ext")
+```
+
+```
+@return (boolean)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn file?
+  [filepath]
+  (file-exists? filepath))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [io.api :refer [file?]]))
+
+(io.api/file? ...)
+(file?        ...)
 ```
 
 </details>

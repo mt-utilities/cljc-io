@@ -47,23 +47,22 @@
        (or (-> file .extists not)
            (-> file .isDirectory))))
 
-(defn directory?
+(defn file?
   ; @description
-  ; Checks whether a directory exists on the given filepath.
+  ; Checks whether the file exists on the given filepath.
   ;
-  ; @param (string) directory-path
+  ; @param (string) filepath
   ;
   ; @usage
-  ; (directory? "my-directory/my-subdirectory")
+  ; (file-exists? "my-directory/my-file.ext")
   ;
   ; @return (boolean)
-  [directory-path]
-  ; XXX#7440 (source-code/clj/io/README.md)
-  (-> directory-path str clojure.java.io/file .isDirectory))
+  [filepath]
+  (file-exists? filepath))
 
 (defn directory-exists?
   ; @description
-  ; Checks whether the directory exists on the given filepath.
+  ; Checks whether the directory exists on the given path.
   ;
   ; @param (string) directory-path
   ;
@@ -79,7 +78,7 @@
 
 (defn directory-not-exists?
   ; @description
-  ; Checks whether the directory does not exist on the given filepath.
+  ; Checks whether the directory does not exist on the given path.
   ;
   ; @param (string) directory-path
   ;
@@ -92,3 +91,16 @@
   (let [directory (-> directory-path str clojure.java.io/file)]
        (or (-> directory .exists      not)
            (-> directory .isDirectory not))))
+
+(defn directory?
+  ; @description
+  ; Checks whether the directory exists on the given path.
+  ;
+  ; @param (string) directory-path
+  ;
+  ; @usage
+  ; (directory-exists? "my-directory/my-subdirectory")
+  ;
+  ; @return (boolean)
+  [directory-path]
+  (directory-exists? directory-path))

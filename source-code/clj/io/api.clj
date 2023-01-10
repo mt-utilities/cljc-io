@@ -41,6 +41,7 @@
 (def filename-invalid?       check/filename-invalid?)
 (def directory-name-valid?   check/directory-name-valid?)
 (def directory-name-invalid? check/directory-name-invalid?)
+(def file?                   check/file?)
 (def file-exists?            check/file-exists?)
 (def file-not-exists?        check/file-not-exists?)
 (def directory?              check/directory?)

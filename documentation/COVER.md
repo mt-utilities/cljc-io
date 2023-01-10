@@ -1,8 +1,7 @@
 
-
 # io-api documentation
 
-Documentation of the [io-api](https://github.com/bithandshake-hq/io-api) Clojure / ClojureScript library
+Documentation of the [io-api](https://github.com/bithandshake/io-api) Clojure / ClojureScript library
 
 ##### [README](../README.md) > DOCUMENTATION
 
