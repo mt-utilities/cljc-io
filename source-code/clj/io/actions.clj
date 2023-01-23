@@ -1,11 +1,11 @@
 
 (ns io.actions
     (:require [clojure.java.io]
-              [candy.api   :refer [return]]
               [io.check    :as check]
               [io.config   :as config]
               [io.read     :as read]
               [iso.io.file :as file]
+              [noop.api    :refer [return]]
               [string.api  :as string]))
 
 ;; ----------------------------------------------------------------------------

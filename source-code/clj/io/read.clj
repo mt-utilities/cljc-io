@@ -1,10 +1,10 @@
 
 (ns io.read
     (:require [clojure.java.io]
-              [candy.api  :refer [param return]]
               [io.check   :as check]
               [io.config  :as config]
               [io.helpers :as helpers]
+              [noop.api   :refer [param return]]
               [string.api :as string]
               [vector.api :as vector]))
 

@@ -1,7 +1,7 @@
 
 (ns iso.io.file
-    (:require [candy.api        :refer [return]]
-              [iso.io.mime-type :as mime-type]
+    (:require [iso.io.mime-type :as mime-type]
+              [noop.api         :refer [return]]
               [string.api       :as string]))
 
 ;; ----------------------------------------------------------------------------

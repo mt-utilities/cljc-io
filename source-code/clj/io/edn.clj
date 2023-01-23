@@ -1,10 +1,10 @@
 
 (ns io.edn
-    (:require [candy.api  :refer [return]]
-              [io.actions :as actions]
+    (:require [io.actions :as actions]
               [io.check   :as check]
               [io.config  :as config]
               [io.read    :as read]
+              [noop.api   :refer [return]]
               [pretty.api :as pretty]
               [reader.api :as reader]
               [string.api :as string]
