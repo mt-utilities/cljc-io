@@ -3,7 +3,8 @@
     (:require [clojure.java.io]
               [io.check   :as check]
               [io.config  :as config]
-              [io.helpers :as helpers]
+              [io.env     :as env]
+              [io.utils   :as utils]
               [noop.api   :refer [param return]]
               [string.api :as string]
               [vector.api :as vector]))
@@ -50,12 +51,12 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if-let [resource-url (clojure.java.io/resource directory-path)]
-                (let [resource-root-url (helpers/get-resource-root-url directory-path)
+                (let [resource-root-url (env/get-resource-root-url directory-path)
                       directory         (-> resource-url clojure.java.io/file)]
                      (and (-> directory .isDirectory)
                           (let [file-seq (-> directory .listFiles)]
                                (letfn [(f [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
-                                      (helpers/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
+                                      (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
                 (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -79,12 +80,12 @@
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if-let [resource-url (clojure.java.io/resource directory-path)]
-                (let [resource-root-url (helpers/get-resource-root-url directory-path)
+                (let [resource-root-url (env/get-resource-root-url directory-path)
                       directory         (-> resource-url clojure.java.io/file)]
                      (and (-> directory .isDirectory)
                           (let [file-seq (-> directory file-seq)]
                                (letfn [(f [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
-                                      (helpers/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
+                                      (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
                 (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -134,7 +135,7 @@
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
-                 (helpers/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -162,7 +163,7 @@
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
-                 (helpers/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -190,7 +191,7 @@
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
-                 (helpers/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -218,7 +219,7 @@
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
-                 (helpers/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -246,7 +247,7 @@
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
-                 (helpers/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -274,7 +275,7 @@
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
-                 (helpers/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
             (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 

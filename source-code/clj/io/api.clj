@@ -5,7 +5,7 @@
               [io.check          :as check]
               [io.config         :as config]
               [io.edn            :as edn]
-              [io.helpers        :as helpers]
+              [io.env            :as env]
               [io.read           :as read]
               [io.size           :as size]
               [iso.io.directory  :as directory]
@@ -67,9 +67,9 @@
 (def read-edn-header   edn/read-edn-header)
 (def write-edn-header! edn/write-edn-header!)
 
-; io.helpers
-(def get-resource-root-path io.helpers/get-resource-root-path)
-(def get-resource-root-url  io.helpers/get-resource-root-url)
+; io.env
+(def get-resource-root-path io.env/get-resource-root-path)
+(def get-resource-root-url  io.env/get-resource-root-url)
 
 ; io.read
 (def read-resource-file     read/read-resource-file)
