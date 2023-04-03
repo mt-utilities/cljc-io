@@ -129,7 +129,12 @@
   ; @param (string) filepath
   ;
   ; @usage
-  ; (filepath->extension "my-directory/my-file.EXT")
+  ; (filepath->extension "my-directory/my-file.ext")
+  ;
+  ; @example
+  ; (filepath->extension "my-directory/my-file.ext")
+  ; =>
+  ; "ext"
   ;
   ; @example
   ; (filepath->extension "my-directory/my-file.EXT")
@@ -157,7 +162,12 @@
   ; @param (string) filename
   ;
   ; @usage
-  ; (filename->extension "my-file.EXT")
+  ; (filename->extension "my-file.ext")
+  ;
+  ; @example
+  ; (filename->extension "my-file.ext")
+  ; =>
+  ; "ext"
   ;
   ; @example
   ; (filename->extension "my-file.EXT")
@@ -182,10 +192,10 @@
   ; @param (string) filename
   ;
   ; @usage
-  ; (filename->basename "my-file.EXT")
+  ; (filename->basename "my-file.ext")
   ;
   ; @example
-  ; (filename->basename "my-file.EXT")
+  ; (filename->basename "my-file.ext")
   ; =>
   ; "my-file"
   ;
@@ -209,10 +219,10 @@
   ; @param (string) filepath
   ;
   ; @usage
-  ; (filepath->basename "my-directory/my-file.EXT")
+  ; (filepath->basename "my-directory/my-file.ext")
   ;
   ; @example
-  ; (filepath->basename "my-directory/my-file.EXT")
+  ; (filepath->basename "my-directory/my-file.ext")
   ; =>
   ; "my-file"
   ;
@@ -474,4 +484,4 @@
   ;
   ; @return (boolean)
   [filename]
-  (filepath->image? filename))
+  (filepath->video? filename))
