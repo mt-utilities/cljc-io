@@ -27,6 +27,8 @@ The <strong>cljc-io</strong> functional documentation is [available here](docume
 
 You can track the changes of the <strong>cljc-io</strong> library [here](CHANGES.md).
 
+# Usage
+
 ### Index
 
 - [How to check whether a file exists?](#how-to-check-whether-a-file-exists)
@@ -82,8 +84,6 @@ You can track the changes of the <strong>cljc-io</strong> library [here](CHANGES
 - [How to get the header from an EDN file?](#how-to-get-the-header-from-an-edn-file)
 
 - [How to prepend to the header of an EDN file?](#how-to-prepend-to-the-header-of-an-edn-file)
-
-# Usage
 
 ### How to check whether a file exists?
 
