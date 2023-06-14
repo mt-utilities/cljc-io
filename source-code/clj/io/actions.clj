@@ -35,6 +35,12 @@
            (return :directory-already-exists))))
 
 (defn create-path!
+  ; @description
+  ; Creates the (non-exisinting) ancestor folders of the given path.
+  ; E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
+  ;      to this function, it creates the 'my-directory' and 'my-subdirectory'
+  ;      folders in case of they do not exist.
+  ;
   ; @param (string) item-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -42,12 +48,6 @@
   ;
   ; @usage
   ; (create-path! "my-directory/my-file.ext")
-  ;
-  ; @example
-  ; (create-path! "my-directory/my-file.ext")
-  ; =>
-  ; It only creates the my-directory (if it does not exist),
-  ; to settle the path for the item.
   ;
   ; @return (boolean)
   ([item-path]

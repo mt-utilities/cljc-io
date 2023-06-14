@@ -110,7 +110,7 @@ function checks whether a directory exists or not.
 The [`io.api/read-file`](documentation/clj/io/API.md/#read-file)
 function reads the content from a file.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (read-file "my-directory/my-file.ext")
@@ -122,7 +122,7 @@ function reads the content from a file.
 The [`io.api/file-list`](documentation/clj/io/API.md/#file-list)
 function reads the file list of a directory.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (file-list "my-directory/my-subdirectory")
@@ -134,7 +134,7 @@ function reads the file list of a directory.
 The [`io.api/all-file-list`](documentation/clj/io/API.md/#all-file-list)
 function reads the file list of a directory (recursively).
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (all-file-list "my-directory/my-subdirectory")
@@ -146,7 +146,7 @@ function reads the file list of a directory (recursively).
 The [`io.api/subdirectory-list`](documentation/clj/io/API.md/#subdirectory-list)
 function reads the subdirectory list of a directory.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (subdirectory-list "my-directory/my-subdirectory")
@@ -158,7 +158,7 @@ function reads the subdirectory list of a directory.
 The [`io.api/subdirectory-list`](documentation/clj/io/API.md/#subdirectory-list)
 function reads the subdirectory list of a directory (recursively).
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (all-subdirectory-list "my-directory/my-subdirectory")
@@ -170,7 +170,7 @@ function reads the subdirectory list of a directory (recursively).
 The [`io.api/item-list`](documentation/clj/io/API.md/#item-list)
 function reads the file and subdirectory list of a directory.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (item-list "my-directory/my-subdirectory")
@@ -182,7 +182,7 @@ function reads the file and subdirectory list of a directory.
 The [`io.api/item-list`](documentation/clj/io/API.md/#item-list)
 function reads the file and subdirectory list of a directory (recursively).
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (all-item-list "my-directory/my-subdirectory")
@@ -194,7 +194,7 @@ function reads the file and subdirectory list of a directory (recursively).
 The [`io.api/empty-directory?`](documentation/clj/io/API.md/#empty-directory)
 function checks whether a directory is empty or not.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (empty-directory? "my-directory/my-subdirectory")
@@ -206,7 +206,7 @@ function checks whether a directory is empty or not.
 The [`io.api/create-directory!`](documentation/clj/io/API.md/#create-directory)
 function creates a directory on a specific path.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (create-directory! "my-directory/my-subdirectory")
@@ -216,10 +216,13 @@ function creates a directory on a specific path.
 ### How to settle a path for a directory or file?
 
 The [`io.api/create-path!`](documentation/clj/io/API.md/#create-path)
-function settles a path for a directory or file.
-The function only creates the parent directory to settle the path for the directory or file.
+function creates the (non-exisinting) ancestor folders of the given path.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
+     to this function, it creates the 'my-directory' and 'my-subdirectory'
+     folders in case of they do not exist.
+
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (create-path! "my-directory/my-subdirectory/my-file.ext")
@@ -232,7 +235,7 @@ The [`io.api/create-file!`](documentation/clj/io/API.md/#create-file)
 function creates an empty plain text file on a specific path.
 
 - By using the `{:return? true}` setting, the function will return the content of the file.
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (create-file! "my-directory/my-file.ext")
@@ -245,7 +248,7 @@ function creates an empty plain text file on a specific path.
 The [`io.api/delete-file!`](documentation/clj/io/API.md/#delete-file)
 function deletes a file from a specific path.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (delete-file! "my-directory/my-file.ext")
@@ -258,7 +261,7 @@ The [`io.api/copy-file!`](documentation/clj/io/API.md/#copy-file)
 function duplicates a file to a specific path.
 
 - By using the `{:return? true}` setting, the function will return the content of the file.
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (copy-file! "my-directory/my-file.ext" "my-directory/copy-file.ext")
@@ -273,7 +276,7 @@ function writes the given content into a file.
 
 - By using the `{:create? true}` setting, the function will create the file if it doesn't exist.
 - By using the `{:return? true}` setting, the function will return the content of the file.
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (write-file! "my-directory/my-file.ext" "My content")
@@ -289,7 +292,7 @@ function deletes the content of a file.
 
 - By using the `{:create? true}` setting, the function will create the file if it doesn't exist.
 - By using the `{:return? true}` setting, the function will return the content of the file (after emptying it).
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (empty-file! "my-directory/my-file.ext")
@@ -306,7 +309,7 @@ function appends the given string to the content of a file.
 - By using the `{:create? true}` setting, the function will create the file if it doesn't exist.
 - By using the `{:max-line-count ...}` setting, the function will crop the file content if necessary.
 - By using the `{:return? true}` setting, the function will return the content of the file.
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (append-to-file! "my-directory/my-file.ext" "My content")
@@ -324,7 +327,7 @@ function prepends the given string to the content of a file.
 - By using the `{:create? true}` setting, the function will create the file if it doesn't exist.
 - By using the `{:max-line-count ...}` setting, the function will crop the file content if necessary.
 - By using the `{:return? true}` setting, the function will return the content of the file.
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (prepend-to-file! "my-directory/my-file.ext" "My content")
@@ -339,7 +342,7 @@ function prepends the given string to the content of a file.
 The [`io.api/empty-directory!`](documentation/clj/io/API.md/#empty-directory)
 function removes the content of a directory.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (empty-directory! "my-directory/my-subdirectory")
@@ -351,7 +354,7 @@ function removes the content of a directory.
 The [`io.api/delete-directory!`](documentation/clj/io/API.md/#delete-directory)
 function deletes a directory.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (delete-directory! "my-directory/my-subdirectory")
@@ -363,7 +366,7 @@ function deletes a directory.
 The [`io.api/read-edn-file`](documentation/clj/io/API.md/#read-edn-file)
 function reads the content of a file as an EDN structure.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (read-edn-file "my-directory/my-file.edn")
@@ -376,7 +379,7 @@ The [`io.api/create-edn-file!`](documentation/clj/io/API.md/#create-edn-file)
 function creates an EDN file.
 
 - By using the `{:return? true}` setting, the function will return the content of the file.
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (create-edn-file! "my-directory/my-file.edn")
@@ -391,7 +394,7 @@ function writes content into an EDN file.
 - By using the `{:abc? true}` setting, the output will be ordered alphabetically.
 - By using the `{:create? true}` setting, the function will create the file if it doesn't exist.
 - By using the `{:return? true}` setting, the function will return the content of the file.
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (create-edn-file! "my-directory/my-file.edn")
@@ -420,7 +423,7 @@ Unlike the other file handling functions, the `swap-edn-file!` function ...
 The [`io.api/read-edn-header`](documentation/clj/io/API.md/#read-edn-header)
 function reads the header of an EDN file.
 
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (read-edn-header "my-directory/my-file.edn")
@@ -434,7 +437,7 @@ function prepends the given content to the header of an EDN file.
 
 - By using the `{:create? true}` setting, the function will create the file if it doesn't exist.
 - By using the `{:return? true}` setting, the function will return the content of the file.
-- By using the `{:warn? true}` setting, the function will print the warnings on the console.
+- By using the `{:warn? true}` setting, the function could print the warnings on the console.
 
 ```
 (write-edn-header! "my-directory/my-file.edn" "First row\nSecond row")
