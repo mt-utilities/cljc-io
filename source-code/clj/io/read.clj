@@ -5,7 +5,6 @@
               [io.config  :as config]
               [io.env     :as env]
               [io.utils   :as utils]
-              [noop.api   :refer [param return]]
               [string.api :as string]
               [vector.api :as vector]))
 

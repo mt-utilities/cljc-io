@@ -1,7 +1,6 @@
 
 (ns iso.io.file
     (:require [iso.io.mime-type :as mime-type]
-              [noop.api         :refer [return]]
               [string.api       :as string]))
 
 ;; ----------------------------------------------------------------------------
@@ -213,7 +212,7 @@
   [filename]
   (if-let [extension (filename->extension filename)]
           (string/before-last-occurence filename (str "." extension))
-          (return filename)))
+          (-> filename)))
 
 (defn filepath->basename
   ; @param (string) filepath

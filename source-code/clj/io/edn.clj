@@ -4,7 +4,6 @@
               [io.check   :as check]
               [io.config  :as config]
               [io.read    :as read]
-              [noop.api   :refer [return]]
               [pretty.api :as pretty]
               [reader.api :as reader]
               [string.api :as string]
@@ -156,8 +155,8 @@
                                             (f (str result "\n")
                                                (cut-row n))
                                             :else
-                                            (return result))
-                                      (return result)))]
+                                            (-> result))
+                                      (-> result)))]
                (f "" file-content)))))
 
 (defn write-edn-header!
@@ -186,6 +185,6 @@
                    (if-let [last-row (string/after-last-occurence n "\n")]
                            (f (str "; " last-row "\n" result)
                               (string/before-last-occurence n "\n" {:return? false}))
-                           (return result)))]
+                           (-> result)))]
                (let [file-content (str "\n" (f file-content header))]
                     (actions/write-file! filepath file-content options))))))

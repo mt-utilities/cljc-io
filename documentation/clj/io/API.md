@@ -965,7 +965,7 @@ Returns with the file's content or with nil if the return? option is set to fals
            (do (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
                (try (-> directory-path java.io.File. .mkdirs)
                     (catch Exception e (println e))))
-           (return :directory-already-exists))))
+           (-> :directory-already-exists))))
 ```
 
 </details>
@@ -1131,7 +1131,7 @@ E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
    (when-let [parent-path (file/item-path->parent-path item-path)]
              (if-not (check/directory-exists? parent-path)
                      (create-directory!       parent-path options)
-                     (return :path-already-exists)))))
+                     (-> :path-already-exists)))))
 ```
 
 </details>
@@ -1413,8 +1413,8 @@ Checks whether the directory does not exist on the given path.
 (defn directory-path->directory-name
   [directory-path]
   (if-let [directory-name (string/after-last-occurence directory-path "/")]
-          (return directory-name)
-          (return directory-path)))
+          (-> directory-name)
+          (-> directory-path)))
 ```
 
 </details>
@@ -2167,7 +2167,7 @@ false
   [filename]
   (if-let [extension (filename->extension filename)]
           (string/before-last-occurence filename (str "." extension))
-          (return filename)))
+          (-> filename)))
 ```
 
 </details>
@@ -3603,8 +3603,8 @@ Returns with the file's content or with nil if the return? option is set to fals
                                             (f (str result "\n")
                                                (cut-row n))
                                             :else
-                                            (return result))
-                                      (return result)))]
+                                            (-> result))
+                                      (-> result)))]
                (f "" file-content)))))
 ```
 
@@ -4457,7 +4457,7 @@ Returns with the file's content (as string) or with nil if the return? option is
         (letfn [(f [result n]
                    (if-let [last-row (string/after-last-occurence n "\n")]
                            (f (str "                              (string/before-last-occurence n "\n" {:return? false}))
-                           (return result)))]
+                           (-> result)))]
                (let [file-content (str "\n" (f file-content header))]
                     (actions/write-file! filepath file-content options))))))
 ```

@@ -1,6 +1,5 @@
 
-(ns io.utils
-    (:require [noop.api :refer [return]]))
+(ns io.utils)
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -23,8 +22,8 @@
            (f1 [%] (or keep-hidden? (f0 %)))
            (f2 [%] (not= directory-path (output-f %)))
            (f3 [result %] (if (and (f1 %) (f2 %))
-                              (conj   result (output-f %))
-                              (return result)))]
+                              (conj result (output-f %))
+                              (->   result)))]
           (reduce f3 [] file-seq))))
 
 (defn file-seq->file-list
@@ -47,8 +46,8 @@
            (f2 [%] (if keep-hidden? (f0 %)
                                     (f1 %)))
            (f3 [result %] (if (f2 %)
-                              (conj   result (output-f %))
-                              (return result)))]
+                              (conj result (output-f %))
+                              (->   result)))]
           (reduce f3 [] file-seq))))
 
 (defn file-seq->directory-list
@@ -72,6 +71,6 @@
                                     (f1 %)))
            (f3 [%] (not= directory-path (output-f %)))
            (f4 [result %] (if (and (f2 %) (f3 %))
-                              (conj   result (output-f %))
-                              (return result)))]
+                              (conj result (output-f %))
+                              (->   result)))]
           (reduce f4 [] file-seq))))

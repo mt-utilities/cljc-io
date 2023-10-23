@@ -1,7 +1,6 @@
 
 (ns iso.io.directory
-    (:require [noop.api   :refer [return]]
-              [string.api :as string]))
+    (:require [string.api :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -17,5 +16,5 @@
   ; @return (string)
   [directory-path]
   (if-let [directory-name (string/after-last-occurence directory-path "/")]
-          (return directory-name)
-          (return directory-path)))
+          (-> directory-name)
+          (-> directory-path)))

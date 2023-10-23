@@ -5,7 +5,6 @@
               [io.config   :as config]
               [io.read     :as read]
               [iso.io.file :as file]
-              [noop.api    :refer [return]]
               [string.api  :as string]))
 
 ;; ----------------------------------------------------------------------------
@@ -32,7 +31,7 @@
            (do (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
                (try (-> directory-path java.io.File. .mkdirs)
                     (catch Exception e (println e))))
-           (return :directory-already-exists))))
+           (-> :directory-already-exists))))
 
 (defn create-path!
   ; @description
@@ -59,7 +58,7 @@
    (when-let [parent-path (file/item-path->parent-path item-path)]
              (if-not (check/directory-exists? parent-path)
                      (create-directory!       parent-path options)
-                     (return :path-already-exists)))))
+                     (-> :path-already-exists)))))
 
 (defn create-file!
   ; @param (string) filepath

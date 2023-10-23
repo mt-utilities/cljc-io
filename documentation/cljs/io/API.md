@@ -575,8 +575,8 @@ false
 (defn directory-path->directory-name
   [directory-path]
   (if-let [directory-name (string/after-last-occurence directory-path "/")]
-          (return directory-name)
-          (return directory-path)))
+          (-> directory-name)
+          (-> directory-path)))
 ```
 
 </details>
@@ -937,7 +937,7 @@ false
   [filename]
   (if-let [extension (filename->extension filename)]
           (string/before-last-occurence filename (str "." extension))
-          (return filename)))
+          (-> filename)))
 ```
 
 </details>
