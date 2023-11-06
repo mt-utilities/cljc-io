@@ -2,7 +2,6 @@
 (ns io.edn
     (:require [io.actions :as actions]
               [io.check   :as check]
-              [io.config  :as config]
               [io.read    :as read]
               [pretty.api :as pretty]
               [reader.api :as reader]

@@ -1,5 +1,9 @@
 
-# io.api Clojure namespace
+### io.api
+
+Functional documentation of the io.api Clojure namespace
+
+---
 
 ##### [README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > io.api
 
@@ -172,6 +176,8 @@
 - [write-edn-header!](#write-edn-header)
 
 - [write-file!](#write-file)
+
+---
 
 ### B->GB
 
@@ -537,7 +543,7 @@
 
 ```
 @description
-Returns with the filenames found on the given directory-path (recursive).
+Returns with the filenames found on the given directory path (recursive).
 ```
 
 ```
@@ -572,7 +578,7 @@ Returns with the filenames found on the given directory-path (recursive).
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -596,7 +602,7 @@ Returns with the filenames found on the given directory-path (recursive).
 
 ```
 @description
-Returns with the subdirectories and files found on the given directory-path (recursive).
+Returns with the subdirectory names and filenames found on the given directory path (recursive).
 ```
 
 ```
@@ -631,7 +637,7 @@ Returns with the subdirectories and files found on the given directory-path (rec
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -652,6 +658,12 @@ Returns with the subdirectories and files found on the given directory-path (rec
 ---
 
 ### all-resource-file-list
+
+```
+@description
+- Returns with the filenames found on the given resource directory path (recursive).
+- Resource directory paths are relative to the Java resources directory.
+```
 
 ```
 @param (string) directory-path
@@ -692,7 +704,7 @@ Returns with the subdirectories and files found on the given directory-path (rec
                           (let [file-seq (-> directory file-seq)]
                                (letfn [(f [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
                                       (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
-                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -716,7 +728,7 @@ Returns with the subdirectories and files found on the given directory-path (rec
 
 ```
 @description
-Returns with the subdirectories found on the given directory-path (recursive).
+Returns with the subdirectory names found on the given directory path (recursive).
 ```
 
 ```
@@ -751,7 +763,7 @@ Returns with the subdirectories found on the given directory-path (recursive).
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -772,6 +784,11 @@ Returns with the subdirectories found on the given directory-path (recursive).
 ---
 
 ### append-to-file!
+
+```
+@description
+Appends the given content to the content of the file found on the given filepath.
+```
 
 ```
 @param (string) filepath
@@ -836,6 +853,11 @@ Returns with the file's content or with nil if the return? option is set to fals
 ### copy-file!
 
 ```
+@description
+Duplicates the file found on the given filepath.
+```
+
+```
 @param (string) source-filepath
 @param (string) destination-filepath
 @param (map)(opt) options
@@ -869,7 +891,7 @@ Returns with the file's content or with nil if the return? option is set to fals
             (do (clojure.java.io/copy (-> source-filepath      str clojure.java.io/file)
                                       (-> destination-filepath str clojure.java.io/file))
                 (if return? (read/read-file destination-filepath)))
-            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" source-filepath "\"")))))))
 ```
 
@@ -892,11 +914,21 @@ Returns with the file's content or with nil if the return? option is set to fals
 ### copy-uri-to-file!
 
 ```
+@description
+Opens an input stream from a URI and copies its contents to the file on the given filepath.
+```
+
+```
 @param (string) uri
-@param (?) file
+@param (string) destination-filepath
 @param (map)(opt) options
 {:warn? (boolean)(opt)
   Default: true}
+```
+
+```
+@usage
+(copy-uri-to-file! "..." "my-file.ext")
 ```
 
 ```
@@ -908,12 +940,12 @@ Returns with the file's content or with nil if the return? option is set to fals
 
 ```
 (defn copy-uri-to-file!
-  ([uri file]
-   (copy-uri-to-file! uri file {}))
+  ([uri destination-filepath]
+   (copy-uri-to-file! uri destination-filepath {}))
 
-  ([uri file {:keys [warn?] :or {warn? true}}]
+  ([uri destination-filepath {:keys [warn?] :or {warn? true}}]
    (try (with-open [input  (clojure.java.io/input-stream  uri)
-                    output (clojure.java.io/output-stream file)]
+                    output (clojure.java.io/output-stream destination-filepath)]
                    (clojure.java.io/copy input output))
         (catch Exception e (if warn? (println e))))))
 ```
@@ -935,6 +967,11 @@ Returns with the file's content or with nil if the return? option is set to fals
 ---
 
 ### create-directory!
+
+```
+@description
+Creates a directory to the given directory path.
+```
 
 ```
 @param (string) directory-path
@@ -962,7 +999,7 @@ Returns with the file's content or with nil if the return? option is set to fals
 
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (if-not (check/directory-exists? directory-path)
-           (do (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
+           (do (if warn? (println (str errors/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
                (try (-> directory-path java.io.File. .mkdirs)
                     (catch Exception e (println e))))
            (-> :directory-already-exists))))
@@ -1039,6 +1076,11 @@ or with nil if the return? option is set to false.
 ### create-file!
 
 ```
+@description
+Creates an empty file to the given filepath.
+```
+
+```
 @param (string) filepath
 @param (map)(opt) options
 {:return? (boolean)(opt)
@@ -1070,7 +1112,7 @@ Returns nil if the return? option is set to false.
   ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (when-not (check/file-exists? filepath)
              (create-path!       filepath {:warn? false})
-             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (if warn? (println (str errors/CREATE-FILE-MESSAGE " \"" filepath "\"")))
              (spit filepath nil))
    (if return? (read/read-file filepath))))
 ```
@@ -1095,9 +1137,9 @@ Returns nil if the return? option is set to false.
 
 ```
 @description
-Creates the (non-exisinting) ancestor folders of the given path.
+Creates the (non-existing) ancestor folders of the given path.
 E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
-     to this function, it creates the 'my-directory' and 'my-subdirectory'
+     to this function, it creates the 'my-directory' and the 'my-subdirectory'
      folders in case of they do not exist.
 ```
 
@@ -1153,6 +1195,11 @@ E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
 ### delete-directory!
 
 ```
+@description
+Deletes the directory found on the given directory path.
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -1200,6 +1247,11 @@ E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
 ### delete-empty-directory!
 
 ```
+@description
+Deletes the directory found on the given directory path if it is empty.
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -1226,7 +1278,7 @@ E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists?     directory-path)
             (clojure.java.io/delete-file directory-path)
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -1247,6 +1299,11 @@ E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
 ---
 
 ### delete-file!
+
+```
+@description
+Deletes the file found on the given filepath.
+```
 
 ```
 @param (string) filepath
@@ -1275,7 +1332,7 @@ E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists?          filepath)
             (clojure.java.io/delete-file filepath)
-            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 ```
 
@@ -1481,6 +1538,11 @@ Checks whether the directory exists on the given path.
 ### empty-directory!
 
 ```
+@description
+Deletes the files in the directory found on the given directory path.
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -1531,6 +1593,11 @@ Checks whether the directory exists on the given path.
 ### empty-directory?
 
 ```
+@description
+Returns TRUE if the given directory path is empty.
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:keep-hidden? (boolean)(opt)
@@ -1577,6 +1644,11 @@ Checks whether the directory exists on the given path.
 ---
 
 ### empty-file!
+
+```
+@description
+Deletes the content of the file found on the given filepath.
+```
 
 ```
 @param (string) filepath
@@ -1915,7 +1987,7 @@ Checks whether the file exists on the given filepath.
 
 ```
 @description
-Returns with the filenames found on the given directory-path (non-recursive).
+Returns with the filenames found on the given directory path (non-recursive).
 ```
 
 ```
@@ -1950,7 +2022,7 @@ Returns with the filenames found on the given directory-path (non-recursive).
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -3024,6 +3096,11 @@ false
 ### get-filesize
 
 ```
+@description
+Returns the size of the file found on the given filepath.
+```
+
+```
 @param (string) filepath
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -3051,7 +3128,7 @@ The length of the file in bytes
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists? filepath)
             (->                 filepath str clojure.java.io/file .length)
-            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 ```
 
@@ -3075,7 +3152,7 @@ The length of the file in bytes
 
 ```
 @description
-Returns with the subdirectories and files found on the given directory-path (non-recursive).
+Returns with the subdirectory names and filenames found on the given directory path (non-recursive).
 ```
 
 ```
@@ -3110,7 +3187,7 @@ Returns with the subdirectories and files found on the given directory-path (non
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -3307,6 +3384,11 @@ nil
 ### max-filesize-reached?
 
 ```
+@description
+Returns TRUE if the size of the file found on the given filepath exceeds the given maximum filesize.
+```
+
+```
 @param (string) filepath
 @param (B) max-filesize
 @param (map)(opt) options
@@ -3451,6 +3533,11 @@ false
 ---
 
 ### prepend-to-file!
+
+```
+@description
+Prepends the given content to the content of the file found on the given filepath.
+```
 
 ```
 @param (string) filepath
@@ -3627,6 +3714,11 @@ Returns with the file's content or with nil if the return? option is set to fals
 ### read-file
 
 ```
+@description
+Returns the content of the file found on the given filepath.
+```
+
+```
 @param (string) filepath
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -3653,7 +3745,7 @@ Returns with the file's content or with nil if the return? option is set to fals
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists? filepath)
             (slurp              filepath)
-            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 ```
 
@@ -3674,6 +3766,12 @@ Returns with the file's content or with nil if the return? option is set to fals
 ---
 
 ### read-resource-file
+
+```
+@description
+- Returns the content of the file found on the given resource filepath.
+- Resource filepaths are relative to the Java resources directory.
+```
 
 ```
 @param (string) resource-path
@@ -3702,7 +3800,7 @@ Returns with the file's content or with nil if the return? option is set to fals
   ([resource-path {:keys [warn?] :or {warn? true}}]
    (try (if-let [resource-url (clojure.java.io/resource resource-path)]
                 (slurp resource-url)
-                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" resource-path "\"")))))))
 ```
 
@@ -3726,7 +3824,8 @@ Returns with the file's content or with nil if the return? option is set to fals
 
 ```
 @description
-Checks whether the resource directory exists on the given resource path.
+- Checks whether the resource directory exists on the given resource path.
+- Resource directory paths are relative to the Java resources directory.
 ```
 
 ```
@@ -3772,7 +3871,8 @@ Checks whether the resource directory exists on the given resource path.
 
 ```
 @description
-Checks whether the resource directory does not exist on the given resource path.
+- Checks whether the resource directory does not exist on the given resource path.
+- Resource directory paths are relative to the Java resources directory.
 ```
 
 ```
@@ -3818,7 +3918,8 @@ Checks whether the resource directory does not exist on the given resource path.
 
 ```
 @description
-Checks whether the resource directory exists on the given resource path.
+- Checks whether the resource directory exists on the given resource path.
+- Resource directory paths are relative to the Java resources directory.
 ```
 
 ```
@@ -3863,7 +3964,8 @@ Checks whether the resource directory exists on the given resource path.
 
 ```
 @description
-Checks whether the resource file exists on the given resource path.
+- Checks whether the resource file exists on the given resource path.
+- Resource filepaths are relative to the Java resources directory.
 ```
 
 ```
@@ -3908,6 +4010,12 @@ Checks whether the resource file exists on the given resource path.
 ### resource-file-list
 
 ```
+@description
+- Returns with the filenames found on the given resource directory path (non-recursive).
+- Resource directory paths are relative to the Java resources directory.
+```
+
+```
 @param (string) directory-path
 @param (map)(opt) options
 {:warn? (boolean)(opt)
@@ -3946,7 +4054,7 @@ Checks whether the resource file exists on the given resource path.
                           (let [file-seq (-> directory .listFiles)]
                                (letfn [(f [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
                                       (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
-                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -3970,7 +4078,8 @@ Checks whether the resource file exists on the given resource path.
 
 ```
 @description
-Checks whether the resource file does not exist on the given resource path.
+- Checks whether the resource file does not exist on the given resource path.
+- Resource filepaths are relative to the Java resources directory.
 ```
 
 ```
@@ -4016,7 +4125,8 @@ Checks whether the resource file does not exist on the given resource path.
 
 ```
 @description
-Checks whether the resource file exists on the given resource path.
+- Checks whether the resource file exists on the given resource path.
+- Resource filepaths are relative to the Java resources directory.
 ```
 
 ```
@@ -4061,7 +4171,7 @@ Checks whether the resource file exists on the given resource path.
 
 ```
 @description
-Returns with the subdirectories found on the given directory-path (non-recursive).
+Returns with the subdirectory names found on the given directory path (non-recursive).
 ```
 
 ```
@@ -4096,7 +4206,7 @@ Returns with the subdirectories found on the given directory-path (non-recursive
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 ```
 
@@ -4481,6 +4591,11 @@ Returns with the file's content (as string) or with nil if the return? option is
 ### write-file!
 
 ```
+@description
+Overwrites the file found on the given filepath with the given content.
+```
+
+```
 @param (string) filepath
 @param (*) content
 @param (map)(opt) options
@@ -4519,9 +4634,9 @@ Returns with the file's content or with nil if the return? option is set to fals
    (if (check/file-exists? filepath)
        (spit filepath (str content))
        (if create? (do (create-path! filepath {:warn? false})
-                       (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+                       (if warn? (println (str errors/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (spit filepath (str content)))
-                   (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
+                   (if warn? (println (str errors/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
    (if return? (read/read-file filepath))))
 ```
 
@@ -4541,5 +4656,5 @@ Returns with the file's content or with nil if the return? option is set to fals
 
 ---
 
-This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.
+<sub>This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.</sub>
 

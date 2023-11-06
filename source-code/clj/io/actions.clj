@@ -2,7 +2,7 @@
 (ns io.actions
     (:require [clojure.java.io]
               [io.check    :as check]
-              [io.config   :as config]
+              [io.errors   :as errors]
               [io.read     :as read]
               [iso.io.file :as file]
               [string.api  :as string]))
@@ -11,6 +11,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn create-directory!
+  ; @description
+  ; Creates a directory to the given directory path.
+  ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -28,16 +31,16 @@
    ; (try (-> directory-path java.io.File. .mkdir)  ...)
    ; (try (-> directory-path java.io.File. .mkdirs) ...)
    (if-not (check/directory-exists? directory-path)
-           (do (if warn? (println (str config/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
+           (do (if warn? (println (str errors/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
                (try (-> directory-path java.io.File. .mkdirs)
                     (catch Exception e (println e))))
            (-> :directory-already-exists))))
 
 (defn create-path!
   ; @description
-  ; Creates the (non-exisinting) ancestor folders of the given path.
+  ; Creates the (non-existing) ancestor folders of the given path.
   ; E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
-  ;      to this function, it creates the 'my-directory' and 'my-subdirectory'
+  ;      to this function, it creates the 'my-directory' and the 'my-subdirectory'
   ;      folders in case of they do not exist.
   ;
   ; @param (string) item-path
@@ -61,6 +64,9 @@
                      (-> :path-already-exists)))))
 
 (defn create-file!
+  ; @description
+  ; Creates an empty file to the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:return? (boolean)(opt)
@@ -81,7 +87,7 @@
   ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (when-not (check/file-exists? filepath)
              (create-path!       filepath {:warn? false})
-             (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (if warn? (println (str errors/CREATE-FILE-MESSAGE " \"" filepath "\"")))
              (spit filepath nil))
    (if return? (read/read-file filepath))))
 
@@ -89,6 +95,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn delete-file!
+  ; @description
+  ; Deletes the file found on the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -104,10 +113,13 @@
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists?          filepath)
             (clojure.java.io/delete-file filepath)
-            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
 (defn copy-file!
+  ; @description
+  ; Duplicates the file found on the given filepath.
+  ;
   ; @param (string) source-filepath
   ; @param (string) destination-filepath
   ; @param (map)(opt) options
@@ -131,10 +143,13 @@
             (do (clojure.java.io/copy (-> source-filepath      str clojure.java.io/file)
                                       (-> destination-filepath str clojure.java.io/file))
                 (if return? (read/read-file destination-filepath)))
-            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" source-filepath "\"")))))))
 
 (defn write-file!
+  ; @description
+  ; Overwrites the file found on the given filepath with the given content.
+  ;
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
@@ -160,12 +175,15 @@
    (if (check/file-exists? filepath)
        (spit filepath (str content))
        (if create? (do (create-path! filepath {:warn? false})
-                       (if warn? (println (str config/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+                       (if warn? (println (str errors/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (spit filepath (str content)))
-                   (if warn? (println (str config/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
+                   (if warn? (println (str errors/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
    (if return? (read/read-file filepath))))
 
 (defn empty-file!
+  ; @description
+  ; Deletes the content of the file found on the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
@@ -187,6 +205,9 @@
    (write-file! filepath nil options)))
 
 (defn append-to-file!
+  ; @description
+  ; Appends the given content to the content of the file found on the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
@@ -219,6 +240,9 @@
                            (write-file! filepath output options)))))
 
 (defn prepend-to-file!
+  ; @description
+  ; Prepends the given content to the content of the file found on the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
@@ -251,19 +275,25 @@
                            (write-file! filepath output options)))))
 
 (defn copy-uri-to-file!
+  ; @description
+  ; Opens an input stream from a URI and copies its contents to the file on the given filepath.
+  ;
   ; @param (string) uri
-  ; @param (?) file
+  ; @param (string) destination-filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
   ;   Default: true}
   ;
+  ; @usage
+  ; (copy-uri-to-file! "..." "my-file.ext")
+  ;
   ; @return (nil)
-  ([uri file]
-   (copy-uri-to-file! uri file {}))
+  ([uri destination-filepath]
+   (copy-uri-to-file! uri destination-filepath {}))
 
-  ([uri file {:keys [warn?] :or {warn? true}}]
+  ([uri destination-filepath {:keys [warn?] :or {warn? true}}]
    (try (with-open [input  (clojure.java.io/input-stream  uri)
-                    output (clojure.java.io/output-stream file)]
+                    output (clojure.java.io/output-stream destination-filepath)]
                    (clojure.java.io/copy input output))
         (catch Exception e (if warn? (println e))))))
 
@@ -271,6 +301,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn delete-empty-directory!
+  ; @description
+  ; Deletes the directory found on the given directory path if it is empty.
+  ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -286,10 +319,13 @@
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists?     directory-path)
             (clojure.java.io/delete-file directory-path)
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn empty-directory!
+  ; @description
+  ; Deletes the files in the directory found on the given directory path.
+  ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -310,6 +346,9 @@
               (delete-file! item-path)))))
 
 (defn delete-directory!
+  ; @description
+  ; Deletes the directory found on the given directory path.
+  ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)

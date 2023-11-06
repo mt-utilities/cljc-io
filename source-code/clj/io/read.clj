@@ -2,8 +2,8 @@
 (ns io.read
     (:require [clojure.java.io]
               [io.check   :as check]
-              [io.config  :as config]
               [io.env     :as env]
+              [io.errors  :as errors]
               [io.utils   :as utils]
               [string.api :as string]
               [vector.api :as vector]))
@@ -12,6 +12,10 @@
 ;; ----------------------------------------------------------------------------
 
 (defn read-resource-file
+  ; @description
+  ; - Returns the content of the file found on the given resource filepath.
+  ; - Resource filepaths are relative to the Java resources directory.
+  ;
   ; @param (string) resource-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -27,10 +31,14 @@
   ([resource-path {:keys [warn?] :or {warn? true}}]
    (try (if-let [resource-url (clojure.java.io/resource resource-path)]
                 (slurp resource-url)
-                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" resource-path "\"")))))))
 
 (defn resource-file-list
+  ; @description
+  ; - Returns with the filenames found on the given resource directory path (non-recursive).
+  ; - Resource directory paths are relative to the Java resources directory.
+  ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -56,10 +64,14 @@
                           (let [file-seq (-> directory .listFiles)]
                                (letfn [(f [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
                                       (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
-                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-resource-file-list
+  ; @description
+  ; - Returns with the filenames found on the given resource directory path (recursive).
+  ; - Resource directory paths are relative to the Java resources directory.
+  ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -85,13 +97,16 @@
                           (let [file-seq (-> directory file-seq)]
                                (letfn [(f [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
                                       (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f})))))
-                (throw (Exception. config/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
 (defn read-file
+  ; @description
+  ; Returns the content of the file found on the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -107,12 +122,12 @@
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists? filepath)
             (slurp              filepath)
-            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
 (defn file-list
   ; @description
-  ; Returns with the filenames found on the given directory-path (non-recursive).
+  ; Returns with the filenames found on the given directory path (non-recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -135,12 +150,12 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-file-list
   ; @description
-  ; Returns with the filenames found on the given directory-path (recursive).
+  ; Returns with the filenames found on the given directory path (recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -163,12 +178,12 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn subdirectory-list
   ; @description
-  ; Returns with the subdirectories found on the given directory-path (non-recursive).
+  ; Returns with the subdirectory names found on the given directory path (non-recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -191,12 +206,12 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-subdirectory-list
   ; @description
-  ; Returns with the subdirectories found on the given directory-path (recursive).
+  ; Returns with the subdirectory names found on the given directory path (recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -219,12 +234,12 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn item-list
   ; @description
-  ; Returns with the subdirectories and files found on the given directory-path (non-recursive).
+  ; Returns with the subdirectory names and filenames found on the given directory path (non-recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -247,12 +262,12 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-item-list
   ; @description
-  ; Returns with the subdirectories and files found on the given directory-path (recursive).
+  ; Returns with the subdirectory names and filenames found on the given directory path (recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -275,10 +290,13 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
-            (throw (Exception. config/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn empty-directory?
+  ; @description
+  ; Returns TRUE if the given directory path is empty.
+  ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:keep-hidden? (boolean)(opt)

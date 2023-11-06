@@ -17,7 +17,8 @@
 
 (defn resource-file-exists?
   ; @description
-  ; Checks whether the resource file exists on the given resource path.
+  ; - Checks whether the resource file exists on the given resource path.
+  ; - Resource filepaths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
   ;
@@ -31,7 +32,8 @@
 
 (defn resource-file-not-exists?
   ; @description
-  ; Checks whether the resource file does not exist on the given resource path.
+  ; - Checks whether the resource file does not exist on the given resource path.
+  ; - Resource filepaths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
   ;
@@ -45,7 +47,8 @@
 
 (defn resource-file?
   ; @description
-  ; Checks whether the resource file exists on the given resource path.
+  ; - Checks whether the resource file exists on the given resource path.
+  ; - Resource filepaths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
   ;
@@ -61,7 +64,8 @@
 
 (defn resource-directory-exists?
   ; @description
-  ; Checks whether the resource directory exists on the given resource path.
+  ; - Checks whether the resource directory exists on the given resource path.
+  ; - Resource directory paths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
   ;
@@ -75,7 +79,8 @@
 
 (defn resource-directory-not-exists?
   ; @description
-  ; Checks whether the resource directory does not exist on the given resource path.
+  ; - Checks whether the resource directory does not exist on the given resource path.
+  ; - Resource directory paths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
   ;
@@ -89,7 +94,8 @@
 
 (defn resource-directory?
   ; @description
-  ; Checks whether the resource directory exists on the given resource path.
+  ; - Checks whether the resource directory exists on the given resource path.
+  ; - Resource directory paths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
   ;

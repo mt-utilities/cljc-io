@@ -1,5 +1,9 @@
 
-# io.api ClojureScript namespace
+### io.api
+
+Functional documentation of the io.api ClojureScript namespace
+
+---
 
 ##### [README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > io.api
 
@@ -92,6 +96,8 @@
 - [valid-absolute-path](#valid-absolute-path)
 
 - [valid-relative-path](#valid-relative-path)
+
+---
 
 ### B->GB
 
@@ -2334,5 +2340,5 @@ true
 
 ---
 
-This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.
+<sub>This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.</sub>
 

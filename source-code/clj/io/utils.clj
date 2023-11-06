@@ -5,15 +5,17 @@
 ;; ----------------------------------------------------------------------------
 
 (defn file-seq->item-list
+  ; @ignore
+  ;
   ; @param (string) directory-path
-  ; @param (vector) file-seq
+  ; @param (strings in vector) file-seq
   ; @param (map)(opt) options
   ; {:keep-hidden? (boolean)(opt)
   ;   Default: false
   ;  :output-f (function)(opt)
   ;   Default: str}
   ;
-  ; @return (vector)
+  ; @return (strings in vector)
   ([directory-path file-seq]
    (file-seq->item-list directory-path file-seq {}))
 
@@ -27,15 +29,17 @@
           (reduce f3 [] file-seq))))
 
 (defn file-seq->file-list
+  ; @ignore
+  ;
   ; @param (string) directory-path
-  ; @param (vector) file-seq
+  ; @param (strings in vector) file-seq
   ; @param (map)(opt) options
   ; {:keep-hidden? (boolean)(opt)
   ;   Default: false
   ;  :output-f (function)(opt)
   ;   Default: str}
   ;
-  ; @return (vector)
+  ; @return (strings in vector)
   ([directory-path file-seq]
    (file-seq->file-list directory-path file-seq {}))
 
@@ -51,15 +55,17 @@
           (reduce f3 [] file-seq))))
 
 (defn file-seq->directory-list
+  ; @ignore
+  ;
   ; @param (string) directory-path
-  ; @param (vector) file-seq
+  ; @param (strings in vector) file-seq
   ; @param (map)(opt) options
   ; {:keep-hidden? (boolean)(opt)
   ;   Default: false
   ;  :output-f (function)(opt)
   ;   Default: str}
   ;
-  ; @return (vector)
+  ; @return (strings in vector)
   ([directory-path file-seq]
    (file-seq->directory-list directory-path file-seq {}))
 

@@ -1,13 +1,16 @@
 
 (ns io.size
     (:require [clojure.java.io]
-              [io.config :as config]
-              [io.check  :as check]))
+              [io.check  :as check]
+              [io.errors :as errors]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
 (defn get-filesize
+  ; @description
+  ; Returns the size of the file found on the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
@@ -25,10 +28,13 @@
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/file-exists? filepath)
             (->                 filepath str clojure.java.io/file .length)
-            (throw (Exception. config/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
 (defn max-filesize-reached?
+  ; @description
+  ; Returns TRUE if the size of the file found on the given filepath exceeds the given maximum filesize.
+  ;
   ; @param (string) filepath
   ; @param (B) max-filesize
   ; @param (map)(opt) options

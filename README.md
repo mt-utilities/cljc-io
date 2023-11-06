@@ -216,7 +216,7 @@ function creates a directory on a specific path.
 ### How to settle a path for a directory or file?
 
 The [`io.api/create-path!`](documentation/clj/io/API.md/#create-path)
-function creates the (non-exisinting) ancestor folders of the given path.
+function creates the (non-existing) ancestor folders of the given path.
 
 E.g. If you pass the "my-directory/my-subdirectory/my-file.ext" path
      to this function, it creates the 'my-directory' and 'my-subdirectory'
