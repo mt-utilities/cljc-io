@@ -1,8 +1,6 @@
 
 # cljc-io
 
-> "The ships hung in the sky in much the same way that bricks don't." – Douglas Adams
-
 ### Overview
 
 The <strong>cljc-io</strong> is a set of Clojure file/directory handling functions
@@ -28,6 +26,9 @@ The <strong>cljc-io</strong> functional documentation is [available here](docume
 You can track the changes of the <strong>cljc-io</strong> library [here](CHANGES.md).
 
 # Usage
+
+> Some parameters of the following functions and some further functions are not discussed in this file.
+  To learn more about the available functionality, check out the [functional documentation](documentation/COVER.md)!
 
 ### Index
 

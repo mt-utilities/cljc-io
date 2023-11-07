@@ -3628,7 +3628,7 @@ Returns with the file's content or with nil if the return? option is set to fals
   ([filepath options]
    (let [file-content (read/read-file filepath options)]
         (if (-> file-content string/trim some?)
-            (-> file-content reader/string->mixed)))))
+            (-> file-content reader/read-edn)))))
 ```
 
 </details>

@@ -29,7 +29,7 @@
    ; a map ("{...}"), etc.
    (let [file-content (read/read-file filepath options)]
         (if (-> file-content string/trim some?)
-            (-> file-content reader/string->mixed)))))
+            (-> file-content reader/read-edn)))))
 
 (defn create-edn-file!
   ; @param (string) filepath
