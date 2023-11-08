@@ -125,13 +125,16 @@
             (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
 (defn file-list
   ; @description
   ; Returns with the filenames found on the given directory path (non-recursive).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
-  ; {:keep-hidden? (boolean)(opt)
+  ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
   ;   Default: true}
@@ -145,11 +148,11 @@
   ([directory-path]
    (file-list directory-path {}))
 
-  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
+  ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
-                 (utils/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->file-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
             (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -159,7 +162,7 @@
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
-  ; {:keep-hidden? (boolean)(opt)
+  ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
   ;   Default: true}
@@ -173,13 +176,45 @@
   ([directory-path]
    (all-file-list directory-path {}))
 
-  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
+  ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
-                 (utils/file-seq->file-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->file-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
             (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
+
+(defn search-files
+  ; @description
+  ; Returns with the filenames found on the given search path (recursive) that match with the given search pattern.
+  ;
+  ; @param (string) search-path
+  ; @param (string) search-pattern
+  ; @param (map)(opt) options
+  ; {:ignore-hidden? (boolean)(opt)
+  ;   Default: false
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
+  ;
+  ; @example
+  ; (search-files "my-directory" #"[a-z\-]{1,20}\.ext")
+  ; =>
+  ; ["my-directory/my-file.ext" ...]
+  ;
+  ; @return (strings in vector)
+  ([search-path search-pattern]
+   (search-files search-path search-pattern {}))
+
+  ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
+   (try (if (check/directory-exists? search-path)
+            (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
+                 (utils/file-seq->file-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" search-path "\"")))))))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defn subdirectory-list
   ; @description
@@ -187,7 +222,7 @@
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
-  ; {:keep-hidden? (boolean)(opt)
+  ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
   ;   Default: true}
@@ -201,11 +236,11 @@
   ([directory-path]
    (subdirectory-list directory-path {}))
 
-  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
+  ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
-                 (utils/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->directory-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
             (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -215,7 +250,7 @@
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
-  ; {:keep-hidden? (boolean)(opt)
+  ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
   ;   Default: true}
@@ -229,13 +264,45 @@
   ([directory-path]
    (all-subdirectory-list directory-path {}))
 
-  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
+  ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
-                 (utils/file-seq->directory-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->directory-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
             (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
+
+(defn search-subdirectories
+  ; @description
+  ; Returns with the subdirectory names found on the given search path (recursive) that match with the given search pattern.
+  ;
+  ; @param (string) search-path
+  ; @param (string) search-pattern
+  ; @param (map)(opt) options
+  ; {:ignore-hidden? (boolean)(opt)
+  ;   Default: false
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
+  ;
+  ; @example
+  ; (search-subdirectories "my-directory" #"[a-z\-]{1,20}")
+  ; =>
+  ; ["my-directory/my-subdirectory" ...]
+  ;
+  ; @return (strings in vector)
+  ([search-path search-pattern]
+   (search-subdirectories search-path search-pattern {}))
+
+  ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
+   (try (if (check/directory-exists? search-path)
+            (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
+                 (utils/file-seq->directory-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" search-path "\"")))))))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defn item-list
   ; @description
@@ -243,7 +310,7 @@
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
-  ; {:keep-hidden? (boolean)(opt)
+  ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
   ;   Default: true}
@@ -257,11 +324,11 @@
   ([directory-path]
    (item-list directory-path {}))
 
-  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
+  ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
-                 (utils/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->item-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
             (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
@@ -271,7 +338,7 @@
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
-  ; {:keep-hidden? (boolean)(opt)
+  ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
   ;   Default: true}
@@ -285,13 +352,45 @@
   ([directory-path]
    (all-item-list directory-path {}))
 
-  ([directory-path {:keys [keep-hidden? warn?] :or {warn? true}}]
+  ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
-                 (utils/file-seq->item-list directory-path file-seq {:keep-hidden? keep-hidden?}))
+                 (utils/file-seq->item-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
             (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
+
+(defn search-items
+  ; @description
+  ; Returns with the subdirectory names and filenames found on the given search path (recursive) that match with the given search pattern.
+  ;
+  ; @param (string) search-path
+  ; @param (string) search-pattern
+  ; @param (map)(opt) options
+  ; {:ignore-hidden? (boolean)(opt)
+  ;   Default: false
+  ;  :warn? (boolean)(opt)
+  ;   Default: true}
+  ;
+  ; @example
+  ; (search-items "my-directory" #"[a-z\-\.]{1,20}")
+  ; =>
+  ; ["my-directory/my-subdirectory" "my-directory/my-file.ext" ...]
+  ;
+  ; @return (strings in vector)
+  ([search-path search-pattern]
+   (search-items search-path search-pattern {}))
+
+  ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
+   ; XXX#7440 (source-code/clj/io/README.md)
+   (try (if (check/directory-exists? search-path)
+            (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
+                 (utils/file-seq->item-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
+            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+        (catch Exception e (if warn? (println (str e " \"" search-path "\"")))))))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defn empty-directory?
   ; @description
@@ -299,7 +398,7 @@
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
-  ; {:keep-hidden? (boolean)(opt)
+  ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
   ;   Default: true}

@@ -8,6 +8,7 @@
               [io.env            :as env]
               [io.read           :as read]
               [io.size           :as size]
+              [io.utils          :as utils]
               [iso.io.directory  :as directory]
               [iso.io.file       :as file]
               [iso.io.filesize   :as filesize]
@@ -78,15 +79,23 @@
 (def read-file              read/read-file)
 (def file-list              read/file-list)
 (def all-file-list          read/all-file-list)
+(def search-files           read/search-files)
 (def subdirectory-list      read/subdirectory-list)
 (def all-subdirectory-list  read/all-subdirectory-list)
+(def search-subdirectories  read/search-subdirectories)
 (def item-list              read/item-list)
 (def all-item-list          read/all-item-list)
+(def search-items           read/search-items)
 (def empty-directory?       read/empty-directory?)
 
 ; io.size
 (def get-filesize          size/get-filesize)
 (def max-filesize-reached? size/max-filesize-reached?)
+
+; io.utils
+(def file-seq->item-list      utils/file-seq->item-list)
+(def file-seq->file-list      utils/file-seq->file-list)
+(def file-seq->directory-list utils/file-seq->directory-list)
 
 ; iso.io.directory
 (def directory-path->directory-name directory/directory-path->directory-name)
