@@ -447,5 +447,3 @@ function prepends the given content to the header of an EDN file.
                                                :return? true
                                                :warn?   true})
 ```
-
- 
