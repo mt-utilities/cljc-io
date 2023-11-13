@@ -1,6 +1,8 @@
 
 (ns io.api
-    (:require [iso.io.check     :as check]
+    (:require [io.base64        :as base64]
+              [io.blob          :as blob]
+              [iso.io.check     :as check]
               [iso.io.config    :as config]
               [iso.io.directory :as directory]
               [iso.io.file      :as file]
@@ -10,6 +12,12 @@
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
+
+; io.base64
+(def base64->blob base64/base64->blob)
+
+; io.blob
+(def blob->object-url blob/blob->object-url)
 
 ; iso.io.check
 (def filename-valid?         check/filename-valid?)

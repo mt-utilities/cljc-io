@@ -2,6 +2,7 @@
 (ns io.api
     (:require [clojure.java.io]
               [io.actions        :as actions]
+              [io.base64         :as base64]
               [io.check          :as check]
               [io.config         :as config]
               [io.edn            :as edn]
@@ -37,6 +38,12 @@
 (def delete-empty-directory! actions/delete-empty-directory!)
 (def empty-directory!        actions/empty-directory!)
 (def delete-directory!       actions/delete-directory!)
+
+; io.base64
+(def base64->byte-array base64/base64->byte-array)
+(def encode-base64!     base64/encode-base64!)
+(def decode-base64!     base64/encode-base64!)
+(def save-base64!       base64/encode-base64!)
 
 ; io.check
 (def filename-valid?                check/filename-valid?)
