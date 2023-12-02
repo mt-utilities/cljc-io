@@ -31,6 +31,7 @@
 (def delete-file!            actions/delete-file!)
 (def copy-file!              actions/copy-file!)
 (def write-file!             actions/write-file!)
+(def update-file!            actions/update-file!)
 (def empty-file!             actions/empty-file!)
 (def append-to-file!         actions/append-to-file!)
 (def prepend-to-file!        actions/prepend-to-file!)
@@ -71,7 +72,7 @@
 (def read-edn-file     edn/read-edn-file)
 (def create-edn-file!  edn/create-edn-file!)
 (def write-edn-file!   edn/write-edn-file!)
-(def swap-edn-file!    edn/swap-edn-file!)
+(def update-edn-file!  edn/update-edn-file!)
 (def read-edn-header   edn/read-edn-header)
 (def write-edn-header! edn/write-edn-header!)
 

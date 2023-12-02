@@ -5,8 +5,7 @@
               [io.read    :as read]
               [pretty.api :as pretty]
               [reader.api :as reader]
-              [string.api :as string]
-              [vector.api :as vector]))
+              [string.api :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -15,6 +14,7 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -25,8 +25,7 @@
    (read-edn-file filepath {}))
 
   ([filepath options]
-   ; The content of an EDN file might be a string ("..."), a vector ("[...]"),
-   ; a map ("{...}"), etc.
+   ; The content of an EDN file might be string ("..."), vector ("[...]"), map ("{...}"), etc.
    (let [file-content (read/read-file filepath options)]
         (if (-> file-content string/trim some?)
             (-> file-content reader/read-edn)))))
@@ -35,8 +34,10 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:return? (boolean)(opt)
+  ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -60,10 +61,13 @@
   ; {:abc? (boolean)(opt)
   ;   Default: false
   ;  :create? (boolean)(opt)
+  ;   If TRUE, the function creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
+  ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -95,27 +99,27 @@
         (actions/write-file! filepath (str "\n" output "\n" ) options))
    (if return? (read-edn-file filepath {:warn? false}))))
 
-(defn swap-edn-file!
+(defn update-edn-file!
   ; @param (string) filepath
   ; @param (function) f
   ; @param (*) params
   ;
   ; @usage
-  ; (swap-edn-file! "my-directory/my-file.edn" assoc-in [:items :xyz] "XYZ")
+  ; (update-edn-file! "my-directory/my-file.edn" assoc-in [:items :xyz] "XYZ")
   ;
   ; @usage
-  ; (swap-edn-file! "my-directory/my-file.edn" conj "XYZ")
+  ; (update-edn-file! "my-directory/my-file.edn" conj "XYZ")
   ;
   ; @return (*)
-  ; Returns with the file's content (the reader procceses the content to data).
+  ; Returns the file's content (as parsed EDN data).
   [filepath f & params]
-  ; Unlike the other file handling functions, the swap-edn-file! function ...
+  ; Unlike other file handling functions, the 'update-edn-file!' function, (because
+  ; of the variadic parameters) ...
   ; ... does not take the 'options' parameter.
   ; ... always creates the file if it does not exist!
-  ; ... always print a warning message when the file does not exist!
-  (let [edn    (read-edn-file    filepath)
-        params (vector/cons-item params edn)
-        output (apply          f params)]
+  ; ... always prints a warning message when the file does not exist!
+  (let [edn    (read-edn-file filepath)
+        output (apply f edn params)]
        (write-edn-file! filepath output {:create? true :warn? true})
        (read-edn-file   filepath {:warn? false})))
 
@@ -126,6 +130,7 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -164,17 +169,19 @@
   ; @param (map)(opt) options
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
+  ;   If TRUE, the function creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
+  ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
   ; (write-edn-header! "my-directory/my-file.edn" "My header\nI love comments!")
   ;
-  ; @return (nil or string)
-  ; Returns with the file's content (as string) or with nil if the return? option is set to false.
+  ; @return (string)
   ([filepath header]
    (write-edn-header! filepath header {}))
 

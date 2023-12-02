@@ -24,11 +24,11 @@
 
 (defn encode-base64!
   ; @warning
-  ; This function does not create the directory path of the output if it does not exist!
+  ; This function does not create the directory path for the output if it does not exist!
   ;
   ; @description
-  ; Reads the file from the 'source-filepath' encodes the file's content to base64
-  ; and writes the encoded content to the 'destination-filepath'.
+  ; Reads the file from the source filepath, encodes the file's content to base64,
+  ; and writes the encoded content to the destination filepath.
   ;
   ; @param (string) source-filepath
   ; @param (string) destination-filepath
@@ -54,8 +54,8 @@
   ; This function does not create the directory path of the output if it does not exist!
   ;
   ; @description
-  ; Reads the file from the 'source-filepath' decodes the file's content to byte array
-  ; and writes the decoded content to the 'destination-filepath'.
+  ; Reads the file from the source filepath, decodes the file's content to byte array,
+  ; and writes the decoded content to the destination filepath.
   ;
   ; @param (string) source-filepath
   ; @param (string) destination-filepath
@@ -77,7 +77,7 @@
   ; This function does not create the directory path of the output if it does not exist!
   ;
   ; @description
-  ; Decodes the given 'n' base64 string to byte array and writes the decoded content to the 'destination-filepath'.
+  ; Decodes the given 'n' base64 string to byte array, and writes the decoded content to the destination filepath.
   ;
   ; @param (string) n
   ; @param (string) destination-filepath

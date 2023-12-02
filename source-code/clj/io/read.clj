@@ -19,6 +19,7 @@
   ; @param (string) resource-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -42,6 +43,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -75,6 +77,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -110,6 +113,7 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -137,6 +141,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -165,6 +170,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -194,6 +200,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -225,6 +232,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -253,6 +261,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -282,6 +291,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -313,6 +323,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -341,6 +352,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -370,6 +382,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @example
@@ -401,6 +414,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage

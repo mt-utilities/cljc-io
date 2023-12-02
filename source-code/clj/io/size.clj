@@ -14,6 +14,7 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
@@ -39,6 +40,7 @@
   ; @param (B) max-filesize
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
+  ;   If TRUE, the function prints the error message to the console in case of any error.
   ;   Default: true}
   ;
   ; @usage
