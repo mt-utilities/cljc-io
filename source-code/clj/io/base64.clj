@@ -1,7 +1,7 @@
 
 (ns io.base64
-    (:require [clojure.java.io]
-              [clojure.data.codec.base64]
+    (:require [clojure.data.codec.base64]
+              [clojure.java.io]
               [base64.api :as base64]))
 
 ;; ----------------------------------------------------------------------------
