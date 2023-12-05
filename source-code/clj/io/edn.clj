@@ -151,17 +151,17 @@
                               (let [row (string/after-first-occurence row ";" {:return? false})]
                                    (if result (str result "\n" row)
                                               (str             row))))
-                (f [result n] (if-let [first-row (string/before-first-occurence n "\n" {:return? false})]
-                                      (cond (comment-row?         first-row)
-                                            (f (append-row result first-row)
-                                               (cut-row n))
-                                            (empty-row? first-row)
-                                            (f (str result "\n")
-                                               (cut-row n))
-                                            :else
-                                            (-> result))
-                                      (-> result)))]
-               (f "" file-content)))))
+                (f0 [result n] (if-let [first-row (string/before-first-occurence n "\n" {:return? false})]
+                                       (cond (comment-row?         first-row)
+                                             (f0 (append-row result first-row)
+                                                 (cut-row n))
+                                             (empty-row? first-row)
+                                             (f0 (str result "\n")
+                                                 (cut-row n))
+                                             :else
+                                             (-> result))
+                                       (-> result)))]
+               (f0 "" file-content)))))
 
 (defn write-edn-header!
   ; @param (string) filepath
@@ -179,7 +179,7 @@
   ;   Default: true}
   ;
   ; @usage
-  ; (write-edn-header! "my-directory/my-file.edn" "My header\nI love comments!")
+  ; (write-edn-header! "my-directory/my-file.edn" "My header\nMy comment!")
   ;
   ; @return (string)
   ([filepath header]
@@ -187,10 +187,10 @@
 
   ([filepath header options]
    (let [file-content (read/read-file filepath options)]
-        (letfn [(f [result n]
-                   (if-let [last-row (string/after-last-occurence n "\n")]
-                           (f (str "; " last-row "\n" result)
-                              (string/before-last-occurence n "\n" {:return? false}))
-                           (-> result)))]
-               (let [file-content (str "\n" (f file-content header))]
+        (letfn [(f0 [result n]
+                    (if-let [last-row (string/after-last-occurence n "\n")]
+                            (f0 (str "; " last-row "\n" result)
+                                (string/before-last-occurence n "\n" {:return? false}))
+                            (-> result)))]
+               (let [file-content (str "\n" (f0 file-content header))]
                     (actions/write-file! filepath file-content options))))))
