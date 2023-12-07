@@ -1,7 +1,7 @@
 
 (ns iso.io.check
-    (:require [iso.io.config :as config]
-              [regex.api     :refer [re-match? re-mismatch?]]))
+    (:require [fruits.regex.api :refer [re-match? re-mismatch?]]
+              [iso.io.config    :as config]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

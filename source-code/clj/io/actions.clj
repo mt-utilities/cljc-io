@@ -1,11 +1,11 @@
 
 (ns io.actions
     (:require [clojure.java.io]
-              [io.check    :as check]
-              [io.errors   :as errors]
-              [io.read     :as read]
-              [iso.io.file :as file]
-              [string.api  :as string]))
+              [fruits.string.api :as string]
+              [io.check          :as check]
+              [io.errors         :as errors]
+              [io.read           :as read]
+              [iso.io.file       :as file]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 
 (ns iso.io.file
-    (:require [iso.io.mime-type :as mime-type]
-              [string.api       :as string]))
+    (:require [fruits.string.api :as string]
+              [iso.io.mime-type  :as mime-type]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

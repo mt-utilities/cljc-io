@@ -1,11 +1,11 @@
 
 (ns io.edn
-    (:require [io.actions :as actions]
-              [io.check   :as check]
-              [io.read    :as read]
-              [pretty.api :as pretty]
-              [reader.api :as reader]
-              [string.api :as string]))
+    (:require [fruits.pretty.api :as pretty]
+              [fruits.reader.api :as reader]
+              [fruits.string.api :as string]
+              [io.actions        :as actions]
+              [io.check          :as check]
+              [io.read           :as read]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

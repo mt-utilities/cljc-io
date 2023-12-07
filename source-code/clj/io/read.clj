@@ -1,12 +1,12 @@
 
 (ns io.read
     (:require [clojure.java.io]
-              [io.check   :as check]
-              [io.env     :as env]
-              [io.errors  :as errors]
-              [io.utils   :as utils]
-              [string.api :as string]
-              [vector.api :as vector]))
+              [fruits.string.api :as string]
+              [fruits.vector.api :as vector]
+              [io.check          :as check]
+              [io.env            :as env]
+              [io.errors         :as errors]
+              [io.utils          :as utils]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
