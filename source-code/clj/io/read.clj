@@ -192,7 +192,7 @@
 
 (defn search-files
   ; @description
-  ; Returns with the filenames found on the given search path (recursive) that match with the given search pattern.
+  ; Returns with the filenames found on the given search path (recursive) that match the given search pattern.
   ;
   ; @param (string) search-path
   ; @param (string) search-pattern
@@ -283,7 +283,7 @@
 
 (defn search-subdirectories
   ; @description
-  ; Returns with the subdirectory names found on the given search path (recursive) that match with the given search pattern.
+  ; Returns with the subdirectory names found on the given search path (recursive) that match the given search pattern.
   ;
   ; @param (string) search-path
   ; @param (string) search-pattern
@@ -374,7 +374,7 @@
 
 (defn search-items
   ; @description
-  ; Returns with the subdirectory names and filenames found on the given search path (recursive) that match with the given search pattern.
+  ; Returns with the subdirectory names and filenames found on the given search path (recursive) that match the given search pattern.
   ;
   ; @param (string) search-path
   ; @param (string) search-pattern

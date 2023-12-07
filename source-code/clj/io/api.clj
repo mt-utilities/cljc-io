@@ -19,12 +19,12 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; clojure.java.io
+; @redirect (clojure.java.io)
 (def file          clojure.java.io/file)
 (def input-stream  clojure.java.io/input-stream)
 (def output-stream clojure.java.io/output-stream)
 
-; io.actions
+; @redirect (io.actions)
 (def create-directory!       actions/create-directory!)
 (def create-path!            actions/create-path!)
 (def create-file!            actions/create-file!)
@@ -40,13 +40,13 @@
 (def empty-directory!        actions/empty-directory!)
 (def delete-directory!       actions/delete-directory!)
 
-; io.base64
+; @redirect (io.base64)
 (def base64->byte-array base64/base64->byte-array)
 (def encode-base64!     base64/encode-base64!)
 (def decode-base64!     base64/encode-base64!)
 (def save-base64!       base64/encode-base64!)
 
-; io.check
+; @redirect (io.check)
 (def filename-valid?                check/filename-valid?)
 (def filename-invalid?              check/filename-invalid?)
 (def directory-name-valid?          check/directory-name-valid?)
@@ -64,11 +64,11 @@
 (def directory-not-exists?          check/directory-not-exists?)
 (def directory?                     check/directory?)
 
-; io.config
+; @redirect (io.config)
 (def MIME-TYPES config/MIME-TYPES)
 (def EXTENSIONS config/EXTENSIONS)
 
-; io.edn
+; @redirect (io.edn)
 (def read-edn-file     edn/read-edn-file)
 (def create-edn-file!  edn/create-edn-file!)
 (def write-edn-file!   edn/write-edn-file!)
@@ -76,11 +76,11 @@
 (def read-edn-header   edn/read-edn-header)
 (def write-edn-header! edn/write-edn-header!)
 
-; io.env
+; @redirect (io.env)
 (def get-resource-root-path io.env/get-resource-root-path)
 (def get-resource-root-url  io.env/get-resource-root-url)
 
-; io.read
+; @redirect (io.read)
 (def read-resource-file     read/read-resource-file)
 (def resource-file-list     read/resource-file-list)
 (def all-resource-file-list read/all-resource-file-list)
@@ -96,19 +96,19 @@
 (def search-items           read/search-items)
 (def empty-directory?       read/empty-directory?)
 
-; io.size
+; @redirect (io.size)
 (def get-filesize          size/get-filesize)
 (def max-filesize-reached? size/max-filesize-reached?)
 
-; io.utils
+; @redirect (io.utils)
 (def file-seq->item-list      utils/file-seq->item-list)
 (def file-seq->file-list      utils/file-seq->file-list)
 (def file-seq->directory-list utils/file-seq->directory-list)
 
-; iso.io.directory
+; @redirect (iso.io.directory)
 (def directory-path->directory-name directory/directory-path->directory-name)
 
-; iso.io.file
+; @redirect (iso.io.file)
 (def extension->audio?        file/extension->audio?)
 (def extension->image?        file/extension->image?)
 (def extension->text?         file/extension->text?)
@@ -131,7 +131,7 @@
 (def filename->text?          file/filename->text?)
 (def filename->video?         file/filename->video?)
 
-; iso.io.filesize
+; @redirect (iso.io.filesize)
 (def B->kB  filesize/B->kB)
 (def B->MB  filesize/B->MB)
 (def B->GB  filesize/B->GB)
@@ -145,12 +145,12 @@
 (def GB->kB filesize/GB->kB)
 (def GB->MB filesize/GB->MB)
 
-; iso.io.mime-type
+; @redirect (iso.io.mime-type)
 (def mime-type->extension mime-type/mime-type->extension)
 (def extension->mime-type mime-type/extension->mime-type)
 (def unknown-mime-type?   mime-type/unknown-mime-type?)
 (def mime-type->image?    mime-type/mime-type->image?)
 
-; iso.io.valid
+; @redirect (iso.io.valid)
 (def valid-relative-path valid/valid-relative-path)
 (def valid-absolute-path valid/valid-absolute-path)
