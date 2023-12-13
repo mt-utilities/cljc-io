@@ -37,7 +37,7 @@
 
 (defn resource-file-list
   ; @description
-  ; - Returns with the filenames found on the given resource directory path (non-recursive).
+  ; - Returns the filenames found on the given resource directory path (non-recursively).
   ; - Resource directory paths are relative to the Java resources directory.
   ;
   ; @param (string) directory-path
@@ -71,7 +71,7 @@
 
 (defn all-resource-file-list
   ; @description
-  ; - Returns with the filenames found on the given resource directory path (recursive).
+  ; - Returns the filenames found on the given resource directory path (recursively).
   ; - Resource directory paths are relative to the Java resources directory.
   ;
   ; @param (string) directory-path
@@ -134,7 +134,7 @@
 
 (defn file-list
   ; @description
-  ; Returns with the filenames found on the given directory path (non-recursive).
+  ; Returns the filenames found on the given directory path (non-recursively).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -163,7 +163,7 @@
 
 (defn all-file-list
   ; @description
-  ; Returns with the filenames found on the given directory path (recursive).
+  ; Returns the filenames found on the given directory path (recursively).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -192,7 +192,7 @@
 
 (defn search-files
   ; @description
-  ; Returns with the filenames found on the given search path (recursive) that match the given search pattern.
+  ; Returns the filenames found on the given search path (recursively) that match the given search pattern.
   ;
   ; @param (string) search-path
   ; @param (string) search-pattern
@@ -225,7 +225,7 @@
 
 (defn subdirectory-list
   ; @description
-  ; Returns with the subdirectory names found on the given directory path (non-recursive).
+  ; Returns the subdirectory names found on the given directory path (non-recursively).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -254,7 +254,7 @@
 
 (defn all-subdirectory-list
   ; @description
-  ; Returns with the subdirectory names found on the given directory path (recursive).
+  ; Returns the subdirectory names found on the given directory path (recursively).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -283,7 +283,7 @@
 
 (defn search-subdirectories
   ; @description
-  ; Returns with the subdirectory names found on the given search path (recursive) that match the given search pattern.
+  ; Returns the subdirectory names found on the given search path (recursively) that match the given search pattern.
   ;
   ; @param (string) search-path
   ; @param (string) search-pattern
@@ -316,7 +316,7 @@
 
 (defn item-list
   ; @description
-  ; Returns with the subdirectory names and filenames found on the given directory path (non-recursive).
+  ; Returns the subdirectory names and filenames found on the given directory path (non-recursively).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -345,7 +345,7 @@
 
 (defn all-item-list
   ; @description
-  ; Returns with the subdirectory names and filenames found on the given directory path (recursive).
+  ; Returns the subdirectory names and filenames found on the given directory path (recursively).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -374,7 +374,7 @@
 
 (defn search-items
   ; @description
-  ; Returns with the subdirectory names and filenames found on the given search path (recursive) that match the given search pattern.
+  ; Returns the subdirectory names and filenames found on the given search path (recursively) that match the given search pattern.
   ;
   ; @param (string) search-path
   ; @param (string) search-pattern

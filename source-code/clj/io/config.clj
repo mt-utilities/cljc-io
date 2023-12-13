@@ -5,7 +5,7 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; iso.io.config
+; @redirect (iso.io.config/*)
 (def FILENAME-PATTERN       config/FILENAME-PATTERN)
 (def DIRECTORY-NAME-PATTERN config/DIRECTORY-NAME-PATTERN)
 (def MAX-FILENAME-LENGTH    config/MAX-FILENAME-LENGTH)

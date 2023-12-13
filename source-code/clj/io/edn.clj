@@ -44,7 +44,7 @@
   ; (create-edn-file! "my-directory/my-file.edn")
   ;
   ; @return (nil or string)
-  ; Returns with the file's content (the reader procceses the content to data),
+  ; Returns the file's content (the reader procceses the content to data),
   ; or with nil if the return? option is set to false.
   ([filepath]
    (create-edn-file! filepath {}))
@@ -89,7 +89,7 @@
   ; "{:a "A" :b "B" :c "C" :d "D"}"
   ;
   ; @return (*)
-  ; Returns with the file's content (the reader procceses the content to data),
+  ; Returns the file's content (the reader procceses the content to data),
   ; or with nil if the return? option is set to false.
   ([filepath content]
    (write-edn-file! filepath content {}))

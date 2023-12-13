@@ -23,8 +23,8 @@
 ;; ----------------------------------------------------------------------------
 
 (defn encode-base64!
-  ; @warning
-  ; This function does not create the directory path for the output if it does not exist!
+  ; @important
+  ; This function does not create the directory path for the output!
   ;
   ; @description
   ; Reads the file from the source filepath, encodes the file's content to base64,
@@ -50,8 +50,8 @@
                         (slurp destination-filepath)))
 
 (defn decode-base64!
-  ; @warning
-  ; This function does not create the directory path of the output if it does not exist!
+  ; @important
+  ; This function does not create the directory path for the output!
   ;
   ; @description
   ; Reads the file from the source filepath, decodes the file's content to byte array,
@@ -73,8 +73,8 @@
                (-> destination-filepath slurp boolean))))
 
 (defn save-base64!
-  ; @warning
-  ; This function does not create the directory path of the output if it does not exist!
+  ; @important
+  ; This function does not create the directory path for the output!
   ;
   ; @description
   ; Decodes the given 'n' base64 string to byte array, and writes the decoded content to the destination filepath.
