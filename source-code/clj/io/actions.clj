@@ -3,7 +3,7 @@
     (:require [clojure.java.io]
               [fruits.string.api :as string]
               [io.check          :as check]
-              [io.errors         :as errors]
+              [io.messages         :as messages]
               [io.read           :as read]
               [iso.io.file       :as file]))
 
@@ -32,7 +32,7 @@
    ; (try (-> directory-path java.io.File. .mkdir)  ...)
    ; (try (-> directory-path java.io.File. .mkdirs) ...)
    (if-not (check/directory-exists? directory-path)
-           (do (if warn? (println (str errors/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
+           (do (if warn? (println (str messages/CREATE-DIRECTORY-MESSAGE " \"" directory-path "\"")))
                (try (-> directory-path java.io.File. .mkdirs)
                     (catch Exception e (println e))))
            (-> :directory-already-exists))))
@@ -83,7 +83,7 @@
   ([filepath {:keys [return? warn?] :or {return? true warn? true}}]
    (when-not (check/file-exists? filepath)
              (create-path!       filepath {:warn? false})
-             (if warn? (println (str errors/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+             (if warn? (println (str messages/CREATE-FILE-MESSAGE " \"" filepath "\"")))
              (spit filepath nil))
    (if return? (read/read-file filepath))))
 
@@ -110,7 +110,7 @@
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists?          filepath)
             (clojure.java.io/delete-file filepath)
-            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
 (defn copy-file!
@@ -141,7 +141,7 @@
             (do (clojure.java.io/copy (-> source-filepath      str clojure.java.io/file)
                                       (-> destination-filepath str clojure.java.io/file))
                 (if return? (read/read-file destination-filepath)))
-            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/FILE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" source-filepath "\"")))))))
 
 (defn write-file!
@@ -175,9 +175,9 @@
    (if (check/file-exists? filepath)
        (spit filepath (str content))
        (if create? (do (create-path! filepath {:warn? false})
-                       (if warn? (println (str errors/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+                       (if warn? (println (str messages/CREATE-FILE-MESSAGE " \"" filepath "\"")))
                        (spit filepath (str content)))
-                   (if warn? (println (str errors/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
+                   (if warn? (println (str messages/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
    (if return? (read/read-file filepath))))
 
 (defn update-file!
@@ -350,7 +350,7 @@
   ([directory-path {:keys [warn?] :or {warn? true}}]
    (try (if (check/directory-exists?     directory-path)
             (clojure.java.io/delete-file directory-path)
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn empty-directory!

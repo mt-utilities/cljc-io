@@ -2,7 +2,7 @@
 (ns io.size
     (:require [clojure.java.io]
               [io.check  :as check]
-              [io.errors :as errors]))
+              [io.messages :as messages]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -29,7 +29,7 @@
    ; XXX#7440 (source-code/clj/io/README.md)
    (try (if (check/file-exists? filepath)
             (->                 filepath str clojure.java.io/file .length)
-            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
 (defn max-filesize-reached?

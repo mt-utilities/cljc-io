@@ -5,7 +5,7 @@
               [fruits.vector.api :as vector]
               [io.check          :as check]
               [io.env            :as env]
-              [io.errors         :as errors]
+              [io.messages         :as messages]
               [io.utils          :as utils]))
 
 ;; ----------------------------------------------------------------------------
@@ -32,7 +32,7 @@
   ([resource-path {:keys [warn?] :or {warn? true}}]
    (try (if-let [resource-url (clojure.java.io/resource resource-path)]
                 (slurp resource-url)
-                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. messages/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" resource-path "\"")))))))
 
 (defn resource-file-list
@@ -66,7 +66,7 @@
                           (let [file-seq (-> directory .listFiles)]
                                (letfn [(f0 [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
                                       (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f0})))))
-                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. messages/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-resource-file-list
@@ -100,7 +100,7 @@
                           (let [file-seq (-> directory file-seq)]
                                (letfn [(f0 [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
                                       (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f0})))))
-                (throw (Exception. errors/RESOURCE-DOES-NOT-EXIST-ERROR)))
+                (throw (Exception. messages/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 ;; ----------------------------------------------------------------------------
@@ -126,7 +126,7 @@
   ([filepath {:keys [warn?] :or {warn? true}}]
    (try (if (check/file-exists? filepath)
             (slurp              filepath)
-            (throw (Exception. errors/FILE-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/FILE-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
 ;; ----------------------------------------------------------------------------
@@ -158,7 +158,7 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->file-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
        (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-file-list
@@ -187,7 +187,7 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->file-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn search-files
@@ -217,7 +217,7 @@
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->file-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" search-path "\"")))))))
 
 ;; ----------------------------------------------------------------------------
@@ -249,7 +249,7 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->directory-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-subdirectory-list
@@ -278,7 +278,7 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->directory-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn search-subdirectories
@@ -308,7 +308,7 @@
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->directory-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" search-path "\"")))))))
 
 ;; ----------------------------------------------------------------------------
@@ -340,7 +340,7 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->item-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-item-list
@@ -369,7 +369,7 @@
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->item-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn search-items
@@ -399,7 +399,7 @@
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->item-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
-            (throw (Exception. errors/DIRECTORY-DOES-NOT-EXIST-ERROR)))
+            (throw (Exception. messages/DIRECTORY-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" search-path "\"")))))))
 
 ;; ----------------------------------------------------------------------------
