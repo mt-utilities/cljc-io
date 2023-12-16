@@ -136,7 +136,9 @@
    (copy-file! source-filepath destination-filepath {}))
 
   ([source-filepath destination-filepath {:keys [return? warn?] :or {return? true warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (#7440)
+   ; It's important to ensure that file paths are not NIL before passing them to the 'clojure.java.io/file' function.
+   ; Otherwise, NIL file paths would cause errors.
    (try (if (check/file-exists? source-filepath)
             (do (clojure.java.io/copy (-> source-filepath      str clojure.java.io/file)
                                       (-> destination-filepath str clojure.java.io/file))
@@ -193,9 +195,9 @@
   ;
   ; @return (string)
   [filepath f & params]
-  ; XXX#5012
+  ; @NOTE (#5012)
   ; Unlike other file handling functions, the 'update-file!' function, (because of the variadic parameters) ...
-  ; ... does not take the 'options' parameter.
+  ; ... does not take 'options' parameter.
   ; ... always creates the file if it does not exist!
   ; ... always prints a warning message when the file does not exist!
   (let [file-content (read/read-file filepath {:warn? false})

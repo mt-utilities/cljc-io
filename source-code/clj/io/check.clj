@@ -120,7 +120,7 @@
   ;
   ; @return (boolean)
   [filepath]
-  ; XXX#7440 (source-code/clj/io/README.md)
+  ; @NOTE (source-code/clj/io/actions.clj#7440)
   (let [file (-> filepath str clojure.java.io/file)]
        (and (-> file .exists)
             (-> file .isDirectory not))))
@@ -136,7 +136,7 @@
   ;
   ; @return (boolean)
   [filepath]
-  ; XXX#7440 (source-code/clj/io/README.md)
+  ; @NOTE (source-code/clj/io/actions.clj#7440)
   (let [file (-> filepath str clojure.java.io/file)]
        (or (-> file .extists not)
            (-> file .isDirectory))))
@@ -168,7 +168,7 @@
   ;
   ; @return (boolean)
   [directory-path]
-  ; XXX#7440 (source-code/clj/io/README.md)
+  ; @NOTE (source-code/clj/io/actions.clj#7440)
   (let [directory (-> directory-path str clojure.java.io/file)]
        (and (-> directory .exists)
             (-> directory .isDirectory))))
@@ -184,7 +184,7 @@
   ;
   ; @return (boolean)
   [directory-path]
-  ; XXX#7440 (source-code/clj/io/README.md)
+  ; @NOTE (source-code/clj/io/actions.clj#7440)
   (let [directory (-> directory-path str clojure.java.io/file)]
        (or (-> directory .exists      not)
            (-> directory .isDirectory not))))

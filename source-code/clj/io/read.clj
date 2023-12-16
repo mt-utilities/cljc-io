@@ -154,7 +154,7 @@
    (file-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->file-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -183,7 +183,7 @@
    (all-file-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->file-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -213,7 +213,7 @@
    (search-files search-path search-pattern {}))
 
   ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->file-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
@@ -245,7 +245,7 @@
    (subdirectory-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->directory-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -274,7 +274,7 @@
    (all-subdirectory-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->directory-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -304,7 +304,7 @@
    (search-subdirectories search-path search-pattern {}))
 
   ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->directory-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
@@ -336,7 +336,7 @@
    (item-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->item-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -365,7 +365,7 @@
    (all-item-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->item-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -395,7 +395,7 @@
    (search-items search-path search-pattern {}))
 
   ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; XXX#7440 (source-code/clj/io/README.md)
+   ; @NOTE (source-code/clj/io/actions.clj#7440)
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->item-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))

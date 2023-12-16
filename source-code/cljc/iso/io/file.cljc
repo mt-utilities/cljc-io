@@ -152,7 +152,10 @@
   ;
   ; @return (string)
   [filepath]
-  ; XXX#5591 (source-code/cljc/iso/io/README.md)
+  ; @NOTE (#5591)
+  ; Filenames of hidden files (in UNIX based systems) start with a period (.).
+  ; In case of only period is in the filename, it might not be an extension marker!
+  ; E.g., .my-hidden-file
   (let [filename (-> filepath filepath->filename (string/not-starts-with! "."))]
        (if-let [extension (string/after-last-occurence filename "." {:return? false})]
                (string/to-lowercase extension))))
