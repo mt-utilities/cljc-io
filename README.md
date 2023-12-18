@@ -10,7 +10,7 @@ The <strong>cljc-io</strong> is a set of Clojure file/directory handling functio
 
 ```
 {:deps {bithandshake/cljc-io {:git/url "https://github.com/bithandshake/cljc-io"
-                              :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+                              :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}}
 ```
 
 ### Current version

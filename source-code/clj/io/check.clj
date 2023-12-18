@@ -6,7 +6,7 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; iso.io.check
+; @redirect (iso.io.check/*)
 (def filename-valid?         check/filename-valid?)
 (def filename-invalid?       check/filename-invalid?)
 (def directory-name-valid?   check/directory-name-valid?)
@@ -17,7 +17,7 @@
 
 (defn resource-file-exists?
   ; @description
-  ; - Checks whether the resource file exists on the given resource path.
+  ; - Checks whether the resource file exists at the given resource path.
   ; - Resource filepaths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
@@ -32,7 +32,7 @@
 
 (defn resource-file-not-exists?
   ; @description
-  ; - Checks whether the resource file does not exist on the given resource path.
+  ; - Checks whether the resource file does not exist at the given resource path.
   ; - Resource filepaths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
@@ -47,7 +47,7 @@
 
 (defn resource-file?
   ; @description
-  ; - Checks whether the resource file exists on the given resource path.
+  ; - Checks whether the resource file exists at the given resource path.
   ; - Resource filepaths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
@@ -64,7 +64,7 @@
 
 (defn resource-directory-exists?
   ; @description
-  ; - Checks whether the resource directory exists on the given resource path.
+  ; - Checks whether the resource directory exists at the given resource path.
   ; - Resource directory paths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
@@ -79,7 +79,7 @@
 
 (defn resource-directory-not-exists?
   ; @description
-  ; - Checks whether the resource directory does not exist on the given resource path.
+  ; - Checks whether the resource directory does not exist at the given resource path.
   ; - Resource directory paths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
@@ -94,7 +94,7 @@
 
 (defn resource-directory?
   ; @description
-  ; - Checks whether the resource directory exists on the given resource path.
+  ; - Checks whether the resource directory exists at the given resource path.
   ; - Resource directory paths are relative to the Java resources directory.
   ;
   ; @param (string) resource-path
@@ -111,7 +111,7 @@
 
 (defn file-exists?
   ; @description
-  ; Checks whether the file exists on the given filepath.
+  ; Checks whether the file exists at the given filepath.
   ;
   ; @param (string) filepath
   ;
@@ -127,7 +127,7 @@
 
 (defn file-not-exists?
   ; @description
-  ; Checks whether the file does not exist on the given filepath.
+  ; Checks whether the file does not exist at the given filepath.
   ;
   ; @param (string) filepath
   ;
@@ -143,7 +143,7 @@
 
 (defn file?
   ; @description
-  ; Checks whether the file exists on the given filepath.
+  ; Checks whether the file exists at the given filepath.
   ;
   ; @param (string) filepath
   ;
@@ -159,7 +159,7 @@
 
 (defn directory-exists?
   ; @description
-  ; Checks whether the directory exists on the given path.
+  ; Checks whether the directory exists at the given directory path.
   ;
   ; @param (string) directory-path
   ;
@@ -175,7 +175,7 @@
 
 (defn directory-not-exists?
   ; @description
-  ; Checks whether the directory does not exist on the given path.
+  ; Checks whether the directory does not exist at the given directory path.
   ;
   ; @param (string) directory-path
   ;
@@ -191,7 +191,7 @@
 
 (defn directory?
   ; @description
-  ; Checks whether the directory exists on the given path.
+  ; Checks whether the directory exists at the given directory path.
   ;
   ; @param (string) directory-path
   ;

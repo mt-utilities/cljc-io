@@ -3,7 +3,7 @@
     (:require [clojure.java.io]
               [fruits.string.api :as string]
               [io.check          :as check]
-              [io.messages         :as messages]
+              [io.messages       :as messages]
               [io.read           :as read]
               [iso.io.file       :as file]))
 
@@ -92,7 +92,7 @@
 
 (defn delete-file!
   ; @description
-  ; Deletes the file found on the given filepath.
+  ; Deletes the file at the given filepath.
   ;
   ; @param (string) filepath
   ; @param (map)(opt) options
@@ -115,7 +115,7 @@
 
 (defn copy-file!
   ; @description
-  ; Duplicates the file found on the given filepath.
+  ; Duplicates the file at the given filepath.
   ;
   ; @param (string) source-filepath
   ; @param (string) destination-filepath
@@ -148,7 +148,7 @@
 
 (defn write-file!
   ; @description
-  ; Overwrites the file found on the given filepath with the given content.
+  ; Overwrites the file at the given filepath with the given content.
   ;
   ; @param (string) filepath
   ; @param (*) content
@@ -184,7 +184,7 @@
 
 (defn update-file!
   ; @description
-  ; Updates the file found on the given filepath by applying the given 'f' function on its content.
+  ; Updates the file at the given filepath by applying the given 'f' function on its content.
   ;
   ; @param (string) filepath
   ; @param (function) f
@@ -207,7 +207,7 @@
 
 (defn empty-file!
   ; @description
-  ; Deletes the content of the file found on the given filepath.
+  ; Deletes the content of the file at the given filepath.
   ;
   ; @param (string) filepath
   ; @param (map)(opt) options
@@ -233,7 +233,7 @@
 
 (defn append-to-file!
   ; @description
-  ; Appends the given content to the content of the file found on the given filepath.
+  ; Appends the given content to the content of the file at the given filepath.
   ;
   ; @param (string) filepath
   ; @param (*) content
@@ -270,7 +270,7 @@
 
 (defn prepend-to-file!
   ; @description
-  ; Prepends the given content to the content of the file found on the given filepath.
+  ; Prepends the given content to the content of the file at the given filepath.
   ;
   ; @param (string) filepath
   ; @param (*) content
@@ -307,7 +307,7 @@
 
 (defn copy-uri-to-file!
   ; @description
-  ; Opens an input stream from a URI and copies its content to the file found on the given filepath.
+  ; Opens an input stream from a URI and copies its content to the file at the given filepath.
   ;
   ; @param (string) uri
   ; @param (string) destination-filepath
@@ -334,7 +334,7 @@
 
 (defn delete-empty-directory!
   ; @description
-  ; Deletes the directory found on the given directory path if it is empty.
+  ; Deletes the directory at the given directory path if it is empty.
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -357,7 +357,7 @@
 
 (defn empty-directory!
   ; @description
-  ; Deletes the files in the directory found on the given directory path.
+  ; Deletes the files in the directory at the given directory path.
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
@@ -381,7 +381,7 @@
 
 (defn delete-directory!
   ; @description
-  ; Deletes the directory found on the given directory path.
+  ; Deletes the directory at the given directory path.
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options

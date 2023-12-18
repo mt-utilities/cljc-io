@@ -1,7 +1,7 @@
 
 (ns io.size
     (:require [clojure.java.io]
-              [io.check  :as check]
+              [io.check    :as check]
               [io.messages :as messages]))
 
 ;; ----------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 
 (defn get-filesize
   ; @description
-  ; Returns the size of the file found on the given filepath.
+  ; Returns the size of the file at the given filepath.
   ;
   ; @param (string) filepath
   ; @param (map)(opt) options
@@ -34,7 +34,7 @@
 
 (defn max-filesize-reached?
   ; @description
-  ; Returns TRUE if the size of the file found on the given filepath exceeds the given maximum filesize.
+  ; Returns TRUE if the size of the file at the given filepath is exceeded the given maximum filesize.
   ;
   ; @param (string) filepath
   ; @param (B) max-filesize
