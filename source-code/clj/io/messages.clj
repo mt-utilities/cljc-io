@@ -4,7 +4,7 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; Directory- and filenames have to be printed between quotes, otherwise it might
+; Directory names and filenames must be printed between quotes, otherwise it might
 ; be hard to recognize printed NIL values.
 
 ;; ----------------------------------------------------------------------------
