@@ -14,7 +14,7 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -37,7 +37,7 @@
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -67,7 +67,7 @@
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -130,7 +130,7 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -175,7 +175,7 @@
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage

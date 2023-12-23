@@ -3,8 +3,7 @@
 
 ### Overview
 
-The <strong>cljc-io</strong> is a set of Clojure file/directory handling functions
-(+ Clojure/ClojuresScript file/directory utility functions).
+The <strong>cljc-io</strong> is a set of file/directory handling functions for Clojure projects.
 
 ### deps.edn
 

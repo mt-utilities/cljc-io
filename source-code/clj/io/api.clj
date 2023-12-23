@@ -101,6 +101,7 @@
 (def max-filesize-reached? size/max-filesize-reached?)
 
 ; @redirect (io.utils/*)
+(def check-eol                utils/check-eol)
 (def file-seq->item-list      utils/file-seq->item-list)
 (def file-seq->file-list      utils/file-seq->file-list)
 (def file-seq->directory-list utils/file-seq->directory-list)

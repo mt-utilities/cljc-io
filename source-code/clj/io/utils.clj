@@ -1,6 +1,29 @@
 
 (ns io.utils
-    (:require [fruits.regex.api :as regex]))
+    (:require [fruits.regex.api :as regex]
+              [fruits.string.api :as string]))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn check-eol
+  ; @param (*) file-content
+  ;
+  ; @usage
+  ; (check-eol "Row #1\nRow #2")
+  ; =>
+  ; "Row #1\nRow #2\n"
+  ;
+  ; @usage
+  ; (check-eol "Row #1\nRow #2\n")
+  ; =>
+  ; "Row #1\nRow #2\n"
+  ;
+  ; @return (string)
+  [file-content]
+  (if (-> file-content string/last-character (not= "\n"))
+      (-> file-content (str "\n"))
+      (-> file-content (str))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

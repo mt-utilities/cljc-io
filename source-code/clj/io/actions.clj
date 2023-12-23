@@ -4,6 +4,7 @@
               [fruits.string.api :as string]
               [io.check          :as check]
               [io.messages       :as messages]
+              [io.utils :as utils]
               [io.read           :as read]
               [iso.io.file       :as file]))
 
@@ -17,7 +18,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -44,7 +45,7 @@
   ; @param (string) item-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -70,7 +71,7 @@
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -97,7 +98,7 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -124,7 +125,7 @@
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -153,14 +154,16 @@
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ; {:create? (boolean)(opt)
+  ; {:check-eol? (boolean)(opt)
+  ;   If TRUE, the function ensures that the file content ends with a newline character.
+  ;  :create? (boolean)(opt)
   ;   If TRUE, the function creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -173,12 +176,14 @@
   ([filepath content]
    (write-file! filepath content {}))
 
-  ([filepath content {:keys [create? return? warn?] :or {return? true warn? true} :as options}]
+  ([filepath content {:keys [check-eol? create? return? warn?] :or {return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
-       (spit filepath (str content))
+       (if check-eol? (spit filepath (-> content str utils/check-eol))
+                      (spit filepath (-> content str)))
        (if create? (do (create-path! filepath {:warn? false})
-                       (if warn? (println (str messages/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-                       (spit filepath (str content)))
+                       (if warn?      (println (str messages/CREATE-FILE-MESSAGE " \"" filepath "\"")))
+                       (if check-eol? (spit filepath (-> content str utils/check-eol))
+                                      (spit filepath (-> content str))))
                    (if warn? (println (str messages/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
    (if return? (read/read-file filepath))))
 
@@ -196,7 +201,7 @@
   ; @return (string)
   [filepath f & params]
   ; @NOTE (#5012)
-  ; Unlike other file handling functions, the 'update-file!' function, (because of the variadic parameters) ...
+  ; Unlike other file handling functions, the 'update-file!' function, (due to variadic arguments) ...
   ; ... does not take 'options' parameter.
   ; ... always creates the file if it does not exist!
   ; ... always prints a warning message when the file does not exist!
@@ -218,7 +223,7 @@
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -246,7 +251,7 @@
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -283,7 +288,7 @@
   ;   If TRUE, the function returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -313,7 +318,7 @@
   ; @param (string) destination-filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -339,7 +344,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -362,7 +367,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -386,7 +391,7 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message to the console in case of any error.
+  ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
