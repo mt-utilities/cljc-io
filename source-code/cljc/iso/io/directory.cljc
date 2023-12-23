@@ -8,7 +8,7 @@
 (defn directory-path->directory-name
   ; @param (string) directory-path
   ;
-  ; @example
+  ; @usage
   ; (directory-path->directory-name "a/b")
   ; =>
   ; "b"

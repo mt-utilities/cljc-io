@@ -11,9 +11,6 @@
   ;
   ; @usage
   ; (extension->audio? "mp3")
-  ;
-  ; @example
-  ; (extension->audio? "mp3")
   ; =>
   ; true
   ;
@@ -25,9 +22,6 @@
   ; @param (string) extension
   ;
   ; @usage
-  ; (extension->image? "png")
-  ;
-  ; @example
   ; (extension->image? "png")
   ; =>
   ; true
@@ -41,9 +35,6 @@
   ;
   ; @usage
   ; (extension->text? "txt")
-  ;
-  ; @example
-  ; (extension->text? "txt")
   ; =>
   ; true
   ;
@@ -55,9 +46,6 @@
   ; @param (string) extension
   ;
   ; @usage
-  ; (extension->video? "mp4")
-  ;
-  ; @example
   ; (extension->video? "mp4")
   ; =>
   ; true
@@ -74,13 +62,10 @@
   ;
   ; @usage
   ; (item-path->parent-path "my-directory/my-subdirectory/my-file.ext")
-  ;
-  ; @example
-  ; (item-path->parent-path "my-directory/my-subdirectory/my-file.ext")
   ; =>
   ; "my-directory/my-subdirectory"
   ;
-  ; @example
+  ; @usage
   ; (item-path->parent-path "my-file.ext")
   ; =>
   ; nil
@@ -94,13 +79,10 @@
   ;
   ; @usage
   ; (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
-  ;
-  ; @example
-  ; (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
   ; =>
   ; "my-directory/my-subdirectory"
   ;
-  ; @example
+  ; @usage
   ; (filepath->directory-path "my-file.ext")
   ; =>
   ; nil
@@ -114,9 +96,6 @@
   ;
   ; @usage
   ; (filepath->filename "my-directory/my-file.ext")
-  ;
-  ; @example
-  ; (filepath->filename "my-directory/my-file.ext")
   ; =>
   ; "my-file.ext"
   ;
@@ -129,23 +108,20 @@
   ;
   ; @usage
   ; (filepath->extension "my-directory/my-file.ext")
-  ;
-  ; @example
-  ; (filepath->extension "my-directory/my-file.ext")
   ; =>
   ; "ext"
   ;
-  ; @example
+  ; @usage
   ; (filepath->extension "my-directory/my-file.EXT")
   ; =>
   ; "ext"
   ;
-  ; @example
+  ; @usage
   ; (filepath->extension "my-directory/.my-hidden-file.ext")
   ; =>
   ; "ext"
   ;
-  ; @example
+  ; @usage
   ; (filepath->extension "my-directory/.my-hidden-file")
   ; =>
   ; nil
@@ -165,23 +141,20 @@
   ;
   ; @usage
   ; (filename->extension "my-file.ext")
-  ;
-  ; @example
-  ; (filename->extension "my-file.ext")
   ; =>
   ; "ext"
   ;
-  ; @example
+  ; @usage
   ; (filename->extension "my-file.EXT")
   ; =>
   ; "ext"
   ;
-  ; @example
+  ; @usage
   ; (filename->extension ".my-hidden-file.ext")
   ; =>
   ; "ext"
   ;
-  ; @example
+  ; @usage
   ; (filename->extension ".my-hidden-file")
   ; =>
   ; nil
@@ -195,18 +168,15 @@
   ;
   ; @usage
   ; (filename->basename "my-file.ext")
-  ;
-  ; @example
-  ; (filename->basename "my-file.ext")
   ; =>
   ; "my-file"
   ;
-  ; @example
+  ; @usage
   ; (filename->basename ".my-hidden-file.ext")
   ; =>
   ; ".my-hidden-file"
   ;
-  ; @example
+  ; @usage
   ; (filename->basename ".my-hidden-file")
   ; =>
   ; ".my-hidden-file"
@@ -222,18 +192,15 @@
   ;
   ; @usage
   ; (filepath->basename "my-directory/my-file.ext")
-  ;
-  ; @example
-  ; (filepath->basename "my-directory/my-file.ext")
   ; =>
   ; "my-file"
   ;
-  ; @example
+  ; @usage
   ; (filepath->basename "my-directory/.my-hidden-file.ext")
   ; =>
   ; ".my-hidden-file"
   ;
-  ; @example
+  ; @usage
   ; (filepath->basename "my-directory/.my-hidden-file")
   ; =>
   ; ".my-hidden-file"
@@ -247,13 +214,10 @@
   ;
   ; @usage
   ; (filepath->mime-type "my-directory/my-image.png")
-  ;
-  ; @example
-  ; (filepath->mime-type "my-directory/my-image.png")
   ; =>
   ; "image/png"
   ;
-  ; @example
+  ; @usage
   ; (filepath->mime-type "my-directory/my-file")
   ; =>
   ; "unknown/unknown"
@@ -267,13 +231,10 @@
   ;
   ; @usage
   ; (filename->mime-type "my-image.png")
-  ;
-  ; @example
-  ; (filename->mime-type "my-image.png")
   ; =>
   ; "image/png"
   ;
-  ; @example
+  ; @usage
   ; (filename->mime-type "my-file")
   ; =>
   ; "unknown/unknown"
@@ -290,18 +251,15 @@
   ;
   ; @usage
   ; (filepath->audio? "my-directory/my-audio.mp3")
-  ;
-  ; @example
-  ; (filepath->audio? "my-directory/my-audio.mp3")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filepath->audio? "my-directory/my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filepath->audio? "my-directory/my-file")
   ; =>
   ; false
@@ -315,18 +273,15 @@
   ;
   ; @usage
   ; (filepath->image? "my-directory/my-image.png")
-  ;
-  ; @example
-  ; (filepath->image? "my-directory/my-image.png")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filepath->image? "my-directory/my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filepath->image? "my-directory/my-file")
   ; =>
   ; false
@@ -340,18 +295,15 @@
   ;
   ; @usage
   ; (filepath->text? "my-directory/my-text.txt")
-  ;
-  ; @example
-  ; (filepath->text? "my-directory/my-text.txt")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filepath->text? "my-directory/my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filepath->text? "my-directory/my-file")
   ; =>
   ; false
@@ -365,18 +317,15 @@
   ;
   ; @usage
   ; (filepath->video? "my-directory/my-video.mp4")
-  ;
-  ; @example
-  ; (filepath->video? "my-directory/my-video.mp4")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filepath->video? "my-directory/my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filepath->video? "my-directory/my-file")
   ; =>
   ; false
@@ -393,18 +342,15 @@
   ;
   ; @usage
   ; (filename->audio? "my-audio.mp3")
-  ;
-  ; @example
-  ; (filename->audio? "my-audio.mp3")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filename->audio? "my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filename->audio? "my-file")
   ; =>
   ; false
@@ -418,18 +364,15 @@
   ;
   ; @usage
   ; (filename->image? "my-image.png")
-  ;
-  ; @example
-  ; (filename->image? "my-image.png")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filename->image? "my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filename->image? "my-file")
   ; =>
   ; false
@@ -443,18 +386,15 @@
   ;
   ; @usage
   ; (filename->text? "my-text.txt")
-  ;
-  ; @example
-  ; (filename->text? "my-text.txt")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filename->text? "my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filename->text? "my-file")
   ; =>
   ; false
@@ -468,18 +408,15 @@
   ;
   ; @usage
   ; (filename->video? "my-video.mp4")
-  ;
-  ; @example
-  ; (filename->video? "my-video.mp4")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filename->video? "my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filename->video? "my-file")
   ; =>
   ; false

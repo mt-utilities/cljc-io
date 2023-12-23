@@ -9,12 +9,12 @@
 (defn filename-valid?
   ; @param (string) filename
   ;
-  ; @example
+  ; @usage
   ; (filename-valid? "my-file.ext")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (filename-valid? "my-directory/my-file.ext")
   ; =>
   ; false
@@ -26,12 +26,12 @@
 (defn filename-invalid?
   ; @param (string) filename
   ;
-  ; @example
+  ; @usage
   ; (filename-invalid? "my-file.ext")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (filename-invalid? "my-directory/my-file.ext")
   ; =>
   ; true
@@ -43,12 +43,12 @@
 (defn directory-name-valid?
   ; @param (string) directory-name
   ;
-  ; @example
+  ; @usage
   ; (directory-name-valid? "my-directory")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (directory-name-valid? "my-directory/my-subdirectory")
   ; =>
   ; false
@@ -60,12 +60,12 @@
 (defn directory-name-invalid?
   ; @param (string) directory-name
   ;
-  ; @example
+  ; @usage
   ; (directory-name-invalid? "my-directory")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (directory-name-invalid? "my-directory/my-subdirectory")
   ; =>
   ; true

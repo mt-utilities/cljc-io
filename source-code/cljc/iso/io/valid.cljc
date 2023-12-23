@@ -10,18 +10,15 @@
   ;
   ; @usage
   ; (valid-relative-path "/my-directory")
-  ;
-  ; @example
-  ; (valid-relative-path "/my-directory")
   ; =>
   ; "/my-directory"
   ;
-  ; @example
+  ; @usage
   ; (valid-relative-path "my-directory/")
   ; =>
   ; "/my-directory"
   ;
-  ; @example
+  ; @usage
   ; (valid-relative-path "")
   ; =>
   ; "/"
@@ -36,18 +33,15 @@
   ;
   ; @usage
   ; (valid-absolute-path "my-directory")
-  ;
-  ; @example
-  ; (valid-absolute-path "my-directory")
   ; =>
   ; "my-directory"
   ;
-  ; @example
+  ; @usage
   ; (valid-absolute-path "/my-directory/")
   ; =>
   ; "my-directory"
   ;
-  ; @example
+  ; @usage
   ; (valid-absolute-path "")
   ; =>
   ; ""

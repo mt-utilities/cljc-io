@@ -14,9 +14,6 @@
   ;
   ; @usage
   ; (get-resource-root-path "my-directory")
-  ;
-  ; @example
-  ; (get-resource-root-path "my-directory")
   ; =>
   ; ".../resources"
   ;
@@ -34,9 +31,6 @@
   ; @param (string) resource-path
   ;
   ; @usage
-  ; (get-resource-root-url "my-directory")
-  ;
-  ; @example
   ; (get-resource-root-url "my-directory")
   ; =>
   ; "file:/.../resources/"

@@ -9,12 +9,12 @@
 (defn mime-type->extension
   ; @param (string) mime-type
   ;
-  ; @example
+  ; @usage
   ; (mime-type->extension "text/xml")
   ; =>
   ; "xml"
   ;
-  ; @example
+  ; @usage
   ; (mime-type->extension "foo/bar")
   ; =>
   ; "unknown"
@@ -26,12 +26,12 @@
 (defn extension->mime-type
   ; @param (extension)
   ;
-  ; @example
+  ; @usage
   ; (extension->mime-type "xml")
   ; =>
   ; "text/xml"
   ;
-  ; @example
+  ; @usage
   ; (extension->mime-type "bar")
   ; =>
   ; "unknown/unknown"
@@ -43,12 +43,12 @@
 (defn unknown-mime-type?
   ; @param (string) mime-type
   ;
-  ; @example
+  ; @usage
   ; (unknown-mime-type? "text/xml")
   ; =>
   ; false
   ;
-  ; @example
+  ; @usage
   ; (unknown-mime-type? "foo/bar")
   ; =>
   ; true
@@ -60,12 +60,12 @@
 (defn mime-type->audio?
   ; @param (string) extension
   ;
-  ; @example
+  ; @usage
   ; (mime-type->image? "audio/mpeg")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (mime-type->image? "application/pdf")
   ; =>
   ; false
@@ -77,12 +77,12 @@
 (defn mime-type->image?
   ; @param (string) extension
   ;
-  ; @example
+  ; @usage
   ; (mime-type->image? "image/png")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (mime-type->image? "application/pdf")
   ; =>
   ; false
@@ -94,12 +94,12 @@
 (defn mime-type->text?
   ; @param (string) extension
   ;
-  ; @example
+  ; @usage
   ; (mime-type->image? "text/plain")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (mime-type->image? "application/pdf")
   ; =>
   ; false
@@ -111,12 +111,12 @@
 (defn mime-type->video?
   ; @param (string) extension
   ;
-  ; @example
+  ; @usage
   ; (mime-type->image? "video/mpeg")
   ; =>
   ; true
   ;
-  ; @example
+  ; @usage
   ; (mime-type->image? "application/pdf")
   ; =>
   ; false

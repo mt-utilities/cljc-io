@@ -35,9 +35,6 @@
   ;
   ; @usage
   ; (encode-base64! "my-document.pdf" "my-document.b64")
-  ;
-  ; @example
-  ; (encode-base64! "my-document.pdf" "my-document.b64")
   ; =>
   ; "data:application/pdf;base64,..."
   ;

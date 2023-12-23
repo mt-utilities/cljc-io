@@ -71,18 +71,12 @@
   ;   Default: true}
   ;
   ; @usage
-  ; (write-edn-file! "my-directory/my-file.edn" {...})
-  ;
-  ; @usage
-  ; (write-edn-file! "my-directory/my-file.edn" {...} {...})
-  ;
-  ; @example
   ; (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"})
   ; (read-file       "my-directory/my-file.edn")
   ; =>
   ; "{:b "B" :a "A" :d "D" :c "C"}"
   ;
-  ; @example
+  ; @usage
   ; (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"} {:abc? true})
   ; (read-file       "my-directory/my-file.edn")
   ; =>

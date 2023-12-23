@@ -48,9 +48,6 @@
   ;
   ; @usage
   ; (resource-file-list "my-directory")
-  ;
-  ; @example
-  ; (resource-file-list "my-directory")
   ; =>
   ; ["my-directory/my-file.ext" ...]
   ;
@@ -81,9 +78,6 @@
   ;   Default: true}
   ;
   ; @usage
-  ; (all-resource-file-list "my-directory")
-  ;
-  ; @example
   ; (all-resource-file-list "my-directory")
   ; =>
   ; ["my-directory/my-file.ext" ...]
@@ -144,7 +138,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (file-list "my-directory")
   ; =>
   ; ["my-directory/my-file.ext" ...]
@@ -173,7 +167,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (all-file-list "my-directory")
   ; =>
   ; ["my-directory/my-file.ext" ...]
@@ -203,7 +197,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (search-files "my-directory" #"[a-z\-]{1,20}\.ext")
   ; =>
   ; ["my-directory/my-file.ext" ...]
@@ -235,7 +229,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (subdirectory-list "my-directory")
   ; =>
   ; ["my-directory/my-subdirectory" ...]
@@ -264,7 +258,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (all-subdirectory-list "my-directory")
   ; =>
   ; ["my-directory/my-subdirectory" ...]
@@ -294,7 +288,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (search-subdirectories "my-directory" #"[a-z\-]{1,20}")
   ; =>
   ; ["my-directory/my-subdirectory" ...]
@@ -326,7 +320,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (item-list "my-directory")
   ; =>
   ; ["my-directory/my-subdirectory" "my-directory/my-subdirectory/my-file.ext" ...]
@@ -355,7 +349,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (all-item-list "my-directory")
   ; =>
   ; ["my-directory/my-subdirectory" "my-directory/my-subdirectory/my-file.ext" ...]
@@ -385,7 +379,7 @@
   ;   If TRUE, the function prints the error message (if any) to the console.
   ;   Default: true}
   ;
-  ; @example
+  ; @usage
   ; (search-items "my-directory" #"[a-z\-\.]{1,20}")
   ; =>
   ; ["my-directory/my-subdirectory" "my-directory/my-file.ext" ...]
