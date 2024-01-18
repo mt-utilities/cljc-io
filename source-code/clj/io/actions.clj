@@ -4,8 +4,8 @@
               [fruits.string.api :as string]
               [io.check          :as check]
               [io.messages       :as messages]
-              [io.utils :as utils]
               [io.read           :as read]
+              [io.utils          :as utils]
               [iso.io.file       :as file]))
 
 ;; ----------------------------------------------------------------------------
@@ -112,7 +112,7 @@
    (try (if (check/file-exists?          filepath)
             (clojure.java.io/delete-file filepath)
             (throw (Exception. messages/FILE-DOES-NOT-EXIST-ERROR)))
-       (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
+        (catch Exception e (if warn? (println (str e " \"" filepath "\"")))))))
 
 (defn copy-file!
   ; @description
@@ -137,7 +137,7 @@
    (copy-file! source-filepath destination-filepath {}))
 
   ([source-filepath destination-filepath {:keys [return? warn?] :or {return? true warn? true}}]
-   ; @NOTE (#7440)
+   ; @note (#7440)
    ; It's important to ensure that file paths are not NIL before passing them to the 'clojure.java.io/file' function.
    ; Otherwise, NIL file paths would cause errors.
    (try (if (check/file-exists? source-filepath)
@@ -200,7 +200,7 @@
   ;
   ; @return (string)
   [filepath f & params]
-  ; @NOTE (#5012)
+  ; @note (#5012)
   ; Unlike other file handling functions, the 'update-file!' function, (due to variadic arguments) ...
   ; ... does not take 'options' parameter.
   ; ... always creates the file if it does not exist!

@@ -1,6 +1,6 @@
 
 (ns io.utils
-    (:require [fruits.regex.api :as regex]
+    (:require [fruits.regex.api  :as regex]
               [fruits.string.api :as string]))
 
 ;; ----------------------------------------------------------------------------
