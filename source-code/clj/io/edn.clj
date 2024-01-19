@@ -28,7 +28,7 @@
    ; The content of an EDN file might be string ("..."), vector ("[...]"), map ("{...}"), etc.
    (let [file-content (read/read-file filepath options)]
         (if (-> file-content string/trim some?)
-            (-> file-content reader/read-edn)))))
+            (-> file-content reader/parse-edn)))))
 
 (defn create-edn-file!
   ; @param (string) filepath
