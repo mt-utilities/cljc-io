@@ -25,8 +25,8 @@
   ;
   ; @return (string)
   [n]
-  (-> n (string/not-ends-with! "/")
-        (string/starts-with!   "/")))
+  (-> n (string/not-end-with "/")
+        (string/start-with   "/")))
 
 (defn valid-absolute-path
   ; @param (string) n
@@ -48,5 +48,5 @@
   ;
   ; @return (string)
   [n]
-  (-> n (string/not-ends-with!   "/")
-        (string/not-starts-with! "/")))
+  (-> n (string/not-end-with   "/")
+        (string/not-start-with "/")))

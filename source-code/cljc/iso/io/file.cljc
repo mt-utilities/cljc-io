@@ -132,7 +132,7 @@
   ; Filenames of hidden files (in UNIX based systems) start with a period (.).
   ; In case of only period is in the filename, it might not be an extension marker!
   ; E.g., .my-hidden-file
-  (let [filename (-> filepath filepath->filename (string/not-starts-with! "."))]
+  (let [filename (-> filepath filepath->filename (string/not-start-with "."))]
        (if-let [extension (string/after-last-occurence filename "." {:return? false})]
                (string/to-lowercase extension))))
 

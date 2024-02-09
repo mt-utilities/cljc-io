@@ -20,8 +20,8 @@
   ; @return (string)
   [resource-path]
   (if-let [resource-url (clojure.java.io/resource resource-path)]
-          (-> resource-url (string/not-ends-with! resource-path)
-                           (string/not-starts-with! "file:"))))
+          (-> resource-url (string/not-end-with resource-path)
+                           (string/not-start-with "file:"))))
 
 (defn get-resource-root-url
   ; @description
@@ -38,4 +38,4 @@
   ; @return (string)
   [resource-path]
   (if-let [resource-url (clojure.java.io/resource resource-path)]
-          (-> resource-url (string/not-ends-with! resource-path))))
+          (-> resource-url (string/not-end-with resource-path))))

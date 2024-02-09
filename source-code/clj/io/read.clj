@@ -61,7 +61,7 @@
                       directory         (-> resource-url clojure.java.io/file)]
                      (and (-> directory .isDirectory)
                           (let [file-seq (-> directory .listFiles)]
-                               (letfn [(f0 [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
+                               (letfn [(f0 [%] (string/not-start-with (-> % .toURI .normalize) resource-root-url))]
                                       (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f0})))))
                 (throw (Exception. messages/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
@@ -92,7 +92,7 @@
                       directory         (-> resource-url clojure.java.io/file)]
                      (and (-> directory .isDirectory)
                           (let [file-seq (-> directory file-seq)]
-                               (letfn [(f0 [%] (string/not-starts-with! (-> % .toURI .normalize) resource-root-url))]
+                               (letfn [(f0 [%] (string/not-start-with (-> % .toURI .normalize) resource-root-url))]
                                       (utils/file-seq->file-list (str directory-path "/") file-seq {:output-f f0})))))
                 (throw (Exception. messages/RESOURCE-DOES-NOT-EXIST-ERROR)))
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
