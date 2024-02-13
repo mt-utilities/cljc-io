@@ -4,11 +4,11 @@
               [io.blob          :as blob]
               [iso.io.check     :as check]
               [iso.io.config    :as config]
-              [iso.io.directory :as directory]
-              [iso.io.file      :as file]
-              [iso.io.filesize  :as filesize]
-              [iso.io.mime-type :as mime-type]
-              [iso.io.valid     :as valid]))
+              [io.directory :as directory]
+              [io.file :as file]
+              [io.filesize  :as filesize]
+              [io.mime-type :as mime-type]
+              [io.valid     :as valid]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -29,10 +29,10 @@
 (def MIME-TYPES config/MIME-TYPES)
 (def EXTENSIONS config/EXTENSIONS)
 
-; @redirect (iso.io.directory/*)
+; @redirect (io.directory/*)
 (def directory-path->directory-name directory/directory-path->directory-name)
 
-; @redirect (iso.io.file/*)
+; @redirect (io.file/*)
 (def extension->audio?        file/extension->audio?)
 (def extension->image?        file/extension->image?)
 (def extension->text?         file/extension->text?)
@@ -55,7 +55,7 @@
 (def filename->text?          file/filename->text?)
 (def filename->video?         file/filename->video?)
 
-; @redirect (iso.io.filesize/*)
+; @redirect (io.filesize/*)
 (def B->kB  filesize/B->kB)
 (def B->MB  filesize/B->MB)
 (def B->GB  filesize/B->GB)
@@ -69,12 +69,12 @@
 (def GB->kB filesize/GB->kB)
 (def GB->MB filesize/GB->MB)
 
-; @redirect (iso.io.mime-type/*)
+; @redirect (io.mime-type/*)
 (def mime-type->extension mime-type/mime-type->extension)
 (def extension->mime-type mime-type/extension->mime-type)
 (def unknown-mime-type?   mime-type/unknown-mime-type?)
 (def mime-type->image?    mime-type/mime-type->image?)
 
-; @redirect (iso.io.valid/*)
+; @redirect (io.valid/*)
 (def valid-relative-path valid/valid-relative-path)
 (def valid-absolute-path valid/valid-absolute-path)

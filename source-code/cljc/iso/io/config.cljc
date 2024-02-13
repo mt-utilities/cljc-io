@@ -17,6 +17,12 @@
 ;; ----------------------------------------------------------------------------
 
 ; @constant (map)
+; {"my-extension" (string)}
+;
+; @usage
+; (get MIME-TYPES "jpeg")
+; =>
+; "image/jpeg"
 (def MIME-TYPES {"aac"  "audio/aac"
                  "avi"  "video/x-msvideo"
                  "bin"  "application/octet-stream"
@@ -65,6 +71,12 @@
                  "7z"   "application/x-7z-compressed"})
 
 ; @constant (map)
+; {"my-mime-type" (string)}
+;
+; @usage
+; (get EXTENSIONS "image/jpeg")
+; =>
+; "jpeg"
 (def EXTENSIONS {"audio/aac"                                                               "aac"
                  "video/x-msvideo"                                                         "avi"
                  "application/octet-stream"                                                "bin"

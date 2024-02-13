@@ -1,28 +1,23 @@
 
 (ns io.api
-    (:require [clojure.java.io]
-              [io.actions       :as actions]
+    (:require [io.actions       :as actions]
               [io.base64        :as base64]
               [io.check         :as check]
               [io.config        :as config]
+              [io.stream :as stream]
               [io.edn           :as edn]
               [io.env           :as env]
               [io.read          :as read]
               [io.size          :as size]
               [io.utils         :as utils]
-              [iso.io.directory :as directory]
-              [iso.io.file      :as file]
-              [iso.io.filesize  :as filesize]
-              [iso.io.mime-type :as mime-type]
-              [iso.io.valid     :as valid]))
+              [io.directory :as directory]
+              [io.file :as file]
+              [io.filesize  :as filesize]
+              [io.mime-type :as mime-type]
+              [io.valid :as valid]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
-
-; @redirect (clojure.java.io/*)
-(def file          clojure.java.io/file)
-(def input-stream  clojure.java.io/input-stream)
-(def output-stream clojure.java.io/output-stream)
 
 ; @redirect (io.actions/*)
 (def create-directory!       actions/create-directory!)
@@ -68,6 +63,9 @@
 (def MIME-TYPES config/MIME-TYPES)
 (def EXTENSIONS config/EXTENSIONS)
 
+; @redirect (io.directory/*)
+(def directory-path->directory-name directory/directory-path->directory-name)
+
 ; @redirect (io.edn/*)
 (def read-edn-file     edn/read-edn-file)
 (def create-edn-file!  edn/create-edn-file!)
@@ -80,36 +78,8 @@
 (def get-resource-root-path io.env/get-resource-root-path)
 (def get-resource-root-url  io.env/get-resource-root-url)
 
-; @redirect (io.read/*)
-(def read-resource-file     read/read-resource-file)
-(def resource-file-list     read/resource-file-list)
-(def all-resource-file-list read/all-resource-file-list)
-(def read-file              read/read-file)
-(def file-list              read/file-list)
-(def all-file-list          read/all-file-list)
-(def search-files           read/search-files)
-(def subdirectory-list      read/subdirectory-list)
-(def all-subdirectory-list  read/all-subdirectory-list)
-(def search-subdirectories  read/search-subdirectories)
-(def item-list              read/item-list)
-(def all-item-list          read/all-item-list)
-(def search-items           read/search-items)
-(def empty-directory?       read/empty-directory?)
-
-; @redirect (io.size/*)
-(def get-filesize          size/get-filesize)
-(def max-filesize-reached? size/max-filesize-reached?)
-
-; @redirect (io.utils/*)
-(def check-eol                utils/check-eol)
-(def file-seq->item-list      utils/file-seq->item-list)
-(def file-seq->file-list      utils/file-seq->file-list)
-(def file-seq->directory-list utils/file-seq->directory-list)
-
-; @redirect (iso.io.directory/*)
-(def directory-path->directory-name directory/directory-path->directory-name)
-
-; @redirect (iso.io.file/*)
+; @redirect (io.file/*)
+(def file                     file/file)
 (def extension->audio?        file/extension->audio?)
 (def extension->image?        file/extension->image?)
 (def extension->text?         file/extension->text?)
@@ -132,7 +102,7 @@
 (def filename->text?          file/filename->text?)
 (def filename->video?         file/filename->video?)
 
-; @redirect (iso.io.filesize/*)
+; @redirect (io.filesize/*)
 (def B->kB  filesize/B->kB)
 (def B->MB  filesize/B->MB)
 (def B->GB  filesize/B->GB)
@@ -146,12 +116,42 @@
 (def GB->kB filesize/GB->kB)
 (def GB->MB filesize/GB->MB)
 
-; @redirect (iso.io.mime-type/*)
+; @redirect (io.mime-type/*)
 (def mime-type->extension mime-type/mime-type->extension)
 (def extension->mime-type mime-type/extension->mime-type)
 (def unknown-mime-type?   mime-type/unknown-mime-type?)
 (def mime-type->image?    mime-type/mime-type->image?)
 
-; @redirect (iso.io.valid/*)
+; @redirect (io.read/*)
+(def read-resource-file     read/read-resource-file)
+(def resource-file-list     read/resource-file-list)
+(def all-resource-file-list read/all-resource-file-list)
+(def read-file              read/read-file)
+(def file-list              read/file-list)
+(def all-file-list          read/all-file-list)
+(def search-files           read/search-files)
+(def subdirectory-list      read/subdirectory-list)
+(def all-subdirectory-list  read/all-subdirectory-list)
+(def search-subdirectories  read/search-subdirectories)
+(def item-list              read/item-list)
+(def all-item-list          read/all-item-list)
+(def search-items           read/search-items)
+(def empty-directory?       read/empty-directory?)
+
+; @redirect (io.size/*)
+(def get-filesize          size/get-filesize)
+(def max-filesize-reached? size/max-filesize-reached?)
+
+; @redirect (io.stream/*)
+(def input-stream  stream/input-stream)
+(def output-stream stream/output-stream)
+
+; @redirect (io.utils/*)
+(def check-eol                utils/check-eol)
+(def file-seq->item-list      utils/file-seq->item-list)
+(def file-seq->file-list      utils/file-seq->file-list)
+(def file-seq->directory-list utils/file-seq->directory-list)
+
+; @redirect (io.valid/*)
 (def valid-relative-path valid/valid-relative-path)
 (def valid-absolute-path valid/valid-absolute-path)
