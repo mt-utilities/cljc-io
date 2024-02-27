@@ -5,7 +5,7 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; @redirect (iso.io/mime-type/*)
+; @redirect (iso.io.mime-type/*)
 (def mime-type->extension mime-type/mime-type->extension)
 (def extension->mime-type mime-type/extension->mime-type)
 (def unknown-mime-type?   mime-type/unknown-mime-type?)

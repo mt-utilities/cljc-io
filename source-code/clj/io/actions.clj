@@ -268,7 +268,7 @@
    (let [file-content (read/read-file filepath)
          output       (str file-content "\n" content)]
         (if max-line-count ; If the maximum number of lines is limited ...
-                           (let [output (string/max-lines output max-line-count)]
+                           (let [output (string/limit-lines output max-line-count)]
                                 (write-file! filepath output options))
                            ; If the maximum number of lines is NOT limited ...
                            (write-file! filepath output options)))))
@@ -305,7 +305,7 @@
    (let [file-content (read/read-file filepath)
          output       (str content "\n" file-content)]
         (if max-line-count ; If the maximum number of lines is limited ...
-                           (let [output (string/max-lines output max-line-count)]
+                           (let [output (string/limit-lines output max-line-count)]
                                 (write-file! filepath output options))
                            ; If the maximum number of lines is NOT limited ...
                            (write-file! filepath output options)))))
