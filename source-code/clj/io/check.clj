@@ -16,14 +16,18 @@
 ;; ----------------------------------------------------------------------------
 
 (defn resource-file-exists?
+  ; @note
+  ; Resource filepaths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Checks whether the resource file exists at the given resource path.
-  ; - Resource filepaths are relative to the Java resources directory.
+  ; Checks whether the resource file exists at the given resource path.
   ;
   ; @param (string) resource-path
   ;
   ; @usage
   ; (resource-file-exists? "my-directory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [resource-path]
@@ -31,14 +35,18 @@
           (-> resource-url clojure.java.io/file .isFile)))
 
 (defn resource-file-not-exists?
+  ; @note
+  ; Resource filepaths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Checks whether the resource file does not exist at the given resource path.
-  ; - Resource filepaths are relative to the Java resources directory.
+  ; Checks whether the resource file does not exist at the given resource path.
   ;
   ; @param (string) resource-path
   ;
   ; @usage
   ; (resource-file-not-exists? "my-directory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [resource-path]
@@ -46,14 +54,18 @@
           (-> resource-url clojure.java.io/file .isFile not)))
 
 (defn resource-file?
+  ; @note
+  ; Resource filepaths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Checks whether the resource file exists at the given resource path.
-  ; - Resource filepaths are relative to the Java resources directory.
+  ; Checks whether the resource file exists at the given resource path.
   ;
   ; @param (string) resource-path
   ;
   ; @usage
   ; (resource-file? "my-directory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [resource-path]
@@ -63,14 +75,18 @@
 ;; ----------------------------------------------------------------------------
 
 (defn resource-directory-exists?
+  ; @note
+  ; Resource directory paths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Checks whether the resource directory exists at the given resource path.
-  ; - Resource directory paths are relative to the Java resources directory.
+  ; Checks whether the resource directory exists at the given resource path.
   ;
   ; @param (string) resource-path
   ;
   ; @usage
   ; (resource-directory-exists? "my-directory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [resource-path]
@@ -78,14 +94,18 @@
           (-> resource-url clojure.java.io/file .isDirectory)))
 
 (defn resource-directory-not-exists?
+  ; @note
+  ; Resource directory paths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Checks whether the resource directory does not exist at the given resource path.
-  ; - Resource directory paths are relative to the Java resources directory.
+  ; Checks whether the resource directory does not exist at the given resource path.
   ;
   ; @param (string) resource-path
   ;
   ; @usage
   ; (resource-directory-not-exists? "my-directory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [resource-path]
@@ -93,14 +113,18 @@
           (-> resource-url clojure.java.io/file .isDirectory not)))
 
 (defn resource-directory?
+  ; @note
+  ; Resource directory paths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Checks whether the resource directory exists at the given resource path.
-  ; - Resource directory paths are relative to the Java resources directory.
+  ; Checks whether the resource directory exists at the given resource path.
   ;
   ; @param (string) resource-path
   ;
   ; @usage
   ; (resource-directory? "my-directory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [resource-path]
@@ -117,10 +141,12 @@
   ;
   ; @usage
   ; (file-exists? "my-directory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [filepath]
-  ; @NOTE (source-code/clj/io/actions.clj#7440)
+  ; @note (io.actions#7440)
   (let [file (-> filepath str clojure.java.io/file)]
        (and (-> file .exists)
             (-> file .isDirectory not))))
@@ -133,10 +159,12 @@
   ;
   ; @usage
   ; (file-not-exists? "my-directory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [filepath]
-  ; @NOTE (source-code/clj/io/actions.clj#7440)
+  ; @note (io.actions#7440)
   (let [file (-> filepath str clojure.java.io/file)]
        (or (-> file .extists not)
            (-> file .isDirectory))))
@@ -149,6 +177,8 @@
   ;
   ; @usage
   ; (file? "my-directory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [filepath]
@@ -165,10 +195,12 @@
   ;
   ; @usage
   ; (directory-exists? "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [directory-path]
-  ; @NOTE (source-code/clj/io/actions.clj#7440)
+  ; @note (io.actions#7440)
   (let [directory (-> directory-path str clojure.java.io/file)]
        (and (-> directory .exists)
             (-> directory .isDirectory))))
@@ -181,10 +213,12 @@
   ;
   ; @usage
   ; (directory-not-exists? "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [directory-path]
-  ; @NOTE (source-code/clj/io/actions.clj#7440)
+  ; @note (io.actions#7440)
   (let [directory (-> directory-path str clojure.java.io/file)]
        (or (-> directory .exists      not)
            (-> directory .isDirectory not))))
@@ -197,6 +231,8 @@
   ;
   ; @usage
   ; (directory? "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [directory-path]

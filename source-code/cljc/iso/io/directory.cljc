@@ -9,9 +9,9 @@
   ; @param (string) directory-path
   ;
   ; @usage
-  ; (directory-path->directory-name "a/b")
+  ; (directory-path->directory-name "my-directory/my-subdirectory")
   ; =>
-  ; "b"
+  ; "my-subdirectory"
   ;
   ; @return (string)
   [directory-path]

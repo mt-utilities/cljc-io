@@ -62,7 +62,7 @@
   ;
   ; @return (boolean)
   [source-filepath destination-filepath]
-  ; The 'base64->byte-array' function works with wrapped (header + body) base64 strings.
+  ; The 'base64->byte-array' function works only with wrapped (header + body) base64 strings.
   (if-let [base64-body (slurp source-filepath)]
           (let [base64 (str "data:decoder/b64;base64," base64-body)]
                (clojure.java.io/copy (base64->byte-array base64)
@@ -74,7 +74,7 @@
   ; This function does not create the directory path for the output!
   ;
   ; @description
-  ; Decodes the given 'n' base64 string to byte array, and writes the decoded content to the destination filepath.
+  ; Decodes the given base64 string to byte array, and writes the decoded content to the destination filepath.
   ;
   ; @param (string) n
   ; @param (string) destination-filepath

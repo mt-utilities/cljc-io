@@ -6,9 +6,11 @@
 ;; ----------------------------------------------------------------------------
 
 (defn get-resource-root-path
+  ; @note
+  ; Resource file and directory paths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Returns the absolute path of the parent directory of the given resource file or directory path.
-  ; - Resource file and directory paths are relative to the Java resources directory.
+  ; Returns the absolute path of the parent directory of the given resource file or directory path.
   ;
   ; @param (string) resource-path
   ;
@@ -24,9 +26,11 @@
                            (string/not-start-with "file:"))))
 
 (defn get-resource-root-url
+  ; @note
+  ; Resource file and directory paths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Returns the absolute URI of the parent directory of the given resource file or directory path.
-  ; - Resource file and directory paths are relative to the Java resources directory.
+  ; Returns the absolute URI of the parent directory of the given resource file or directory path.
   ;
   ; @param (string) resource-path
   ;

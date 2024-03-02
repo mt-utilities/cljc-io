@@ -3,6 +3,7 @@
     (:require [fruits.pretty.api :as pretty]
               [fruits.reader.api :as reader]
               [fruits.string.api :as string]
+              [fruits.regex.api :as regex]
               [io.actions        :as actions]
               [io.check          :as check]
               [io.read           :as read]))
@@ -11,14 +12,19 @@
 ;; ----------------------------------------------------------------------------
 
 (defn read-edn-file
+  ; @description
+  ; Returns the parsed content of the EDN file at the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (read-edn-file "my-directory/my-file.edn")
+  ; =>
+  ; {:my-value "My value"}
   ;
   ; @return (*)
   ([filepath]
@@ -31,21 +37,24 @@
             (-> file-content reader/parse-edn)))))
 
 (defn create-edn-file!
+  ; @description
+  ; Creates an EDN file to given filepath.
+  ;
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (create-edn-file! "my-directory/my-file.edn")
+  ; =>
+  ; nil
   ;
-  ; @return (nil or string)
-  ; Returns the file's content (the reader procceses the content to data),
-  ; or with nil if the return? option is set to false.
+  ; @return (*)
   ([filepath]
    (create-edn-file! filepath {}))
 
@@ -55,36 +64,35 @@
    (if return? (read-edn-file filepath {:warn? false}))))
 
 (defn write-edn-file!
+  ; @description
+  ; Overwrites the EDN file at the given filepath with the given content.
+  ;
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:abc? (boolean)(opt)
   ;   Default: false
   ;  :create? (boolean)(opt)
-  ;   If TRUE, the function creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"})
-  ; (read-file       "my-directory/my-file.edn")
   ; =>
-  ; "{:b "B" :a "A" :d "D" :c "C"}"
+  ; {:b "B" :a "A" :d "D" :c "C"}
   ;
   ; @usage
   ; (write-edn-file! "my-directory/my-file.edn" {:b "B" :a "A" :d "D" :c "C"} {:abc? true})
-  ; (read-file       "my-directory/my-file.edn")
   ; =>
-  ; "{:a "A" :b "B" :c "C" :d "D"}"
+  ; {:a "A" :b "B" :c "C" :d "D"}
   ;
   ; @return (*)
-  ; Returns the file's content (the reader procceses the content to data),
-  ; or with nil if the return? option is set to false.
   ([filepath content]
    (write-edn-file! filepath content {}))
 
@@ -94,24 +102,25 @@
    (if return? (read-edn-file filepath {:warn? false}))))
 
 (defn update-edn-file!
+  ; @description
+  ; Updates the EDN file at the given filepath by applying the given 'f' function on its content.
+  ;
   ; @param (string) filepath
   ; @param (function) f
   ; @param (*) params
   ;
   ; @usage
-  ; (update-edn-file! "my-directory/my-file.edn" assoc-in [:items :xyz] "XYZ")
-  ;
-  ; @usage
-  ; (update-edn-file! "my-directory/my-file.edn" conj "XYZ")
+  ; (update-edn-file! "my-directory/my-file.edn" assoc :another-value "Another value")
+  ; =>
+  ; {:my-value      "My value"
+  ;  :another-value "Another value"}
   ;
   ; @return (*)
-  ; Returns the file's content (as parsed EDN data).
   [filepath f & params]
-  ; Unlike other file handling functions, the 'update-edn-file!' function, (because
-  ; of the variadic parameters) ...
+  ; Unlike other file handling functions, the 'update-edn-file!' function, (because of the variadic parameters) ...
   ; ... does not take the 'options' parameter.
-  ; ... always creates the file if it does not exist!
-  ; ... always prints a warning message when the file does not exist!
+  ; ... always creates the file in case it does not exist!
+  ; ... always prints warning message when the file does not exist!
   (let [edn    (read-edn-file filepath)
         output (apply f edn params)]
        (write-edn-file! filepath output {:create? true :warn? true})
@@ -124,11 +133,13 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (read-edn-header "my-directory/my-file.edn")
+  ; =>
+  ; "My header"
   ;
   ; @return (string)
   ([filepath]
@@ -136,44 +147,32 @@
 
   ([filepath options]
    (let [file-content (read/read-file filepath options)]
-        (letfn [(cut-row      [n]   (string/after-first-occurence n "\n"))
-                (comment-row? [row] (-> row (string/trim)
-                                            (string/starts-with? ";")))
-                (empty-row?   [row] (-> row (string/trim)
-                                            (= "")))
-                (append-row   [result row]
-                              (let [row (string/after-first-occurence row ";" {:return? false})]
-                                   (if result (str result "\n" row)
-                                              (str             row))))
-                (f0 [result n] (if-let [first-row (string/before-first-occurence n "\n" {:return? false})]
-                                       (cond (comment-row?         first-row)
-                                             (f0 (append-row result first-row)
-                                                 (cut-row n))
-                                             (empty-row? first-row)
-                                             (f0 (str result "\n")
-                                                 (cut-row n))
-                                             :else
-                                             (-> result))
-                                       (-> result)))]
-               (f0 "" file-content)))))
+        (-> filepath (read/read-file options)
+                     (regex/re-all   #"(?<=\n\;)[^\n]*(?=\n)")
+                     (string/join    "\n")))))
 
 (defn write-edn-header!
+  ; @description
+  ; Prepends the given header as commented lines to the EDN file at the given filepath.
+  ;
   ; @param (string) filepath
   ; @param (string) header
   ; @param (map)(opt) options
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   If TRUE, the function creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
-  ; (write-edn-header! "my-directory/my-file.edn" "My header\nMy comment!")
+  ; (write-edn-header! "my-directory/my-file.edn" "My header")
+  ; =>
+  ; "\n;My header\n{:my-value "My value"}"
   ;
   ; @return (string)
   ([filepath header]
@@ -181,10 +180,8 @@
 
   ([filepath header options]
    (let [file-content (read/read-file filepath options)]
-        (letfn [(f0 [result n]
-                    (if-let [last-row (string/after-last-occurence n "\n")]
-                            (f0 (str "; " last-row "\n" result)
-                                (string/before-last-occurence n "\n" {:return? false}))
-                            (-> result)))]
-               (let [file-content (str "\n" (f0 file-content header))]
+        (letfn [(f0 [%] (string/replace-part % "\n" "\n;"))
+                (f1 [%] (str "\n" %))
+                (f2 [%] (str % "\n" file-content))]
+               (let [file-content (-> header f1 f0 f2)]
                     (actions/write-file! filepath file-content options))))))

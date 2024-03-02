@@ -18,11 +18,13 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (create-directory! "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   ([directory-path]
@@ -40,16 +42,18 @@
 
 (defn create-path!
   ; @description
-  ; Creates the ancestor directories for the given path.
+  ; Creates the ancestor directories of the given path.
   ;
   ; @param (string) item-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (create-path! "my-directory/my-subdirectory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   ([item-path]
@@ -68,14 +72,16 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (create-file! "my-directory/my-file.ext")
+  ; =>
+  ; ""
   ;
   ; @return (string)
   ([filepath]
@@ -98,11 +104,13 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (delete-file! "my-directory/my-file.ext")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   ([filepath]
@@ -122,15 +130,17 @@
   ; @param (string) destination-filepath
   ; @param (map)(opt) options
   ; {:return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (copy-file! "my-directory/my-source-file.ext"
   ;             "my-directory/my-destination-file.ext")
+  ; =>
+  ; "My content"
   ;
   ; @return (string)
   ([source-filepath destination-filepath]
@@ -154,36 +164,35 @@
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ; {:check-eol? (boolean)(opt)
-  ;   If TRUE, the function ensures that the file content ends with a newline character.
+  ; {:ensure-eol? (boolean)(opt)
+  ;   If TRUE, ensures that the file content ends with a newline character.
   ;  :create? (boolean)(opt)
-  ;   If TRUE, the function creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (write-file! "my-directory/my-file.ext" "My content")
-  ;
-  ; @usage
-  ; (write-file! "my-directory/my-file.ext" "My content" {...})
+  ; =>
+  ; "My content"
   ;
   ; @return (string)
   ([filepath content]
    (write-file! filepath content {}))
 
-  ([filepath content {:keys [check-eol? create? return? warn?] :or {return? true warn? true} :as options}]
+  ([filepath content {:keys [create? ensure-eol? return? warn?] :or {return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
-       (if check-eol? (spit filepath (-> content str utils/check-eol))
-                      (spit filepath (-> content str)))
+       (if ensure-eol? (spit filepath (-> content str utils/ensure-eol))
+                       (spit filepath (-> content str)))
        (if create? (do (create-path! filepath {:warn? false})
                        (if warn?      (println (str messages/CREATE-FILE-MESSAGE " \"" filepath "\"")))
-                       (if check-eol? (spit filepath (-> content str utils/check-eol))
-                                      (spit filepath (-> content str))))
+                       (if ensure-eol? (spit filepath (-> content str utils/ensure-eol))
+                                       (spit filepath (-> content str))))
                    (if warn? (println (str messages/FILE-DOES-NOT-EXIST-ERROR " \"" filepath "\"")))))
    (if return? (read/read-file filepath))))
 
@@ -196,7 +205,9 @@
   ; @param (*) params
   ;
   ; @usage
-  ; (update-file! "my-directory/my-file.ext" #(str % "abc"))
+  ; (update-file! "my-directory/my-file.ext" clojure.string/upper-case)
+  ; =>
+  ; "MY CONTENT"
   ;
   ; @return (string)
   [filepath f & params]
@@ -217,17 +228,19 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   If TRUE, the function creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (empty-file! "my-directory/my-file.ext")
+  ; =>
+  ; ""
   ;
   ; @return (string)
   ([filepath]
@@ -244,21 +257,20 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   If TRUE, the function creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :max-line-count (integer)(opt)
   ;  :return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
-  ; (append-to-file! "my-directory/my-file.ext" "My content")
-  ;
-  ; @usage
-  ; (append-to-file! "my-directory/my-file.ext" "My content" {...})
+  ; (append-to-file! "my-directory/my-file.ext" "\nAnother content")
+  ; =>
+  ; "My content\nAnother content"
   ;
   ; @return (string)
   ([filepath content]
@@ -281,21 +293,20 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   If TRUE, the function creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it doesn't exist.
   ;   Default: false
   ;  :max-line-count (integer)(opt)
   ;  :return? (boolean)(opt)
-  ;   If TRUE, the function returns the file content.
+  ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
-  ; (prepend-to-file! "my-directory/my-file.ext" "My content")
-  ;
-  ; @usage
-  ; (prepend-to-file! "my-directory/my-file.ext" "My content" {...})
+  ; (prepend-to-file! "my-directory/my-file.ext" "Another content\n")
+  ; =>
+  ; "Another content\nMy content"
   ;
   ; @return (string)
   ([filepath content]
@@ -312,13 +323,13 @@
 
 (defn copy-uri-to-file!
   ; @description
-  ; Opens an input stream from a URI and copies its content to the file at the given filepath.
+  ; Opens an input stream from the given URI and copies its content to the file at the given filepath.
   ;
   ; @param (string) uri
   ; @param (string) destination-filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -344,11 +355,13 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (delete-empty-directory! "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   ([directory-path]
@@ -367,11 +380,13 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (empty-directory! "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   ([directory-path]
@@ -391,11 +406,13 @@
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (delete-directory! "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   ([directory-path]

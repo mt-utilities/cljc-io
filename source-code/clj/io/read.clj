@@ -12,18 +12,22 @@
 ;; ----------------------------------------------------------------------------
 
 (defn read-resource-file
+  ; @note
+  ; Resource file and directory paths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Returns the content of the file at the given resource filepath.
-  ; - Resource filepaths are relative to the Java resources directory.
+  ; Returns the content of the file at the given resource filepath.
   ;
   ; @param (string) resource-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (read-resource-file "my-directory/my-file.ext")
+  ; =>
+  ; "My content"
   ;
   ; @return (string)
   ([resource-path]
@@ -36,14 +40,16 @@
         (catch Exception e (if warn? (println (str e " \"" resource-path "\"")))))))
 
 (defn resource-file-list
+  ; @note
+  ; Resource file and directory paths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Returns the filenames at the given resource directory path (non-recursively).
-  ; - Resource directory paths are relative to the Java resources directory.
+  ; Returns the filenames at the given resource directory path (non-recursively).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -67,14 +73,16 @@
         (catch Exception e (if warn? (println (str e " \"" directory-path "\"")))))))
 
 (defn all-resource-file-list
+  ; @note
+  ; Resource file and directory paths are relative to the Java resources directory.
+  ;
   ; @description
-  ; - Returns the filenames at the given resource directory path (recursively).
-  ; - Resource directory paths are relative to the Java resources directory.
+  ; Returns the filenames at the given resource directory path (recursively).
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -107,11 +115,13 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (read-file "my-directory/my-file.ext")
+  ; =>
+  ; "My content"
   ;
   ; @return (string)
   ([filepath]
@@ -135,7 +145,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -148,7 +158,7 @@
    (file-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->file-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -164,7 +174,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -177,7 +187,7 @@
    (all-file-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->file-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -194,7 +204,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -207,7 +217,7 @@
    (search-files search-path search-pattern {}))
 
   ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->file-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
@@ -226,7 +236,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -239,7 +249,7 @@
    (subdirectory-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->directory-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -255,7 +265,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -268,7 +278,7 @@
    (all-subdirectory-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->directory-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -285,7 +295,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -298,7 +308,7 @@
    (search-subdirectories search-path search-pattern {}))
 
   ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->directory-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
@@ -317,7 +327,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -330,7 +340,7 @@
    (item-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file .listFiles)]
                  (utils/file-seq->item-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -346,7 +356,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -359,7 +369,7 @@
    (all-item-list directory-path {}))
 
   ([directory-path {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? directory-path)
             (let [file-seq (-> directory-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->item-list directory-path file-seq {:ignore-hidden? ignore-hidden?}))
@@ -376,7 +386,7 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
@@ -389,7 +399,7 @@
    (search-items search-path search-pattern {}))
 
   ([search-path search-pattern {:keys [ignore-hidden? warn?] :or {warn? true}}]
-   ; @NOTE (source-code/clj/io/actions.clj#7440)
+   ; @note (io.actions#7440)
    (try (if (check/directory-exists? search-path)
             (let [file-seq (-> search-path str clojure.java.io/file file-seq)]
                  (utils/file-seq->item-list search-path file-seq {:ignore-hidden? ignore-hidden? :filter-pattern search-pattern}))
@@ -408,11 +418,13 @@
   ; {:ignore-hidden? (boolean)(opt)
   ;   Default: false
   ;  :warn? (boolean)(opt)
-  ;   If TRUE, the function prints the error message (if any) to the console.
+  ;   If TRUE, prints the error message (if any) to the console.
   ;   Default: true}
   ;
   ; @usage
   ; (empty-directory? "my-directory/my-subdirectory")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   ([directory-path]

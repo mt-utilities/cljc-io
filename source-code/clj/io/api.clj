@@ -139,15 +139,15 @@
 (def empty-directory?       read/empty-directory?)
 
 ; @redirect (io.size/*)
-(def get-filesize          size/get-filesize)
-(def max-filesize-reached? size/max-filesize-reached?)
+(def get-filesize           size/get-filesize)
+(def max-filesize-exceeded? size/max-filesize-exceeded?)
 
 ; @redirect (io.stream/*)
 (def input-stream  stream/input-stream)
 (def output-stream stream/output-stream)
 
 ; @redirect (io.utils/*)
-(def check-eol                utils/check-eol)
+(def ensure-eol               utils/ensure-eol)
 (def file-seq->item-list      utils/file-seq->item-list)
 (def file-seq->file-list      utils/file-seq->file-list)
 (def file-seq->directory-list utils/file-seq->directory-list)
