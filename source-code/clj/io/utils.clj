@@ -104,8 +104,6 @@
    (file-seq->file-list parent-path file-seq {}))
 
   ([_ file-seq {:keys [filter-pattern ignore-hidden? output-f] :or {output-f str}}]
-   (doseq [f file-seq]
-          (println f))
    (letfn [(f0 [%] (or (not filter-pattern)
                        (-> % output-f (regex/re-match? filter-pattern))))
            (f1 [%] (and (-> % .isFile)))
@@ -150,8 +148,6 @@
    (file-seq->directory-list parent-path file-seq {}))
 
   ([parent-path file-seq {:keys [filter-pattern ignore-hidden? output-f] :or {output-f str}}]
-   (doseq [f file-seq]
-          (println f))
    (letfn [(f0 [%] (or (not filter-pattern)
                        (-> % output-f (regex/re-match? filter-pattern))))
            (f1 [%] (and (-> % .isDirectory)))
