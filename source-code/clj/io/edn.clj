@@ -24,7 +24,7 @@
   ; @usage
   ; (read-edn-file "my-directory/my-file.edn")
   ; =>
-  ; {:my-value "My value"}
+  ; {:my-key "My value"}
   ;
   ; @return (*)
   ([filepath]
@@ -110,10 +110,10 @@
   ; @param (*) params
   ;
   ; @usage
-  ; (update-edn-file! "my-directory/my-file.edn" assoc :another-value "Another value")
+  ; (update-edn-file! "my-directory/my-file.edn" assoc :another-key "Another value")
   ; =>
-  ; {:my-value      "My value"
-  ;  :another-value "Another value"}
+  ; {:my-key      "My value"
+  ;  :another-key "Another value"}
   ;
   ; @return (*)
   [filepath f & params]
@@ -172,7 +172,7 @@
   ; @usage
   ; (write-edn-header! "my-directory/my-file.edn" "My header")
   ; =>
-  ; "\n;My header\n{:my-value "My value"}"
+  ; "\n;My header\n{:my-key "My value"}"
   ;
   ; @return (string)
   ([filepath header]
