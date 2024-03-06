@@ -1,20 +1,20 @@
 
 (ns io.api
-    (:require [io.actions       :as actions]
-              [io.base64        :as base64]
-              [io.check         :as check]
-              [io.config        :as config]
-              [io.stream :as stream]
-              [io.edn           :as edn]
-              [io.env           :as env]
-              [io.read          :as read]
-              [io.size          :as size]
-              [io.utils         :as utils]
+    (:require [io.actions   :as actions]
+              [io.base64    :as base64]
+              [io.check     :as check]
+              [io.config    :as config]
               [io.directory :as directory]
-              [io.file :as file]
+              [io.edn       :as edn]
+              [io.env       :as env]
+              [io.file      :as file]
               [io.filesize  :as filesize]
               [io.mime-type :as mime-type]
-              [io.valid :as valid]))
+              [io.read      :as read]
+              [io.size      :as size]
+              [io.stream    :as stream]
+              [io.utils     :as utils]
+              [io.valid     :as valid]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

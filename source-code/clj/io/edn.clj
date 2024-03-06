@@ -2,8 +2,8 @@
 (ns io.edn
     (:require [fruits.pretty.api :as pretty]
               [fruits.reader.api :as reader]
+              [fruits.regex.api  :as regex]
               [fruits.string.api :as string]
-              [fruits.regex.api :as regex]
               [io.actions        :as actions]
               [io.check          :as check]
               [io.read           :as read]))

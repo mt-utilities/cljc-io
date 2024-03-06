@@ -1,14 +1,14 @@
 
 (ns io.api
-    (:require [io.base64        :as base64]
-              [io.blob          :as blob]
-              [iso.io.check     :as check]
-              [iso.io.config    :as config]
-              [io.directory :as directory]
-              [io.file :as file]
-              [io.filesize  :as filesize]
-              [io.mime-type :as mime-type]
-              [io.valid     :as valid]))
+    (:require [io.base64     :as base64]
+              [io.blob       :as blob]
+              [io.directory  :as directory]
+              [io.file       :as file]
+              [io.filesize   :as filesize]
+              [io.mime-type  :as mime-type]
+              [io.valid      :as valid]
+              [iso.io.check  :as check]
+              [iso.io.config :as config]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
