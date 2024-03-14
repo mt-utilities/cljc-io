@@ -73,7 +73,7 @@
   ; {:abc? (boolean)(opt)
   ;   Default: false
   ;  :create? (boolean)(opt)
-  ;   If TRUE, creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
@@ -160,7 +160,7 @@
   ; @param (map)(opt) options
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   If TRUE, creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.

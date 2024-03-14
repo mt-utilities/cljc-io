@@ -167,7 +167,7 @@
   ; {:ensure-eol? (boolean)(opt)
   ;   If TRUE, ensures that the file content ends with a newline character.
   ;  :create? (boolean)(opt)
-  ;   If TRUE, creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
@@ -228,7 +228,7 @@
   ; @param (string) filepath
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   If TRUE, creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
@@ -257,7 +257,7 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   If TRUE, creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
   ;  :max-line-count (integer)(opt)
   ;  :return? (boolean)(opt)
@@ -293,7 +293,7 @@
   ; @param (*) content
   ; @param (map)(opt) options
   ; {:create? (boolean)(opt)
-  ;   If TRUE, creates the file in case if it doesn't exist.
+  ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
   ;  :max-line-count (integer)(opt)
   ;  :return? (boolean)(opt)
