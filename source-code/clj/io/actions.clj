@@ -186,7 +186,7 @@
   ([filepath content]
    (write-file! filepath content {}))
 
-  ([filepath content {:keys [create? ensure-eol? return? warn?] :or {ensure-eol? true turn? true warn? true} :as options}]
+  ([filepath content {:keys [create? ensure-eol? return? warn?] :or {ensure-eol? true return? true warn? true} :as options}]
    (if (check/file-exists? filepath)
        (if ensure-eol? (spit filepath (-> content str utils/ensure-eol))
                        (spit filepath (-> content str)))
