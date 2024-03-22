@@ -7,6 +7,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn extension->audio?
+  ; @description
+  ; Returns TRUE if the given extension corresponds to an audio file.
+  ;
   ; @param (string) extension
   ;
   ; @usage
@@ -19,6 +22,9 @@
   (-> extension mime-type/extension->mime-type mime-type/mime-type->audio?))
 
 (defn extension->image?
+  ; @description
+  ; Returns TRUE if the given extension corresponds to an image file.
+  ;
   ; @param (string) extension
   ;
   ; @usage
@@ -31,6 +37,9 @@
   (-> extension mime-type/extension->mime-type mime-type/mime-type->image?))
 
 (defn extension->text?
+  ; @description
+  ; Returns TRUE if the given extension corresponds to a text file.
+  ;
   ; @param (string) extension
   ;
   ; @usage
@@ -43,6 +52,9 @@
   (-> extension mime-type/extension->mime-type mime-type/mime-type->text?))
 
 (defn extension->video?
+  ; @description
+  ; Returns TRUE if the given extension corresponds to a video file.
+  ;
   ; @param (string) extension
   ;
   ; @usage
@@ -58,6 +70,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn item-path->parent-path
+  ; @description
+  ; Returns parent path from the given item path.
+  ;
   ; @param (string) item-path
   ;
   ; @usage
@@ -75,6 +90,9 @@
   (string/before-last-occurence item-path "/" {:return? false}))
 
 (defn filepath->directory-path
+  ; @description
+  ; Returns directory path from the given filepath.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -92,6 +110,9 @@
   (item-path->parent-path filepath))
 
 (defn filepath->filename
+  ; @description
+  ; Returns filename from the given filepath.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -104,6 +125,9 @@
   (string/after-last-occurence filepath "/" {:return? true}))
 
 (defn filepath->extension
+  ; @description
+  ; Returns extension from the given filepath.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -137,6 +161,9 @@
                (string/to-lowercase extension))))
 
 (defn filename->extension
+  ; @description
+  ; Returns extension from the given filename.
+  ;
   ; @param (string) filename
   ;
   ; @usage
@@ -164,6 +191,9 @@
   (filepath->extension filename))
 
 (defn filename->basename
+  ; @description
+  ; Returns basename (filename without extension) from the given filename.
+  ;
   ; @param (string) filename
   ;
   ; @usage
@@ -188,6 +218,9 @@
           (-> filename)))
 
 (defn filepath->basename
+  ; @description
+  ; Returns basename (filename without extension) from the given filepath.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -210,6 +243,9 @@
   (-> filepath filepath->filename filename->basename))
 
 (defn filepath->mime-type
+  ; @description
+  ; Returns MIME type from the given filepath.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -227,6 +263,9 @@
   (-> filepath filepath->extension mime-type/extension->mime-type))
 
 (defn filename->mime-type
+  ; @description
+  ; Returns MIME type from the given filename.
+  ;
   ; @param (string) filename
   ;
   ; @usage
@@ -247,6 +286,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn filepath->audio?
+  ; @description
+  ; Returns TRUE if the given filepath corresponds to an audio file.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -269,6 +311,9 @@
   (-> filepath filepath->extension extension->audio?))
 
 (defn filepath->image?
+  ; @description
+  ; Returns TRUE if the given filepath corresponds to an image file.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -291,6 +336,9 @@
   (-> filepath filepath->extension extension->image?))
 
 (defn filepath->text?
+  ; @description
+  ; Returns TRUE if the given filepath corresponds to a text file.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -313,6 +361,9 @@
   (-> filepath filepath->extension extension->text?))
 
 (defn filepath->video?
+  ; @description
+  ; Returns TRUE if the given filepath corresponds to a video file.
+  ;
   ; @param (string) filepath
   ;
   ; @usage
@@ -338,6 +389,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn filename->audio?
+  ; @description
+  ; Returns TRUE if the given filename corresponds to an audio file.
+  ;
   ; @param (string) filename
   ;
   ; @usage
@@ -360,6 +414,9 @@
   (filepath->audio? filename))
 
 (defn filename->image?
+  ; @description
+  ; Returns TRUE if the given filename corresponds to an image file.
+  ;
   ; @param (string) filename
   ;
   ; @usage
@@ -382,6 +439,9 @@
   (filepath->image? filename))
 
 (defn filename->text?
+  ; @description
+  ; Returns TRUE if the given filename corresponds to a text file.
+  ;
   ; @param (string) filename
   ;
   ; @usage
@@ -404,6 +464,9 @@
   (filepath->text? filename))
 
 (defn filename->video?
+  ; @description
+  ; Returns TRUE if the given filename corresponds to a video file.
+  ;
   ; @param (string) filename
   ;
   ; @usage

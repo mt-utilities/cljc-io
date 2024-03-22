@@ -164,11 +164,12 @@
   ; @param (string) filepath
   ; @param (*) content
   ; @param (map)(opt) options
-  ; {:ensure-eol? (boolean)(opt)
-  ;   If TRUE, ensures that the file content ends with a newline character.
-  ;  :create? (boolean)(opt)
+  ; {:create? (boolean)(opt)
   ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
+  ;  :ensure-eol? (boolean)(opt)
+  ;   If TRUE, ensures that the file content ends with a newline character.
+  ;   Default: true
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
   ;   Default: true
@@ -185,7 +186,7 @@
   ([filepath content]
    (write-file! filepath content {}))
 
-  ([filepath content {:keys [create? ensure-eol? return? warn?] :or {return? true warn? true} :as options}]
+  ([filepath content {:keys [create? ensure-eol? return? warn?] :or {ensure-eol? true turn? true warn? true} :as options}]
    (if (check/file-exists? filepath)
        (if ensure-eol? (spit filepath (-> content str utils/ensure-eol))
                        (spit filepath (-> content str)))
@@ -230,6 +231,9 @@
   ; {:create? (boolean)(opt)
   ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
+  ;  :ensure-eol? (boolean)(opt)
+  ;   If TRUE, ensures that the file content ends with a newline character.
+  ;   Default: true
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
   ;   Default: true
@@ -259,6 +263,9 @@
   ; {:create? (boolean)(opt)
   ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
+  ;  :ensure-eol? (boolean)(opt)
+  ;   If TRUE, ensures that the file content ends with a newline character.
+  ;   Default: true
   ;  :max-line-count (integer)(opt)
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
@@ -295,6 +302,9 @@
   ; {:create? (boolean)(opt)
   ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
+  ;  :ensure-eol? (boolean)(opt)
+  ;   If TRUE, ensures that the file content ends with a newline character.
+  ;   Default: true
   ;  :max-line-count (integer)(opt)
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
@@ -375,7 +385,7 @@
 
 (defn empty-directory!
   ; @description
-  ; Deletes the files in the directory at the given directory path.
+  ; Deletes all items in the directory at the given directory path.
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options

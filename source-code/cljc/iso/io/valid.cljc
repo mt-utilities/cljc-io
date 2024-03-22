@@ -6,6 +6,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn valid-relative-path
+  ; @description
+  ; Ensures that the leading and trailing slashes are used correctly in the given relative path.
+  ;
   ; @param (string) n
   ;
   ; @usage
@@ -29,6 +32,9 @@
         (string/start-with   "/")))
 
 (defn valid-absolute-path
+  ; @description
+  ; Ensures that the leading and trailing slashes are used correctly in the given absolute path.
+  ;
   ; @param (string) n
   ;
   ; @usage

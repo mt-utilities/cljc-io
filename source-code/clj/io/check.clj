@@ -20,7 +20,7 @@
   ; Resource filepaths are relative to the Java resources directory.
   ;
   ; @description
-  ; Checks whether the resource file exists at the given resource path.
+  ; Returns TRUE if the resource file exists at the given resource path.
   ;
   ; @param (string) resource-path
   ;
@@ -39,7 +39,7 @@
   ; Resource filepaths are relative to the Java resources directory.
   ;
   ; @description
-  ; Checks whether the resource file does not exist at the given resource path.
+  ; Returns TRUE if the resource file does not exist at the given resource path.
   ;
   ; @param (string) resource-path
   ;
@@ -58,7 +58,7 @@
   ; Resource filepaths are relative to the Java resources directory.
   ;
   ; @description
-  ; Checks whether the resource file exists at the given resource path.
+  ; Returns TRUE if the resource file exists at the given resource path.
   ;
   ; @param (string) resource-path
   ;
@@ -79,7 +79,7 @@
   ; Resource directory paths are relative to the Java resources directory.
   ;
   ; @description
-  ; Checks whether the resource directory exists at the given resource path.
+  ; Returns TRUE if the resource directory exists at the given resource path.
   ;
   ; @param (string) resource-path
   ;
@@ -98,7 +98,7 @@
   ; Resource directory paths are relative to the Java resources directory.
   ;
   ; @description
-  ; Checks whether the resource directory does not exist at the given resource path.
+  ; Returns TRUE if the resource directory does not exist at the given resource path.
   ;
   ; @param (string) resource-path
   ;
@@ -117,7 +117,7 @@
   ; Resource directory paths are relative to the Java resources directory.
   ;
   ; @description
-  ; Checks whether the resource directory exists at the given resource path.
+  ; Returns TRUE if the resource directory exists at the given resource path.
   ;
   ; @param (string) resource-path
   ;
@@ -135,7 +135,7 @@
 
 (defn file-exists?
   ; @description
-  ; Checks whether the file exists at the given filepath.
+  ; Returns TRUE if the file exists at the given filepath.
   ;
   ; @param (string) filepath
   ;
@@ -153,7 +153,7 @@
 
 (defn file-not-exists?
   ; @description
-  ; Checks whether the file does not exist at the given filepath.
+  ; Returns TRUE if the file does not exist at the given filepath.
   ;
   ; @param (string) filepath
   ;
@@ -171,7 +171,7 @@
 
 (defn file?
   ; @description
-  ; Checks whether the file exists at the given filepath.
+  ; Returns TRUE if the file exists at the given filepath.
   ;
   ; @param (string) filepath
   ;
@@ -189,7 +189,7 @@
 
 (defn directory-exists?
   ; @description
-  ; Checks whether the directory exists at the given directory path.
+  ; Returns TRUE if the directory exists at the given directory path.
   ;
   ; @param (string) directory-path
   ;
@@ -207,7 +207,7 @@
 
 (defn directory-not-exists?
   ; @description
-  ; Checks whether the directory does not exist at the given directory path.
+  ; Returns TRUE if the directory does not exist at the given directory path.
   ;
   ; @param (string) directory-path
   ;
@@ -225,7 +225,7 @@
 
 (defn directory?
   ; @description
-  ; Checks whether the directory exists at the given directory path.
+  ; Returns TRUE if the directory exists at the given directory path.
   ;
   ; @param (string) directory-path
   ;

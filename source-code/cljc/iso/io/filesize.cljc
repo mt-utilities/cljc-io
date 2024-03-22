@@ -5,6 +5,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn B->kB
+  ; @description
+  ; Converts the given byte value into kilobyte.
+  ;
   ; @param (B) n
   ;
   ; @usage
@@ -19,6 +22,9 @@
   (/ n 1000))
 
 (defn B->MB
+  ; @description
+  ; Converts the given byte value into megabyte.
+  ;
   ; @param (B) n
   ;
   ; @usage
@@ -31,6 +37,9 @@
   (/ n 1000000))
 
 (defn B->GB
+  ; @description
+  ; Converts the given byte value into gigabyte.
+  ;
   ; @param (B) n
   ;
   ; @usage
@@ -43,6 +52,9 @@
   (/ n 1000000000))
 
 (defn kB->B
+  ; @description
+  ; Converts the given kilobyte value into byte.
+  ;
   ; @param (kB) n
   ;
   ; @usage
@@ -57,6 +69,9 @@
   (* n 1000))
 
 (defn kB->MB
+  ; @description
+  ; Converts the given kilobyte value into megabyte.
+  ;
   ; @param (kB) n
   ;
   ; @usage
@@ -69,6 +84,9 @@
   (/ n 1000))
 
 (defn kB->GB
+  ; @description
+  ; Converts the given kilobyte value into gigabyte.
+  ;
   ; @param (kB) n
   ;
   ; @usage
@@ -81,6 +99,9 @@
   (/ n 1000000))
 
 (defn MB->B
+  ; @description
+  ; Converts the given megabyte value into byte.
+  ;
   ; @param (MB) n
   ;
   ; @usage
@@ -95,6 +116,9 @@
   (* n 1000000))
 
 (defn MB->kB
+  ; @description
+  ; Converts the given megabyte value into kilobyte.
+  ;
   ; @param (MB) n
   ;
   ; @usage
@@ -107,6 +131,9 @@
   (* n 1000))
 
 (defn MB->GB
+  ; @description
+  ; Converts the given megabyte value into gigabyte.
+  ;
   ; @param (MB) n
   ;
   ; @usage
@@ -119,6 +146,9 @@
   (/ n 1000))
 
 (defn GB->B
+  ; @description
+  ; Converts the given gigabyte value into byte.
+  ;
   ; @param (GB) n
   ;
   ; @usage
@@ -133,6 +163,9 @@
   (* n 1000000000))
 
 (defn GB->kB
+  ; @description
+  ; Converts the given gigabyte value into kilobyte.
+  ;
   ; @param (GB) n
   ;
   ; @usage
@@ -147,6 +180,9 @@
   (* n 1000000))
 
 (defn GB->MB
+  ; @description
+  ; Converts the given gigabyte value into megabyte.
+  ;
   ; @param (GB) n
   ;
   ; @usage

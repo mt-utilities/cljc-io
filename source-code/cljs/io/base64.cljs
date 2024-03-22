@@ -6,12 +6,17 @@
 ;; ----------------------------------------------------------------------------
 
 (defn base64->blob
+  ; @description
+  ; Converts the given Base64 string into a Blob object.
+  ;
   ; @param (string) n
   ;
   ; @usage
   ; (base64->blob "data:application/pdf;base64,...")
+  ; =>
+  ; #object[Blob]
   ;
-  ; @return (object)
+  ; @return (Blob object)
   [n]
   (let [binary-string (.atob          js/window n)
         binary-length (.-length       binary-string)

@@ -7,6 +7,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn filename-valid?
+  ; @description
+  ; Returns TRUE if the given filename does not contain any illegal character.
+  ;
   ; @param (string) filename
   ;
   ; @usage
@@ -24,6 +27,9 @@
   (re-match? filename config/FILENAME-PATTERN))
 
 (defn filename-invalid?
+  ; @description
+  ; Returns TRUE if the given filename contains any illegal character.
+  ;
   ; @param (string) filename
   ;
   ; @usage
@@ -41,6 +47,9 @@
   (re-mismatch? filename config/FILENAME-PATTERN))
 
 (defn directory-name-valid?
+  ; @description
+  ; Returns TRUE if the given directory name does not contain any illegal character.
+  ;
   ; @param (string) directory-name
   ;
   ; @usage
@@ -58,6 +67,9 @@
   (re-match? directory-name config/DIRECTORY-NAME-PATTERN))
 
 (defn directory-name-invalid?
+  ; @description
+  ; Returns TRUE if the given directory name contains any illegal character.
+  ;
   ; @param (string) directory-name
   ;
   ; @usage

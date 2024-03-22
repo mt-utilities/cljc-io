@@ -42,7 +42,10 @@
   ;
   ; @param (string) filepath
   ; @param (map)(opt) options
-  ; {:return? (boolean)(opt)
+  ; {:ensure-eol? (boolean)(opt)
+  ;   If TRUE, ensures that the file content ends with a newline character.
+  ;   Default: true
+  ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
   ;   Default: true
   ;  :warn? (boolean)(opt)
@@ -58,9 +61,9 @@
   ([filepath]
    (create-edn-file! filepath {}))
 
-  ([filepath {:keys [return? warn?] :or {return? true warn? true} :as options}]
+  ([filepath {:keys [return?] :or {return? true} :as options}]
    (if-not (check/file-exists?  filepath)
-           (actions/write-file! filepath "\n{}" {:create? true :warn? warn?}))
+           (actions/write-file! filepath "\n{}" (assoc options :create? true)))
    (if return? (read-edn-file filepath {:warn? false}))))
 
 (defn write-edn-file!
@@ -75,6 +78,9 @@
   ;  :create? (boolean)(opt)
   ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
+  ;  :ensure-eol? (boolean)(opt)
+  ;   If TRUE, ensures that the file content ends with a newline character.
+  ;   Default: true
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
   ;   Default: true
@@ -162,6 +168,9 @@
   ; {:create? (boolean)(opt)
   ;   If TRUE, creates the file in case if it does not exist.
   ;   Default: false
+  ;  :ensure-eol? (boolean)(opt)
+  ;   If TRUE, ensures that the file content ends with a newline character.
+  ;   Default: true
   ;  :return? (boolean)(opt)
   ;   If TRUE, returns the file content.
   ;   Default: true

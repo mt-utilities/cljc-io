@@ -5,11 +5,16 @@
 ;; ----------------------------------------------------------------------------
 
 (defn blob->object-url
-  ; @param (object) n
+  ; @description
+  ; Converts the given Blob object into an object URL.
+  ;
+  ; @param (Blob object) n
   ;
   ; @usage
-  ; (to-object-url ...)
+  ; (to-object-url #object[Blob])
+  ; =>
+  ; "..."
   ;
-  ; @return (object)
+  ; @return (string)
   [n]
   (.createObjectURL js/URL n))

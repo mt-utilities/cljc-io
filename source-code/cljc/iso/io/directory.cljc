@@ -6,6 +6,9 @@
 ;; ----------------------------------------------------------------------------
 
 (defn directory-path->directory-name
+  ; @description
+  ; Returns the direction name from the given directory path.
+  ;
   ; @param (string) directory-path
   ;
   ; @usage
