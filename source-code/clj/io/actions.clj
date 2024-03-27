@@ -42,7 +42,7 @@
 
 (defn create-path!
   ; @description
-  ; Creates the ancestor directories of the given path.
+  ; Creates the ancestor directories of the given item path (file- or directory path).
   ;
   ; @param (string) item-path
   ; @param (map)(opt) options
@@ -385,7 +385,7 @@
 
 (defn empty-directory!
   ; @description
-  ; Deletes all items in the directory at the given directory path.
+  ; Deletes all items of the directory at the given directory path.
   ;
   ; @param (string) directory-path
   ; @param (map)(opt) options

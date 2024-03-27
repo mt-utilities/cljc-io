@@ -24,7 +24,7 @@
   ;
   ; @return (boolean)
   [filename]
-  (re-match? filename config/FILENAME-PATTERN))
+  (-> filename (re-match? config/FILENAME-PATTERN)))
 
 (defn filename-invalid?
   ; @description
@@ -44,7 +44,7 @@
   ;
   ; @return (boolean)
   [filename]
-  (re-mismatch? filename config/FILENAME-PATTERN))
+  (-> filename (re-mismatch? config/FILENAME-PATTERN)))
 
 (defn directory-name-valid?
   ; @description
@@ -64,7 +64,7 @@
   ;
   ; @return (boolean)
   [directory-name]
-  (re-match? directory-name config/DIRECTORY-NAME-PATTERN))
+  (-> directory-name (re-match? config/DIRECTORY-NAME-PATTERN)))
 
 (defn directory-name-invalid?
   ; @description
@@ -84,4 +84,4 @@
   ;
   ; @return (boolean)
   [directory-name]
-  (re-mismatch? directory-name config/DIRECTORY-NAME-PATTERN))
+  (-> directory-name (re-mismatch? config/DIRECTORY-NAME-PATTERN)))

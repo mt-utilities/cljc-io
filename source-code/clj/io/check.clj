@@ -69,7 +69,7 @@
   ;
   ; @return (boolean)
   [resource-path]
-  (resource-file-exists? resource-path))
+  (-> resource-path resource-file-exists?))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -128,7 +128,7 @@
   ;
   ; @return (boolean)
   [resource-path]
-  (resource-directory-exists? resource-path))
+  (-> resource-path resource-directory-exists?))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -182,7 +182,7 @@
   ;
   ; @return (boolean)
   [filepath]
-  (file-exists? filepath))
+  (-> filepath file-exists?))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -236,4 +236,4 @@
   ;
   ; @return (boolean)
   [directory-path]
-  (directory-exists? directory-path))
+  (-> directory-path directory-exists?))

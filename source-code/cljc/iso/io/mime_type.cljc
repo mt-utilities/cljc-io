@@ -84,7 +84,7 @@
   ;
   ; @return (boolean)
   [mime-type]
-  (string/starts-with? mime-type "audio"))
+  (-> mime-type (string/starts-with? "audio")))
 
 (defn mime-type->image?
   ; @description
@@ -124,7 +124,7 @@
   ;
   ; @return (boolean)
   [mime-type]
-  (string/starts-with? mime-type "text"))
+  (-> mime-type (string/starts-with? "text")))
 
 (defn mime-type->video?
   ; @description
@@ -144,4 +144,4 @@
   ;
   ; @return (boolean)
   [mime-type]
-  (string/starts-with? mime-type "video"))
+  (-> mime-type (string/starts-with? "video")))

@@ -71,7 +71,7 @@
 
 (defn item-path->parent-path
   ; @description
-  ; Returns parent path from the given item path.
+  ; Returns the parent path of the given item path (file- or directory path).
   ;
   ; @param (string) item-path
   ;
@@ -81,37 +81,35 @@
   ; "my-directory/my-subdirectory"
   ;
   ; @usage
-  ; (item-path->parent-path "my-file.ext")
+  ; (item-path->parent-path "my-directory/my-subdirectory")
   ; =>
-  ; nil
+  ; "my-directory"
   ;
   ; @return (string)
   [item-path]
-  (string/before-last-occurence item-path "/" {:return? false}))
+  (-> item-path (string/before-last-occurence "/" {:return? false})))
 
-(defn filepath->directory-path
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn filepath->parent-path
   ; @description
-  ; Returns directory path from the given filepath.
+  ; Returns the parent path of the given filepath.
   ;
   ; @param (string) filepath
   ;
   ; @usage
-  ; (filepath->directory-path "my-directory/my-subdirectory/my-file.ext")
+  ; (filepath->parent-path "my-directory/my-subdirectory/my-file.ext")
   ; =>
   ; "my-directory/my-subdirectory"
   ;
-  ; @usage
-  ; (filepath->directory-path "my-file.ext")
-  ; =>
-  ; nil
-  ;
   ; @return (string)
   [filepath]
-  (item-path->parent-path filepath))
+  (-> filepath item-path->parent-path))
 
 (defn filepath->filename
   ; @description
-  ; Returns filename from the given filepath.
+  ; Returns the filename of the given filepath.
   ;
   ; @param (string) filepath
   ;
@@ -122,11 +120,11 @@
   ;
   ; @return (string)
   [filepath]
-  (string/after-last-occurence filepath "/" {:return? true}))
+  (-> filepath (string/after-last-occurence "/" {:return? true})))
 
 (defn filepath->extension
   ; @description
-  ; Returns extension from the given filepath.
+  ; Returns the extension of the given filepath.
   ;
   ; @param (string) filepath
   ;
@@ -160,9 +158,60 @@
        (if-let [extension (string/after-last-occurence filename "." {:return? false})]
                (string/to-lowercase extension))))
 
+(defn filepath->mime-type
+  ; @description
+  ; Returns the MIME type of the given filepath.
+  ;
+  ; @param (string) filepath
+  ;
+  ; @usage
+  ; (filepath->mime-type "my-directory/my-image.png")
+  ; =>
+  ; "image/png"
+  ;
+  ; @usage
+  ; (filepath->mime-type "my-directory/my-file")
+  ; =>
+  ; "unknown/unknown"
+  ;
+  ; @return (string)
+  [filepath]
+  (-> filepath filepath->extension mime-type/extension->mime-type))
+
+(defn filepath->basename
+  ; @description
+  ; Returns the basename (filename without extension) of the given filepath.
+  ;
+  ; @param (string) filepath
+  ;
+  ; @usage
+  ; (filepath->basename "my-directory/my-file.ext")
+  ; =>
+  ; "my-file"
+  ;
+  ; @usage
+  ; (filepath->basename "my-directory/.my-hidden-file.ext")
+  ; =>
+  ; ".my-hidden-file"
+  ;
+  ; @usage
+  ; (filepath->basename "my-directory/.my-hidden-file")
+  ; =>
+  ; ".my-hidden-file"
+  ;
+  ; @return (string)
+  [filepath]
+  (if-let [filename (-> filepath filepath->filename)]
+          (if-let [extension (-> filepath filepath->extension)]
+                  (-> filename (string/before-last-occurence (str "." extension)))
+                  (-> filename))))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
 (defn filename->extension
   ; @description
-  ; Returns extension from the given filename.
+  ; Returns the extension of the given filename.
   ;
   ; @param (string) filename
   ;
@@ -188,11 +237,31 @@
   ;
   ; @return (string)
   [filename]
-  (filepath->extension filename))
+  (-> filename filepath->extension))
+
+(defn filename->mime-type
+  ; @description
+  ; Returns the MIME type of the given filename.
+  ;
+  ; @param (string) filename
+  ;
+  ; @usage
+  ; (filename->mime-type "my-image.png")
+  ; =>
+  ; "image/png"
+  ;
+  ; @usage
+  ; (filename->mime-type "my-file")
+  ; =>
+  ; "unknown/unknown"
+  ;
+  ; @return (string)
+  [filename]
+  (-> filename filepath->mime-type))
 
 (defn filename->basename
   ; @description
-  ; Returns basename (filename without extension) from the given filename.
+  ; Returns the basename (filename without extension) of the given filename.
   ;
   ; @param (string) filename
   ;
@@ -213,74 +282,7 @@
   ;
   ; @return (string)
   [filename]
-  (if-let [extension (filename->extension filename)]
-          (string/before-last-occurence filename (str "." extension))
-          (-> filename)))
-
-(defn filepath->basename
-  ; @description
-  ; Returns basename (filename without extension) from the given filepath.
-  ;
-  ; @param (string) filepath
-  ;
-  ; @usage
-  ; (filepath->basename "my-directory/my-file.ext")
-  ; =>
-  ; "my-file"
-  ;
-  ; @usage
-  ; (filepath->basename "my-directory/.my-hidden-file.ext")
-  ; =>
-  ; ".my-hidden-file"
-  ;
-  ; @usage
-  ; (filepath->basename "my-directory/.my-hidden-file")
-  ; =>
-  ; ".my-hidden-file"
-  ;
-  ; @return (string)
-  [filepath]
-  (-> filepath filepath->filename filename->basename))
-
-(defn filepath->mime-type
-  ; @description
-  ; Returns MIME type from the given filepath.
-  ;
-  ; @param (string) filepath
-  ;
-  ; @usage
-  ; (filepath->mime-type "my-directory/my-image.png")
-  ; =>
-  ; "image/png"
-  ;
-  ; @usage
-  ; (filepath->mime-type "my-directory/my-file")
-  ; =>
-  ; "unknown/unknown"
-  ;
-  ; @return (string)
-  [filepath]
-  (-> filepath filepath->extension mime-type/extension->mime-type))
-
-(defn filename->mime-type
-  ; @description
-  ; Returns MIME type from the given filename.
-  ;
-  ; @param (string) filename
-  ;
-  ; @usage
-  ; (filename->mime-type "my-image.png")
-  ; =>
-  ; "image/png"
-  ;
-  ; @usage
-  ; (filename->mime-type "my-file")
-  ; =>
-  ; "unknown/unknown"
-  ;
-  ; @return (string)
-  [filename]
-  (filepath->mime-type filename))
+  (-> filename filepath->basename))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -411,7 +413,7 @@
   ;
   ; @return (boolean)
   [filename]
-  (filepath->audio? filename))
+  (-> filename filepath->audio?))
 
 (defn filename->image?
   ; @description
@@ -436,7 +438,7 @@
   ;
   ; @return (boolean)
   [filename]
-  (filepath->image? filename))
+  (-> filename filepath->image?))
 
 (defn filename->text?
   ; @description
@@ -461,7 +463,7 @@
   ;
   ; @return (boolean)
   [filename]
-  (filepath->text? filename))
+  (-> filename filepath->text?))
 
 (defn filename->video?
   ; @description
@@ -486,4 +488,4 @@
   ;
   ; @return (boolean)
   [filename]
-  (filepath->video? filename))
+  (-> filename filepath->video?))
