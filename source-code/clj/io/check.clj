@@ -1,7 +1,9 @@
 
 (ns io.check
     (:require [clojure.java.io]
-              [iso.io.check :as check]))
+              [iso.io.check :as check])
+    (:import java.net.URL
+             java.io.File))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
